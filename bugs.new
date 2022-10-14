@@ -1,0 +1,13 @@
+FIND
+- 1 !
+  10 BEEP @ PUT "#43"          -> FIND "PU"
+  kudelski/benski
+PDIR
+- decompile en KA
+  kudelski/benski
+DDIR & PDIR
+- 10 DDIR @ SHOW PORT
+  benski
+PBLIST & DBLIST & DDIR & PDIR
+- DDIR TO :PORT(4)
+  david/taillandier

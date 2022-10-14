@@ -1,0 +1,141 @@
+	TITLE  SHRINKLEX <shrink.as>
+
+*
+* <862610.1108>
+*
+
+ JPCPRV	EQU	1
+
+ sBADRC EQU    8
+
+	REL(5) =SHRINKd
+	REL(5) =SHRINKp
+=SHRINKe
+	GOSBVL =FSPECx
+	GONC   SHK00
+ Mferr	GOVLNG =MFERR
+ 
+ SHK00	GOSBVL =FINDF+
+	GOC    Mferr
+	CD1EX
+	R3=C
+	D1=C
+	GOSBVL =RDHDR1
+	A=R2
+	A=A-1  A
+	A=A-1  A
+	GOC    SHK10
+	LC(2)  =eFTYPE
+	GONC   Mferr	(B.E.T.)
+ 
+ SHK10	A=R3
+	C=0    A
+	C=C-1  A
+	R1=C
+	GOSUB  POSTXT
+	GONC   SHK20
+	?C#0   A
+	GOYES  Mferr
+ 
+ SHK20	?ST=0  sBADRC
+	GOYES  SHK30
+	LC(2)  =eEOFIL
+	GONC   Mferr	(B.E.T.)
+ 
+ SHK30	C=D    A
+	A=C    A
+	C=0    A
+	C=C-1  A
+	C=DAT1 4
+	C=C+1  A
+	GONC   SHK60
+	D1=D1+ 4
+ SHK60	CD1EX
+	B=C    A
+	B=B-A  A
+	C=R3
+    if JPCPRV
+	GOSBVL =MVMEM+
+    else
+	GOSBVL =MGOSUB
+	CON(5) =MVMEM+
+    endif
+	GOC    Mferr
+	GOVLNG =NXTSTM
+ 
+ 
+ POSTXT D1=A
+	D1=D1+ =oFTYPh
+	D1=D1+ (=oFLAGh)-(=oFTYPh)
+	GOSBVL =FILSK+
+	D=C    A
+	D1=D1+ 5
+	CD1EX
+	A=R1
+	GOSUB  FRCRDr
+	RTNNC
+	C=0    A
+	?ST=0  sBADRC
+	RTNYES
+	LC(2)  =eEOFIL
+	RTNSC
+ 
+ 
+ FRCRDr R1=A
+	A=0    W
+	A=A-1  A
+	R0=A
+	ST=0   =sEOF
+	ST=0   sBADRC
+ FRCR10 GOSUB  PRSREC
+	RTNC
+	D0=C
+	A=R0
+	A=A+1  A
+	R0=A
+	C=R1
+	?A=C   A
+	GOYES  rtncc
+	?ST=1  sBADRC
+	RTNYES
+	CD0EX
+	GONC   FRCR10	  (B.E.T.)
+ 
+ 
+ PRSREC B=0    A
+	D1=C
+	?C>=D  A
+	GOYES  PRSR10
+	D1=D1+ 4
+	CD1EX
+	?C>D   A
+	GOYES  PRSR20
+	A=DAT1 4
+	GOSBVL =SWPBYT
+	P=     3
+	B=A    WP
+	C=B    A
+	B=B+1  WP
+	P=     0
+	RTNC
+	BCEX   A
+	CSRB
+	C=C+1  A
+	C=C+C  A
+	C=C+C  A
+	AD1EX
+	D1=A
+	C=A+C  A
+	?C<=D  A
+	GOYES  rtncc
+	ST=1   sBADRC
+ rtncc	RTNCC
+ 
+ PRSR10 ST=1   =sEOF
+	RTNSC
+ 
+ PRSR20 B=B-1  A
+	ST=1   sBADRC
+	RTNSC
+
+	END

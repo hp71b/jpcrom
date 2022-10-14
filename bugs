@@ -1,0 +1,66 @@
+JPC Rom
+  - Changer le nom du fichier
+FINPUT
+  - accepter les elements de tableau comme variable destination: FINPUT I$(1),..
+  - sortir par deux fois [ENDLINE]
+SPACE$
+  - parametre optionnel supplementaire (SPACE$([$,] n)) => similaire a RPT$
+RPLC$ et REPLACE$
+  - doivent etre reunis.
+    si trois parametres : RPLC$
+    si 4eme parametre = num : RPLC$
+    si 4eme parametre = alpha : REPLACE$
+PAINT
+  - parametre <etat> optionnel : PAINT ( [<etat>,] <x> , <y> )
+ROMAN8
+  - a creer
+INV$ & INVERSE
+  - supprimer INV$
+  - ajouter des parametres a INVERSE : INVERSE [ <debut> , <limite> ]
+SWAP
+  - a changer en VARSWAP
+PPOLL
+  - a changer en PARPOLL
+ENABLE & DISABLE
+  - a changer en LEX <file> ON|OFF
+DBLIST & PBLIST
+  - changer BLIST en DBLIST
+  - ajouter l'indentation des structures
+  - autoriser ou non la marge gauche
+
+(GPSET & GLINE)
+  - devraient pouvoir ecrire dans une autre variable que G$
+([f][VIEW])
+  - devrait pouvoir etre debrayable
+
+FILESIZE
+  - de Kudelski : a integrer a la place de FILE?
+KA
+  - a integrer
+  - homogene avec FINPUT (sortir par 2 fois [ENDLINE] ou [RUN])
+  - 8 champs
+ADLEX
+  - a integrer
+  - 8 champs
+Poll Ext Files
+  - de Buitenhuis : a integrer
+KEYWAIT
+  - a integrer
+SYSTEMFN
+  - a integrer, en ajoutant :
+	- CONTRAST
+	- STARTUP$
+	- ENDUP$
+	- eventuellement : ADBUF$ et adresse de variable
+CALCLEX
+  - n'agit plus en mode Cmd Stack
+STACK
+  - corriger STACK dans ML (Kudelski)
+[f][CALC]
+  - bug avec [f][CALC] et editeur de texte et curseur en position [1..n-1]
+STARTUP$ et ENDUP$
+  - DESTROY ALL / DIM S$ / DIM S$[LEN(STARTUP$)]  (Tapani Tarvainen)
+PHI
+  - PHI(0) plante (PHI(2) aussi d'apres Michael Markov)
+
+Integrer les idees de Tapani

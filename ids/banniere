@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#
+# Imprime une banniere dans une page de 59 lignes
+#
+
+NL=`banner $1 $1 $1 | wc -l`
+
+reste=`expr 59 - $NL`
+
+N1=`expr $reste / 2`
+
+N2=`expr 59 - $NL - $N1`
+
+skip $N1
+banner $1 $1 $1
+skip $N2

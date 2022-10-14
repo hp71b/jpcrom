@@ -1,0 +1,37 @@
+#!/bin/sh
+
+#
+# Imprime les IDS de JPC Rom
+#
+
+
+LP="lp -or"
+# LP="cat"
+IDS="print-ids -l59"
+
+#
+# Page de titre centrée
+#
+
+cat titre | $LP
+
+#
+# Listing de link
+#
+
+(banniere "JPC:D03" ; cat jpcrom/list/lex.al) | $IDS | $LP
+
+#
+# Listing hexa
+#
+
+hex < jpcrom/jpc | $IDS | $LP
+
+#
+# Les modules
+#
+
+for i in `cat LISTE`
+do
+    (banniere $i.as ; cat jpcrom/list/$i.al) | $IDS | $LP
+done

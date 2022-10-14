@@ -1,0 +1,233 @@
+       LEX    'COMBILEX'  Combinations & permutations (HP71)
+* LEX ID 94, tokens 1-2
+* Tapani Tarvainen 85/07/22
+*
+* Functions PERM(n,k) = n!/k! and
+* COMB(n,k)= n!/(k!(n-k)!)
+*
+* Both require 0<=k<=n<1E14, n and k integers
+* (others give Invalid Arg)
+*
+* Algorithms:
+* COMB(n,k)=COMB(n,min(k,n-k));
+* PERM(n,0)=COMB(n,0)=1;
+* PERM(n,k) = n*(n-1)*...*(n-k+1);
+* COMB(n,k) = n*(n-1)/2*(n-2)/3...*(n-k+1)/k.
+* Note that all divisions are exact
+* (as long as dividend accurate, i.e. <1E15);
+* INX should be always correct!
+* (If an intermediate result overflows 15 digits,
+* final result cannot be accurate to 12)
+*
+* Notation: X=(A,B), Y=(C,D), S1=(R0,R1), S2=(R2,R3),
+* 15-forms (exp(A)&sign(S),mantissa)
+*
+       ID     #5E      94 dec
+       MSG    0
+       POLL   POLLH
+
+RDATTY EQU    #17CC6   Data Type -error
+INVNaN EQU    #0C65F   Create IVL NaN
+STAB1  EQU    #0D3D9   S1=X
+EXAB1  EQU    #0D3E7   X<>S1
+RCCD1  EQU    #0D3F5   Y=S1
+STAB2  EQU    #0D400   S2=X
+EXAB2  EQU    #0D40E   X<>S2
+RCCD2  EQU    #0D41C   Y=S2
+STCD2  EQU    #0D427   S2=Y
+ADDF   EQU    #0C372   X=X+Y (w/o checks)
+MULTF  EQU    #0C446   X=X*Y (w/o checks)
+DIVF   EQU    #0C4B8   X=X/Y (w/o checks)
+MSN12  EQU    #0D553   12-f to 15-f, check NaNs
+CLRFRC EQU    #0C6F4   Clear frc part
+MPOP2N EQU    #0BD54   Pop 2 nums off stk
+OUTRES EQU    #0BC84   Conv. 15-f to 12-f & return result
+fPERM  EQU    3        Flag to distinguish PERM & COMB
+
+       ENTRY  COMB
+       CHAR   #F
+       ENTRY  PERM
+       CHAR   #F
+       KEY    'COMB'
+       TOKEN  1
+       KEY    'PERM'
+       TOKEN  2
+       ENDTXT
+
+* Poll handler for VER$
+POLLH  ?B=0   B        pVER$?
+       GOYES  VER$
+       RTNSXM
+VER$   C=R3            stk pt
+       D1=C
+       D1=D1- 12       2*#chars
+       CD1EX
+       A=R2   AVMEMS
+       ?C<A   A        memory full?
+       GOYES  rtnsxm
+       D1=C
+       R3=C            new pt
+       LCASC  ' CMB:A'
+       DAT1=C 12
+rtnsxm RTNSXM
+
+       NIBHEX 8822     2 num params
+PERM   ST=1   fPERM
+       GOTO   perm1
+
+       NIBHEX 8822     2 num params
+COMB   ST=0   fPERM
+perm1  XM=0
+       SB=0
+       GOSBVL MPOP2N   params off stk, k in C, n in A
+       GONC   real
+       GOVLNG RDATTY   either n or k complex
+
+real   XM=0            in case of sigNaN
+       ACEX   W        A=k, C=n
+       GOSBVL MSN12    to 15-f (X=k,Y=n), check NaNs
+       GOC    res0     either is NaN
+       GOSBVL STCD2    S2=n
+       GOSUB  INTG?    k non-integer, <0 or too big?
+       GOSBVL EXAB2    X=n,S2=k
+       GOSUB  INTG?    n ok?
+       GOSBVL STAB1    S1=n
+       GOSBVL RCCD2    Y=k
+       C=-C-1 S        Y=-k
+       GOSBVL ADDF     X=n-k; clears SB (result exact!)
+       ?A=0   S        n-k>=0?
+       GOYES  n>=k
+       GOTO   ivl      k>n => Invalid Arg
+
+ovf    A=0    W        let's force overflow
+       A=A+1  M        exp 1000
+       B=0    W
+       B=B-1  M        9999...
+       B=B+1  S
+       BSR    S        set SB (=>INX)
+res0   GOTO   res
+
+n>=k   GOSBVL RCCD2    Y=k
+       ?ST=1  fPERM
+       GOYES  kOK      in PERM k'=k
+* in COMB k'=min(k,n-k)
+       BCEX   W        mants in C&D
+       ?A>B   A        comp. exps
+       GOYES  k<
+       ?A#B   A        equal exps?
+       GOYES  swap     no
+       ?C>=D  W        yes, comp mants
+       GOYES  k<
+swap   ABEX   W
+       CDEX   W
+k<     BCEX   W
+kOK
+* Convert k' to integer
+* Note: k'>999 overflows always
+       DSLC   W        msd in S
+       DSLC   W        msd in D(0)
+       C=C-1  A        decr exp
+       GOC    kFIXd    k'<10
+       DSLC   W        exp>0, 2nd digit
+       C=C-1  A
+       GOC    kFIXd    k'<100
+       DSLC   W        exp>1, 3rd digit
+       C=C-1  A
+       GONC   ovf      exp>2
+kFIXd  C=D    X        k' (integer)
+       A=0    W        gener. 1 (12-f)
+       P=     14
+       A=A+1  P
+       R2=A   init.    divisor
+       C=C-1  X        decr. counter, check for k'=0
+       GONC   k>0
+       B=0    W        result=1; conv. 12-f 1 in A to 15-f
+       ABEX   M
+       GOTO   res
+
+* counter (k'-1) in C(X)
+k>0    A=R1            copy n to X (no RCAB1!)
+       B=A    W
+       A=R0            now X=n=init. prod.
+       GOTO   end?     loop might execute 0 times
+
+LOOP
+* X=partial prod., S1=multiplier (15-forms);
+* R2=divisor (12-form, COMB only), C(X)=counter (integer)
+       R3=C            save counter
+
+* decrement multiplier:
+* (using SUBONE would need more regs, time
+* and clear SB)
+       C=R0            exp
+       GOSUB  NN1      non-normalized 1
+       C=R1            mantissa
+       D=C-D  W        subtract - result always >=0!
+       C=R0            exp
+       P=     14       test msd
+       ?D#0   P        normalized?
+       GOYES  Y-1OK    yes
+       DSL    W        msd=0: shift mant left
+       C=C-1  A        and decr exp to normalize
+Y-1OK  CDEX   W        mult back to S1 (no STCD1!)
+       R1=C
+       CDEX   W
+       R0=C
+       GOSBVL MULTF    multiply (doesn't clear SB)
+       ?ST=1  fPERM    no division in PERM
+       GOYES  perm2
+
+       C=R2   divisor  (12-form!)
+* increment
+* (ADDONE as bad as SUBONE above)
+       GOSUB  NN1      non-norm 1
+       C=R2
+       C=C+D  M
+       GONC   Y+1OK    no carry => normalized
+       CSR    M        carried: shift right,
+       P=     14
+       C=C+1  P        add carry and
+       C=C+1  X        adjust exp
+Y+1OK  R2=C
+       D=0    W        convert to 15-form
+       CDEX   M
+       GOSBVL DIVF     divide (doesn't clear SB)
+
+* end test: repeat if counter>0
+perm2  C=R3            counter
+end?   C=C-1  X        (<1000)
+       GONC   LOOP
+res    GOVLNG OUTRES   result in X
+
+* Subr NN1 generates non-normalized 1 with given exp
+* exp (<15) in C(B), result (mant only) in D(W)
+* Assumes DEC mode, uses C(B),D(W),P
+* See INFR15 in IDS III!
+NN1    D=C    B
+       P=     0
+       LCHEX  14
+       C=C-D  B
+       P=     1
+       ?C=0   P        <10?
+       GOYES  pickup
+       P=     9        add 10
+       C+P+1           always works in hex!
+pickup P=C    0        pos of 1's
+       D=0    W
+       D=D+1  P
+       RTN
+
+* Sub INTG? checks that X is positive integer <1E14
+* else gives Invalid Arg
+INTG?  ?A#0   S        neg?
+       GOYES  ivl0
+       GOSBVL CLRFRC   clear fp, carry if non-int
+       GONC   ivl0
+       ?P#    15       <1E14?
+       RTNYES
+ivl0   C=RSTK          pop local GOSUB
+ivl    P=     0        load msg code in C(B)
+       LCHEX  0B       11:Invalid Arg
+       GOSBVL INVNaN
+       GOTO   res
+       END

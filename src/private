@@ -1,0 +1,36 @@
+#!/bin/sh
+
+TMP=/tmp/prv.$$
+PROG=`basename $0`
+
+usage ()
+{
+    echo "usage: $PROG on|off file1 ... filen" >&2
+    exit 1
+}
+
+set +x
+
+case "$1" in
+    on)	 EQU=1 ;;
+    off) EQU=0 ;;
+    *)	 usage ;;
+esac
+
+shift
+
+for i
+do
+    sed "/^[ 	]*JPCPRV[ 	]*EQU/s/EQU.*/EQU	$EQU/" $i >$TMP ||exit 2
+
+    if cmp -s $i $TMP
+    then :
+    else
+	echo $i
+	mv $TMP $i
+    fi
+done
+
+rm -f $TMP
+
+exit 0

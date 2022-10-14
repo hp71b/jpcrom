@@ -1,0 +1,110 @@
+JPCLEX current token allocation (December 13th, 1987)
+
+XFN   225001 ADBUF$       $=ADBUF$($)
+XFN   225002 ASC$         $=ASC$($)
+XFN   225003 ATH$         $=ATH$($,[n])
+XFN   225004 HTA$         $=HTA($,[n])
+XFN   225005 RED$         $=RED($)
+XFN   225006 REPLACE$     $=REPLACE$($,$,$ [,$|n])
+XFN   225007 FILESIZE     n=FILESIZE($)
+XWORD 225008 ATTN         ATTN ON|OFF
+XWORD 225009 LEX	  LEX $ ON|OFF
+
+XWORD 225011 FKEY         FKEY $
+XFN   225012 CONTRAST     n=CONTRAST()
+XWORD 225013 INVERSE      INVERSE
+
+XFN   225015 PAINT        n=PAINT([n],n,n)
+XFN   225016 ENDUP$       $=ENDUP$()
+XWORD 225017 ENDUP        ENDUP $
+XFN   225018 STARTUP$     $=STARTUP$()
+XWORD 225019 EXECUTE      EXECUTE $
+XFN   225020 ARR          n=ARR(n,n)
+XFN   225021 COMB         n=COMB(n,n)
+XFN   225022 HMSADD       n=HMSADD(n,n)
+XFN   225023 HMSSUB       n=HMSSUB(n,n)
+XFN   225024 HMS          n=HMS(n)
+XFN   225025 HR           n=HR(n)
+XWORD 225026 EDIT         EDIT $ TO $                         non programmable
+XWORD 225027 STACK        STACK n
+
+XWORD 225029 MARGIN       MARGIN n
+XFN   225030 NEXTOP$      NEXTOP$($)
+XFN   225031 OPCODE$      OPCODE$($)
+XWORD 225032 SYSEDIT      SYSEDIT $
+XFN   225033 MENU         n=MENU(n [,n])
+XFN   225034 CENTER$      $=CENTER$($,n)
+XFN   225035 CESURE       n=CESURE($,n)
+XFN   225036 FORMAT$      $=FORMAT$($,n)
+XFN   225037 REDUCE$      $=REDUCE$($)
+XFN   225038 SPACE$       $=SPACE$([n|$],n)
+XWORD 225039 BELL         BELL
+XWORD 225040 BOLD         BOLD ON|OFF
+XWORD 225041 PCR          PCR
+XFN   225042 ESC$         $=ESC$([$])
+XWORD 225043 PFF          PFF
+XWORD 225044 PLF          PLF
+XWORD 225045 MODE         MODE n
+XWORD 225046 PERF         PERF ON|OFF
+XWORD 225047 PAGELEN      PAGELEN [n [,n]]
+XWORD 225048 UNDERLINE    UNDERLINE ON|OFF
+XWORD 225049 WRAP         WRAP ON|OFF
+XFN   225050 DATESTR$     n=DATESTR$(n|$)
+XFN   225051 DATEADD      n=DATEADD(n|$,n)
+XFN   225052 DDAYS        n=DDAYS(n|$,n|$)
+XFN   225053 DMY          DMY
+XFN   225054 DOW$         $=DOW$([n|$])
+XFN   225055 DOW          n=DOW([n|$])
+XFN   225056 MDY          MDY
+XFN   225057 MAXD         MAXD(n|$)
+XFN   225058 MAXM         MAXM(n|$)
+XFN   225059 MEMD         MEMD(n|$)
+XFN   225060 MEMM         MEMM(n|$)
+XWORD 225061 EXIT         EXIT var
+XFN   225062 NLOOP        n=NLOOP()
+XFN   225063 PARPOLL      n=PARPOLL()
+XWORD 225064 SLEEP        SLEEP
+XFN   225065 SRQ          n=SRQ()
+XWORD 225066 END          END WHILE | LOOP | SELECT | IF
+XWORD 225067 WHILE        WHILE n
+XWORD 225068 REPEAT       REPEAT
+XWORD 225069 UNTIL        UNTIL n
+XWORD 225070 LEAVE        LEAVE
+XWORD 225071 VARSWAP      VARSWAP var,var
+XFN   225072 ENTRY$       $=ENTRY$($ [,n])
+XFN   225073 TOKEN        n=TOKEN($ [,n])
+
+XWORD 225075 FIND         FIND $                                non programmable
+XFN   225076 MAP$         MAP$($,$,$)
+XWORD 225077 MAP          MAP $,$,$
+XWORD 225078 GLINE        GLINE n,n,n,n,n
+XWORD 225079 GPSET        GPSET n
+
+XWORD 225081 SHRINK       SHRINK $
+XFN   225082 FPRIM        n=FPRIM(n [,n])
+XFN   225083 NPRIM        n=NPRIM(n,n)
+XFN   225084 PGCD         n=PGCD(n,n...n)
+XFN   225085 PHI          n=PHI(n)
+XFN   225086 PPCM         n=PPCM(n,n...n)
+XFN   225087 PRIM         n=PRIM(n [,n])
+XFN   225088 FRAC$        $=FRAC$(n [,n])
+XFN   225089 POSI         n=POSI($,n|$ [,n|$])
+XWORD 225090 DBLIST       DBLIST $ [,n[,n]]
+XWORD 225091 PBLIST       PBLIST $ [,n[,n]]
+XWORD 225092 RENUMREM     RENUMREM n [, n [, n [, n]]]
+XWORD 225093 FINPUT       FINPUT var$,$ [,$], var
+XFN   225094 RREC$        RREC$($|n, $|n)
+XWORD 225095 WREC         WREC $,$|n,$|n
+XWORD 225096 LOOP         LOOP
+XWORD 225097 SELECT       SELECT n|$
+XWORD 225098 CASE         CASE 
+XWORD 225099 IF           IF n THEN
+XWORD 225100 ELSE         ELSE
+XWORD 225101 KA		  KA [$]
+XWORD 225102 ADCREATE	  ADCREATE $[,$]
+XWORD 225103 ADDELETE	  ADDELETE $,n,[$]
+XFN   225104 ADFIND	  n=ADFIND($,$[,$])
+XWORD 225105 ADGET	  ADGET $,var,n[,$]
+XWORD 225106 ADPUT	  ADPUT $,var[,$]
+XFN   225107 ADSIZE	  n=ADSIZE($[,$])
+XWORD 225108 ROMAN	  ROMAN ON|OFF

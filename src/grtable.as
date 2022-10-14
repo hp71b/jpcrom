@@ -1,0 +1,3036 @@
+	TITLE	Graphique, Table des Caractères <grtable.as>
+
+=FINCAR EQU    %10000000
+=SAUTE	EQU    %1000
+=TRACE	EQU    %0000
+ D0	EQU    0*#10
+ D45	EQU    1*#10
+ D90	EQU    2*#10
+ D135	EQU    3*#10
+ D180	EQU    4*#10
+ D225	EQU    5*#10
+ D270	EQU    6*#10
+ D315	EQU    7*#10
+
+=CTABLE
+	REL(4) CAR32
+	REL(4) CAR33
+	REL(4) CAR34
+	REL(4) CAR35
+	REL(4) CAR36
+	REL(4) CAR37
+	REL(4) CAR38
+	REL(4) CAR39
+	REL(4) CAR40
+	REL(4) CAR41
+	REL(4) CAR42
+	REL(4) CAR43
+	REL(4) CAR44
+	REL(4) CAR45
+	REL(4) CAR46
+	REL(4) CAR47
+	REL(4) CAR48
+	REL(4) CAR49
+	REL(4) CAR50
+	REL(4) CAR51
+	REL(4) CAR52
+	REL(4) CAR53
+	REL(4) CAR54
+	REL(4) CAR55
+	REL(4) CAR56
+	REL(4) CAR57
+	REL(4) CAR58
+	REL(4) CAR59
+	REL(4) CAR60
+	REL(4) CAR61
+	REL(4) CAR62
+	REL(4) CAR63
+	REL(4) CAR64
+	REL(4) CAR65
+	REL(4) CAR66
+	REL(4) CAR67
+	REL(4) CAR68
+	REL(4) CAR69
+	REL(4) CAR70
+	REL(4) CAR71
+	REL(4) CAR72
+	REL(4) CAR73
+	REL(4) CAR74
+	REL(4) CAR75
+	REL(4) CAR76
+	REL(4) CAR77
+	REL(4) CAR78
+	REL(4) CAR79
+	REL(4) CAR80
+	REL(4) CAR81
+	REL(4) CAR82
+	REL(4) CAR83
+	REL(4) CAR84
+	REL(4) CAR85
+	REL(4) CAR86
+	REL(4) CAR87
+	REL(4) CAR88
+	REL(4) CAR89
+	REL(4) CAR90
+	REL(4) CAR91
+	REL(4) CAR92
+	REL(4) CAR93
+	REL(4) CAR94
+	REL(4) CAR95
+	REL(4) CAR96
+	REL(4) CAR97
+	REL(4) CAR98
+	REL(4) CAR99
+	REL(4) CAR100
+	REL(4) CAR101
+	REL(4) CAR102
+	REL(4) CAR103
+	REL(4) CAR104
+	REL(4) CAR105
+	REL(4) CAR106
+	REL(4) CAR107
+	REL(4) CAR108
+	REL(4) CAR109
+	REL(4) CAR110
+	REL(4) CAR111
+	REL(4) CAR112
+	REL(4) CAR113
+	REL(4) CAR114
+	REL(4) CAR115
+	REL(4) CAR116
+	REL(4) CAR117
+	REL(4) CAR118
+	REL(4) CAR119
+	REL(4) CAR120
+	REL(4) CAR121
+	REL(4) CAR122
+	REL(4) CAR123
+	REL(4) CAR124
+	REL(4) CAR125
+	REL(4) CAR126
+	REL(4) CAR127
+	REL(4) CAR128
+	REL(4) CAR129
+	REL(4) CAR130
+	REL(4) CAR131
+	REL(4) CAR132
+	REL(4) CAR133
+	REL(4) CAR134
+	REL(4) CAR135
+	REL(4) CAR136
+	REL(4) CAR137
+	REL(4) CAR138
+	REL(4) CAR139
+	REL(4) CAR140
+	REL(4) CAR141
+	REL(4) CAR142
+	REL(4) CAR143
+	REL(4) CAR144
+	REL(4) CAR145
+	REL(4) CAR146
+	REL(4) CAR147
+	REL(4) CAR148
+	REL(4) CAR149
+	REL(4) CAR150
+	REL(4) CAR151
+	REL(4) CAR152
+	REL(4) CAR153
+	REL(4) CAR154
+	REL(4) CAR155
+	REL(4) CAR156
+	REL(4) CAR157
+	REL(4) CAR158
+	REL(4) CAR159
+	REL(4) CAR160
+	REL(4) CAR161
+	REL(4) CAR162
+	REL(4) CAR163
+	REL(4) CAR164
+	REL(4) CAR165
+	REL(4) CAR166
+	REL(4) CAR167
+	REL(4) CAR168
+	REL(4) CAR169
+	REL(4) CAR170
+	REL(4) CAR171
+	REL(4) CAR172
+	REL(4) CAR173
+	REL(4) CAR174
+	REL(4) CAR175
+	REL(4) CAR176
+	REL(4) CAR177
+	REL(4) CAR178
+	REL(4) CAR179
+	REL(4) CAR180
+	REL(4) CAR181
+	REL(4) CAR182
+	REL(4) CAR183
+	REL(4) CAR184
+	REL(4) CAR185
+	REL(4) CAR186
+	REL(4) CAR187
+	REL(4) CAR188
+	REL(4) CAR189
+	REL(4) CAR190
+	REL(4) CAR191
+	REL(4) CAR192
+	REL(4) CAR193
+	REL(4) CAR194
+	REL(4) CAR195
+	REL(4) CAR196
+	REL(4) CAR197
+	REL(4) CAR198
+	REL(4) CAR199
+	REL(4) CAR200
+	REL(4) CAR201
+	REL(4) CAR202
+	REL(4) CAR203
+	REL(4) CAR204
+	REL(4) CAR205
+	REL(4) CAR206
+	REL(4) CAR207
+	REL(4) CAR208
+	REL(4) CAR209
+	REL(4) CAR210
+	REL(4) CAR211
+	REL(4) CAR212
+	REL(4) CAR213
+	REL(4) CAR214
+	REL(4) CAR215
+	REL(4) CAR216
+	REL(4) CAR217
+	REL(4) CAR218
+	REL(4) CAR219
+	REL(4) CAR220
+	REL(4) CAR221
+	REL(4) CAR222
+	REL(4) CAR223
+	REL(4) CAR224
+	REL(4) CAR225
+	REL(4) CAR226
+	REL(4) CAR227
+	REL(4) CAR228
+	REL(4) CAR229
+	REL(4) CAR230
+	REL(4) CAR231
+	REL(4) CAR232
+	REL(4) CAR233
+	REL(4) CAR234
+	REL(4) CAR235
+	REL(4) CAR236
+	REL(4) CAR237
+	REL(4) CAR238
+	REL(4) CAR239
+	REL(4) CAR240
+	REL(4) CAR241
+	REL(4) CAR242
+	REL(4) CAR243
+	REL(4) CAR244
+	REL(4) CAR245
+	REL(4) CAR246
+	REL(4) CAR247
+	REL(4) CAR248
+	REL(4) CAR249
+	REL(4) CAR250
+	REL(4) CAR251
+	REL(4) CAR252
+	REL(4) CAR253
+	REL(4) CAR254
+	REL(4) CAR255
+
+*
+* Caractere 32 (espace)
+*
+ CAR32
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 33 (!)
+*
+ CAR33
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+0
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+5
+
+*
+* Caractere 34 (")
+*
+ CAR34
+	CON(2) (D45)+(=SAUTE)+1
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+2
+
+*
+* Caractere 35 (#)
+*
+ CAR35
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D180)+(=TRACE)+4
+	CON(2) (D45)+(=SAUTE)+1
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+4
+
+*
+* Caractere 36 ($)
+*
+ CAR36
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D135)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+6
+
+*
+* Caractere 37 (%)
+*
+ CAR37
+	CON(2) (D45)+(=SAUTE)+3
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D180)+(=SAUTE)+3
+	CON(2) (D45)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+3
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+1
+
+*
+* Caractere 38 (&)
+*
+ CAR38
+	CON(2) (D45)+(=SAUTE)+4
+	CON(2) (D225)+(=TRACE)+2
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+4
+
+*
+* Caractere 39 (')
+*
+ CAR39
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+1
+
+*
+* Caractere 40 (()
+*
+ CAR40
+	CON(2) (D0)+(=SAUTE)+3
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D135)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+2
+
+*
+* Caractere 41 ())
+*
+ CAR41
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+2
+
+*
+* Caractere 42 (*)
+*
+ CAR42
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D180)+(=SAUTE)+2
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+4
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+4
+
+*
+* Caractere 43 (+)
+*
+ CAR43
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D135)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+4
+
+*
+* Caractere 44 (,)
+*
+ CAR44
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+1
+
+*
+* Caractere 45 (-)
+*
+ CAR45
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+4
+
+*
+* Caractere 46 (.)
+*
+ CAR46
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+1
+
+*
+* Caractere 47 (/)
+*
+ CAR47
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+4
+
+*
+* Caractere 48 (0)
+*
+ CAR48
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+4
+
+*
+* Caractere 49 (1)
+*
+ CAR49
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+5
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+2
+
+*
+* Caractere 50 (2)
+*
+ CAR50
+	CON(2) (D90)+(=SAUTE)+7
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+4
+
+*
+* Caractere 51 (3)
+*
+ CAR51
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 52 (4)
+*
+ CAR52
+	CON(2) (D45)+(=SAUTE)+4
+	CON(2) (D180)+(=TRACE)+4
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+3
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+6
+
+*
+* Caractere 53 (5)
+*
+ CAR53
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+3
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+4
+
+*
+* Caractere 54 (6)
+*
+ CAR54
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+1
+
+*
+* Caractere 55 (7)
+*
+ CAR55
+	CON(2) (D45)+(=SAUTE)+1
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+3
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+4
+
+*
+* Caractere 56 (8)
+*
+ CAR56
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=SAUTE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+1
+
+*
+* Caractere 57 (9)
+*
+ CAR57
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+3
+
+*
+* Caractere 58 (:)
+*
+ CAR58
+	CON(2) (D45)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+1
+
+*
+* Caractere 59 (;)
+*
+ CAR59
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+1
+
+*
+* Caractere 60 (<)
+*
+ CAR60
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D315)+(=TRACE)+3
+	CON(2) (D135)+(=SAUTE)+3
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+3
+
+*
+* Caractere 61 (=)
+*
+ CAR61
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+4
+
+*
+* Caractere 62 (>)
+*
+ CAR62
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+3
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+3
+
+*
+* Caractere 63 (?)
+*
+ CAR63
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D180)+(=TRACE)+0
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 64 (@)
+*
+ CAR64
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 65 (A)
+*
+ CAR65
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+5
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+4
+
+*
+* Caractere 66 (B)
+*
+ CAR66
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+3
+	CON(2) (D0)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+3
+
+*
+* Caractere 67 (C)
+*
+ CAR67
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+1
+
+*
+* Caractere 68 (D)
+*
+ CAR68
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+3
+
+*
+* Caractere 69 (E)
+*
+ CAR69
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D180)+(=TRACE)+4
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D270)+(=SAUTE)+3
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+3
+
+*
+* Caractere 70 (F)
+*
+ CAR70
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D270)+(=SAUTE)+3
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+3
+
+*
+* Caractere 71 (G)
+*
+ CAR71
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+1
+
+*
+* Caractere 72 (H)
+*
+ CAR72
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D270)+(=TRACE)+6
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+4
+
+*
+* Caractere 73 (I)
+*
+ CAR73
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D270)+(=SAUTE)+6
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+2
+
+*
+* Caractere 74 (J)
+*
+ CAR74
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+5
+
+*
+* Caractere 75 (K)
+*
+ CAR75
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D225)+(=TRACE)+4
+	CON(2) (D45)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+3
+
+*
+* Caractere 76 (L)
+*
+ CAR76
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D270)+(=SAUTE)+6
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+4
+
+*
+* Caractere 77 (M)
+*
+ CAR77
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D315)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+6
+
+*
+* Caractere 78 (N)
+*
+ CAR78
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D315)+(=TRACE)+4
+	CON(2) (D270)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+6
+
+*
+* Caractere 79 (O)
+*
+ CAR79
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 80 (P)
+*
+ CAR80
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+3
+
+*
+* Caractere 81 (Q)
+*
+ CAR81
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 82 (R)
+*
+ CAR82
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+3
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+3
+
+*
+* Caractere 83 (S)
+*
+ CAR83
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+1
+
+*
+* Caractere 84 (T)
+*
+ CAR84
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+4
+
+*
+* Caractere 85 (U)
+*
+ CAR85
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D270)+(=TRACE)+5
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 86 (V)
+*
+ CAR86
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D135)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+2
+
+*
+* Caractere 87 (W)
+*
+ CAR87
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D270)+(=TRACE)+5
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 88 (X)
+*
+ CAR88
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+4
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D180)+(=SAUTE)+4
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+4
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+1
+
+*
+* Caractere 89 (Y)
+*
+ CAR89
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D135)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+2
+
+*
+* Caractere 90 (Z)
+*
+ CAR90
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+4
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+4
+
+*
+* Caractere 91 ([)
+*
+ CAR91
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+2
+
+*
+* Caractere 92 (\)
+*
+ CAR92
+	CON(2) (D90)+(=SAUTE)+7
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+4
+
+*
+* Caractere 93 (])
+*
+ CAR93
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+2
+
+*
+* Caractere 94 (^)
+*
+ CAR94
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+2
+
+*
+* Caractere 95 (_)
+*
+ CAR95
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+4
+
+*
+* Caractere 96 (`)
+*
+ CAR96
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+1
+
+*
+* Caractere 97 (a)
+*
+ CAR97
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D180)+(=TRACE)+3
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+3
+
+*
+* Caractere 98 (b)
+*
+ CAR98
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+6
+
+*
+* Caractere 99 (c)
+*
+ CAR99
+	CON(2) (D45)+(=SAUTE)+4
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 100 (d)
+*
+ CAR100
+	CON(2) (D45)+(=SAUTE)+4
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+6
+
+*
+* Caractere 101 (e)
+*
+ CAR101
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 102 (f)
+*
+ CAR102
+	CON(2) (D45)+(=SAUTE)+1
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D225)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+3
+
+*
+* Caractere 103 (g)
+*
+ CAR103
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 104 (h)
+*
+ CAR104
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D270)+(=SAUTE)+3
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+3
+
+*
+* Caractere 105 (i)
+*
+ CAR105
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D225)+(=TRACE)+0
+	CON(2) (D225)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+2
+
+*
+* Caractere 106 (j)
+*
+ CAR106
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D45)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+0
+
+*
+* Caractere 107 (k)
+*
+ CAR107
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D270)+(=SAUTE)+4
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D225)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+2
+
+*
+* Caractere 108 (l)
+*
+ CAR108
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+1
+
+*
+* Caractere 109 (m)
+*
+ CAR109
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+3
+
+*
+* Caractere 110 (n)
+*
+ CAR110
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+3
+
+*
+* Caractere 111 (o)
+*
+ CAR111
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 112 (p)
+*
+ CAR112
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 113 (q)
+*
+ CAR113
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 114 (r)
+*
+ CAR114
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+1
+
+*
+* Caractere 115 (s)
+*
+ CAR115
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+1
+
+*
+* Caractere 116 (t)
+*
+ CAR116
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D135)+(=SAUTE)+2
+	CON(2) (D270)+(=TRACE)+5
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 117 (u)
+*
+ CAR117
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+4
+
+*
+* Caractere 118 (v)
+*
+ CAR118
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+2
+
+*
+* Caractere 119 (w)
+*
+ CAR119
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+3
+
+*
+* Caractere 120 (x)
+*
+ CAR120
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D45)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+4
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+4
+
+*
+* Caractere 121 (y)
+*
+ CAR121
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D270)+(=SAUTE)+3
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+3
+
+*
+* Caractere 122 (z)
+*
+ CAR122
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D225)+(=TRACE)+4
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+4
+
+*
+* Caractere 123 ({)
+*
+ CAR123
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=SAUTE)+3
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+1
+
+*
+* Caractere 124 (|)
+*
+ CAR124
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+3
+
+*
+* Caractere 125 (})
+*
+ CAR125
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+1
+
+*
+* Caractere 126 (~)
+*
+ CAR126
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 127 (DEL)
+*
+ CAR127
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D45)+(=TRACE)+4
+	CON(2) (D135)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+4
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D225)+(=TRACE)+4
+	CON(2) (D315)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+4
+
+*
+* Caractere 128 ()
+*
+ CAR128
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 129 ()
+*
+ CAR129
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 130 ()
+*
+ CAR130
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 131 ()
+*
+ CAR131
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 132 ()
+*
+ CAR132
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 133 ()
+*
+ CAR133
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 134 ()
+*
+ CAR134
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 135 ()
+*
+ CAR135
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 136 ()
+*
+ CAR136
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 137 ()
+*
+ CAR137
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 138 ()
+*
+ CAR138
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 139 ()
+*
+ CAR139
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 140 ()
+*
+ CAR140
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 141 ()
+*
+ CAR141
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 142 ()
+*
+ CAR142
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 143 ()
+*
+ CAR143
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 144 ()
+*
+ CAR144
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 145 ()
+*
+ CAR145
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 146 ()
+*
+ CAR146
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 147 ()
+*
+ CAR147
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 148 ()
+*
+ CAR148
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 149 ()
+*
+ CAR149
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 150 ()
+*
+ CAR150
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 151 ()
+*
+ CAR151
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 152 ()
+*
+ CAR152
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 153 ()
+*
+ CAR153
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 154 ()
+*
+ CAR154
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 155 ()
+*
+ CAR155
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 156 ()
+*
+ CAR156
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 157 ()
+*
+ CAR157
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 158 ()
+*
+ CAR158
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 159 ()
+*
+ CAR159
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 160 ()
+*
+ CAR160
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 161 (A grave)
+*
+ CAR161
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D135)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+2
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+4
+
+*
+* Caractere 162 (A circonflexe)
+*
+ CAR162
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+2
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+4
+
+*
+* Caractere 163 (E grave)
+*
+ CAR163
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+4
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+2
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+3
+
+*
+* Caractere 164 (E circonflexe)
+*
+ CAR164
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+4
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D180)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 165 (E trema)
+*
+ CAR165
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+4
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D180)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D135)+(=SAUTE)+1
+	CON(2) (D180)+(=TRACE)+0
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+0
+
+*
+* Caractere 166 (I circonflexe)
+*
+ CAR166
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+1
+
+*
+* Caractere 167 (I trema)
+*
+ CAR167
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D180)+(=TRACE)+0
+	CON(2) (D180)+(=SAUTE)+2
+	CON(2) (D270)+(=TRACE)+0
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+1
+
+*
+* Caractere 168 (accent aigu)
+*
+ CAR168
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+2
+
+*
+* Caractere 169 (accent grave)
+*
+ CAR169
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D0)+(=SAUTE)+3
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+2
+
+*
+* Caractere 170 (accent circonflexe)
+*
+ CAR170
+	CON(2) (D90)+(=SAUTE)+7
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+1
+
+*
+* Caractere 171 (trema)
+*
+ CAR171
+	CON(2) (D90)+(=SAUTE)+7
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+0
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+0
+
+*
+* Caractere 172 (tilde)
+*
+ CAR172
+	CON(2) (D90)+(=SAUTE)+7
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 173 (U grave)
+*
+ CAR173
+	CON(2) (D90)+(=SAUTE)+7
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 174 (U circonflexe)
+*
+ CAR174
+	CON(2) (D90)+(=SAUTE)+7
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 175 (Livre a deux barres)
+*
+ CAR175
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D180)+(=TRACE)+3
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+3
+
+*
+* Caractere 176 (Overscore)
+*
+ CAR176
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+4
+
+*
+* Caractere 177 (Y aigu)
+*
+ CAR177
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+2
+
+*
+* Caractere 178 (y aigu)
+*
+ CAR178
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D135)+(=SAUTE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D225)+(=SAUTE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 179 (degre)
+*
+ CAR179
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+2
+
+*
+* Caractere 180 (C cedille)
+*
+ CAR180
+	CON(2) (D45)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+4
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+1
+
+*
+* Caractere 181 (c cedille)
+*
+ CAR181
+	CON(2) (D45)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+1
+
+*
+* Caractere 182 (N tilde)
+*
+ CAR182
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D315)+(=TRACE)+4
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 183 (n tilde)
+*
+ CAR183
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+6
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 184 (! renverse)
+*
+ CAR184
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+0
+
+*
+* Caractere 185 (? renverse)
+*
+ CAR185
+	CON(2) (D45)+(=SAUTE)+4
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+0
+
+*
+* Caractere 186 (?????)
+*
+ CAR186
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D135)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D225)+(=SAUTE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D315)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+4
+
+*
+* Caractere 187 (Livre a une barre)
+*
+ CAR187
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+3
+
+*
+* Caractere 188 (Yen)
+*
+ CAR188
+	CON(2) (D45)+(=SAUTE)+3
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D135)+(=SAUTE)+1
+	CON(2) (D135)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+3
+
+*
+* Caractere 189 (paragraphe)
+*
+ CAR189
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+1
+
+*
+* Caractere 190 (f barre)
+*
+ CAR190
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+2
+
+*
+* Caractere 191 (c barre)
+*
+ CAR191
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D315)+(=SAUTE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 192 (a circonflexe)
+*
+ CAR192
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D180)+(=TRACE)+3
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D135)+(=SAUTE)+3
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+1
+
+*
+* Caractere 193 (e circonflexe)
+*
+ CAR193
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 194 (o circonflexe)
+*
+ CAR194
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+1
+
+*
+* Caractere 195 (u cironflexe)
+*
+ CAR195
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D135)+(=SAUTE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 196 (a aigu)
+*
+ CAR196
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D180)+(=TRACE)+3
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D135)+(=SAUTE)+3
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 197 (e aigu)
+*
+ CAR197
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D135)+(=SAUTE)+3
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 198 (o aigu)
+*
+ CAR198
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 199 (u aigu)
+*
+ CAR199
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D135)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 200 (a grave)
+*
+ CAR200
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D180)+(=TRACE)+3
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 201 (e grave)
+*
+ CAR201
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 202 (o grave)
+*
+ CAR202
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=SAUTE)+3
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 203 (u grave)
+*
+ CAR203
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D135)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 204 (a trema)
+*
+ CAR204
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D180)+(=TRACE)+3
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D135)+(=SAUTE)+3
+	CON(2) (D0)+(=TRACE)+0
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+0
+
+*
+* Caractere 205 (e trema)
+*
+ CAR205
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D180)+(=TRACE)+0
+	CON(2) (D180)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+0
+
+*
+* Caractere 206 (o trema)
+*
+ CAR206
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+0
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+0
+
+*
+* Caractere 207 (u trema)
+*
+ CAR207
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D135)+(=SAUTE)+1
+	CON(2) (D180)+(=TRACE)+0
+	CON(2) (D180)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+0
+
+*
+* Caractere 208 (A carre)
+*
+ CAR208
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+4
+
+*
+* Caractere 209 (i circonflexe)
+*
+ CAR209
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+1
+
+*
+* Caractere 210 (O barre)
+*
+ CAR210
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D45)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+2
+
+*
+* Caractere 211 (AE)
+*
+ CAR211
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D180)+(=SAUTE)+2
+	CON(2) (D270)+(=TRACE)+6
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+3
+
+*
+* Caractere 212 (a carre)
+*
+ CAR212
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D180)+(=TRACE)+3
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+3
+
+*
+* Caractere 213 (i aigu)
+*
+ CAR213
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 214 (o barre)
+*
+ CAR214
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+2
+
+*
+* Caractere 215 (ae)
+*
+ CAR215
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+1
+
+*
+* Caractere 216 (A circomflexe inverse)
+*
+ CAR216
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D180)+(=SAUTE)+4
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D135)+(=SAUTE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 217 (i grave)
+*
+ CAR217
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D225)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+1
+
+*
+* Caractere 218 (O trema)
+*
+ CAR218
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+0
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+0
+
+*
+* Caractere 219 (U trema)
+*
+ CAR219
+	CON(2) (D90)+(=SAUTE)+7
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D135)+(=SAUTE)+1
+	CON(2) (D180)+(=TRACE)+0
+	CON(2) (D180)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+0
+
+*
+* Caractere 220 (E aigu)
+*
+ CAR220
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D270)+(=SAUTE)+5
+	CON(2) (D180)+(=TRACE)+4
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D135)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 221 (i trema)
+*
+ CAR221
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+0
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+0
+
+*
+* Caractere 222 (beta)
+*
+ CAR222
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 223 (O circonflexe)
+*
+ CAR223
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+2
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 224 (A aigu)
+*
+ CAR224
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (D225)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+4
+
+*
+* Caractere 225 (A tilde)
+*
+ CAR225
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D180)+(=SAUTE)+3
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+4
+
+*
+* Caractere 226 (a tilde)
+*
+ CAR226
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D180)+(=TRACE)+3
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 227 (D barre)
+*
+ CAR227
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+4
+
+*
+* Caractere 228 (d barre)
+*
+ CAR228
+	CON(2) (D45)+(=SAUTE)+3
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D315)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+2
+
+*
+* Caractere 229 (I aigu)
+*
+ CAR229
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D270)+(=SAUTE)+5
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+5
+
+*
+* Caractere 230 (I grave)
+*
+ CAR230
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D270)+(=SAUTE)+5
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+5
+
+*
+* Caractere 231 (O aigu)
+*
+ CAR231
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (D225)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 232 (O grave)
+*
+ CAR232
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D135)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+2
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 233 (O tilde)
+*
+ CAR233
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D180)+(=SAUTE)+3
+	CON(2) (D270)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 234 (o tilde)
+*
+ CAR234
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 235 (S circonflexe inverse)
+*
+ CAR235
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D135)+(=TRACE)+1
+
+*
+* Caractere 236 (s circonflexe inverse)
+*
+ CAR236
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D135)+(=SAUTE)+3
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 237 (U aigu)
+*
+ CAR237
+	CON(2) (D90)+(=SAUTE)+7
+	CON(2) (D270)+(=TRACE)+4
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+4
+	CON(2) (D135)+(=SAUTE)+1
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 238 (Y trema)
+*
+ CAR238
+	CON(2) (D90)+(=SAUTE)+7
+	CON(2) (D270)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+2
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D45)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+1
+	CON(2) (D135)+(=SAUTE)+1
+	CON(2) (D180)+(=TRACE)+0
+	CON(2) (D180)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+0
+
+*
+* Caractere 239 (y trema)
+*
+ CAR239
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+5
+	CON(2) (D270)+(=SAUTE)+3
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D45)+(=SAUTE)+1
+	CON(2) (D0)+(=TRACE)+0
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+0
+
+*
+* Caractere 240 (P estranger)
+*
+ CAR240
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D90)+(=SAUTE)+6
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D270)+(=TRACE)+6
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+2
+
+*
+* Caractere 241 (p estranger)
+*
+ CAR241
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D90)+(=TRACE)+6
+	CON(2) (D270)+(=SAUTE)+2
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+2
+
+*
+* Caractere 242 ()
+*
+ CAR242
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 243 ()
+*
+ CAR243
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 244 ()
+*
+ CAR244
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 245 ()
+*
+ CAR245
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0
+
+*
+* Caractere 246 (Barre horizontale)
+*
+ CAR246
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+4
+
+*
+* Caractere 247 (1/4)
+*
+ CAR247
+	CON(2) (D90)+(=SAUTE)+4
+	CON(2) (D45)+(=TRACE)+4
+	CON(2) (D270)+(=SAUTE)+4
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D90)+(=SAUTE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D180)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D90)+(=TRACE)+3
+
+*
+* Caractere 248 (1/2)
+*
+ CAR248
+	CON(2) (D90)+(=SAUTE)+5
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D225)+(=TRACE)+4
+	CON(2) (D0)+(=SAUTE)+2
+	CON(2) (D45)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D225)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D0)+(=TRACE)+2
+
+*
+* Caractere 249 (a souligne)
+*
+ CAR249
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D180)+(=TRACE)+3
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+1
+
+*
+* Caractere 250 (o souligne)
+*
+ CAR250
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+2
+	CON(2) (D135)+(=TRACE)+1
+	CON(2) (D180)+(=TRACE)+2
+	CON(2) (D225)+(=TRACE)+1
+	CON(2) (D270)+(=TRACE)+2
+	CON(2) (D315)+(=TRACE)+1
+	CON(2) (D0)+(=TRACE)+2
+	CON(2) (=FINCAR)+(D45)+(=TRACE)+1
+
+*
+* Caractere 251 (guillemet ouvrant)
+*
+ CAR251
+	CON(2) (D0)+(=SAUTE)+4
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D135)+(=TRACE)+3
+	CON(2) (D45)+(=TRACE)+3
+	CON(2) (D180)+(=SAUTE)+1
+	CON(2) (D225)+(=TRACE)+3
+	CON(2) (=FINCAR)+(D315)+(=TRACE)+3
+
+*
+* Caractere 252 (carre)
+*
+ CAR252
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D90)+(=TRACE)+3
+	CON(2) (D0)+(=TRACE)+3
+	CON(2) (D270)+(=TRACE)+3
+	CON(2) (=FINCAR)+(D180)+(=TRACE)+3
+
+*
+* Caractere 253 (guillemet fermant)
+*
+ CAR253
+	CON(2) (D90)+(=SAUTE)+2
+	CON(2) (D45)+(=TRACE)+3
+	CON(2) (D135)+(=TRACE)+3
+	CON(2) (D0)+(=SAUTE)+1
+	CON(2) (D315)+(=TRACE)+3
+	CON(2) (=FINCAR)+(D225)+(=TRACE)+3
+
+*
+* Caractere 254 (+ ou -)
+*
+ CAR254
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D0)+(=TRACE)+4
+	CON(2) (D90)+(=SAUTE)+3
+	CON(2) (D180)+(=TRACE)+4
+	CON(2) (D45)+(=SAUTE)+2
+	CON(2) (=FINCAR)+(D270)+(=TRACE)+4
+
+*
+* Caractere 255 ()
+*
+ CAR255
+	CON(2) (=FINCAR)+(D0)+(=SAUTE)+0

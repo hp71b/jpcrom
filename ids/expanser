@@ -1,0 +1,50 @@
+#!/bin/sh
+
+#
+# Crée l'arborescence pour JPC Rom en expansant les fichiers au fur et à mesure
+#
+
+ORG=/users/common/Assembleur/jpcrom/sources
+AUX="msg.am gmsg.am"
+DST=`pwd`
+
+#
+# Création de l'arborescence
+#
+
+rm -rf jpcrom
+mkdir jpcrom jpcrom/obj jpcrom/list
+
+#
+# Expansion des fichiers individuels
+#
+
+for i in `cat LISTE`
+do
+    expand < $ORG/$i.as > jpcrom/$i.as
+done
+
+#
+# Copie des fichiers source de messages
+#
+
+(cd $ORG ; cp $AUX $DST/jpcrom)
+
+#
+# Copie et modification de 'link' pour inclure le listing
+#
+
+sed 's:ald:& -xa../list/lex.al -l59:' < $ORG/link > jpcrom/link
+chmod +x jpcrom/link
+
+#
+# Copie et modification de 'Makefile' pour inclure le listing
+#
+
+sed 's:aas:& -xalist -l59:' < $ORG/Makefile > jpcrom/Makefile
+
+#
+# On y va !
+#
+
+(cd jpcrom ; make)

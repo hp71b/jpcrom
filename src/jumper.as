@@ -1,0 +1,84 @@
+	TITLE	Jumper <jumper.as>
+
+=LEXPIL EQU    #FF
+
+=JUMPER RSTK=C
+	CD1EX
+	D1=(5) =SNAPBF
+	DAT1=C A
+	D1=(2) (=SNAPBF)+5
+	C=RSTK
+	DAT1=C W
+	D1=(4) (=SNAPBF)+21
+	DAT1=A W
+	D1=(2) (=SNAPBF)+37
+	C=B    A
+	CPEX   5
+	P=     6
+	C=0    P
+	GONC   JUMP05
+	C=C-1  P
+ JUMP05 P=     7
+	C=0    P
+	C=C-1  P
+	DAT1=C 8
+	SETHEX
+	P=     0
+	LC(3)  =bLEX
+	GOSBVL =I/OFND
+	GONC   JUMP90
+	LC(2)  =LEXPIL
+	B=C    A
+	A=0    A
+	A=A+1  A
+ JUMP10 C=DAT1 6
+	?C=0   B
+	GOYES  JUMP90
+	?B#C   B
+	GOYES  JUMP20
+	CSR    W
+	CSR    A
+	?A<C   B
+	GOYES  JUMP20
+	CSR    A
+	CSR    A
+	C=C-A  B
+	GONC   JUMP30
+ JUMP20 D1=D1+ 11
+	GONC   JUMP10
+ JUMP90 LC(4)  =eXWORD
+	GOVLNG =BSERR
+ JUMP30 D1=D1+ 6
+	C=DAT1 A
+	B=C    A
+	C=RSTK
+	D1=C
+	D1=D1+ 5
+	CD1EX
+	RSTK=C
+	C=DAT1 A
+	C=C+B  A
+	RSTK=C
+	D1=(5) (=SNAPBF)+21
+	A=DAT1 W
+	D1=D1+ 16
+	C=DAT1 8
+	B=C    A
+	P=     7
+	C=C+1  P
+	GOC    JUMP50
+	SETDEC
+ JUMP50 P=     6
+	?C#0   P
+	GOYES  JUMP60
+ JUMP60 P=C    5
+	D1=(4) (=SNAPBF)+5
+	C=DAT1 W
+	D1=(2) =SNAPBF
+	RSTK=C
+	C=DAT1 A
+	D1=C
+	C=RSTK
+	RTN
+
+	END

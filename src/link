@@ -1,0 +1,56 @@
+#!/bin/sh
+
+#
+# Comme dans un repas mondain, certains Lex doivent être placés près
+# les uns des autres. Au contraire, aucun n'est susceptible...
+#
+# Dépendances :
+#	jumper (=JUMPER) : kris mm rw dir
+#	ka (=Num2D1) : xdsp
+#	ka (=fkey) : fkey xdsp
+#
+# Les fichiers ci-dessous forment des ensembles ordonnés à ne pas séparer :
+#	FINPUT : fbas fcomp fboucle
+#	XEDIT : find xdec xbcl xcmd xtext xutil xdsp xgen xaux
+#
+
+cd obj
+ald -o../jpc								\
+    jpc def msg decomp parse						\
+    gdef gmmain gmsg gmbas gmutil					\
+    grmain grutil gr1 gr2 grtrace gr3 grtable				\
+    jumper kris mm rw dir						\
+    file pol								\
+    fbas fcomp fboucle							\
+    ad									\
+    attn								\
+    blist								\
+    combarr								\
+    date								\
+    des									\
+    desal								\
+    divi								\
+    drive								\
+    endup								\
+    exit								\
+    format								\
+    frac								\
+    gline								\
+    hms									\
+    map									\
+    marge								\
+    menu								\
+    print								\
+    replace								\
+    roman								\
+    rplc								\
+    scan								\
+    stack								\
+    struc								\
+    swap								\
+    shrink								\
+    sys									\
+    posi								\
+    ka fkey								\
+    find xdec xbcl xcmd xtext xutil xdsp xgen xaux			\
+    edit pk ilmsg keywait
