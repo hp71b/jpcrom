@@ -1,0 +1,200 @@
+.language
+F
+
+.keyword
+GLINE
+
+.purpose
+{cGLINE} (Graphic LINE) pr≈pare le trac≈ d'une ligne graphique
+sur les imprimantes ThinkJet ou LaserJet.
+
+.options
+SKID
+
+.syntaxe
+{cGLINE {ix{c , {ilongueur{c , {ipremier{c , {itaille{c , {i≈cart{c
+
+.examples
+.ex
+GLINE x1,x2-x1+1,1,1,0
+.co
+Trace une ligne entre les points x1 et x2 en utilisant la
+variable G$.
+
+.input
+.it
+x
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 640.
+.it
+longueur
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 640.
+.it
+premier
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 640.
+.it
+taille
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 640.
+.it
+≈cart
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 640.
+
+.operation
+{gLes graphiques sur les imprimantes ˚ raster ˝ :}
+
+\Les imprimantes capables de dessiner des graphiques du type
+˚ raster ˝ sont, par exemple, les ThinkJet, LaserJet ou QuietJet.\
+
+\Les graphiques sur ces imprimantes sont construits ligne par
+ligne.  Il faut donc un espace de 80 caract…res pour recevoir une
+image des 640 points de cette ligne. {cGLINE} et {cGPSET}
+utilisent donc une variable de 80 caract…res nomm≈e explicitement
+G$, dimensionn≈e au pr≈alable par un ordre {cDIM G$[80]}.\
+
+\Avant le d≈but de chaque nouvelle ligne, il faudra remplir cette
+variable avec des {cCHR$(0)} pour l'initialiser. Ceci peut se
+faire par un simple segment de programme du type :{c\
+
+100 DIM G$[80]
+110 G$=SPACE$(0,80)
+
+
+{gL'impression de la ligne graphique :}
+
+\L'impression se fait » l'aide d'une s≈quence d'≈chappement (voir
+{cESC$}), d≈pendante de l'imprimante dont vous disposez.
+Avec une ThinkJet, vous ferez :\
+
+{cPRINT ESC$("*r640S"); @ PWIDTH INF}
+
+\pour initialiser le mode graphique. Notez que cette
+initialisation ne devra
+¡tre faite qu'une seule fois pour toute la dur≈e de votre
+programme.\
+
+\Vous imprimerez ensuite chaque ligne graphique en faisant
+:\
+
+{cPRINT ESC$("*b80W")&G$;}
+
+\Attention : faites de pr≈f≈rence un {cPWIDTH INF} avant
+d'imprimer le graphique, pour ≈viter que le HP-71 n'ins…re une
+s≈quence de fin de ligne (voir {cENDLINE}) au milieu de vos
+donn≈es graphiques.\
+
+
+\Reportez-vous au manuel de votre imprimante pour plus de d≈tails sur
+le fonctionnement des graphiques.\
+
+
+{gL'utilisation de GLINE :}
+
+\{cGLINE} sert » tracer une droite dans l'˚image˝ G$, » partir du
+point {ix}, de longueur {ilongueur}. La caract≈ristique de {cGLINE}
+est de tracer des jolis motifs. Par exemple :{l\
+
+   premier
+   v    taille    ≈cart
+ <---><--------><------>
+ ___________________________________________________________
+|     xxxxxxxxxx        xxxxxxxxxx        xxxxxxxxx
+|   xxxxxxxxxx        xxxxxxxxxx        xxxxxxxxx
+| xxxxxxxxxx        xxxxxxxxxx        xxxxxxxxx
+|}
+
+\Ceci ≈tait un petit exemple de motif. Chaque ligne est construite en
+donnant 5 param…tres :\
+
+\1) La coordonn≈e du premier point : {ix}\
+\2) la longueur de la ligne : {ilongueur}\
+\3) le premier ≈cart : {ipremier}\
+\4) la taille d'un trait : {itaille}\
+\5) l'≈cart entre les traits : {i≈cart}.\
+
+\Pour dessiner un motif comme celui-ci, il suffit de faire varier
+{ipremier} :\
+
+{ipremier{c = MOD ( {ipremier{c - 2 , {i≈cart{c )}
+
+\Pour tracer une ligne droite normale, prenez :\
+
+{ipremier} = {itaille} = 1
+{i≈cart} = 0
+.references
+{iJPC 35} (page 38) {cGLINE} et le sous programme {cGRAPH} par
+Pierre David.
+
+{iJPC 42} (page 29) exemple d'utilisation par Eric Gengoux.
+
+{iManuel du module Graphique pour HP-71} par Pierre David.
+.related
+ENDLINE
+ESC$
+GPSET
+PRINT
+PWIDTH
+.author
+Pierre David
+.end keyword
+
+.keyword
+GPSET
+
+.purpose
+{cGPSET} (Graphic Point SET) pr≈pare le trac≈ d'un point sur les
+imprimantes ThinkJet ou LaserJet.
+
+.options
+SKID
+
+.syntaxe
+{cGPSET {ix{c
+
+.examples
+.ex
+FOR X=X1 TO X2 @ GPSET X @ NEXT X
+.co
+Trace une ligne de x1 » x2.
+
+.input
+.it
+x
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 640.
+
+.operation
+\{cGPSET} trace un point dans l'˚image˝ de la ligne G$. Pour plus
+d'explications, voir {cGLINE}.\
+.references
+{iJPC 35} (page 38) {cGPSET} et le sous programme {cGRAPH} par
+Pierre David.
+
+{iJPC 42} (page 29) exemple d'utilisation par Eric Gengoux.
+
+{iManuel du module Graphique pour HP-71} par Pierre David.
+.related
+ENDLINE
+ESC$
+GLINE
+PRINT
+PWIDTH
+.author
+Pierre David
+.end keyword
+.end

@@ -1,0 +1,278 @@
+.language
+F
+
+.keyword
+IDRAW
+
+.purpose
+{cIDRAW} (Incremental DRAWing) trace un segment de droite
+» partir de la position courante de la plume jusqu'» la position
+sp≈cifi≈e par les incr≈ments en x et y.
+
+.options
+SKID
+
+.syntaxe
+{cIDRAW {iincr≈ment x{c, {iincr≈ment y}
+
+.example
+.ex
+IDRAW 10,20
+.co
+trace un vecteur (10,20) » partir de la position courante de la
+plume.
+
+.input
+.it
+incr≈ment x, incr≈ment y
+.de
+Expressions num≈riques arrondies » des entiers.
+.re
+-32767 » +32767
+
+.operation
+\{cDRAW} est semblable » {cDRAW}, » ceci pr…s que les param…tres
+sont des incr≈ments et non des positions absolues. L'origine est
+la plus r≈cente position de la plume.\
+
+\Comme pour {cDRAW}, aucun trait ne peut ¡tre trac≈ en dehors de
+la zone de trµage. Si un trac≈ d≈passe cette limite, la position
+th≈orique de la plume sera chang≈e, mais le trait s'arr¡tera » la
+fronti…re.\
+
+\Le trait est trac≈ suivant le type de ligne en vigueur.\
+
+.related
+DRAW
+IMOVE
+LINETYPE
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+IF ... THEN ... ELSE ... END IF
+
+.purpose
+La structure {cIF} ... {cTHEN} ... {cELSE} ... {cEND IF} ≈tend la
+structure standard au traitement multi-lignes.
+
+.options
+SKID
+
+.syntaxe
+{cIF {iexpression logique{c THEN
+  {isegment de programme
+END IF
+}ou bien :
+{cIF {iexpression logique{c THEN
+  {isegment de programme
+ELSE
+  {isegment de programme
+END IF
+
+.examples
+.ex
+100 IF X=0 THEN
+110   INPUT X
+120 ELSE
+130   X=X+1
+140 END IF
+150  }:
+.co
+Si le contenu de la variable X est nul, le {lINPUT{p est ex≈cut≈,
+sinon la variable X est incr≈ment≈e.
+.ex
+100 IF X=0 THEN
+110   INPUT X
+120 END IF
+130  }:
+.co
+Si le contenu de la variable X est nul, le {lINPUT{p est ex≈cut≈,
+sinon l'ex≈cution continue » la ligne 130.
+
+.input
+.it
+expression logique
+.de
+Expression num≈rique ≈valu≈e comme vraie si diff≈rente de z≈ro et
+fausse si ≈gale » z≈ro.
+.re
+Aucune.
+.it
+segment de programme
+.de
+Tout nombre de lignes de programme contiguÕs.
+.re
+Aucune.
+
+.operation
+\La structure {cIF} ... {cELSE} ... {cEND IF} (ou {cIF} ... {cEND
+IF}) de JPC Rom est une extension de la structure {cIF} standard.\
+
+\La diff≈rence est faite quand il y a une fin d'ordre apr…s le
+{cTHEN}, c'est » dire une fin de ligne, un caract…re {c@}, une
+remarque ({c!}) ou un {cELSE} mono-ligne.\
+
+\Par exemple :{c\
+
+10 IF X=0 THEN              IF de JPC Rom
+10 IF X=0 THEN @ BEEP            "
+10 IF X=0 THEN ! Remarque        "
+
+10 IF X=0 THEN 'BEEP'       IF standard
+10 IF X=0 THEN 10                "
+10 IF X=0 THEN BEEP              "}
+
+\Les programmes conµus avec des {cIF} monolignes sont ex≈cutables
+m¡me lorsque JPC Rom n'est plus dans le HP-71.\
+
+\Si l'≈valuation de l'{iexpression logique} est vraie (diff≈rente
+de z≈ro), l'ex≈cution se poursuit au premier ordre suivant le
+{cTHEN}. Si le {cELSE} est pr≈sent, l'ex≈cution continue apr…s le
+{cEND IF}, en sautant le block d≈limit≈ par {cELSE} et {cEND
+IF}.\
+
+\Si l'≈valuation de l'{iexpression logique} est fausse (nulle),
+l'ex≈cution continue imm≈diatement apr…s le {cELSE} s'il est
+pr≈sent, ou apr…s le {cEND IF} sinon.\
+
+\Les segments de programme peuvent eux-m¡mes contenir des
+structures de type boucle ou choix. L'embo—tement doit ¡tre
+correct, sinon l'erreur {cJPC ERR:Structure Mismatch} est
+renvoy≈e.\
+.references
+{iJPC 52} (page 10) premi…re version par Pierre David et Janick
+Taillandier.
+
+Basic 5.0 pour HP 9000 s≈ries 200/300.
+.related
+IF} ... {cTHEN
+SELECT} ... {cEND SELECT
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+IMOVE
+
+.purpose
+{cIMOVE} (Incremental MOVE) d≈place la plume
+depuis la position courante de la plume jusqu'» la position
+sp≈cifi≈e par les incr≈ments en x et y.
+
+.options
+SKID
+
+.syntaxe
+{cIMOVE {iincr≈ment x{c, {iincr≈ment y}
+
+.example
+.ex
+IMOVE 30,40
+.co
+d≈place la plume de 30 unit≈s graphiques selon l'axe des x, et de
+40 unit≈s graphiques selon l'axe des y.
+
+.input
+.it
+incr≈ment x, incr≈ment y
+.de
+Expressions num≈riques arrondies » des entiers.
+.re
+-32767 » +32767
+
+.operation
+\{cIMOVE} est semblable » {cMOVE}, » ceci pr…s que les
+param…tres sont des incr≈ments et non des positions absolues.\
+
+\Si un ordre {cIMOVE} d≈place la plume en dehors des limites du
+trac≈, le prochain trait ne commencera qu'» partir de la
+fronti…re de la zone de traµage.\
+
+.related
+MOVE
+IDRAW
+LINETYPE
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+INVERSE
+
+.purpose
+{cINVERSE} inverse des portions de l'affichage graphique.
+
+.options
+SKID
+
+.syntaxe
+{cINVERSE
+{cINVERSE {id≈but{c , {ifin{c
+
+.examples
+.ex
+IF KEYDOWN("I") THEN INVERSE
+.co
+Inverse l'affichage si la touche {l[I]{p est press≈e.
+.ex
+INVERSE 10,121
+.co
+Inverse l'affichage de la colonne 10 » la colonne 121, c'est
+» dire en laissant 10 colonnes inchang≈es de
+part et d'autre.
+
+.input
+.it
+d≈but
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 131
+.df
+0
+.it
+fin
+.de
+Expression num≈rique arrondie » un entier.
+.re
+d≈but » 131
+.df
+131
+
+.operation
+\{cINVERSE} inverse la totalit≈ ou une portion de
+l'affichage graphique. les points
+blancs passent » noir, et les points noirs passent » blanc.\
+
+\Le contenu de la m≈moire d'≈cran (telle que renvoy≈e par
+{cDISP$}) n'est pas modifi≈.\
+
+\Les param…tres optionnels pr≈cisent les premi…re et
+derni…re colonnes de l'inversion.\
+.references
+{iJPC 19} (page 25) routine d'inversion de l'afficheur graphique
+en Forth par Jean-Pierre Bondu.
+
+{iJPC 24} (page 37) premi…re version par Jean-Jacques Moreau.
+
+{iJPC 25} (page 59) programme en Forth renvoyant l'adresse d'une
+colonne graphique par Jean-Pierre Bondu.
+
+{iA para—tre} : deuxi…me version par Pierre David et Janick
+Taillandier.
+
+{iInternal Design Specification} Volume I, chapitre 3.2.1.
+.related
+GDISP$
+GDISP
+.author
+Pierre David
+Jean-Jacques Moreau
+Janick Taillandier
+.end keyword
+.end

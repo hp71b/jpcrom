@@ -1,0 +1,519 @@
+.language
+F
+
+.keyword
+EDIT
+
+.purpose
+{cEDIT} vous permet de r≈unir des fichiers LEX, ou d'≈diter des
+fichiers r≈sidant sur un p≈riph≈rique. {cEDIT} n'est pas
+programmable.
+
+.options
+SK
+
+.syntaxe
+{cEDIT
+{cEDIT {ifichier1
+{cEDIT {ifichier1{c TO {ifichier2}
+
+.examples
+.ex
+EDIT AREUH:TAPE
+.co
+Copie le fichier AREUH r≈sidant sur :TAPE vers la m≈moire
+centrale, puis en fait le fichier courant.
+.ex
+EDIT AREUH:TAPE TO TOTO:PORT(0)
+.co
+Copie le fichier AREUH r≈sidant sur :TAPE vers le port
+ind≈pendant num≈ro 0 en changeant son nom en TOTO, puis en fait
+le fichier courant.
+.ex
+EDIT STRINGLX
+.co
+Edite le fichier LEX STRINGLX.
+
+.input
+.it
+fichier1
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+optionnel.
+.df
+Fichier de travail syst…me
+.it
+fichier2
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Le sp≈cificateur de p≈riph≈rique doit ¡tre en m≈moire vive.
+.df
+fichier de m¡me nom en m≈moire principale.
+
+.operation
+{gLa recopie et l'≈dition des fichiers :}
+
+\Si le premier sp≈cificateur de fichier indique une unit≈ de
+m≈moire de masse ext≈rieure, le fichier est d'abord copi≈.\
+
+\Si le deuxi…me sp≈cificateur est fourni, le fichier est copi≈
+dans ce fichier.\
+
+\Le fichier est ensuite ≈dit≈, c'est » dire qu'il devient le
+fichier de travail courant.\
+
+\Le comportement de {cEDIT} sur des fichiers externes se r≈sume »
+un ordre {cCOPY} suivi d'un {cEDIT} standard sur ce fichier.\
+
+\Si le type du fichier recopi≈ est invalide, c'est » dire
+diff≈rent de Basic, Keys ou Lex, la copie est effectu≈e, puis
+l'erreur {cERR:Invalid†Filetype} est renvoy≈e.\
+
+
+{gLe cha—nage de fichiers Lex :}
+
+\Le fichier ≈dit≈ peut ¡tre un fichier Lex. C'est la premi…re
+≈tape du cha—nage de Lex. Voir {cMERGE} pour plus de d≈tails.\
+
+
+{gAttention !}
+
+\Lorsque vous ≈ditez un fichier LEX, celui-ci devient le fichier
+de travail courant. Si vous ex≈cutez l'ordre {cPURGE} sur ce
+fichier, le fichier de travail courant n'est pas remis sur le
+fcihier de travail syst…me ({cworkfile}), et cela donne des
+comportements ≈tranges.\
+
+\Pour rem≈dier » cela, soyez s√r de faire {cEDIT} pour ≈diter le
+fichier de travail syst…me » la fin de votre s≈ance de cha—nage.\
+.references
+{iJPC 31} (page 54) ≈dition des fichiers sur p≈riph≈riques par
+Jean-Pierre Bondu.
+
+{iJPC 23} (page 47) programme de cha—nage de fichiers Lex en
+Basic par Michel Martinet.
+
+{iJPC 37} (page 22) cha—nage de fichiers Lex en assembleur par
+Pierre David et Michel Martinet.
+.related
+COPY
+EDIT
+MERGE
+.author
+Jean-Pierre Bondu
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+ENDUP
+
+.purpose
+{cENDUP} d≈finit une cha—ne de commandes » ex≈cuter lorsque le
+HP-71 se met hors tension.
+
+.options
+SKID
+
+.syntaxe
+{cENDUP {icha—ne de commande{c
+
+.examples
+.ex
+ENDUP "BEEP@'Au revoir...'"
+.co
+Le HP-71 ≈mettra un signal sonore, puis affichera "Au revoir..."
+lors de chaque extinction.
+
+.input
+.it
+cha—ne de commande
+.de
+Expression alphanum≈rique.
+.re
+0 » 95 caract…res.
+
+.operation
+\Lorsque vous sp≈cifiez une cha—ne de commandes par {cENDUP},
+vous pouvez utiliser toute cha—ne d'instructions que vous pouvez,
+par ailleurs, ex≈cuter au clavier.\
+
+\Lorsque vous ex≈cutez {cENDUP}, le HP-71 stocke la cha—ne de
+commandes sp≈cifi≈e telle qu'elle est entr≈e, sans v≈rifier les
+erreurs de syntaxe. L'ordinateur ne conserve qu'une cha—ne
+{cENDUP} » un instant donn≈. Lorsque vous mettez le HP-71 hors
+tension, la cha—ne {cENDUP} est ex≈cut≈e si elle est exempte
+d'erreur.  Sinon, l'ordinateur affiche un message d'erreur puis
+se met dans un ≈tat oÀ un appui sur {l[ATTN]} met le HP-71 hors
+tension.\
+
+\La cha—ne sp≈cifi≈e est conserv≈e dans un buffer. Voir le
+mot-clef {cADBUF$} pour plus de renseignements sur les buffers et
+leur utilisation.\
+
+\Note : la cha—ne sp≈cifi≈e par {cENDUP} n'est pas ex≈cut≈e
+lorsque le HP-71 se met hors tension en mode CALC ou avec
+{cKA}.\
+.references
+{iJPC 25} (page 43) premi…re version par Jean-Jacques Moreau.
+
+{iJPC 31} (page 29) deuxi…me version par Jean-Jacques Moreau.
+.related
+ADBUF$
+ENDUP$
+STARTUP$
+STARTUP
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+ENDUP$
+
+.purpose
+{cENDUP$} renvoie la cha—ne de commandes sp≈cifi≈e par {cENDUP}.
+
+.options
+FKID
+
+.syntaxe
+ENDUP$
+
+.examples
+.ex
+A$=ENDUP$
+.co
+Place la commande qui doit ¡tre ex≈cut≈e » l'extinction du HP-71
+dans la variable A$.
+
+.operation
+\{cENDUP$} renvoie la cha—ne de commandes devant ¡tre ex≈cut≈e »
+l'extinction du HP-71. La longueur de cette cha—ne ne peut
+exc≈der 95 caract…res.\
+
+\{cENDUP$} renvoie une cha—ne nulle si aucune commande n'avait ≈t≈
+sp≈cifi≈e par {cENDUP}.\
+.references
+{iJPC 25} (page 43) premi…re version par Jean-Jacques Moreau.
+
+{iJPC 31} (page 29) deuxi…me version par Jean-Jacques Moreau.
+.related
+ENDUP
+STARTUP
+STARTUP$
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+ENTRY$
+
+.purpose
+{cENTRY$} (point d'entr≈e) renvoie l'adresse du point d'entr≈e du
+mot-clef sp≈cifi≈.
+
+.options
+FKID
+
+.syntaxe
+{cENTRY$ ( {imot-clef{c )
+{cENTRY$ ( {imot-clef{c , {inum≈ro d'ordre{c )
+
+.examples
+.ex
+A$=ENTRY$("ENTRY$")
+.co
+Place l'adresse de la routine d'ex≈cution de {lENTRY${p dans la
+variable A$.
+.ex
+DISP ENTRY$("EDIT",2)
+.co
+Renvoie l'adresse du deuxi…me {lEDIT{p, c'est » dire le standard.
+Les fichiers Lex sont cherch≈s avant les fonctions standard.
+
+.input
+.it
+mot-clef
+.de
+Expression alphanum≈rique.
+.re
+Le mot-clef doit exister.
+.it
+num≈ro d'ordre
+.de
+Expression num≈rique arrondie » un entier.
+.re
+Le mot-clef doit exister.
+.df
+1
+
+.operation
+\{cENTRY$} renvoie l'adresse du point d'entr≈e de la fonction
+sp≈cifi≈e. L'adresse de la routine d'ex≈cution est synonyme
+d'adresse du point d'entr≈e.\
+
+\La fonction {cENTRY$} est surtout utilis≈e conjoitement avec le
+d≈bogueur (HP-82178A) pour fournir un point d'arr¡t facile »
+utiliser.\
+
+\Attention toutefois : les fichiers dans la m≈moire principale du HP-71
+sont constamment d≈plac≈s. Par exemple, toute suppression de
+fichier, tout ajout ou retrait dans un fichier situ≈ avant le
+fichier Lex contenant la fonction change l'adresse de son point
+d'entr≈e. Vous pouvez ≈viter ce probl…me en plaµant vos
+programmes en cours d'≈tude dans des ports ind≈pendants.\
+
+\Le point d'entr≈e est l'adresse de la routine d'ex≈cution, c'est
+» dire l'adresse sp≈cifi≈e par la pseudo-op≈ration {cENTRY} de
+l'assembleur du module Forth / Assembleur.\
+
+\Si le deuxi…me param…tre est fourni, {cENTRY$} cherche la
+fonction dans les autres fichiers Lex valides, puis dans les fonctions
+standard du HP-71.\
+
+\Si le mot-clef n'existe pas, ou si le deuxi…me param…tre est
+sup≈rieur au nombre de r≈p≈titions de la fonction dans votre
+HP-71, {cENTRY$} renvoie l'erreur {cERR:Invalid Arg}.\
+
+\Les mots-clefs de plus de 8 caract…res n≈cessitent un traitement
+sp≈cial par le syst…me. Ainsi, des mots comme {cUNDERLINE} ou
+{cRANDOMIZE} sont reconnus comme {cUNDERLIN} ou {cRANDOMIZ}. Ce
+sont ces fonctions qui reconnaissent le {cE} final. {cENTRY$} ne
+peut conna—tre ces caract…res suppl≈mentaires. Pour les trouver,
+cette fonction reconna—t {cUNDERLIN} et ignore le {cE} final.
+Ainsi, {cENTRY$("RANDOMIZE")} comme {cENTRY$("RANDOMIZ----")}
+ignorent les caract…res suppl≈mentaires et renvoient la m¡me
+adresse.\
+
+\Le mot-clef trouv≈ est le plus long mot-clef comprenant les
+caract…res sp≈cifi≈s, les autres sont ignor≈s. Ainsi,
+{cENTRY$("MEMORY")} renvoie l'adresse du point d'entr≈e de la
+fonction {cMEM}.\
+.references
+{iJPC 31} (page 22) premi…re version par Jean-Jacques Moreau.
+
+Manuel du module Forth / Assembler (page 63).
+
+{iInternal Design Specification}, Volume I. En anglais.
+.related
+ADDR$
+LEX
+PEEK$
+TOKEN
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+ESC$
+
+.purpose
+{cESC$} (ESCape) renvoie la cha—ne pr≈c≈d≈e du caract…re
+˚†≈chappement†˝.
+
+.options
+FKID
+
+.syntaxe
+{cESC$
+{cESC$ ( {icha—ne{c )
+
+.examples
+.ex
+PRINT ESC$("Y")
+.co
+Place un p≈riph≈rique d'impression tel que la ThinkJet en mode
+moniteur, c'est » dire qu'il affiche tous les caract…res reµus.
+.ex
+PRINT ESC$("*b80W")&G$
+.co
+Sur la ThinkJet ou la LaserJet, envoie une ligne de graphique.
+.ex
+DISP ESC$&"j";
+.co
+Sur l'interface vid≈o HP-92198B, passe en jeu de caract…res
+Roman8.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.df
+Cha—ne vide.
+
+.operation
+{gLes s≈quences d'≈chappement :}
+
+\Les s≈quences d'≈chappement sont utilis≈es par bon nombre
+d'≈quipements informatiques pour commander des p≈riph≈riques.\
+
+\Le HP-71 proc…de de la m¡me mani…re pour les p≈riph≈riques
+raccord≈s » la boucle HP-IL, de m¡me que pour son afficheur
+interne.\
+
+\Une s≈quence d'≈chappement est pr≈fix≈e par un caract…re de code
+27, appel≈ {icode escape}, abr≈g≈ par {iESC}. Ceci est reconnu
+par le p≈riph≈rique comme un d≈but de commande, et non comme une
+donn≈e normale.\
+
+\Ce code {iESC} est suivi d'une cha—ne de caract…res codant la
+commande. Si le p≈riph≈rique la reconna—t, il la traite.\
+
+\Prenons l'exemple de la ThinkJet. Si vous faites :\
+{cPRINT "LE HP-71";}
+\l'imprimante imprimera ˚LE HP-71˝. Si
+maintenant vous faites :\
+{cPRINT CHR$(27)&"&dD";}
+\l'imrimante traitera les 4 caract…res reµus comme l'ordre de
+passer en mode ˚soulign≈˝, et ne les imprimera pas. C'≈tait une
+s≈quence d'≈chappement.\
+
+\Vous n'avez pas besoin de conna—tre les s≈quences d'≈chappement
+les plus fr≈quentes pour la ThinkJet. Vous pouvez aussi utiliser
+les ordres {cBOLD}, {cPAGELEN}, {cUNDERLINE} et {cWRAP}.\
+
+
+{gLa fonction ESC$ :}
+
+\La fonction {cESC$} ajoute un code {iescape} en t¡te de la
+cha—ne sp≈cifi≈e. Si aucune cha—ne n'est fournie, {cESC$}
+≈quivaut » {cCHR$(27)}.\
+.references
+{iJPC 26} (page 39) premi…re version par Pierre David.
+
+{iJPC 40} (page 16) deuxi…me version par Pierre David.
+
+Consultez aussi les manuels de vos p≈riph≈riques...
+.related
+BOLD
+CHR$
+PAGELEN
+UNDERLINE
+WRAP
+.author
+Pierre David
+.end keyword
+
+.keyword
+EXECUTE
+
+.purpose
+{cEXECUTE} ex≈cute la cha—ne de commandes sp≈cifi≈e et arr¡te le
+programme.
+
+.options
+SKD
+
+.syntaxe
+{cEXECUTE {icha—ne de commandes{c
+
+.examples
+.ex
+10 EXECUTE "FREEPORT(0)@RUN,'A'"
+20 'A':
+.co
+Rend le port interne num≈ro 0 ind≈pendant, et continue
+l'ex≈cution au label 'A'.
+
+.input
+.it
+cha—ne de commandes
+.de
+Expression alphanum≈rique.
+.re
+de 0 » 95 caract…res.
+
+.operation
+\{cEXECUTE} ex≈cute la cha—ne fournie en param…tre, puis stoppe
+l'ex≈cution du programme.\
+
+\Cela permet de rendre ˚†programmables†˝ des fonctions qui ne le
+sont pas.\
+
+\N'essayez pas d'utiliser {cEXECUTE} dans un sous-programme.
+Cela a pour effet d'annuler tous les environnements
+appelants. De m¡me, ne l'utilisez pas dans une structure de
+boucle telle {cLOOP} ... {cEND LOOP} ou une structure de
+choix multiligne ({cIF} ou {cSELECT}).\
+
+\Le programme est encore consid≈r≈
+comme {ien train de s'ex≈cuter} jusqu'» ce que la cha—ne
+compl…te soit ex≈cut≈e. Ceci permet d'utiliser {cCONT} pour
+reprendre l'ex≈cution du programme.\
+.references
+{iJPC 31} (page 29) deuxi…me version de ENDUPLEX par Jean-Jacques
+Moreau.
+.related
+ENDUP
+STARTUP
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+EXIT
+
+.purpose
+{cEXIT} sort pr≈matur≈ment d'une boucle {cFOR} ... {cNEXT}.
+
+.options
+SKID
+
+.syntaxe
+{cEXIT {ivariable de boucle
+
+.examples
+.ex
+10 FOR I=1 TO INF
+20   IF FNC(I) THEN EXIT I
+30 NEXT I @ BEEP
+.co
+Sort de la boucle {lFOR ... NEXT{p et continue l'ex≈cution
+apr…s le {lNEXT I} et ≈met un signal sonore si {lFNC(I){p
+est diff≈rent de 0.
+
+.input
+.it
+variable de boucle
+.de
+Variable num≈rique simple.
+.re
+Aucune.
+
+.operation
+\{cEXIT} sort proprement d'une boucle {cFOR} ... {cNEXT}. Les
+informations n≈cessaires » la gestion de la boucle sont
+effac≈es.\
+
+\La sortie normale d'une boucle se fait sur l'instruction {cNEXT}
+lorsque le contenu de la variable de boucle atteint ou d≈passe la
+valeur limite.\
+
+\Il existe des cas oÀ l'on d≈sire sortir pr≈matur≈ment d'une
+boucle de ce type. Par exemple, pour traiter les cas d'erreur.
+L'ordre {cEXIT} fait alors cette sortie proprement. Un
+exemple d'ex≈cution pourrait ¡tre ce petit programme qui
+calcule 10 racines carr≈es, » moins que l'un des arguments
+soit n≈gatif :{c\
+
+10 DATA 1,2,3,4,5,-6,7,8,9,10
+20 FOR I=1 TO 10
+30   READ X
+40   IF X<0 THEN EXIT I
+50   DISP SQRT(X)
+60 NEXT I
+70 DISP "FINI"}
+.references
+{iJPC 30} (page 49) premi…re version par Janick Taillandier.
+.related
+FOR} ... {cNEXT
+LEAVE
+.author
+Janick Taillandier
+.end keyword
+.end

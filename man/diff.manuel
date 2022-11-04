@@ -1,0 +1,42 @@
+A FAIRE
+------------------------------------------------------------------------------
+introduction
+    - copyright ? PD/JT - PPC Paris ?
+
+DEJA FAITS
+------------------------------------------------------------------------------
+table des messages d'erreur
+table des tokens
+entr≈e OPCODE$
+    - LCHEX : ce n'est pas une adresse, mais une cste
+entr≈e ROMAN
+    - Ω Le jeu de caractere du HP71 : » l'"aide
+entr≈e KEYWAIT
+    - 3eme exemple, commentaire : [l[RUN]
+entr≈es structur≈es
+    - Basic 5.0 et plus Basic 4.0
+Changement de syntaxe de PEEK$, POKE, OPCODE, NEXTOP,SYSEDIT
+entr≈e FIND
+    - ajouter les caract…res g≈n≈riques
+    - ajouter les param…tres suppl≈mentaires
+entr≈e REPLACE$
+    - tenir compte de GENRPLC$ et inclure le tableau
+entr≈e ADBUF
+    - buffers graphiques
+    - parler des buffers scratch
+entr≈e Position du curseur (polls)
+    - EDTEXT dans les related keywords
+entr≈e Tabulations (polls)
+    - EDTEXT
+entr≈e Types de fichiers (polls)
+    - module graphique
+entr≈e GLINE/GPSET
+    - supprimer les r≈f≈rences au module graphique
+entr≈e LEAVE
+    - param…tre suppl≈mentaire
+passage de la version C » la version D
+    - ajouter cette page
+introduction
+    - taille
+    - nombre de mots-clefs
+changer toutes les touches [v][^][<][>] par {m...}

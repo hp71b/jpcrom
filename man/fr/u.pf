@@ -1,0 +1,67 @@
+.language
+F
+
+.keyword
+UNDERLINE
+
+.purpose
+{cUNDERLINE} active ou d≈sactive le mode ˚†caract…res soulign≈s†˝
+sur l'imprimante.
+
+.options
+SKI
+
+.syntaxe
+UNDERLINE ON
+UNDERLINE OFF
+
+.examples
+.ex
+UNDERLINE ON @ PRINT "HP-71"
+.co
+Imprime la cha—ne "{_HP-71{-".
+.ex
+UNDERLINE OFF @ PRINT "HP-71"
+.co
+Imprime la cha—ne "HP-71" sans rien souligner.
+
+.operation
+\{cUNDERLINE ON} active le mode soulign≈ sur le p≈riph≈rique
+d≈sign≈ par {cPRINTER IS}.\
+
+\{cUNDERLINE OFF} repasse en mode normal. Cet ordre d≈pend
+du p≈riph≈rique utilis≈, et est destin≈ aux imprimantes HP
+r≈pondant au {iPrinter Control Language}.\
+
+\Note : {cUNDERLINE} est destin≈ aux imprimantes qui
+reconnaissent le langage {iPCL} de Hewlett-Packard, telles
+que la ThinkJet ou la LaserJet. La s≈quence d'≈chappement
+envoy≈e peut ne pas donner le r≈sultat escompt≈ sur d'autres
+imprimantes.\
+
+
+{gCodes envoy≈s » l'imprimante :}
+
+{cUNDERLINE ON } : {cESC & d D}
+{cUNDERLINE OFF} : {cESC & d @}
+.references
+{iJPC 26} (page 39) premi…re version par Pierre David.
+
+{iJPC 40} (page 16) deuxi…me version par Pierre David.
+
+Consultez aussi le manuel de votre imprimante.
+.related
+BELL
+BOLD
+MODE
+PAGELEN
+PCR
+PFF
+PLF
+PRINT
+PRINTER IS
+WRAP
+.author
+Pierre David
+.end keyword
+.end

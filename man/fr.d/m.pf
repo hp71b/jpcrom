@@ -1,0 +1,877 @@
+.language
+F
+
+.keyword
+MAP
+
+.purpose
+{cMAP} applique une fonction de conversion aux caract…res d'un
+fichier texte.
+
+.options
+SKID
+
+.syntaxe
+MAP {ifichier{c , {icha—ne1{c , {icha—ne2
+MAP {ifichier{c , {icha—ne1{c , {icha—ne2{c , {id≈but
+MAP {ifichier{c , {icha—ne1{c , {icha—ne2{c , {id≈but{c , {ifin
+MAP # {icanal{c , {icha—ne1{c , {icha—ne2{c
+MAP # {icanal{c , {icha—ne1{c , {icha—ne2{c , {id≈but{c
+MAP # {icanal{c , {icha—ne1{c , {icha—ne2{c , {id≈but{c , {ifin
+
+.example
+.ex
+MAP TOTO,"≈—","ei",10,50
+.co
+Remplace, dans le ficher TOTO, les caract…res "≈" et "—" par leur
+≈quivalent non accentu≈, de la ligne 10 » la ligne 50.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Nom de fichier avec sp≈cificateur d'unit≈ en option.
+.it
+canal
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 255.
+.it
+cha—ne1, cha—ne2
+.de
+Expressions alphanum≈riques.
+.re
+Les deux cha—nes doivent avoir la m¡me longueur.
+.it
+d≈but
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 1048575.
+.df
+0
+.it
+fin
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 1048575.
+.df
+derni…re ligne du fichier.
+
+.operation
+\{cMAP} parcourt le fichier sp≈cifi≈ par son nom ({ifichier}) ou
+par le num≈ro de canal qui lui est associ≈ ({icanal}).\
+
+\Chaque caract…re est test≈ pour savoir si il appartient »
+l'ensemble des caract…res de {icha—ne1}. Si c'est le cas, le
+caract…re de {icha—ne2} correspondant remplace le caract…re
+d'origine.\
+
+\Si le m¡me caract…re existe plusieurs fois dans {icha—ne2},
+seule la premi…re occurence est utilis≈e pour trouver le
+caract…re correspondant de {icha—ne3}.\
+.references
+{iSTaK} (Journal du Club Finlandais) Novembre 1986. Premi…re
+version par Tapani Tarvainen.
+
+{iJPC 46} (page 18) traduction de l'article de Tapani Tarvainen
+dans {iJPC}.
+.related
+ASSIGN #
+MAP$
+ROMAN
+.author
+Tapani Tarvainen
+.end keyword
+
+.keyword
+MAP$
+
+.purpose
+{cMAP$} applique une fonction de conversion aux caract…res d'une
+cha—ne alphanum≈rique.
+
+.options
+FKID
+
+.syntaxe
+MAP$ ( {icha—ne1{c , {icha—ne2{c , {icha—ne3{c )
+
+.example
+.ex
+MAP$ ("cha—n≈","≈—","ei")
+.co
+Retourne "chaine", c'est » dire le param…tre initial sans
+accents.
+
+.input
+.it
+cha—ne1
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+cha—ne2, cha—ne3
+.de
+Expressions alphanum≈riques.
+.re
+Les deux cha—nes doivent avoir la m¡me longueur.
+
+.operation
+\{cMAP$} parcourt {icha—ne1} caract…re par caract…re ; si
+celui-ci se trouve dans {icha—ne2}, il est remplac≈ par le
+caract…re de {icha—ne3} correspondant.\
+
+\Si le m¡me caract…re existe plusieurs fois dans {icha—ne2},
+seule la premi…re occurence est utilis≈e pour trouver le
+caract…re correspondant de {icha—ne3}.\
+.references
+{iSTaK} (Journal du Club Finlandais) Novembre 1986. Premi…re
+version par Tapani Tarvainen.
+
+{iJPC 46} (page 18) traduction de l'article de Tapani Tarvainen
+dans {iJPC}.
+.related
+MAP
+REPLACE$
+ROMAN
+.author
+Tapani Tarvainen
+.end keyword
+
+.keyword
+MARGIN
+
+.purpose
+{cMARGIN} valide un signal sonore lorsque le curseur arrive » la
+position sp≈cifi≈e.
+
+.options
+SKID
+
+.syntaxe
+{cMARGIN
+{cMARGIN {iposition
+
+.examples
+.ex
+MARGIN 80
+.co
+Le curseur ≈mettra un signal sonore quand il arrivera » la
+colonne 80.
+.ex
+MARGIN
+.co
+D≈sactive le pr≈c≈dent {lMARGIN{p actif.
+
+.input
+.it
+position
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 96.
+.df
+0
+
+.operation
+\{cMARGIN} m≈morise la position du curseur demand≈e, puis ≈mettra
+un signal sonore » chaque fois que le curseur atteindra cette
+position, en supposant que le signal sonore soit actif
+({cBEEP†ON}) et que JPC Rom soit dans votre HP-71.\
+
+\{cMARGIN} agit en mode d'introduction normale, aussi bien que
+pendant un {cINPUT}, {cLINPUT} ou {cFINPUT} en mode programme, ou
+≈galement en mode FORTH avec les modules Forth Assembleur ou
+Translator Pac.\
+
+\{cMARGIN} utilis≈ sans param…tre ou {cMARGIN 0} inhibent cette
+possibilit≈, et r≈cup…rent l'espace allou≈ » la m≈morisation de
+la position du curseur (4,5 octets).\
+.references
+{iJPC 26} (page 33) premi…re version par Michel Martinet.
+
+{iA para—tre} : modification pour utilisation de ressources
+attribu≈es par HP, par Pierre David et Janick Taillandier.
+
+{cMARGIN} pour HP-75.
+.related
+BEEP
+FINPUT
+FORTH
+INPUT
+LINPUT
+.author
+Pierre David
+Michel Martinet
+Janick Taillandier
+.end keyword
+
+.keyword
+MAXD
+
+.purpose
+{cMAXD} (MAXimum Directory size) retourne le nombre d'entr≈es
+maximum du r≈pertoire d'un support magn≈tique.
+
+.options
+FKIC
+
+.syntaxe
+{cMAXD ( {isp≈cificateur d'unit≈{c )
+
+.examples
+.ex
+A=MAXD(".DISK")
+.co
+Place dans la variable A le nombre d'entr≈es maximum
+dans le r≈pertoire du disque
+rep≈r≈ par le label de volume ".DISK".
+.ex
+DISP MAXD(A$)
+.co
+Affiche le nombre d'entr≈es disponibles sur le support
+d≈sign≈ par le contenu de la variable A$.
+.ex
+N=MAXD(D)
+.co
+Place dans la variable N le nombre d'entr≈es sur le disque
+situ≈ » la position {lD{p dans la boucle.
+
+.input
+.it
+sp≈cificateur d'unit≈
+.de
+Voir les d≈finitions standard HP-IL.
+.re
+Ne doit pas ¡tre une cha—ne sans guillemets.
+
+.operation
+{gLes m≈moires de masse :}
+
+\Les p≈riph≈riques reconnus comme m≈moire de masse par le HP-71
+utilisent tous le protocole {iFilbert}. Ce sont, » l'heure
+actuelle, l'unit≈ de cassettes num≈riques HP-82161 et l'unit≈ de
+disquettes magn≈tiques HP-9114. En r…gle g≈n≈rale, ce sont tous
+les p≈riph≈riques r≈pondant au sp≈cificateur {c:TAPE}.\
+
+\L'unit≈ de mesure en ce qui concerne les m≈moires de masse est
+le {isecteur}. Un {isecteur} est compos≈ de 256 octets, et est
+l'≈l≈ment de base des transferts entre controleur (votre HP-71)
+et m≈moire de masse.\
+
+\L'unit≈ de cassettes num≈riques HP-82161 totalise 512 secteurs
+sur une cassette, soit 128 Ko. Une disquette double face pour le
+HP-9114 poss…de 2464 secteurs, soit 616 Ko.\
+
+
+\Les m≈moires de masse sont organis≈es en trois parties :\
+
+\- La partie {isyst…me}. Le contr¬leur HP-IL (le HP-71) l'utilise
+pour stocker des informations telles que date et heure
+d'initialisation, label de volume, taille du medium, etc. Cette
+partie occupe de mani…re fixe les secteurs 0 et 1, soit 512 octets.\
+
+\- La partie {ir≈pertoire}. Cette partie contient les noms et des
+informations utiles sur les fichiers, telles que date et heure de
+cr≈ation, taille, emplacement sur le support, type, etc. 32
+octets sont n≈cessaires pour coder une entr≈e de fichier. Le
+r≈pertoire commence normalement au secteur 2.\
+
+\- La partie {ifichiers}. C'est l» que sont stock≈s les fichiers
+proprement dits.\
+
+
+\La taille du r≈pertoire est fix≈e » l'initialisation, par
+l'ordre {cINITIALIZE}. Le param…tre est arrondi au multiple de 8
+sup≈rieur, de mani…re » occuper un nombre entier de secteurs.
+Il est stock≈ dans la partie {isyst…me} du support.\
+
+\Par d≈faut, {cINITIALIZE} utilise une taille de r≈pertoire ≈gale
+» 1/32{p{^…me} de la taille du support (en secteurs). Le nombre
+d'entr≈es est alors :\
+{inombre d'entr≈es} = {itaille du support en octets} / 1024
+
+{gLa fonction MAXD :}
+
+\{cMAXD} renvoie le nombre maximum d'entr≈es dans le r≈pertoire
+du support indiqu≈.\
+
+\Ce nombre est toujours multiple de 8. Pour avoir la place
+occup≈e par le r≈pertoire en :\
+
+\secteurs : faire {cMAXD / 8}\
+\octets : faire {cMAXD * 32}\
+
+
+{gInterruption par [ATTN] :}
+
+\Cette fonction est interruptible par deux appuis successifs sur
+la touche {l[ATTN]}. Le HP-71 affiche alors le message d'erreur
+{cHPIL ERR:Aborted}. Il peut ¡tre n≈cessaire d'ex≈cuter {cRESTORE
+IO} pour r≈activer le syst…me HP-IL.\
+.references
+{iJPC 30} (page 44) premi…re version par Michel Martinet.
+
+Manuel d'utilisation du lecteur de cassettes num≈riques
+HP-82161A.
+
+Manuel du module HP-IL pour le HP-71, chapitre 3 et Annexe D.
+.related
+INITIALIZE
+MEMD
+MAXM
+RREC$
+WREC
+.author
+Michel Martinet
+.end keyword
+
+.keyword
+MAXM
+
+.purpose
+{cMAXM} (MAXimum Medium size) renvoie la taille maximum du support en
+octets.
+
+.options
+FKIC
+
+.syntaxe
+{cMAXM ( {isp≈cificateur d'unit≈{c )
+
+.examples
+.ex
+A=MAXM("%16")
+.co
+Renvoie la taille maximum du support en octets.
+.ex
+DISP MAXM(1)
+.co
+Renvoie la taille maximum du support situ≈ dans le lecteur »
+l'adresse 1 sur la boucleu HP-IL.
+
+.input
+.it
+sp≈cificateur d'unit≈
+.de
+Voir les d≈finitions standard HP-IL.
+.re
+Ne doit pas ¡tre une cha—ne sans guillemets.
+
+.operation
+\{cMAXM} renvoie la taille du support d≈sign≈ par le {isp≈cificateur
+d'unit≈}. Cette taille comprend la place occup≈e par le r≈pertoire,
+ainsi que les deux enregistrements utilis≈s par le syst…me.\
+
+\Pour avoir la taille maximum r≈serv≈e aux donn≈es, il faut faire :\
+
+{cMAXM(D)-512-MAXD(D)*32}
+
+\Pour plus de renseignements, voir {cMAXD}, et le manuel du
+module HP-IL.\
+
+
+{gInterruption par [ATTN] :}
+
+\Cette fonction est interruptible par deux appuis successifs sur
+la touche {l[ATTN]}. Le HP-71 affiche alors le message d'erreur
+{cHPIL ERR:Aborted}. Il peut ¡tre n≈cessaire d'ex≈cuter {cRESTORE
+IO} pour r≈activer le syst…me HP-IL.\
+.references
+{iJPC 30} (page 44) premi…re version par Michel Martinet.
+
+Manuel d'utilisation du lecteur de cassettes num≈riques
+HP-82161A.
+
+Manuel du module HP-IL pour le HP-71, chapitre 3 et Annexe D.
+.related
+MAXD
+MEMM
+RREC$
+WREC
+.author
+Michel Martinet
+.end keyword
+
+.keyword
+MDY
+
+.purpose
+{cMDY} (Month Day Year) valide l'introduction des dates au format
+num≈rique {imm.jjaaaa}.
+
+.options
+SKID
+
+.syntaxe
+MDY
+
+.examples
+.ex
+IF K$="N" THEN MDY
+.co
+Si la variable K$ vaut "N", passer en format de date am≈ricain.
+
+.operation
+\Dans le mode s≈lectionn≈ par {cDMY}, les dates utilis≈es dans
+les fonctions de calcul de dates de JPC Rom peuvent ¡tre
+introduites sous la forme {imm.jjaaaa} (format num≈rique).\
+
+\Le format {cMDY} est le format par d≈faut apr…s une
+initialisation de la m≈moire du HP-71 (INIT:3).\
+
+\Le format alphanum≈rique est, quant » lui, toujours utilisable.
+Il n'est pas affect≈ par le mode {cDMY} ou {cMDY}.\
+
+\Pour plus de d≈tails sur les formats d'introduction des dates,
+consulter la fonction {cDATESTR$}.\
+.references
+{iJPC 28} (page 40) premi…re version par Laurent Istria.
+
+{iJPC 49} (page 24) deuxi…me version par Pierre David et Janick
+Taillandier.
+.related
+DATESTR$
+DATEADD
+DDAYS
+DMY
+DOW
+DOW$
+.author
+Pierre David
+Laurent Istria
+Janick Taillandier
+.end keyword
+
+.keyword
+MEMD
+
+.purpose
+{cMEMD} (MEMory in Directory) renvoie le nombre d'entr≈es
+disponibles dans le r≈pertoire du support indiqu≈ pour de
+nouveaux fichiers.
+
+.options
+FKIC
+
+.syntaxe
+{cMEMD ( {isp≈cificateur d'unit≈{c )
+
+.examples
+.ex
+A=MEMD(":TAPE")
+.co
+Renvoie le nombre d'entr≈es disponibles dans le r≈pertoire.
+.ex
+DISP MEMD(B+N)
+.co
+Renvoie le nombre d'entr≈es disponibles pour de nouveaux
+fichiers sur le support situ≈ » l'adresse HP-IL B+N.
+
+.input
+.it
+sp≈cificateur d'unit≈
+.de
+Voir les d≈finitions standard HP-IL.
+.re
+Ne doit pas ¡tre une cha—ne sans guillemets.
+
+.operation
+{gLes fichiers effac≈s :}
+
+\Lorsque des fichiers sont effac≈s du support par l'ordre
+{cPURGE}, les entr≈es correspondantes dans le r≈pertoire sont
+rendues disponibles. Cela conduit » des ˚trous˝ dans le
+r≈pertoire, normalement invisible pour l'utilisateur.\
+
+\Cependant, ces trous peuvent devenir pr≈pond≈rants. Dans ce cas,
+un {cPACKDIR} est quelquefois n≈cessaire pour tasser le
+r≈pertoire et enlever les trous.\
+
+
+{gLa fonction MEMD :}
+
+\La fonction {cMEMD} retourne le nombre d'entr≈es disponibles
+dans le r≈pertoire. Ceci compte les entr≈es correspondant
+aux fichiers effac≈s par {cPURGE} et les entr≈es inutilis≈es
+s'il y en a.\
+
+\{cMEMD} compte comme disponibles les entr≈es correspondant aux
+fichiers effac≈s : {cMEMD} agit comme si il y avait e√ un
+{cPACKDIR}.\
+
+
+{gInterruption par [ATTN] :}
+
+\Cette fonction est interruptible par deux appuis successifs sur
+la touche {l[ATTN]}. Le HP-71 affiche alors le message d'erreur
+{cHPIL ERR:Aborted}. Il peut ¡tre n≈cessaire d'ex≈cuter {cRESTORE
+IO} pour r≈activer le syst…me HP-IL.\
+.references
+{iJPC 30} (page 44) premi…re version par Michel Martinet.
+
+Manuel d'utilisation du lecteur de cassettes num≈riques
+HP-82161A.
+
+Manuel du module HP-IL pour le HP-71, chapitre 3 et Annexe D.
+.related
+MAXD
+MEMM
+PACKDIR
+RREC$
+WREC
+.author
+Michel Martinet
+.end keyword
+
+.keyword
+MEMM
+
+.purpose
+{cMEMM} (MEMory on Medium) renvoie la taille disponible pour
+stocker des fichiers sur le support sp≈cifi≈.
+
+.options
+FKIC
+
+.syntaxe
+{cMEMM ( {isp≈cificateur d'unit≈{c )
+
+.examples
+.ex
+A=MEMM(":HP9114")
+.co
+Renvoie la place disponible sur la premi…re unit≈ de disques
+HP-9114 rencontr≈e.
+
+.input
+.it
+sp≈cificateur d'unit≈
+.de
+Voir les d≈finitions standard HP-IL.
+.re
+Ne doit pas ¡tre une cha—ne sans guillemets.
+
+.operation
+{gLes fichiers effac≈s :}
+
+\Lorsque des fichiers sont effac≈s du support par l'ordre
+{cPURGE}, la place correspondante dans l'espace de stockage des
+fichiers est rendue disponible.  Cela conduit » des espaces vides
+sur le support, normallement invisible pour l'utilisateur.\
+
+\Cependant, ces trous peuvent devenir pr≈pond≈rants. Dans ce cas,
+un {cPACK} est quelquefois n≈cessaire pour tasser le r≈pertoire
+et l'espace de stockage des fichiers, et enlever les trous.\
+
+{gLa fonction MEMM :}
+
+\la fonction {cMEMM} retourne la place disponible dans l'espace
+de stockage des fichiers pour de nouveaux fichiers, en
+comptant ≈galement les fichiers effac≈s et l'espace
+inutilis≈.\
+
+\{cMEMM} compte comme disponible la place rendue disponible par
+les fichiers effac≈s : {cMEMM} agit comme si il y avait e√ un
+{cPACK}.\
+
+
+{gInterruption par [ATTN] :}
+
+\Cette fonction est interruptible par deux appuis successifs sur
+la touche {l[ATTN]}. Le HP-71 affiche alors le message d'erreur
+{cHPIL ERR:Aborted}. Il peut ¡tre n≈cessaire d'ex≈cuter {cRESTORE
+IO} pour r≈activer le syst…me HP-IL.\
+.references
+{iJPC 30} (page 44) premi…re version par Michel Martinet.
+
+Manuel d'utilisation du lecteur de cassettes num≈riques
+HP-82161A.
+
+Manuel du module HP-IL pour le HP-71, chapitre 3 et Annexe D.
+.related
+MAXM
+MEMD
+PACK
+RREC$
+WREC
+.author
+Michel Martinet
+.end keyword
+
+.keyword
+MENU
+
+.purpose
+{cMENU} g…re des menus interactifs.
+
+.options
+FKID
+
+.syntaxe
+{cMENU ( {inombre d'≈l≈ments{c )
+{cMENU ( {inombre d'≈l≈ments{c , {ipremier ≈l≈ment{c )
+
+.examples
+.ex
+10 ATTN OFF @ M=1
+20 DATA UN,DEUX,TROIS,QUATRE
+30 RESTORE 20
+40 M=MENU(4,M) @ ON M GOTO 60,70,80,90
+50 ATTN ON @ BEEP @ END
+60 DISP "ONE" @ GOTO 40
+70 DISP "TWO" @ GOTO 40
+80 DISP "THREE" @ GOTO 40
+90 DISP "FOUR" @ GOTO 40
+.co
+Propose un choix de 4 ≈l≈ments visualisable par les touches de
+curseur vertical. L'utilisateur valide avec {l[ENDLINE]{p, ou
+interrompt avec {l[ATTN]{p et saute » la ligne 40.
+
+.input
+.it
+nombre d'≈l≈ments
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 1048575.
+.it
+premier ≈l≈ment
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 1048575.
+.df
+1
+
+.operation
+\{cMENU} est destin≈ » la gestion des menus interactifs par
+programme.\
+
+\{cMENU} affiche les ≈l≈ments contenus dans les lignes {cDATA}
+rep≈r≈s par le pointeur de {cDATA} courant.\
+
+\L'utilisateur utilise alors les touches de curseur vertical,
+soit {l[^]}, {l[v]}, {l[g][^]} et {l[g][v]}, pour faire d≈filer
+les ≈l≈ments.\
+
+\Il valide son choix en appuyant sur la touche {l[ENDLINE]}. Ceci
+renvoie le num≈ro d'ordre de l'≈l≈ment correspondant. Le premier
+≈l≈ment porte le num≈ro 1, et le dernier porte le num≈ro {inombre
+d'≈l≈ments}.\
+
+\Une pression sur la touche {l[ATTN]} annule l'op≈ration {cMENU}
+et passe » la ligne suivante du programme (et non » l'ordre
+suivant).  Il est ainsi possible de g≈rer les interruptions de
+l'utilisateur.\
+
+\Si la valeur {ipremier ≈l≈ment} est sp≈cifi≈e, elle repr≈sente
+le num≈ro d'ordre de la premi…re donn≈e » afficher. Les touches
+{l[^]} et {l[g][^]} permettent bien s√r de revenir aux pr≈c≈dents
+≈l≈ments.\
+.references
+{iJPC 26} (page 34) premi…re version par Jean-Jacques Dh≈nin.
+.related
+DATA
+FINPUT
+READ
+RESTORE
+.author
+Jean-Jacques Dh≈nin
+.end keyword
+
+.keyword
+MERGE
+
+.purpose
+{cMERGE} ≈tend le mot-clef standard pour le cha—nage des fichiers
+Lex. {cMERGE} n'est pas programmable.
+
+.options
+SKID
+
+.syntaxe
+{cMERGE {ifichier
+{cMERGE {ifichier{c , {iligne d≈but{c
+{cMERGE {ifichier{c , {iligne d≈but{c , {iligne fin
+
+.examples
+.ex
+EDIT STRINGLX @ MERGE KEYWAIT
+.co
+Cha—ne le fichier KEYWAIT dans le fichier STRINGLX.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Nom de fichier avec un sp≈cificateur de p≈riph≈rique optionnel.
+.it
+ligne d≈but
+.de
+Constante enti…re.
+.re
+1 » 9999 (sans signification si Lex).
+.df
+Premi…re ligne de programme.
+.it
+ligne fin
+.de
+Constante enti…re.
+.re
+Ligne de d≈but » 9999 (sans signification si Lex).
+.df
+Ligne de d≈but.
+
+.operation
+{gLe cha—nage de fichiers Lex :}
+
+\La technique du cha—nage permet de r≈unir plusieurs Lex en un
+seul fichier.\
+
+\Le principal avantage du cha—nage est qu'il permet de
+r≈unir en un seul fichier tous les mots-clefs et extensions du syst…me
+d'exploitation recquis par un logiciel. Ceci simplifie
+grandement le programme principal du logiciel, celui-ci
+n'ayant » tester la pr≈sence que d'un seul fichier Lex, au
+lieu de plusieurs. Le temps de chargement de ce fichier Lex
+combin≈ est r≈duit de mani…re significative par rapport au
+temps n≈cessit≈ pour charger les fichiers un par un.\
+
+\Cha—ner des fichiers Lex existant est plus facile qu'≈crire
+un nouveau Lex sp≈cialis≈ disposant de toutes les
+caract≈ristiques n≈cessaires. Ceci contribue ≈galement »
+pr≈server les ressources du HP-71, puisque vous pouvez
+cha—ner des fichiers Lex d'ID diff≈rents ou des fonctions de
+tokens non cons≈cutifs. Enfin, ce cha—nage r≈duit
+l'encombrement de 18,5 octets pour chaque fichier cha—n≈,
+puisque les fichiers Lex partagent le m¡me en-t¡te de 18,5
+octets.\
+
+\L'int≈r¡t du cha—nage de fichiers Lex est le m¡me que la
+r≈union des plusieurs sous programmes Basic en un simple
+fichier : facilit≈, et simplification de la gestion de la
+sauvegarde sur support.\
+
+
+{gMode d'emploi :}
+
+\Pour r≈unir les fichiers F1, F2 et F3 dans le fichier F1, il
+faut proc≈der comme suit :{c\
+
+EDIT F1
+MERGE F2
+MERGE F3
+EDIT
+
+\}Le {cEDIT F1} rend le fichier Lex F1 {ifichier de travail
+courant}. Le {cMERGE F2} r≈unit le fichier F2 dans le fichier F1.
+Le {cMERGE F3} r≈unit le fichier F3 dans le fichier F1 (qui est
+maintenant F1 + F2).\
+
+\Le {cEDIT} final remet le {cworkfile} comme fichier courant.\
+
+\Il ne reste plus qu'» purger ≈ventuellement F2 et F3 qui restent
+en m≈moire, comme apr…s un {cMERGE} normal de programmes Basic ou
+de fichiers Keys.\
+
+\Si vous d≈sirez restaurer le fichier courant, vous ferez
+:{c\
+
+A$=CAT$(0)[1,8]
+EDIT F1
+MERGE F2
+MERGE F3
+EDIT A$
+
+
+{gAttention !}
+
+\Le principe de l'op≈ration est d'autoriser l'≈dition d'un
+fichier Lex.  Il y a un effet secondaire pervers, qui peut se
+r≈v≈ler g≈nant.  Pour cette raison, il ne faut {gjamais purger le
+fichier Lex courant} !\
+
+\Il semblerait qu'il y ait une bogue quelque part.  L'ordre Basic
+{cPURGE} aurait une attitude ≈trange face » un fichier courant de
+type Lex. Il ne remet pas le pointeur de fichier courant dans le
+{cworkfile}.  Ceci conduit » des {cCAT} bizarres. Un simple
+{cEDIT} suffit g≈n≈ralement » s'en sortir...\
+.references
+{iJPC 23} (page 47) programme de cha—nage de fichier Lex en Basic
+par Michel Martinet.
+
+{iJPC 37} (page 22) cha—nage de fichiers Lex en assembleur par
+Pierre David et Michel Martinet.
+.related
+EDIT
+MERGE
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+MODE
+
+.purpose
+{cMODE} change le jeu de caract…res sur l'appareil d'impression
+courant.
+
+.options
+SKI
+
+.syntaxe
+{cMODE {iargument
+
+.examples
+.ex
+MODE 2
+.co
+S≈lectionne l'impression compress≈e sur les imprimantes HP.
+
+.input
+.it
+argument
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 999.
+
+.operation
+\{cMODE} change la densit≈ d'impression sur l'appareil d≈sign≈
+par le plus r≈cent ordre {cPRINTER IS}.\
+
+\Sur l'imprimante ThinkJet,\
+
+\{cMODE 0} correspond » 80 caract…res par ligne,\
+\{cMODE 1} correspond » 40 caract…res par ligne,\
+\{cMODE 2} correspond » 142 caract…res par ligne et\
+\{cMODE 3} correspond » 71 caract…res par ligne.\
+
+{gCodes envoy≈s » l'imprimante :}
+
+{cMODE {in} : {cESC & k {in{c S
+.references
+{iJPC 26} (page 39) premi…re version par Pierre David.
+
+{iJPC 40} (page 16) deuxi…me version par Pierre David.
+
+Consultez aussi le manuel de votre imprimante.
+.related
+BOLD
+PRINTER IS
+UNDERLINE
+WRAP
+.author
+Pierre David
+.end keyword
+.end

@@ -1,0 +1,67 @@
+^{hMAIN DIFFERENCES
+
+^BETWEEN VERSION A AND VERSION B}
+
+
+
+\The differences between version A00 and version B00 (see 
+{cVER$} in {iOther JPC  Rom features})
+result from some bug fixes, modifications and improvements. The
+main differences are listed below :\
+
+
+{gBug fixes}
+
+
+\{cMARGIN} parameter is now limited to 96.\
+
+\Under certain circumstances {cFIND} could find matching lines which should not have been.
+(see {iJPC 45}). Janick Taillandier has corrected this problem.\
+
+\{cCOMB} and {cARR} have been rewritten by Guy Toublanc to use a
+multiplication based algorithm instead of factorials.\
+
+\{cCOMB} was modified to return a valid result when executing
+{cS=S+COMB(n,0)}.\
+
+\The {cFINPUT} version published in {iJPC} exited when pressing
+the {l[f][CONT]} key. This was wrong.\
+
+
+{gNew keywords and features}
+
+\The {cDATESTR$} function has been added to convert from and to
+the new date format.\
+
+\New structured programming statements have been added to this
+version.\
+
+
+{gModifications and improvements}
+
+\Date functions have been modified to use the new JPC Rom date
+format as well as the standard format.\
+
+\The keyword {cKSPEED} has been removed. The cursor speed-up is
+still present, but repetition speed is maximum and delay after
+the key is pressed and before repeat begins is not tunable.\
+
+\{cPOSI} has been modified to admit numeric as well as string
+parameters.\
+
+\The escape sequence sent to the printer by {cBOLD} has been
+modified to be compatible with all {iPCL} printers, especially
+the ThinkJet and LaserJet.\
+
+\{cFF} has been renamed to {cPFF}, {cLF} to {cPLF}, {cPL} to
+{cPAGELEN}, {cCR} to {cPCR}. {cFPRM} has been renamed to {cFPRIM}
+and {cNPRM} to {cNPRIM}. {cHMS+} has been renamed to {cHMSADD}
+and {cHMS-} to {cHMSSUB}.\
+
+
+{gNote}
+
+\All these improvements and corrections have been realized
+preserving program compatibility with previous versions of
+JPC Rom. So your programs written with previous versions are
+totally compatible with the new JPC Rom.\

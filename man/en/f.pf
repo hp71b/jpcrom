@@ -1,0 +1,700 @@
+.language
+A
+
+.keyword
+FILESIZE
+
+.purpose
+{cFILESIZE} returns the size of the specified file.
+
+.options
+FKI
+
+.syntaxe
+{cFILESIZE ( {ifile{c )
+
+.examples
+.ex
+A=FILESIZE("ESSAI")
+.co
+Returns the size of file ESSAI if found, 0 otherwise.
+
+.input
+.it
+file
+.de
+String expression.
+.re
+Filename with optional device specifier.
+
+.operation
+\{cFILESIZE} returns the file size in bytes, or 0 if the file
+cannot be found in memory or on the specified mass media.\
+
+\This allows easily testing if a file exists, whether it is in
+Ram or on an external device. We have to write something like
+:{c\
+
+1000 IF FILESIZE(F$&":TAPE") THEN
+1010   COPY :TAPE TO F$
+1020 END IF
+
+\}The size returned is the {itotal} file size. It includes the
+file header size. This header contains the file name, type,
+creation date and time as well as other informations used by
+the system. So, this size is different from the size returned
+by {cCAT} or {cCAT$}.\
+
+\It is interesting to use this size because it corresponds to the
+available room as returned by {cMEM}. To copy a file from mass
+storage to an Independent Ram, you have only to write something
+like :{c\
+
+{cIF MEM(0)>=FILESIZE("TOTO:TAPE") THEN COPY} ...
+.references
+{iJPC 23} (page 36) keyword {cFILE?}
+
+{iTo be published} : {cFILESIZE} by Henri Kudelski.
+.related
+ADDR$
+CAT
+.author
+Henri Kudelski
+.end keyword
+.keyword
+FIND
+
+.purpose
+{cFIND} finds a character string in a Basic program.
+{cFIND} is nonprogrammable.
+
+.options
+SKD
+
+.syntaxe
+{cFIND {istring
+
+.examples
+.ex
+FIND "OSUB 1210"
+.co
+Looks for the first occurrence of string "OSUB 1210" after the
+current line and sets the cursor to that line.
+
+.input
+.it
+string
+.de
+String expression.
+.re
+None.
+
+.operation
+\{cFIND} looks for a string in the current Basic file, after the
+current line.\
+
+\If {cFIND} finds the string, the line is displayed and the cursor
+is moved to the first character of the found string.\
+
+\If the string cannot be found, the error :
+{cJPC ERR:Not Found} is reported.\
+
+\The first line of a program is not searched unless the
+program has just been edited with {cEDIT}.\
+.references
+{iJPC 31} (page 25) first version by Jean-Jacques Moreau.
+
+{iJPC 45} (page 19) second version by Janick Taillandier.
+
+The HP-75 {cFETCH} command.
+.related
+FETCH
+.author
+Jean-Jacques Moreau
+Janick Taillandier
+.end keyword
+
+.keyword
+FINPUT
+
+.purpose
+{cFINPUT} (Formatted INPUT) creates an input mask and waits for
+data input from the user.
+
+.options
+SKID
+
+.syntaxe
+{cFINPUT {iinput{c , {iprompt{c , {iattn
+{cFINPUT {iinput{c , {iprompt{c , {iformat{c , {iattn
+
+.examples
+.ex
+10 DIM I$[8]
+20 FINPUT I$,"File: ",A
+30 IF A=0 THEN }...
+.co
+The user enters a filename (8 characters maximum),
+and {lFINPUT{p stores it in I$. If the user press
+{l[ATTN]{p, variable A is set to 0.
+
+.input
+.it
+input
+.de
+Existing string variable or array.
+.re
+The variable or array must be created before you use
+{lFINPUT{p.
+.it
+prompt
+.de
+String expression or string array.
+.re
+Contains only displayable characters.
+.it
+format
+.de
+String expression or string array.
+.re
+Non null string exclusively composed of characters "U" and "P" or
+digits specifying a format.
+.df
+STR$(LEN(prompt))&"PU"
+.it
+attn
+.de
+Numeric variable or numeric array name.
+.re
+None.
+
+.operation
+{gProtected fields :}
+
+\Briefly, protected fields may be used with
+{cINPUT} or {cLINPUT} to prevent accidental erasure of important prompts.\
+
+\For example, to enter a date, the display will
+look like :\
+{cDate: Dy/Mo/Yr}
+
+\The user has to replace only characters {cDy} (Day),
+{cMo} (Month) and {cYr} (Year) by their values.
+Others must not change. Here is a program to do
+that :{c\
+
+100 E$=ESC$("<")                   ! Cursor off
+110 A$=ESC$(">")                   ! Cursor on
+120 D$=A$&"Jr"&E$"/"&A$&"Mo"&E$&"/"&A$&"Yr"
+130 DISP E$&"Date: "&D$&E$;        ! Display
+140 INPUT "";I$                    ! Date input
+
+\}First, the program is not understandable in
+spite of the comments.\
+
+\Second, the mask display is slow.\
+
+\Third, if a date is entered, and the
+{l[ATTN]} key is pressed, the month is cleared and
+cursor goes to the beginning. Press {l[ATTN]} again
+nothing happens. The {l[ATTN]} key is not enabled,
+you cannot stop the program. The only solution is
+to press {l[ENDLINE]}. This validates the input,
+but that is obviously not what you wished.\
+
+\Fourth, after entering the date, nothing prevents the
+user from keying-in additional characters. How to prevent this ?\
+
+\The problem is that no character is protected to the right
+of the date. The HP-71 has no reason to lock the remainder of
+the display. So we have to display the mask and then add
+enough protected characters : here, 96 - 14 (length of the
+mask) blank characters. We add the following lines to the
+program :{c\
+
+121 DIM S$[82]
+122 S$=""
+123 S$[82]=" "
+
+\}Then replace line 130 by :{c\
+
+129 WIDTH INF
+130 DISP E$&"Date: "&D$&E$&S$;
+
+\}When running the program, there is an unpleasant display
+blinking before you see the mask but, at last, you cannot enter
+any character past the date.\
+
+\A new problem appears : press {l[->]} after the year, the
+display disappears at the left of the LCD. Worst, pressing
+{l[g][->]} gives you an empty screen after some time.\
+
+
+{gUsing FINPUT :}
+
+
+{iSingle line FINPUT :}
+
+\In its simplest form, {cFINPUT} is an extension of the {cLINPUT}
+statement that facilitates the use of protected fields.\
+
+\Our Basic example can now be written :{c\
+
+100 DIM I$[6]
+110 FINPUT I$,"Date: Dy/Mo/Yr","6P2UP2UP2UP",A
+
+
+\}In this example, it is worth noting that :\
+
+\- I$ is the target string. It must be created before using
+{cFINPUT}.\
+
+\- {iprompt} contains what will appear on the 
+display. All characters, protected or not, are displayed.\
+
+\- the next parameter is the {iformat} string. Let us look at the
+content of this expression : 
+{c6P} means that the 6 first characters are 
+{iProtected}. {c2U}
+specifies that the next 2 characters are 
+{iUnprotected}. The  {cP} indicates that the next
+character is protected, and so on...
+The final {cP} means that the remainder of the display is
+protected. It is not necessary to specify 
+{c82P} to finish the line.\
+
+\- the last parameter, {iattn}, will contain 0 if  
+the {l[ATTN]} key was used to exit {cFINPUT}.\
+
+
+\It is easy to understand that the use of protected fields
+is greatly simplified. 
+{cFINPUT} has many other features, among them :\
+
+\- simplifying protection specification :
+describing protected fields is really easy.\
+
+\- handling of the {l[ATTN]} key :  during {cFINPUT}, 
+the {l[ATTN]} key, pressed once restores the default
+display specified by the {iprompt} string.
+{l[ATTN]} pressed a second time exits {cFINPUT} and stores 0
+into {iattn}.
+The program is not interrupted and it is easy to handle the
+{l[ATTN]} key using a simple test such as :{c IF NOT A THEN} ...\
+
+\- handling of {l[->]} and {l[g][->]} :  these keys
+no longer cause the unpleasant effect described above.\
+
+\- handling of "short variables" : in the previous example,
+if the declaration of I$ had specified less than 6
+characters, for example 3, it would not have been possible
+to enter more than 3 characters. {cFINPUT} adds a new
+security. Programs will no longer stop with the
+{c"String Overflow"} error !\
+
+
+{iFINPUT without format string :}
+
+\In many occasions, you don't need such a sophisticated
+display management. For example, to enter a file name
+with {cINPUT}, you write :\
+{c100 INPUT "File: ";F$}
+
+\As a file name, in Ram, cannot have more than 8
+characters, with {cFINPUT} the program becomes :{c\
+100 DIM F$[8]
+110 FINPUT F$,"File: ",A
+120 IF NOT A THEN END
+
+\}Now, it is impossible to enter more than 8 characters, and
+if the user changes its mind and presses the
+{l[ATTN]} key, the program handles it simply.\
+
+\The {iformat} string is optional. If it is not present,
+{cFINPUT} uses the following defaults :
+STR$(LEN({iprompt}))&"PU".  All characters in the {iprompt}
+string are protected, the remainder is unprotected up to
+the maximum length of the result string.\
+
+
+{iMultiple line FINPUT :}
+
+\The most important characteristic of {cFINPUT}
+is that it can process multiple input lines.
+It is somewhat like a complete screen mask.\
+
+\If a program needs date and time input data, it can be obtained
+by :{c\
+
+100 DIM D$[6],H$[6]
+110 FINPUT D$,"Date: Dy/Mo/Yr","6P2UP2UP2UP",A
+120 IF NOT A THEN END
+130 ! Date processing
+ :
+200 FINPUT H$,"Time: Hr:Mn:Sc","6P2UP2UP2UP",A
+210 IF NOT A THEN END
+220 ! Time processing}
+
+\But there is another solution :{c\
+
+100 OPTION BASE 1             ! array will begin by 1
+110 DIM I$(2)[6],M$(2),P$(2)
+120 DATA Date: Dy/Mo/Yr,Time: Hr:Mn:Sc
+130 DATA 6P2UP2UP2UP,6P2UP2UP2UP
+160 READ M$                   ! read both prompts 
+170 READ P$                   ! read both format strings
+180 FINPUT I$,M$,P$,A
+190 IF NOT A THEN END
+200 ! Date processing (I$(1))
+210 ! Time processing (I$(2))}
+
+\This last solution is more elegant than the first one
+when you need to input large amounts of data.
+All data input is done in a single operation.\
+
+\Cursor keys are used to skip from one line to another. 
+{l[ENDLINE]} is used to validate each line.\
+
+\{gImportant notice} : there are two ways to exit {cFINPUT} and
+validate the input :\
+\- pressing {l[RUN]} which validates the current line, and\
+\- pressing {l[ENDLINE]} twice when the cursor is in the last line.\
+
+\The {iattn} variable contains the line number on which {cFINPUT}
+was exited. The 0 value indicates an exit via the {l[ATTN]}
+key.\
+
+\Using {cFINPUT} this way allows you to fill out an entire form in
+a single operation. The programmer no longer needs to be concerned with
+movements inside the form. {cFINPUT} handles them !\
+
+
+{gSummary :}
+
+\The variable {iinput} must be created before executing {cFINPUT}.\
+
+\The {iprompt} string must contain only displayable characters.
+It may not include 0 (NULL), 27 (ESC), 13 (CR), 10 (LF) or 8 (BS)
+codes.\
+
+\The format specification can contain letters "U" and "P"
+(uppercase or lowercase) preceded by an optional repetition
+factor to specify protected and unprotected characters. The
+string must not be null and the resulting format must not
+specify a string with more than 96 characters. So, {c96P} is
+correct, but {c97P} or {c95P2U} are not.\
+
+\Simple variables are considered as arrays with only one
+element.\
+
+
+{iUsage :}
+
+\While you enter data with {cFINPUT}, selected keys have
+been assigned the functions :\
+
+{l[ATTN]}
+\If characters have been keyed in, the display is restored
+according to {iprompt}.\
+\A second time : exit from {cFINPUT}.\
+
+{l[f][OFF]}
+\Direct exit from {cFINPUT}.\
+
+{l[ENDLINE]}
+\Validates the current line and skips to next line. If single
+line, exits from {cFINPUT}. Pressing {l[ENDLINE]} twice on the
+last line and validates the input.\
+
+{l[RUN]}
+\Validates the current line and exits from {cFINPUT}. If single
+line, {l[RUN]} is the same as {l[ENDLINE]}.\
+
+{l[^]}, {l[v]}, {l[g][^]} and {l[g][v]}
+\Change line without validation of the current line. If single
+line, restore the default display.\
+
+
+{iVariable contents on exit :}
+
+\{iprompt} and {iformat} variables are never modified.\
+
+\After a normal exit (via {l[ENDLINE]} or {l[RUN]}), the variable
+{iattn} contains the line number on which exit occurred. This
+number is between 1 and the array size.\
+
+\The destination variable contains the data you entered.\
+
+\When you exit by way of {l[ATTN]} or {l[f][OFF]}, the variable
+{iattn} contains 0. The destination variable remains
+unchanged.\
+
+.references
+{iJPC 43} (page 16) {cFINPUT} by Pierre David and Janick
+Taillandier.
+.related
+INPUT
+LINPUT
+DISP
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+FKEY
+
+.purpose
+{cFKEY} (First KEY) insert a key code at the beginning of
+the keyboard buffer.
+
+.options
+SKID
+
+.syntaxe
+{cFKEY {ikey
+
+.examples
+.ex
+10 DISP "Result =";R
+20 K$=KEY$
+30 IF NOT LEN(K$) THEN 20
+40 FKEY K$
+50 INPUT X$
+.co
+Displays the result in variable R, then waits for a
+keystroke to go on. The key is not lost and will be used as
+the first character for the next data input.
+
+.input
+.it
+key
+.de
+String expression.
+.re
+Less than 5 characters.
+
+.operation
+\{cFKEY} adds the specified key code at the beginning of the
+keyboard buffer (it can hold up to 15 keystrokes). {cPUT}
+adds it at the end of the buffer.\
+
+\If the keyboard buffer is full the oldest keystroke is
+lost.\
+
+\{cFKEY} allows you to establish a priority system whereby
+certain instructions (key assignments) will be handled
+ahead of other keyboard inputs.\
+.references
+{iJPC 24} (page 35) first version by Jean-Pierre Bondu.
+.related
+KEY$
+KEYWAIT$
+PUT
+.author
+Jean-Pierre Bondu
+.end keyword
+
+.keyword
+FORMAT$
+
+.purpose
+{cFORMAT$} inserts extra spaces inside a string so that it will
+have exactly the specified number of characters.
+
+.options
+FKID
+
+.syntaxe
+{cFORMAT$ ( {istring{c , {iwidth{c )
+
+.examples
+.ex
+A$=FORMAT$("J P C",9)
+.co
+Adds 4 spaces inside the specified string and
+returns {c"J   P   C"}.
+
+.input
+.it
+string
+.de
+String expression.
+.re
+None.
+.it
+width
+.de
+Numeric expression rounded to an integer.
+.re
+1 through 1048575.
+
+.operation
+\First, {cFORMAT$} reduces the string (see {cREDUCE$}).
+Spaces are inserted so that the string length matches the
+specified length.\
+
+\Spaces are inserted between words.\
+
+\This greatly facilitates the production of right and left
+justified formatted text.\
+.references
+{iJPC 21} (page 34) first version of the Basic formatter by
+Pierre David.
+
+{iJPC 26} (page 50) second version of the Basic formatter with
+assembly language functions by Pierre David and Michel Martinet.
+.related
+CESURE
+REDUCE$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+FPRIM
+
+.purpose
+{cFPRIM} (First PRIMe number) returns the first prime number
+after the argument.
+
+.options
+FCKID
+
+.syntaxe
+{cFPRIM ( {iargument{c )
+{cFPRIM ( {iargument{c , {idirection{c )
+
+.examples
+.ex
+A=FPRIM(300)
+.co
+Stores 307, first prime number after 300, into variable A.
+.ex
+A=FPRIM(300,350)
+.co
+Stores 307, first prime number between 300 and 350, into variable A.
+.ex
+DISP FPRIM(300,250)
+.co
+Displays 293, greatest prime number lower than 300 and
+higher than 250.
+
+.input
+.it
+argument
+.de
+Numeric expression.
+.re
+Must be an integer different from 0 and between
+-10{^12{-+1 and 10{^12{--1.
+.it
+direction
+.de
+Numeric expression.
+.re
+Must be an integer between
+-10{^12{-+1 and 10{^12{--1.
+.df
+10{^12{- * SGN(argument).
+
+.operation
+\{cFPRIM} returns the first prime number after the specified
+argument or returns the argument itself if it is a prime
+number.\
+
+\The second parameter, {idirection}, indicates whether the search
+must be conducted towards greater numbers ({idirection} >
+{iargument}) or lower numbers ({idirection} < {iargument}).\
+
+\{idirection} is also used as the upper or lower limit of the
+search. {cFPRIM} returns a value of 0 if no prime is found
+between {iargument} and {idirection}.\
+
+
+{gInterrupting the function with [ATTN] :}
+
+\This function can be interrupted by pressing 
+{l[ATTN]} twice. The HP-71 will then report the error
+{cJPC ERR:Function Interrupted}.\
+.references
+{iJPC 35} (page 21) fist version of DIVILEX by Guy Toublanc.
+
+{iJPC 38} (page 18) second version by Guy Toublanc.
+
+{iJPC 48} (page 23) third version by Guy Toublanc.
+
+{cFPRIM} was previously called {cFPRM}.
+.related
+PRIM
+NPRIM
+DIV
+.author
+Guy Toublanc
+.end keyword
+
+.keyword
+FRAC$
+
+.purpose
+{cFRAC$} (FRACtion) approximates a real number by a
+fraction.
+
+.options
+FKID
+
+.syntaxe
+{cFRAC$ ( {ireal number{c )
+{cFRAC$ ( {ireal number{c , {iaccuracy{c )
+
+.examples
+.ex
+A$=FRAC$(1.25)
+.co
+Returns the string "5/4" to variable A$.
+.ex
+DISP FRAC$(PI,2)
+.co
+Display "22/7", which approximates PI at 10{^-2{-.
+
+.input
+.it
+real number
+.de
+Numeric expression.
+.re
+None.
+
+.it
+accuracy
+.de
+Numeric expression rounded to an integer.
+.re
+-99 through 99
+.df
+if |n|>=1, 10, otherwise 10-exponent of n.
+
+.operation
+\{cFRAC$} gives an approximation of a real number {ix} in the
+form of a fraction. The result is a character string.\
+
+\The {iaccuracy} parameter is optional. If omitted or zero, the
+default accuracy is 10{p{^-10} if |{ix}|>=1, or
+10{p{^-10+exponent of x} otherwise.\
+
+\If {iaccuracy} is positive, precision is 10{i{^-accuracy}.\
+
+\If {iaccuracy} is negative, it represents the number of
+iterations to be used by the {cFRAC$} algorithm.\
+.references
+{iJPC 20} (page 55) first version of a Basic program by
+Pierre David.
+
+{iJPC 42} (page 21) first version by Guy Toublanc.
+.related
+EXPONENT
+.author
+Guy Toublanc
+.end keyword
+.end

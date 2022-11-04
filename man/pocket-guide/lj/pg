@@ -1,0 +1,7 @@
+TR080RPN.R8P:T:n:1:Normal
+TR080IPN.R8P:T:i:2:Italique
+HV090BPN.R8P:T:c:3:Keywords (dans la syntaxe)
+HV080RPN.R8P:T:k:4:Keywords (a l'interieur du texte)
+HV070RPN.R8P:T:l:5:Line printer (fixe)
+TR120BPN.R8P:T:e:6:Enorme (TMS 12)
+lp085rpn:N:t:7:line printer 8.5 resident

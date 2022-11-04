@@ -1,0 +1,348 @@
+.language
+F
+
+.keyword
+CASE
+
+.purpose
+{cCASE} est un ≈l≈ment de la structure {cSELECT} ... {cCASE} ...
+{cEND SELECT}.
+
+.options
+SKID
+
+.syntaxe
+CASE {i≈l≈ment{c ,} ...
+CASE {iop≈rateur relationnel{c {c {i ≈l≈ment{c ,} ...
+CASE {i≈l≈ment{c TO {i≈l≈ment{c ,} ...
+CASE ELSE
+
+.examples
+.ex
+CASE 8,5 TO 7,<0,>=10
+.co
+S≈lectionne ce cas si l'expression du {lSELECT{p est ≈gale » 8 ou
+si elle est comprise entre 5 et 7 ou si elle est n≈gative ou si
+elle est sup≈rieure » 10.
+.ex
+CASE >"Z","A" TO "BCD","0" TO "9"
+.co
+S≈lectionne ce cas si l'expression du {lSELECT{p est sup≈rieure »
+"Z" ou si elle est comprise entre "A" et "BCD" ou entre "0" et
+"9".
+
+.input
+.it
+≈l≈ment
+.de
+Expression num≈rique ou alphanum≈rique.
+.re
+Toutes les expressions doivent ¡tre du m¡me type.
+.it
+op≈rateur relationnel
+.de
+<, =, >, <=, >=, <>, # et ?
+.re
+Aucune.
+
+.operation
+\{cCASE} est un des constituants de la structure de choix
+{cSELECT} ... {cEND SELECT}.\
+
+\{cCASE} offre un choix d'expressions. Si l'une d'entre elles est
+compar≈e positivement » l'expression du {cSELECT}, l'ex≈cution
+continue » l'ordre suivant le {cCASE} s≈lectionn≈.\
+.references
+{iJPC 52} (page 10) premi…re version par Pierre David et Janick Taillandier.
+
+Basic 5.0 pour HP 9000 s≈ries 200/300.
+.related
+SELECT} ... {cEND SELECT
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+CENTER$
+
+.purpose
+{cCENTER$} centre la cha—ne fournie en argument en ajoutant des
+espaces en t¡te.
+
+.options
+FKID
+
+.syntaxe
+{cCENTER$ ( {icha—ne{c , {ilargeur{c )
+
+.examples
+.ex
+A$=CENTER$("Cha—ne » centrer", 22)
+.co
+Place, dans la variable A$, 3 espaces suivis de la cha—ne fournie
+en param…tre.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+largeur
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 524287.
+
+.operation
+\{cCENTER$} ajoute des espaces en t¡te de la cha—ne fournie en
+param…tre, de faµon » ce que cette cha—ne soit au centre de
+{ilargeur} caract…res.\
+
+\La cha—ne est pr≈alablement d≈barass≈e de tous ses espaces
+superflus (voir {cREDUCE$}).\
+.references
+{iJPC 21} (page 34) premi…re version du programme de formattage
+en Basic par Pierre David.
+
+{iJPC 26} (page 50) deuxi…me version du programme en Basic avec
+les fonctions en assembleur par Pierre David et Michel Martinet.
+.related
+CESURE
+FORMAT$
+RED$
+REDUCE$
+SPACE$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+CESURE
+
+.purpose
+{cCESURE} renvoie le premier emplacement oÀ on peut couper la
+cha—ne fournie en param…tre.
+
+.options
+FKID
+
+.syntaxe
+{cCESURE ( {icha—ne{c , {ilargeur{c )
+
+.examples
+.ex
+A=CESURE("PPC Paris",7)
+.co
+Place 3 dans la variable A : la c≈sure peut intervenir au
+troisi…me caract…re.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+
+.it
+largeur
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 1048575.
+
+.operation
+\{cCESURE} explore la cha—ne » partir du caract…re sp≈cifi≈ par
+l'argument {ilargeur} en revenant vers le d≈but jusqu'» trouver
+un endroit oÀ op≈rer une c≈sure.\
+
+\{cCESURE} reconna—t les symboles de ponctuation courants :
+caract…res {ipoint d'interrogation}, {ipoint d'exclamation},
+{ipoint virgule}, {ideux points}, {ipoint} et {iparenth…se
+ouvrante}. L'algorithme est conµu pour ne pas couper la cha—ne
+avant un de ces signes.\
+.references
+{iJPC 21} (page 34) premi…re version du programme de formattage
+en Basic par Pierre David.
+
+{iJPC 26} (page 50) deuxi…me version du programme en Basic avec
+les fonctions en assembleur par Pierre David et Michel Martinet.
+.related
+CENTER$
+FORMAT$
+RED$
+REDUCE$
+SPACE$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+COMB
+
+.purpose
+{cCOMB} (combinaisons) renvoie le nombre de combinaisons d'un
+ensemble de p ≈l≈ments parmi n.
+
+.options
+CFKID
+
+.syntaxe
+COMB ( {in{c , {ip{c )
+
+.examples
+.ex
+A=COMB(4,3)
+.co
+Place 4 dans la variable A.
+
+.input
+.it
+n
+.de
+Expression num≈rique.
+.re
+Nombre entier compris entre 0 et 10{^12{--1.
+.it
+p
+.de
+Expression num≈rique.
+.re
+Nombre entier compris entre 0 et n.
+
+.operation
+COMB(n,p) = C{p{vn{^p} = n! / (p! * (n-p)!)
+
+\{cCOMB} calcule le nombre de combinaisons de n ≈l≈ments pris p »
+p.\
+
+\Pour des raisons de pr≈cision, {cCOMB} n'utilise pas la
+fonction factorielle, mais un algorithme multiplicatif qui permet
+d'≈tendre le domaine de validit≈ de la fonction. Ceci explique
+aussi un temps d'ex≈cution un peu long pour de grandes valeurs.\
+.references
+{iJPC 25} (page 50) premi…re version par Laurent Istria.
+
+{iJPC 41} (page 32) deuxi…me version par Guy Toublanc.
+.related
+ARR
+FACT
+.author
+Laurent Istria
+Guy Toublanc
+.end keyword
+
+.keyword
+CONTRAST
+
+.purpose
+{cCONTRAST} retourne la valeur du contraste courant.
+
+.options
+FKIDC
+
+.syntaxe
+CONTRAST
+
+.examples
+.ex
+A=CONTRAST
+
+.operation
+\{cCONTRAST} sans param…tre retourne la valeur du contraste
+courant. Cette valeur est modifiable par l'ordre {cCONTRAST}
+suivi d'un param…tre entre 0 et 15.\
+.references
+{iJPC 22} (page 42) premi…re version par Laurent Istria.
+
+{iJPC 24} (page 41) deuxi…me version par Jean-Jacques Moreau.
+
+{iManuel du module Forth / Assembler} (page 52). Un exemple de
+primitive Forth renvoyant le contraste courant.
+.related
+CONTRAST
+.author
+Laurent Istria
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+CSIZE
+
+.purpose
+{cCSIZE} (Character SIZE) sp≈cifie la taille et l'aspect des
+caract…res trac≈s par {cLABEL}.
+
+.options
+SKID
+
+.syntaxe
+CSIZE {ihauteur{c }[{c, {irapport{c }]
+
+.examples
+.ex
+CSIZE 20,0.6
+.co
+s≈lectionne une hauteur de caract…res de 20 unit≈s graphiques et
+une largeur de 20*0.6=12 unit≈s graphiques.
+
+.ex
+CSIZE 10*I
+.co
+s≈lectionne une hauteur de 10*I unit≈s graphiques, et une largeur
+de 6*I unit≈s graphiques.
+
+.ex
+CSIZE 20,1.2
+.co
+les caract…res seront trac≈s avec une hauteur de 20 unit≈s
+graphiques et une largeur de 20*1.2=24 unit≈s graphiques.
+
+.input
+.it
+hauteur
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-32767 » +32767
+.it
+rapport
+.de
+Expression num≈rique.
+.re
+Aucune.
+.df
+0.6
+
+.operation
+\Les caract…res imprim≈s par l'instruction {cLABEL} sont d≈finis
+par plusieurs param…tres d≈terminant leur forme et leur taille
+r≈elles. De plus, chaque caract…re se compose d'un symbole et de
+l'espace qui l'entoure, le s≈parant des autres caract…res.\
+
+\Le param…tre {ihauteur} est la somme, en unit≈s graphiques, de
+la hauteur du caract…re et de l'interligne d'impression.\
+
+\Le param…tre {irapport} est le rapport entre la largeur et la
+hauteur de l'espace-caract…re. Une valeur faible indique un
+caract…re ≈troit et une valeur ≈lev≈e indique un caract…re
+large.\
+
+\L'ex≈cution de {cGINIT} donne par d≈faut les valeurs suivantes :
+{ihauteur} = 20 unit≈s graphiques, {irapport d'aspect} = 0,6. Ces
+param…tres d≈finissent une {ilargeur} de 12 unit≈s graphiques.\
+
+.related
+LABEL
+
+.author
+Pierre David
+.end keyword
+
+.end

@@ -1,0 +1,696 @@
+.language
+F
+
+.keyword
+SELECT ... CASE ... END SELECT
+
+.purpose
+La construction {cSELECT} ... {cCASE} ... {cEND SELECT} donne une
+ex≈cution conditionn≈e de segments de programmes.
+
+.options
+SKID
+
+.syntaxe
+SELECT {iexpression
+  CASE {iclauses de choix
+    {isegment de programme
+  CASE {iclauses de choix
+    {isegment de programme
+   }:
+  }[{c CASE ELSE
+      {isegment de programme} ]
+END SELECT
+
+.examples
+.ex
+10 SELECT E+2
+20   CASE <0
+30     DISP "Positif"
+40   CASE =0
+50     DISP "Nul"
+60   CASE ELSE
+70     DISP "Autre" @ BEEP
+80 END SELECT
+.co
+Renvoie un message appropri≈ en fonction de l'expression E+2.
+.ex
+10 SELECT E$
+20   CASE "A" TO "Z"
+30     DISP "Majuscule"
+40   CASE ":",";",",","."
+50     DISP "Ponctuation"
+60 END SELECT
+.co
+Il n'y a pas de {lCASE ELSE{p. Le premier choix est de type
+"intervalle", le deuxi…me est de type "≈num≈ration".
+
+.input
+.it
+expression
+.de
+Expression num≈rique ou alphanum≈rique.
+.re
+Aucune.
+.it
+clauses de choix
+.de
+voir {lCASE
+.re
+Le type des expressions doit ¡tre compatible avec celle du
+{lSELECT{p.
+.it
+segment de programme
+.de
+Tout nombre de lignes contiguÕs.
+.re
+Aucune.
+
+.operation
+\{cSELECT} ... {cEND SELECT} est similaire » la construction
+{cIF} ... {cTHEN} ... {cELSE} ... {cEND IF}, mais permet de
+d≈finir {gplusieurs} segments de programme. Un seul d'entre eux
+sera ex≈cut≈. Chaque segment de programme commence avec {cCASE}
+ou {cCASE ELSE}, et finit quand l'ordre suivant est {cCASE},
+{cCASE ELSE} ou {cEND SELECT}.\
+
+\L'ordre {cSELECT} sp≈cifie une expression dont la valeur est
+compar≈e » {ichaque clause de choix}. Quand une occurence est
+trouv≈e, le segment de programme correspondant est ex≈cut≈. Les
+segments restants sont saut≈s, et l'ex≈cution continue
+imm≈diatement apr…s le {cEND SELECT}.\
+
+\Toutes les {iclauses de choix} doivent ¡tre du m¡me type (soit
+num≈rique, soit alphanum≈rique), et doivent correspondre au type
+de l'expression de {cSELECT}.\
+
+\Le {cCASE ELSE} optionnel d≈finit un segment de programme »
+ex≈cuter lorsque toutes les {iclauses de choix} ont ≈chou≈.\
+
+\Les erreurs rencontr≈es lors de l'≈valuation des {iclauses de
+choix} seront report≈es au niveau du {cSELECT}.\
+
+\Les segments de programme peuvent eux-m¡mes contenir des
+structures de type boucle ou choix. L'embo—tement doit ¡tre
+correct, sinon l'erreur {cJPC ERR:Structure Mismatch} est
+renvoy≈e.\
+.references
+{iJPC 52} (page 10) premi…re version par Pierre David et Janick
+Taillandier.
+
+Basic 4.0 pour HP 9000 s≈ries 200/300.
+.related
+IF} ... {cTHEN} ... {cELSE} ... {cEND IF
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+SHRINK
+
+.purpose
+{cSHRINK} minimise en m≈moire la taille d'un fichier texte
+provenant d'une unit≈ de m≈moire de masse, et r≈cup…re la
+place inutilis≈e.
+
+.options
+SKID
+
+.syntaxe
+{cSHRINK {ifichier
+
+.examples
+.ex
+10 COPY :TAPE TO A$
+20 SHRINK A$
+30 PURGE A$&":TAPE"
+40 COPY A$ TO :TAPE
+.co
+Copie le fichier dont le nom est dans la variable A$, le r≈duit,
+l'efface du support (tr…s important), puis le recopie sur le
+support.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemet.
+.re
+Nom de fichier avec un sp≈cificateur de p≈riph≈rique (interne)
+optionnel.
+
+.operation
+{gLe probl…me :}
+
+\Lorsque des fichiers texte sont stock≈s sur support magn≈tique,
+leur taille est arrondie au secteur sup≈rieur (soit au
+multiple de 256 octets sup≈rieur).\
+
+\Si vous rappelez un fichier texte depuis une unit≈ de
+stockage de masse, puis que vous y ajoutez ne
+serait-ce qu'une lettre par l'interm≈diaire de votre traitement
+de texte favori, sa taille augmentera. La prochaine copie sur le
+support magn≈tique vous montrera que la simple insertion d'une
+lettre prend 256 octets de plus, soit 255 inutiles.
+En r≈it≈rant le processus, on
+arrive tr…s vite » des tailles gigantesques pour des fichiers
+normaux plein d'espaces vides.\
+
+\Un autre cas de fichier texte contenant de l'espace
+inutilis≈ est la cr≈ation par l'ordre {cCREATE} en donnant
+une taille initiale du fichier, ou en faisant un {cPRINT†#}
+alors que le pointeur de fichier est au milieu du fichier
+texte.\
+
+\Cet espace inutilis≈ correspond » la zone comprise entre le
+marqueur de fin de fichier et la fin physique du fichier.\
+
+
+{gLa solution :}
+
+\L'ordre {cSHRINK} compresse les fichiers texte en m≈moire de
+mani…re » ce qu'il n'y ait plus d'espace inutilis≈.\
+
+\Avant de recopier les fichiers vers le support, il faut prendre
+soin de les effacer, sinon l'ancienne taille subsiste, et le
+fichier pourrait encore grossir !\
+.references
+{iJPC 35} (page 35) premi…re version par Jean-Jacques Moreau.
+.related
+COPY
+EDTEXT
+PURGE
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+SLEEP
+
+.purpose
+{cSLEEP} place le HP-71 en ≈tat de sommeil l≈ger.
+
+.options
+SKID
+
+.syntaxe
+{cSLEEP
+
+.examples
+.ex
+10 IF NOT KEYDOWN THEN SLEEP
+.co
+Place le HP-71 en sommeil l≈ger si aucune touche n'est press≈e.
+
+.operation
+\Dans certaines conditions, il faut pouvoir obtenir des r≈ponses
+rapides » des ev≈nements espac≈s. Ceci arrive, par exemple, dans
+des applications de mesure ou de contr¬le de processus.\
+
+\Placer le HP-71 en sommeil profond par {cOFF} ou {cBYE}
+n≈cessiterait trop de temps pour remettre en marche la
+machinerie. D'autre part, le laisser allum≈ pose des probl…mes
+d'autonomie.\
+
+\{cSLEEP} place le HP-71 en sommeil l≈ger, c'est » dire le place
+dans un ≈tat de veille. L'affichage est maintenu allum≈, et les
+r≈actions aux interruptions de l'HP-IL ou du clavier sont plus
+rapides.\
+
+\N'importe quelle touche suffit » rallumer le HP-71. De
+mani…re plus g≈n≈rale, n'importe quelle interruption suffit
+» rallumer le HP-71.\
+.references
+{iJPC 30} (page 50) premi…re version par Jean-Franµois Garnier.
+
+{iJPC 37} (page 33) deuxi…me version par Jean-Franµois Garnier.
+.related
+BYE
+KEYWAIT$
+OFF
+ON TIMER
+ON INTR
+.author
+Jean-Franµois Garnier
+.end keyword
+
+.keyword
+SPACE$
+
+.purpose
+{cSPACE$} renvoie une cha—ne compos≈e du nombre sp≈cifi≈
+d'espaces.
+
+.options
+FKID
+
+.syntaxe
+{cSPACE$ ( {inombre de r≈p≈titions{c )
+{cSPACE$ ( {icha—ne{c , {inombre de r≈p≈titions{c )
+{cSPACE$ ( {icaract…re{c , {inombre de r≈p≈titions{c )
+
+.examples
+.ex
+A$=SPACE$(5)
+.co
+Place une cha—ne compos≈e de 5 espaces dans la variable
+alphanum≈rique A$.
+.ex
+10 DIM X$[50]
+20 X$=SPACE$("ESSAI",10)
+.co
+R≈p…te 10 fois la cha—ne "ESSAI" et place le r≈sultat
+dans la variable X$.
+.ex
+DISP SPACE$(65,20)
+.co
+Affiche le caract…re de code 65 (la lettre "A" ici) 20
+fois.
+
+.input
+.it
+nombre de r≈p≈titions
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-1048575 » 1048575.
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune
+.it
+caract…re
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 255.
+
+.operation
+\{cSPACE$} renvoie une cha—ne compos≈e du nombre d'espaces
+sp≈cifi≈. Si ce nombre est n≈gatif ou nul, la cha—ne vide est
+renvoy≈e.\
+
+\{cSPACE$} est utile pour toutes les applications de
+formattage de textes, pour positionner une marge, aligner
+des colonnes, centrer du texte, et plus encore. Il peut
+aussi servir » initialiser les tableaux utilis≈s avec
+{cFINPUT}.\
+
+\{cSPACE$} permet aussi de r≈p≈ter une cha—ne de caract…res
+quelconque. Ce sont les deuxi…me et troisi…me formes. Dans
+le troisi…me cas, la cha—ne est compos≈e du caract…re de
+code ASCII sp≈cifi≈.\
+
+\Ainsi, {cSPACE$("ESSAI†",3)} renvoie la cha—ne
+{cESSAI†ESSAI†ESSAI}. De m¡me, {cSPACE$(65,2)} renvoie
+{cAA}, 65 repr≈sentant le code ASCII de la lettre {cA}.\
+.references
+{iJPC 21} (page 34) premi…re version du programme de formattage
+en basic par Pierre David.
+
+{iJPC 26} (page 50) deuxi…me version du programme en Basic avec
+les fonctions en assembleur par Pierre David et Michel Martinet.
+.related
+CENTER$
+FORMAT$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+SRQ
+
+.purpose
+{cSRQ} (Service ReQuest) envoie un message sur la boucle HP-IL
+pour tester si un p≈riph≈rique demande service.
+
+.options
+FCKI
+
+.syntaxe
+{cSRQ
+{cSRQ ( {inum≈ro de boucle{c )
+
+.examples
+.ex
+N=SRQ(2) @ IF N THEN GOSUB 'INTERPT'
+.co
+Si un p≈riph≈rique demande service sur la deuxi…me boucle HP-IL,
+ex≈cuter le sous programme sp≈cifi≈.
+
+.input
+.it
+num≈ro de boucle
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 3.
+.df
+1
+
+.operation
+{gLa demande de service :}
+
+\La demande de service est un dispositif permettant » des
+p≈riph≈riques de signaler un ≈tat ou de demander un service au
+contr¬leur HP-IL.\
+
+\Par exemple, l'imprimante ThinkJet signale qu'elle n'a plus de
+papier en ≈mettant des demandes de service.\
+
+\La demande de service est un ≈tat dans lequel rentre le
+p≈riph≈rique.\
+
+\Si le contr¬leur (le HP-71) envoie des octets de donn≈es
+(messages {cDAB}, envoy≈s par {cSEND DATA}) ou des messages
+d'identification ({cIDY}), le p≈riph≈rique met » un un bit
+sp≈cial dans le message, signifiant la demande de service.\
+
+\Apr…s la r≈ception de la demande de service, le HP-71 devra
+interroger l'≈tat des p≈riph≈riques, par la fonction {cSPOLL},
+pour d≈terminer lequel demande le service.\
+
+\{cSRQ} fournit une m≈thode rapide pour d≈terminer si un
+p≈riph≈rique ≈met une demande de service. A la diff≈rence de
+l'interrogation parall…le, il n'aide pas » l'identification
+du p≈riph≈rique qui demande le service. D'un autre cot≈,
+{cSRQ} ne requiert aucune routine d'initialisation.\
+
+
+{gLa fonction :}
+
+\{cSRQ} envoie un message {cIDY 00} sur la boucle sp≈cifi≈e par
+le param…tre optionnel, puis renvoie l'≈tat du bit de service.
+La r≈ponse est donc :\
+
+\- 1 si un ou plusieurs p≈riph≈riques demandent service, ou\
+\- 0 si aucun p≈riph≈rique ne demande service.\
+
+
+{gInterruption par [ATTN] :}
+
+\Cette fonction est interruptible par deux appuis successifs sur
+la touche {l[ATTN]}. Le HP-71 affiche alors le message d'erreur
+{cHPIL ERR:Aborted}. Il peut ¡tre n≈cessaire d'ex≈cuter {cRESTORE
+IO} pour r≈activer le syst…me HP-IL.\
+.references
+{iJPC 30} (page 50) premi…re version par Jean-Franµois Garnier.
+
+{iJPC 37} (page 33) deuxi…me version par Jean-Franµois Garnier.
+
+{iThe HP-IL System : An Introductory Guide to the Hewlett-Packard
+Interface Loop}, par Gerry Kane, Steve Harper, et David Ushijima
+aux ≈ditions Mc Graw-Hill.
+
+{iThe HP-IL Interface Specification}, r≈f≈rence HP-82166-90017.
+D'abord difficile, mais r≈f≈rence la plus pr≈cise.
+.related
+PARPOLL
+SEND
+.author
+Jean-Franµois Garnier
+.end keyword
+
+.keyword
+STACK
+
+.purpose
+{cSTACK} initialise la pile de commandes au nombre d'entr≈es
+sp≈cifi≈.
+
+.options
+SKID
+
+.syntaxe
+{cSTACK {inombre de niveaux
+
+.examples
+.ex
+STACK 15
+.co
+Initialise la pile de commandes » 15 niveaux.
+
+.input
+.it
+nombre de niveaux
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 16.
+
+.operation
+{gLa pile de commandes :}
+
+\La pile de commandes est un outil bien pratique pour ≈pargner
+des efforts de frappe. Cependant, cette pile est limit≈e » 5
+niveaux sur un HP-71 standard.\
+
+{gL'ordre STACK :}
+
+\L'ordre {cSTACK} initialise la pile de commandes au nombre de
+niveaux sp≈cifi≈. La pile de commandes est effac≈e.\
+
+\Ce nombre de niveaux est r≈glable entre 1 et 16. Une profondeur
+de 1 est la moins gourmande en m≈moire, mais la moins utile
+pour aider » la frappe.\
+
+\La profondeur de 16 niveaux n'est pas conseill≈e. En effet, lors
+d'un {cINPUT} ou {cLINPUT}, une pression sur la touche {l[v]}
+monte dans la pile. Ce comportement est ≈trange, voire
+perturbant.\
+
+\Le nombre de niveaux id≈al est 15. C'est typiquement le genre de
+commandes » mettre dans le programme {cML} lanc≈
+automatiquement apr…s  l'initialisation compl…te de la machine.\
+.references
+{iUser's Library Solutions - Utilities}, sous programme SETCMDST
+(page 3).
+
+{iJPC 25} (page 57) premi…re version par Michel Martinet.
+
+{iA para—tre} : deuxi…me version par Henri Kudelski.
+.related
+{cINIT 3}
+.author
+Henri Kudelski
+Michel Martinet
+.end keyword
+
+.keyword
+STARTUP$
+
+.purpose
+{cSTARTUP$} renvoie la cha—ne de commandes sp≈cifi≈e par
+{cSTARTUP}.
+
+.options
+FKID
+
+.syntaxe
+STARTUP$
+
+.examples
+.ex
+A$=STARTUP$
+.co
+Place dans la variable A$ la cha—ne de commandes ex≈cut≈e »
+chaque mise sous tension du HP-71.
+
+.operation
+\{cSTARTUP$} renvoie la cha—ne de commandes devant ¡tre ex≈cut≈e
+» la mise sous tension du HP-71. La longueur de cette cha—ne ne
+peut exc≈der 95 caract…res.\
+
+\{cSTARTUP$} renvoie une cha—ne nulle si aucune commande n'avait ≈t≈
+sp≈cifi≈e par {cSTARTUP}.\
+.reference
+{iJPC 25} (page 43) premi…re version par Jean-Jacques Moreau.
+
+{iJPC 31} (page 29) deuxi…me version par Jean-Jacques Moreau.
+.related
+ENDUP$
+STARTUP
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+SYSEDIT
+
+.purpose
+{cSYSEDIT} (SYStem EDITor) place le HP-71 dans un mode d'≈dition /
+d≈sassemblage interactif de la m≈moire.
+
+.options
+SKID
+
+.syntaxe
+{cSYSEDIT {iadresse hexad≈cimale
+
+.examples
+.ex
+SYSEDIT "0BD38"
+.co
+Examine le contenu de la m≈moire en commenµant » l'adresse 0BD38,
+c'est » dire au d≈but de la routine POP1S.
+.ex
+SYSEDIT ADDR$("EXEMPLE")
+.co
+Examine la m≈moire en commenµant au d≈but de l'en-t¡te du fichier
+EXEMPLE.
+
+.input
+.it
+adresse hexad≈cimale
+.de
+Expression alphanum≈rique contenant des chiffres hexad≈cimaux.
+.re
+Jusqu'» 5 chiffres en majuscules ou en minuscules.
+
+.operation
+\{cSYSEDIT} place le HP-71 dans un mode d'≈dition / d≈sassemblage
+de la m≈moire. Ce mode permet de visualiser le contenu de la
+m≈moire sous forme hexad≈cimale, sous forme de caract…res,
+ou sous forme d'instructions ou de macro-op≈rations
+assembleur. L'affichage est toujours organis≈ comme suit :\
+
+{c00000:2034EE100060F481}
+
+\La premi…re partie est l'{iadresse}.\
+\La deuxi…me partie, s≈par≈e de la premi…re par le caract…re
+{c:} repr≈sente le contenu de la m≈moire » partir de cette
+adresse.\
+
+\Le HP-71 r≈agit alors » certaines pressions de touches.\
+
+{g[ATTN]} ou {g[f][OFF]} - Sortie de l'≈diteur
+\Sort de {cSYSEDIT}.\
+
+{g[+]}, {g[-]}, {g[*]} ou {g[/]} - D≈place la fen¡tre d'affichage
+\Op≈rations sur l'adresse courante. Respectivement : +1, -1,
++16 et -16. Dans tous les cas, le mode hexad≈cimal est remis
+par d≈faut.\
+
+{g[A][1]} » {g[A][8]} - Visualisation en ASCII
+\Affiche le contenu de la m≈moire sous forme de {cNIBASC}.
+Le nombre qui suit le {l[A]} est le nombre de caract…res
+d≈sir≈. Les caract…res non affichables (ceux dont le code
+n'est pas compris entre 32 et 126) sont repr≈sent≈s par un
+point.\
+
+\{g[N][1]} » {g[N][9]} et {g[N][.][0]} » {g[N][.][6]}
+- Visualisation en hexad≈cimal\
+\Affiche le contenu de la m≈moire sous forme de {cNIBHEX}.
+Le nombre qui suit le {l[N]} est le nombre de chiffres
+hexad≈cimaux d≈sir≈. Si celui-ci est sup≈rieur » 9, il faut
+mettre un point avant le chiffre des unit≈s. Par exemple,
+{l[N][8]} affiche 8 chiffres, alors que {l[N][.][6]} en
+affiche 16.\
+
+\{g[C][1]} » {g[C][6]} - Constante d≈cimale\
+\Affiche le contenu de la m≈moire sous forme de {cCON}. Le
+nombre qui suit le {l[C]} est le nombre de quartets formant
+la constante. Si ce nombre est inf≈rieur ou ≈gal » 4, la
+constante est d≈cimale, sinon elle est hexad≈cimale (rep≈r≈e
+par un symbole {c#}).\
+
+\{g[C][H][1]} » {g[C][H][6]} - Constante hexad≈cimale\
+\Cette option est la m¡me que pr≈c≈demment, mais force
+l'affichage de la constante en mode hexad≈cimale.\
+
+\{g[R][1]} » {g[R][5]} - Adresse relative\
+\Affiche le contenu de la m≈moire sous forme d'une adresse
+relative (macro-op≈ration {cREL}). L'adresse calcul≈e est
+toujours affich≈e en hexad≈cimal.\
+
+\{g[H]} - Mode hexad≈cimal\
+\Active le mode hexad≈cimal : affiche le contenu de la m≈moire
+sous forme de 16 chiffres hexad≈cimaux. C'est le mode par d≈faut
+lorsqu'on rentre sous {cSYSEDIT}.\
+
+\{g[D]} - Mode d≈sassemblage\
+\Active le mode d≈sassemblage : affiche le contenu de la
+m≈moire sous forme de mn≈moniques
+assembleur. Voir la fonction {cOPCODE$} pour plus de d≈tails
+sur le format de la sortie.\
+
+\{g[L]} - Visualise l'instruction courante comme LCASC\
+\Si le mode d≈sassemblage est actif, et si l'instruction
+d≈sassembl≈e est {cLC({in{c)}, avec {in} multiple de 2,
+affiche l'instruction courante sous forme de {cLCASC}.
+Les caract…res non affichables (ceux dont le code
+n'est pas compris entre 32 et 126) sont repr≈sent≈s par un
+point.\
+
+\{g[F]} - Sauvegarde dans un fichier\
+\Demande un nom de fichier. Chaque pression ult≈rieure
+sur {l[ENDLINE]} stockera le contenu de l'affichage » la
+fin du fichier. Le fichier est cr≈≈ s'il n'existe pas.
+Sinon, le pointeur est plac≈ » la fin. Pour supprimer la
+sortie dans un fichier, effacer l'affichage avec
+{l[f][-LINE]} et valider.\
+
+\{g[=]} - D≈placement direct\
+\Si l'affichage montre une adresse, positionne l'adresse
+courante » cette adresse.\
+
+{g[(]} - D≈placement et empilement
+\Si l'affichage montre une adresse, sauvegarde l'adresse
+courante dans une pile, et positionne l'adresse
+courante » cette adresse. La pile peut contenir un maximum
+de 7 adresses. Ceci vous permet d'aller d≈sassembler » une
+adresse, et de reprendre » l'ancienne adresse.\
+
+{g[)]} - Retour
+\Si la pile d'adresses n'est pas vide, d≈pile la derni…re
+adresse et positionne l'adresse courante.\
+
+{g[ENDLINE]} - Validation
+\Si la sauvegarde dans un fichier est active, sauve
+l'affichage dans le fichier.
+Saute l'objet courant. Incr≈mente l'adresse du nombre de
+quartets occup≈ par l'objet (opcode, caract…res, adresse
+relative, constante). Si le mode d≈sassemblage est actif,
+affiche le mn≈monique de la prochaine instruction, sinon
+passe en mode hexad≈cimal.\
+
+{g[Z]} - Edition du pointeur
+\Modifie interactivement la valeur de l'adresse. Pour
+valider la nouvelle adresse, faire {l[ENDLINE]}. Pour
+arr¡ter et ne rien modifier, appuyer sur {l[ATTN]}.\
+
+{g[f][Z]} ou {g[M]} - Edition de la m≈moire
+\Modifie interactivement le contenu de la m≈moire (affich≈
+en hexad≈cimal). Pour valider, faire {l[ENDLINE]}. Pour
+arr¡ter et ne rien modifier, appuyer sur {l[ATTN]}.\
+.references
+{iJPC 22} (page 31) premi…re version en Basic de d≈sassembleur
+par Michel Martinet.
+
+Non publi≈ : premi…me version de {cSYSEDIT} en Basic par Pierre
+David.
+
+Non publi≈ : {cSYSEDIT} par Pierre David et Janick Taillandier.
+
+{iManuel du module Forth / Assembler} : pages 55 et suivantes.
+Bonne introduction aux instructions du microprocesseur du HP-71.
+
+{iInternal Design Specification} Volume I (Chapitre 16).
+Description d≈taill≈e et exhaustive du jeu d'instructions.
+
+{iInternal Design Specification} Volume III. La mani…re dont le
+HP-71 utilise ses instructions...
+.related
+ADDR$
+OPCODE$
+PEEK$
+POKE
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+.end

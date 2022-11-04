@@ -1,0 +1,671 @@
+.language
+F
+
+.keyword
+GDUMP
+
+.purpose
+{cGDUMP} (Graphic DUMP)
+
+.options
+SKI
+
+.syntaxe
+GDUMP
+
+.examples
+.ex
+IF UPRC$(R$)="O" THEN GDUMP
+
+.operation
+\{cGDUMP} imprime le contenu du fichier {cGRAPHILE} sur
+l'appareil d≈sign≈ par l'ordre {cPLOTTER IS}.\
+
+\L'appareil d≈sign≈ doit accepter les graphiques d≈finis dans le
+PCL (Printer Control Language de Hewlett-Packard). Les
+imprimantes ThinkJet, QuietJet et LaserJet r≈pondent » {cGDUMP}.\
+
+\Le fichier {cGRAPHILE} n'est pas modifi≈ par {cGDUMP}. C'est »
+dire qu'une session graphique peut contenir plusieurs ordres
+{cGDUMP}. Ceci peut ¡tre utile pour imprimer les ≈tapes
+interm≈diaires du traµage.\
+
+\Si l'ordre {cPLOTTER IS} n'a pas ≈t≈ ex≈cut≈, {cGDUMP} d≈clenche
+l'erreur : "Plotter not reachable".\
+
+.related
+PLOTTER IS
+GINIT
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+GEND
+
+.purpose
+{cGEND} (Graphic END) termine une session graphique ouverte par
+{cGINIT}.
+
+.options
+SKID
+
+.syntaxe
+GEND
+
+.example
+.ex
+100 GEND
+
+.operation
+\{cGEND} ach…ve une session graphique ouverte par un ordre
+{cGINIT}. Le fichier {cGRAPHILE} est effac≈ de la m≈moire, ainsi
+que les zones n≈cessaires au stockage des informations d'≈tat.\
+
+\{cGEND} ne modifie pas la sp≈cification de l'appareil d≈sign≈
+par {cPLOTTER IS}.\
+
+\{cGEND} interdit toute op≈ration autre que {cPLOTTER IS} ou
+{cGINIT}. Une tentative d'ex≈cution d'une fonction graphique
+d≈clenchera l'erreur :\
+GRPH ERR:Graph not initialized
+
+.related
+GINIT
+PLOTTER IS
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+GENLEN
+
+.purpose
+{cGENLEN} (GENeric LENgth) cherche une cha—ne g≈n≈rique dans une
+cha—ne alphanum≈rique et retourne la longueur de l'occurrence trouv≈e.
+
+.options
+FKID
+
+.syntaxe
+GENLEN ( {icha—ne{c , {imotif{c )
+GENLEN ( {icha—ne{c , {imotif{c , {id≈but{c )
+
+.examples
+.ex
+DISP GENLEN ("JPC Rom", "Rom")
+.co
+Affiche 3, c'est » dire la longueur de la cha—ne "Rom" »
+l'int≈rieur de la cha—ne "JPC†Rom".
+.ex
+A=GENLEN (L$,"[0-9][0-9]*",X+1)
+.co
+Place dans la variable A la longueur du premier nombre trouv≈
+dans la cha—ne L$ » partir du caract…re X+1.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+motif
+.de
+Expression alphanum≈rique.
+.re
+Expression g≈n≈rique valide.
+.it
+d≈but
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 1048575
+.df
+0
+
+.operation
+\La fonction {cGENLEN} recherche la cha—ne g≈n≈rique {imotif} dans la cha—ne
+{icha—ne}. Si une occurrence est trouv≈e, sa longueur (≈ventuellement
+nulle) est renvoy≈e, sinon la valeur {c0} est
+renvoy≈e.\
+
+\Attention : la valeur {c0} est ambiguÕ, car elle peut
+indiquer » la fois une occurrence de taille nulle (ce qui peut
+arriver lorsque vous utilisez le caract…re g≈n≈rique {c*} par
+exemple), et » la fois une occurrence non trouv≈e. Pour
+lever l'ambigu›t≈, nous vous conseillons de tester au pr≈alable la
+pr≈sence de l'occurrence avec {cGENPOS}, puis de n'utiliser
+{cGENLEN} que lorsque vous ¡tes s√r qu'il y a une occurrence.
+Cette ambigu›t≈ est pr≈f≈rable, car ainsi les deux fonctions
+soeurs {cGENPOS} et {cGENLEN} renvoie la m¡me valeur en cas
+d'occurrence non trouv≈e, de m¡me que la fonction standard
+{cPOS}.\
+
+\Les caract…res g≈n≈riques utilisables dans la cha—ne
+{imotif} sont r≈sum≈s dans le tableau ci-dessous. Pour plus de
+d≈tails, voir {cXEDIT}.{l\
+
+          Caract…re       Signification
+          ---------       ----------------------------------------------
+              \           annule la signification du caract…re suivant
+              ^           d≈but de ligne
+              $           fin de ligne
+              .           caract…re quelconque
+             [ ]          ensemble de caract…res
+            [^ ]          compl≈mentaire de l'ensemble
+              *           r≈p≈tition du motif pr≈c≈dent 0 ou n fois}
+
+\Si le param…tre num≈rique {id≈but} est pr≈sent, il sp≈cifie » partir de quel
+caract…re de {icha—ne} la recherche doit
+commencer. Par d≈faut, {imotif} est cherch≈ dans toute la cha—ne
+{icha—ne}.  Attention : le caract…re
+g≈n≈rique {c^} (d≈but de cha—ne) correspond au d≈but de la cha—ne
+et non » la position indiqu≈e par {id≈but}. Ainsi, la commande
+{cGENLEN("ABCD","^B",2)} retournera 0.\
+.references
+{iA para—tre} : Premi…re version de {cGENPOS} par Pierre
+David et Janick Taillandier.
+
+{iUnix User's Reference Manual} par AT&T.
+.related
+XEDIT
+FILEPOS
+FIND
+GENPOS
+GENRPLC
+LEN
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+GENPOS
+
+.purpose
+{cGENPOS} (GENeric POSition) cherche une cha—ne g≈n≈rique dans une
+cha—ne alphanum≈rique et retourne la position de l'occurrence trouv≈e.
+
+.options
+FKID
+
+.syntaxe
+GENPOS ( {icha—ne{c , {imotif{c )
+GENPOS ( {icha—ne{c , {imotif{c , {id≈but{c )
+
+.examples
+.ex
+DISP GENPOS ("JPC Rom", "Rom")
+.co
+Affiche 4, c'est » dire la position de la cha—ne "Rom" »
+l'int≈rieur de la cha—ne "JPC†Rom".
+.ex
+A=GENPOS (L$,"[0-9]",X+1)
+.co
+Place dans la variable A la position du premier chiffre dans la cha—ne
+L$ » partir du caract…re X+1.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+motif
+.de
+Expression alphanum≈rique.
+.re
+Expression g≈n≈rique valide.
+.it
+d≈but
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 1048575
+.df
+0
+
+.operation
+\La fonction {cGENPOS} recherche la cha—ne g≈n≈rique {imotif} dans la cha—ne
+{icha—ne}. Si une occurrence est trouv≈e, sa position dans la
+cha—ne {icha—ne} est renvoy≈e, sinon la valeur {c0} est
+renvoy≈e.\
+
+\Les caract…res g≈n≈riques utilisables dans la cha—ne
+{imotif} sont r≈sum≈s dans le tableau ci-dessous. Pour plus de
+d≈tails, voir {cXEDIT}.{l\
+
+          Caract…re       Signification
+          ---------       ----------------------------------------------
+              \           annule la signification du caract…re suivant
+              ^           d≈but de ligne
+              $           fin de ligne
+              .           caract…re quelconque
+             [ ]          ensemble de caract…res
+            [^ ]          compl≈mentaire de l'ensemble
+              *           r≈p≈tition du motif pr≈c≈dent 0 ou n fois}
+
+\Si le param…tre num≈rique {id≈but} est pr≈sent, il sp≈cifie » partir de quel
+caract…re de {icha—ne} la recherche doit
+commencer. Par d≈faut, {imotif} est cherch≈ dans toute la cha—ne
+{icha—ne}.  Attention : le caract…re
+g≈n≈rique {c^} (d≈but de cha—ne) correspond au d≈but de la cha—ne
+et non » la position indiqu≈e par {id≈but}. Ainsi, la commande
+{cGENPOS("ABCD","^B",2)} retournera 0.\
+.references
+{iA para—tre} : Premi…re version de {cGENPOS} par Pierre
+David et Janick Taillandier.
+
+{iUnix User's Reference Manual} par AT&T.
+.related
+XEDIT
+FILEPOS
+FIND
+GENLEN
+GENRPLC
+POS
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+GENRPLC$
+
+.purpose
+{cGENRPLC$} (GENeric RePLaCe) cherche un motif g≈n≈rique dans une
+cha—ne alphanum≈rique, et substitue la sous-cha—ne trouv≈e par la cha—ne
+de remplacement.
+
+.options
+FKID
+
+.syntaxe
+GENRPLC$ ( {icha—ne{c , {imotif{c , {iremplacement{c )
+GENRPLC$ ( {icha—ne{c , {imotif{c , {iremplacement{c , {id≈but{c )
+
+.examples
+.ex
+DISP GENRPLC$ ("Math Rom", "Math", "JPC")
+.co
+Affiche la cha—ne "JPC Rom", c'est » dire la cha—ne d'origine
+avec toutes les occurrences de "Math" remplac≈es par "JPC".
+.ex
+A$=GENRPLC$ (L$,"[0-9][0-9]*","-&",X+1)
+.co
+Place dans la variable A$ la cha—ne origine avec tous les nombres
+rendus positifs : un signe "-"  est plac≈ devant chaque nombre.
+La cha—ne de remplacement signifie : un signe "-" et l'occurrence
+trouv≈e.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+motif
+.de
+Expression alphanum≈rique.
+.re
+Expression g≈n≈rique valide.
+.it
+remplacement
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+d≈but
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 1048575
+.df
+0
+
+.operation
+\La fonction {cGENRPLC$} substitue, dans la cha—ne {icha—ne}, toutes les
+occurrences de la cha—ne {imotif} par la cha—ne
+{iremplacement}.\
+
+\La fonction {cGENRPLC$} est similaire » la fonction {cREPLACE$}.
+La fonction {cREPLACE$} est, elle-m¡me, le regroupement de deux
+fonctions plus anciennes, {cREPLACE$} et {cRPLC$}. Cette fonction
+{cREPLACE$} n'est laiss≈e dans JPC Rom que pour des raisons de
+compatibilit≈ ascendante, et vous ¡tes plut¬t encourag≈s »
+utiliser {cGENRPLC$}.
+Le tableau ci-dessous r≈sume les diff≈rences entre ces trois
+fonctions :{l\
+
+    Fonction     Ancien nom     Caract≈ristiques
+    --------     ----------     -------------------------------------------
+    REPLACE$     REPLACE$       Remplacement simple avec caract…re joker
+    REPLACE$     RPLC$          Cha—nes g≈n≈riques compatibles avec EDTEXT
+    GENRPLC$     GENRPLC$       Cha—nes g≈n≈riques compatibles avec XEDIT
+
+\{pNote : l'ancienne fonction {lREPLACE${p correspond au cas oÀ
+l'actuelle fonction {lREPLACE${p est appel≈e avec un quatri…me
+param…tre alphanum≈rique repr≈sentant le joker. Dans les autres
+cas d'appel, c'est l'ancienne fonction {lRPLC${p qui est
+ex≈cut≈e.}\
+
+\Les cha—nes {imotif} et {iremplacement} peuvent contenir des
+caract…res g≈n≈riques. Le tableau ci-dessous r≈sume ces
+caract…res. Pour une explication d≈taill≈e, voir {cXEDIT}.\
+
+\Les caract…res g≈n≈riques de la cha—ne {imotif} sont :{l\
+
+          Caract…re       Signification
+          ---------       ----------------------------------------------
+              \           annule la signification du caract…re suivant
+              ^           d≈but de ligne
+              $           fin de ligne
+              .           caract…re quelconque
+             [ ]          ensemble de caract…res
+            [^ ]          compl≈mentaire de l'ensemble
+              *           r≈p≈tition du motif pr≈c≈dent 0 ou n fois}
+
+\Dans la cha—ne {iremplacement}, les caract…res g≈n≈riques sont :{l\
+
+          Caract…re       Signification
+          ---------       ----------------------------------------------
+              \           annule la signification du caract…re suivant
+              &           substitue l'occurrence trouv≈e}
+
+\Si le param…tre num≈rique {id≈but} est pr≈sent, il sp≈cifie » partir de quel
+caract…re de {icha—ne} la recherche et la substitution doivent
+commencer. Par d≈faut, {imotif} est cherch≈ dans toute la cha—ne
+{icha—ne}.  Attention : le caract…re
+g≈n≈rique {c^} (d≈but de cha—ne) correspond au d≈but de la cha—ne
+et non » la position indiqu≈e par {id≈but}. Ainsi, la commande
+{cGENRPLC$("ABCD","^B","X",2)} retournera la cha—ne {c"ABCD"}.\
+
+\Si vous d≈sirez remplacer une cha—ne
+susceptible de contenir des caract…res sp≈ciaux
+dont vous voulez annuler la signification, c'est » dire si vous
+d≈sirez op≈rer un remplacement non g≈n≈rique, vous ferez :{c\
+    GENRPLC$ ({icha—ne{c, GENRPLC$ ({imotif{c, "[\\\^\$\.\[\]\*]", "\\&"),
+                    GENRPLC$ ({iremplacement{c, "[\\\&]","\\&"))}
+.references
+{iA para—tre} : Premi…re version de {cGENRPLC$} par Pierre
+David et Janick Taillandier.
+
+{iUnix User's Reference Manual} par AT&T.
+.related
+XEDIT
+GENLEN
+GENPOS
+REPLACE$
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+GINIT
+
+.purpose
+{cGINIT} (Graphic INITialisation) initialise une session
+graphique.
+
+.options
+SKID
+
+.syntaxe
+{cGINIT "RASTER", {idimension}
+
+.example
+.ex
+GINIT "RASTER",100
+.co
+dimensionne une zone de traµage de 100 unit≈s graphiques de
+hauteur.
+.ex
+GINIT "RASTER",H
+
+.input
+.it
+hauteur
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 1048575
+
+.operation
+\{cGINIT} ouvre une session graphique. Toutes les fonctions
+graphiques deviennent autoris≈es.\
+
+\Le param…tre hauteur d≈finit la taille de la zone de traµage.
+Les coordonn≈es sur l'axe des {ix} varient entre {i0} et {i639},
+les
+coordonn≈es sur l'axe des {iy} varient entre {i0} et
+{ihauteur-1}.\
+\{cGINIT} cr≈e un fichier {cGRAPHILE} pour conserver une image de
+la zone de traµage. Il r≈serve aussi de la m≈moire pour les
+informations d'≈tat telles que position de la plume, type de
+ligne courant, taille des caract…res, etc.\
+
+\La place occup≈e par le fichier {cGRAPHILE} est d≈finie par :\
+{iplace occup≈e = 19 + hauteur * 80} octets
+
+Les conditions de traµage par d≈faut sont :
+
+- Position initiale de la plume = (0,0)
+- Type de trac≈ = ligne pleine
+- Taille des caract…res = 20 de hauteur, 12 de largeur
+- Origine des labels = 1
+- Direction des labels = 0 degr≈s
+- Longueur des marques pour les axes = 4 unit≈s graphiques
+
+.related
+GEND
+PLOTTER IS
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+GLINE
+
+.purpose
+{cGLINE} (Graphic LINE) pr≈pare le trac≈ d'une ligne graphique
+sur les imprimantes ThinkJet ou LaserJet.
+
+.options
+SKID
+
+.syntaxe
+{cGLINE {ix{c , {ilongueur{c , {ipremier{c , {itaille{c , {i≈cart{c
+
+.examples
+.ex
+GLINE x1,x2-x1+1,1,1,0
+.co
+Trace une ligne entre les points x1 et x2 en utilisant la
+variable G$.
+
+.input
+.it
+x
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 640.
+.it
+longueur
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 640.
+.it
+premier
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 640.
+.it
+taille
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 640.
+.it
+≈cart
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 640.
+
+.operation
+{gLes graphiques sur les imprimantes ˚ raster ˝ :}
+
+\Les imprimantes capables de dessiner des graphiques du type
+˚ raster ˝ sont, par exemple, les ThinkJet, LaserJet ou QuietJet.\
+
+\Les graphiques sur ces imprimantes sont construits ligne par
+ligne.  Il faut donc un espace de 80 caract…res pour recevoir une
+image des 640 points de cette ligne. {cGLINE} et {cGPSET}
+utilisent donc une variable de 80 caract…res nomm≈e explicitement
+G$, dimensionn≈e au pr≈alable par un ordre {cDIM G$[80]}.\
+
+\Avant le d≈but de chaque nouvelle ligne, il faudra remplir cette
+variable avec des {cCHR$(0)} pour l'initialiser. Ceci peut se
+faire par un simple segment de programme du type :{c\
+
+100 DIM G$[80]
+110 G$=SPACE$(0,80)
+
+
+{gL'impression de la ligne graphique :}
+
+\L'impression se fait » l'aide d'une s≈quence d'≈chappement (voir
+{cESC$}), d≈pendante de l'imprimante dont vous disposez.
+Avec une ThinkJet, vous ferez :\
+
+{cPRINT ESC$("*r640S"); @ PWIDTH INF}
+
+\pour initialiser le mode graphique. Notez que cette
+initialisation ne devra
+¡tre faite qu'une seule fois pour toute la dur≈e de votre
+programme.\
+
+\Vous imprimerez ensuite chaque ligne graphique en faisant
+:\
+
+{cPRINT ESC$("*b80W")&G$;}
+
+\Attention : faites de pr≈f≈rence un {cPWIDTH INF} avant
+d'imprimer le graphique, pour ≈viter que le HP-71 n'ins…re une
+s≈quence de fin de ligne (voir {cENDLINE}) au milieu de vos
+donn≈es graphiques.\
+
+
+\Reportez-vous au manuel de votre imprimante pour plus de d≈tails sur
+le fonctionnement des graphiques.\
+
+
+{gL'utilisation de GLINE :}
+
+\{cGLINE} sert » tracer une droite dans l'˚image˝ G$, » partir du
+point {ix}, de longueur {ilongueur}. La caract≈ristique de {cGLINE}
+est de tracer des jolis motifs. Par exemple :{l\
+
+   premier
+   v    taille    ≈cart
+ <---><--------><------>
+ ___________________________________________________________
+|     xxxxxxxxxx        xxxxxxxxxx        xxxxxxxxx
+|   xxxxxxxxxx        xxxxxxxxxx        xxxxxxxxx
+| xxxxxxxxxx        xxxxxxxxxx        xxxxxxxxx
+|}
+
+\Ceci ≈tait un petit exemple de motif. Chaque ligne est construite en
+donnant 5 param…tres :\
+
+\1) La coordonn≈e du premier point : {ix}\
+\2) la longueur de la ligne : {ilongueur}\
+\3) le premier ≈cart : {ipremier}\
+\4) la taille d'un trait : {itaille}\
+\5) l'≈cart entre les traits : {i≈cart}.\
+
+\Pour dessiner un motif comme celui-ci, il suffit de faire varier
+{ipremier} :\
+
+{ipremier{c = MOD ( {ipremier{c - 2 , {i≈cart{c )}
+
+\Pour tracer une ligne droite normale, prenez :\
+
+{ipremier} = {itaille} = 1
+{i≈cart} = 0
+.references
+{iJPC 35} (page 38) {cGLINE} et le sous programme {cGRAPH} par
+Pierre David.
+
+{iJPC 42} (page 29) exemple d'utilisation par Eric Gengoux.
+.related
+ENDLINE
+ESC$
+GPSET
+PRINT
+PWIDTH
+}Fonctions graphiques de JPC Rom
+.author
+Pierre David
+.end keyword
+
+.keyword
+GPSET
+
+.purpose
+{cGPSET} (Graphic Point SET) pr≈pare le trac≈ d'un point sur les
+imprimantes ThinkJet ou LaserJet.
+
+.options
+SKID
+
+.syntaxe
+{cGPSET {ix{c
+
+.examples
+.ex
+FOR X=X1 TO X2 @ GPSET X @ NEXT X
+.co
+Trace une ligne de x1 » x2.
+
+.input
+.it
+x
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 640.
+
+.operation
+\{cGPSET} trace un point dans l'˚image˝ de la ligne G$. Pour plus
+d'explications, voir {cGLINE}.\
+.references
+{iJPC 35} (page 38) {cGPSET} et le sous programme {cGRAPH} par
+Pierre David.
+
+{iJPC 42} (page 29) exemple d'utilisation par Eric Gengoux.
+.related
+ENDLINE
+ESC$
+GLINE
+PRINT
+PWIDTH
+}Fonctions graphiques de JPC Rom
+.author
+Pierre David
+.end keyword
+.end

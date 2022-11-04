@@ -1,0 +1,106 @@
+.language
+F
+
+.keyword
+BELL
+
+.purpose
+{cBELL} (sonnerie) fait sonner l'imprimante si elle en a la
+capacit≈.
+
+.options
+SKI
+
+.syntaxe
+BELL
+
+.examples
+.ex
+IF DEVADDR("HP82905B")>0 THEN BELL
+.co
+Si l'imprimante est une HP82905B, alors la faire sonner.
+
+.operation
+\{cBELL} fait sonner le p≈riph≈rique d≈sign≈ par le dernier ordre
+{cPRINTER IS}, si celui-ci en a la capacit≈.\
+
+\La ThinkJet ne peut ≈mettre de sonnerie.\
+
+{gCodes envoy≈s » l'imprimante :}
+
+Caract…re de code 7
+.references
+{iJPC 26} (page 39) premi…re version par Pierre David.
+
+{iJPC 40} (page 16) deuxi…me version par Pierre David.
+
+Consultez aussi le manuel de votre imprimante.
+.related
+BOLD
+MODE
+PAGELEN
+PCR
+PFF
+PLF
+UNDERLINE
+WRAP
+.author
+Pierre David
+.end keyword
+
+.keyword
+BOLD
+
+.purpose
+{cBOLD} active ou d≈sactive le mode ˚†caract…res gras†˝ sur
+l'imprimante.
+
+.options
+SKI
+
+.syntaxe
+BOLD ON
+BOLD OFF
+
+.examples
+.ex
+BOLD ON @ PRINT "JPC"
+.co
+Active le mode ˚caract…res gras˝, et imprime la cha—ne "JPC".
+.ex
+BOLD OFF @ PRINT "JPC"
+.co
+D≈sactive le mode ˚caract…res gras˝, et imprime la cha—ne "JPC".
+
+.operation
+\{cBOLD ON} active le passage en caract…res gras sur le
+p≈riph≈rique d≈sign≈ par {cPRINTER IS}. {cBOLD OFF} repasse en
+caract…res normaux.  L'effet de cet ordre d≈pent du p≈riph≈rique
+utilis≈. Il est destin≈ aux imprimantes reconnaissant le langage
+de contr¬le {iPCL} de Hewlett-Packard.\
+
+{gCodes envoy≈s » l'imprimante :}
+
+{cBOLD ON } : {cESC ( s 1 B}
+{cBOLD OFF} : {cESC ( s 0 B}
+.references
+{iJPC 26} (page 39) premi…re version par Pierre David.
+
+{iJPC 40} (page 16) deuxi…me version par Pierre David.
+
+Consultez aussi le manuel de votre imprimante.
+.related
+BELL
+MODE
+PAGELEN
+PCR
+PFF
+PLF
+PRINT
+PRINTER IS
+UNDERLINE
+WRAP
+.author
+Pierre David
+.end keyword
+.end

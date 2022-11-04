@@ -1,0 +1,61 @@
+.language
+F
+
+.keyword
+VARSWAP
+
+.purpose
+{cVARSWAP} permute deux variables ou ≈l≈ments de tableau.
+
+.options
+SKID
+
+.syntaxe
+{cVARSWAP {ivariable1{c , {ivariable2{c
+
+.examples
+.ex
+VARSWAP A,B
+.co
+Echange le contenu des deux variables num≈riques A et B.
+.ex
+VARSWAP A$,B$
+.co
+Echange le contenu des deux variables alphanum≈riques A$ et B$.
+
+.input
+.it
+variable1, variable2
+.de
+Noms de variables num≈riques ou alphanum≈riques.
+.re
+Les variables doivent ¡tre compatibles. Les tableaux entiers
+ne sont pas admis.
+
+.operation
+\{cVARSWAP} permute les contenus des deux variables, pourvu
+qu'elles soient de m¡me type (cha—ne ou num≈rique) et de
+m¡me dimension.\
+
+{gAttention !}
+
+\{cVARSWAP} ne fonctionne pas lorsque la variable {ivariable2}
+n'existe pas et doit donc ¡tre cr≈≈e par {cVARSWAP}.\
+
+\Ceci peut provoquer une r≈initialisation compl…te de la
+m≈moire.\
+.references
+{iJPC 31} (page 50) premi…re version par Jean-Jacques Moreau.
+
+{iA para—tre} : deuxi…me version par Pierre David et Janick
+Taillandier.
+
+L'ancienne appellation de {cVARSWAP} ≈tait {cSWAP}.
+.related
+LET
+.author
+Pierre David
+Jean-Jacques Moreau
+Janick Taillandier
+.end keyword
+.end

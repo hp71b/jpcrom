@@ -1,0 +1,63 @@
+.language
+A
+
+.keyword
+UNDERLINE
+
+.purpose
+{cUNDERLINE} enables or disables underline mode on the printer.
+
+.options
+SKI
+
+.syntaxe
+UNDERLINE ON
+UNDERLINE OFF
+
+.examples
+.ex
+UNDERLINE ON @ PRINT "HP-71"
+.co
+Prints the string {l{_HP-71{-{p.
+.ex
+UNDERLINE OFF @ PRINT "HP-71"
+.co
+Prints the string {lHP-71{p without underlining.
+
+.operation
+\{cUNDERLINE ON} enables the underline mode on the current
+{cPRINTER IS} device.\
+
+\{cUNDERLINE OFF} returns the printer device to normal mode.\
+
+\Note : the {cUNDERLINE ON / OFF} commands are intended for
+printers that implement the HP {iPrinter Control Language} such
+as the ThinkJet and LaserJet printers. It may not work as
+expected with other types of printers.\
+
+{gEscape sequences sent to the printer :}
+
+{cUNDERLINE ON } : {cESC & d D}
+{cUNDERLINE OFF} : {cESC & d @}
+.references
+{iJPC 26} (page 39) first version by Pierre David.
+
+{iJPC 40} (page 16) second version by Pierre David.
+
+Also consult your printer reference manual.
+.related
+BELL
+BOLD
+MODE
+PAGELEN
+PCR
+PFF
+PLF
+PRINT
+PRINTER IS
+WRAP
+.author
+Pierre David
+.end keyword
+.end
+

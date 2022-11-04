@@ -1,0 +1,93 @@
+.language
+F
+
+.keyword
+TOKEN
+
+.purpose
+{cTOKEN} renvoie le code interne (Lex ID et token) de la fonction sp≈cifi≈e.
+
+.options
+FKID
+
+.syntaxe
+{cTOKEN ( {imot-clef{c )
+{cTOKEN ( {imot-clef{c , {inum≈ro d'ordre{c )
+
+.examples
+.ex
+A=TOKEN("TOKEN",1)
+.co
+Place 225073 dans la variable A, soit le token de la fonction
+{lTOKEN{p. L'Id est 225, et le token est 73.
+
+.input
+.it
+mot-clef
+.de
+Expression alphanum≈rique.
+.re
+Le mot-clef doit exister.
+
+.it
+num≈ro d'ordre
+.de
+Expression num≈rique arrondie » un entier.
+.re
+Le mot-clef doit exister.
+.df
+1
+
+.operation
+\{cTOKEN} renvoie le code interne de la fonction sp≈cifi≈e. Le
+code interne est le num≈ro affich≈ avec {cXWORD} ou {cXFN} quand
+le Lex auquel appartient la fonction n'est pas pr≈sent.\
+
+\{cTOKEN} renvoie le code interne sous la forme {iiiittt},
+form≈ par l'identificateur du Lex (Id) et du
+code proprement dit (token). Par exemple, {cTOKEN} a comme token
+73 dans Lex d'identificateur 225. Le r≈sultat est donc
+225*1000+73, soit 225073.\
+
+\S'il existe plusieurs mots-clef de m¡me nom, le param…tre
+{inum≈ro d'ordre} permet de les distinguer. Par d≈faut, {inum≈ro
+d'ordre} vaut 1.\
+
+\Si le mot-clef n'existe pas, ou s'il n'y a pas assez
+d'occurences du mot-clef, l'erreur {cERR:Invalid Arg} est
+renvoy≈e.\
+
+\Les mots-clefs de plus de 8 caract…res n≈cessitent un traitement
+sp≈cial par le syst…me. Ainsi, des mots comme {cUNDERLINE} ou
+{cRANDOMIZE} sont reconnus comme {cUNDERLIN} ou {cRANDOMIZ}. Ce
+sont ces fonctions qui reconnaissent le {cE} final. {cTOKEN} ne
+peut conna—tre ces caract…res suppl≈mentaires. Pour les trouver,
+cette fonction reconna—t {cUNDERLIN} et ignore le {cE} final.
+Ainsi, {cTOKEN("RANDOMIZE")} comme {cTOKEN("RANDOMIZ----")}
+ignorent les caract…res suppl≈mentaires et renvoient le m¡me
+num≈ro.\
+
+\{cTOKEN} identifie le plus long mot-clef dont le nom est
+une sous-cha—ne du param…tre fourni. Par exemple,
+{cTOKEN("MEMORY")} renvoie 1056, le num≈ro de la fonction
+{cMEM}.\
+
+\{cTOKEN} ne reconna—t pas seulement les fonctions et
+mots-clefs, mais tous les ≈l≈ments syntaxiques du Basic du
+HP-71. Ainsi, {cTOKEN(",")} est l≈gal, ainsi que
+{cTOKEN("3")}, etc.\
+
+\{cTOKEN} fournit un moyen rapide et pratique pour
+identifier d'≈ventuels conflits entre mots-clefs.\
+.reference
+{iJPC 31} (page 22) premi…re version par Jean-Jacques Moreau.
+
+Manuel du module Forth / Assembler (page 64).
+
+{iInternal Design Specification}, Volume I
+.related
+ENTRY$
+.author
+Jean-Jacques Moreau
+.end keyword
+.end

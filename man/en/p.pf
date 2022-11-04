@@ -1,0 +1,1149 @@
+.language
+A
+
+.keyword
+PAGELEN
+
+.purpose
+{cPAGELEN} (PAGE LENgth) sets the page and text lengths on the
+printer.
+
+.options
+SKI
+
+.syntaxe
+{cPAGELEN
+{cPAGELEN {ipage length
+{cPAGELEN {ipage length{c , {itext length
+
+.examples
+.ex
+IF K=72 THEN PAGELEN ELSE PAGELEN K,K-6 @ PERF ON
+
+.input
+.it
+page length
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 999.
+.it
+text length
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 999.
+.df
+72, 66
+
+.operation
+\{cPAGELEN} is used to set the page size on Hewlett-Packard
+printers.\
+
+\The logical page size is the page length in number of lines. It
+is equal to the product of the line spacing (number of lines per
+inch) and the physical length of the page in inches.\
+
+\For example, with 6 lines per inch (common default value), a 12
+inch page holds 72 lines, an 11 inch page 66 lines.\
+
+\The 12 inch format is more or less equivalent to A4
+international standard. The 11 inch format is used in the
+United States.\
+
+\The text area corresponds to the printable page area. This is
+the number of lines that can be printed before skipping to next
+page if {iperforation skip} mode is enabled. Using a 66 lines
+text area with a 72 lines logical page gives a 6 lines margin
+divided equally between the top and bottom of the page.\
+
+{gThe PAGELEN keyword :}
+
+\{cPAGELEN} has 3 forms :\
+
+\The first one has no parameter. The logical page size is set to
+72 lines, the text area size to 66 lines, and perforation skip is
+enabled.  {cPAGELEN} without parameter is equivalent to :\
+{cPAGELEN 72,66 @ PERF ON}
+
+\The international size is the default one.  If you are using 11
+inch paper, you have only to execute {cPERF ON}, because
+printers generally use a default 11 inch size.\
+
+\The second form has only one parameter : the logical page
+size. It must be noticed that some printers, specially the
+ThinkJet, set a default text area length after receiving the logical page
+size. Consult your printer reference manual.\
+
+\The third form uses two parameters.\
+
+\Note : only the first form enables perforation skip. The other
+ones don't. You can enable it using the statement {cPERF ON}.\
+
+
+{gEscape sequences sent to the printer :}
+
+{cPAGELEN} : {cESC & l 72 p 66 f 1 L}
+{cPAGELEN {ix} : {cESC & l {ix{c P
+{cPAGELEN {ix{c, {iy} : {cESC & l {ix{c P ESC & l {iy{c F
+.references
+{iJPC 26} (page 39) first version by Pierre David.
+
+{iJPC 40} (page 16) second version by Pierre David.
+
+Consult also your printer reference manual.
+
+{cPAGELEN} was previously called {cPL}.
+.related
+PERF
+PFF
+.author
+Pierre David
+.end keyword
+
+.keyword
+PAINT
+
+.purpose
+{cPAINT} turns on a pixel on the HP-71 display and returns its
+value before modification.
+
+.options
+FCKID
+
+.syntaxe
+PAINT ( {ix{c , {iy{c )
+PAINT ( {istate{c , {ix{c , {iy{c )
+
+.examples
+.ex
+C=PAINT(X,Y)
+.co
+Returns the state of the point with coordinates X and Y into C.
+.ex
+10 FOR X=1 TO 132
+20   A=PAINT(1,X,5)
+30 NEXT X
+.co
+Draws an horizontal line on the LCD display.
+
+.input
+.it
+state , x, y
+.de
+Numeric expression rounded to an integer.
+.re
+None.
+
+.operation
+\{cPAINT} is used for graphic applications using the HP-71 internal
+display. This function performs 2 actions :\
+
+\- changes the state of a dot on the screen.  If {istate} is
+zero, the point with coordinates {i(x,y)} is turned off.
+Otherwise, it is turned on.\
+
+\- returns the old state of the point. This is the value returned
+by {cPAINT}.\
+
+\The coordinate origin is in the upper left corner of the display.
+The lower right corner has coordinates {ix} = 131 and {iy} = 7.\
+
+\To draw a line on the display, you can do :{c\
+
+10 FOR X=0 TO 131
+20   C=PAINT(1,X,5)
+30 NEXT X
+.references
+{iJPC 19} (page 25) Forth word to invert the display by 
+Jean-Pierre Bondu.
+
+{iJPC 24} (page 37) first version by Jean-Jacques Moreau.
+
+{iJPC 25} (page 59) Forth word returning the address of a graphic
+column by Jean-Pierre Bondu.
+
+{iTo be published} : second version by Pierre David and Janick
+Taillandier.
+
+{iInternal Design Specification} Volume I, chapter 3.2.1.
+.related
+GDISP
+GDISP$
+INVERSE
+.author
+Pierre David
+Jean-Jacques Moreau
+Janick Taillandier
+.end keyword
+
+.keyword
+PARPOLL
+
+.purpose
+{cPARPOLL} (Parallel PARPOLL) returns the result of an HP-IL loop parallel
+poll.
+
+.options
+FCKI
+
+.syntaxe
+{cPARPOLL}
+{cPARPOLL ( {iloop number{c )
+
+.examples
+.ex
+IF PARPOLL(1) THEN GOSUB 'INTERPT'
+.co
+Executes 'INTERPT' if an enabled peripheral requires service.
+
+.input
+.it
+loop number
+.de
+Numeric expression rounded to an integer.
+.re
+1 through 3.
+.df
+1
+
+.operation
+{gParallel poll :}
+
+\Parallel polls provide the most efficient way of checking the
+status of two or more peripherals. A parallel poll allows up to
+seven devices to notify the controller (HP-71) that they require
+service.\
+
+\Before you can parallel poll a peripheral, your controller must
+enable the parallel poll mode with {cPPE {in} (Parallel Poll
+Enable) frames. The parameter {in} (0 to 7) determines the
+response of the target peripheral when it receives a subsequent
+{cIDY 00} frame. This is the initialization step. This allows up
+to seven peripherals to respond with service request
+simultaneously.\
+
+\{cPARPOLL} sends an {cIDY 00} frame around the loop. If an enabled
+peripheral requires service, it will set bit {in} in the data
+part of the {cIDY} frame, as well as the service request bit. The
+{cIDY 00} thus changes into an {cISR {im} frame, with {im} =
+2{p{^n}.\
+
+\Some peripherals does not have the capability to answer parallel
+polls. Consult your peripheral manual for more informations.\
+
+{gUsing PARPOLL :}
+
+\Suppose, for example, we want to enable peripherals at address 3
+to set bit 4 and peripheral at address 7 to set bit 2, when they
+request service (initialization routine) :{c\
+
+100 SEND UNL UNT   ! Unconfigure the loop
+110 SEND LISTEN 3  ! Makes the peripheral at address 3 a listener
+120 SEND CMD 128+4 ! PPE 4
+130 SEND UNL       ! Unlistens peripheral at address 3
+140 SEND LISTEN 7  ! Makes the peripheral at address 7 a listener
+150 SEND CMD 128+2 ! PPE 2
+160 SEND UNL UNT   ! End of sequence
+
+\}After this initialization, the program can use parallel polls
+:{c\
+
+500 P=PARPOLL
+510 IF BIT(P,4) THEN GOSUB 'DEV3'
+520 IF BIT(P,2) THEN GOSUB 'DEV7'
+
+\}With this code, if either device at loop addresses 3 or 7
+request service, the program will branch to the respective 'DEV3
+or 'DEV7' subroutines.\
+
+{gInterrupting the function with [ATTN] :}
+
+\This function can be interrupted by pressing the {l[ATTN]} key
+twice.  This causes the message {cHPIL ERR:Aborted}.  It may then
+be necessary to execute {cRESTORE IO} to reactivate the HP-IL
+system.\
+.references
+{iJPC 30} (page 50) first version by Jean-Franµois Garnier.
+
+{iJPC 37} (page 33) second version by Jean-Franµois Garnier.
+
+{iThe HP-IL System : An Introductory Guide to the Hewlett-Packard
+Interface Loop}, by Gerry Kane, Steve Harper, and David Ushijima
+(McGraw Hill).
+
+{iThe HP-IL Interface Specification}, part number HP-82166-90017.
+Difficult, but the most precise reference.
+
+{cPARPOLL} was previously called {cPPOLL}.
+.related
+SRQ
+BIT
+SEND
+SPOLL
+.author
+Jean-Franµois Garnier
+.end keyword
+
+.keyword
+PBLIST
+
+.purpose
+{cPBLIST} (Print Basic LIST) produces a structured listing of a
+Basic program on the current printer device.
+
+.options
+SKI
+
+.syntaxe
+PBLIST{c }[{c INDENT {iindentation{c }] [ {cTO {itarget{c }]
+PBLIST {ifile{c }[{c INDENT {iindentation{c }] [ {cTO {itarget{c }]
+PBLIST {ifile{c , {istart line{c }[{c INDENT {iindentation{c }] [ {cTO {itarget{c }]
+PBLIST {ifile{c , {istart line {c, {ifinal line{c }[{c INDENT {iindentation{c }] [ {cTO {itarget{c }]
+
+.examples
+.ex
+PBLIST MYSUB INDENT 3
+.co
+List program MYSUB, from the first to the last line, indenting
+structures by 3 spaces.
+.ex
+PBLIST MYSUB,10
+.co
+List line 10 of program MYSUB, without structures indenting.
+.ex
+PBLIST MYSUB,10,100 INDENT 2 TO LISTE
+.co
+List program MYSUB, from line 10 to line 100, indenting
+structures by 2 spaces. The result is sent to text
+file LISTE.
+
+.input
+.it
+file
+.de
+String expression or unquoted string.
+.re
+File name with optional device specifier.
+.df
+current file.
+.it
+start line
+.de
+Integer constant identiifying a program line.
+.re
+1 È 9999.
+.df
+First program line.
+.it
+final line
+.de
+Integer constant identiifying a program line.
+.re
+Start line through 9999.
+.df
+Start line, if specified ; otherwise, last program line in file.
+.it
+indentation
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 255.
+.df
+0
+.it
+target
+.de
+String expression or unquoted string.
+.re
+File name with optional device specifier.
+.df
+Listing is output on current {lDISPLAY IS{p device.
+
+.operation
+\{cPBLIST} is similar to {cDBLIST}, but the output is directed 
+to the current printer device instead of the display device.\
+
+\Specifying a file whose type is different from Basic produces the
+error : {cInvalid File Type} (error 63).\
+
+\If you specify {istart line} without specifying {iend line},
+only one line is listed as specified. If you specify an interval
+and the specified line numbers do not exist, the listing starts
+with the first line that actually exists after {ifirst line}.
+{cPBLIST} without lines specification lists the entire file.\
+
+\If the printing device is a display device, the current {cDELAY}
+setting determines how long each line will be displayed.\
+
+\The current {cPWIDTH} setting determines the width of the printed
+listing.\
+
+\To halt a listing and display the cursor simply press
+{l[ATTN]}.\
+
+\Note : {cLIST} and {cPLIST} are non-programmable. {cDBLIST} and
+{cPBLIST} overcome this limitation, insofar as Basic program
+files are concerned.\
+.references
+{iJPC 18} (page 25) first version of Basic program JPCLISTE by
+Pierre David and Michel Martinet.
+
+{iJPC 38} (page 24) first version of {cPBLIST} by Jean-Pierre
+Bondu.
+
+{iTo be published} : second version by Pierre David and Janick
+Taillandier.
+.related
+ATTN
+DBLIST
+PLIST
+DELAY
+PWIDTH
+MODE
+}all structured programming statements
+.author
+Pierre David
+Jean-Pierre Bondu
+Janick Taillandier
+.end keyword
+
+.keyword
+PCR
+
+.purpose
+{cPCR} (Print Carriage Return) moves the print head to the
+beginning of the line.
+
+.options
+SKI
+
+.syntaxe
+PCR
+
+.examples
+.ex
+PCR @ PRINT TAB(55);CHR$(124)
+.co
+Moves the print head to the beginning of the line, then prints a
+"|" at column 55.
+
+.operation
+{gCarriage return :}
+
+\{cPCR} sends a carriage return (code 13) to the peripheral
+specified by the {cPRINTER IS} statement, this moves the print
+head to the beginning of the line.\
+
+\The HP-71 keeps in memory the theoretical print head position.
+This value is used by {cTAB} in a {cPRINT} statement.\
+
+\This position is reset to 0 after executing {cPCR}. This allows
+using {cTAB} more effectively.\
+
+\Note : this statement is very useful when you are sending
+printer control codes and escape sequences to your printer, as
+the HP-71 may include such codes and sequences in the character
+count, which would result in incorrect print head information and
+in premature printing of the contents of the print buffer.\
+
+
+{gCodes sent to the printer :}
+
+Character code 13.
+.references
+{iJPC 26} (page 39) first version by Pierre David.
+
+{iJPC 40} (page 16) second version by Pierre David.
+
+Consult the reference manual of your printer.
+
+{cPCR} was previously called {cCR}.
+.related
+PFF
+PLF
+PRINT TAB
+.author
+Pierre David
+.end keyword
+
+.keyword
+PDIR
+
+.purpose
+{cPDIR} (Print DIRectory) prints directory of the specified
+device.
+
+.options
+SKI
+
+.syntaxe
+{cPDIR }[{c TO {itarget{c }]
+{cPDIR {ifile specifier{c [{c TO {itarget{c }]
+{cPDIR ALL }[{c TO {itarget{c }]
+
+.examples
+.ex
+PDIR :TAPE
+.co
+Prints directory of mass storage unit {l:TAPE{p.
+.ex
+PDIR :PORT(0) TO LISTE
+.co
+Prints directory of port number 0 into text file LISTE.
+.ex
+PDIR ALL
+.co
+Prints all files in HP-71.
+.ex
+PDIR ESSAI:TAPE(2) TO A$
+.co
+Prints all files after file ESSAI on mass storage
+unit {l:TAPE(2){p into the file whose name is
+specified by A$.
+
+.input
+.it
+file specifier
+.de
+String expression or unquoted string.
+.re
+Device specifier or file specifier with optional
+device specifier.
+.df
+{l:MAIN
+.it
+target
+.de
+String expression or unquoted string.
+.re
+File specifier with optional device specifier.
+.df
+Listing on {lDISPLAY IS{p device.
+
+.operation
+\The {cPDIR} is identical to that of {cDDIR}
+except the output goes to the print device
+instead of to the display device.\
+
+\However, if an output redirection is specified
+(by {cTO}), there is no differences between {cDDIR}
+and {cPDIR}.\
+.references
+{iTo be published} : first version by Jean-Jacques
+DhÅnin.
+.related
+CAT$
+CAT
+DBLIST
+DDIR
+PBLIST
+.author
+Jean-Jacques DhÅnin
+.end keyword
+
+.keyword
+PEEK$
+
+.purpose
+{cPEEK$} returns the contents of a memory area specified by its
+address.
+
+.options
+FKID
+
+.syntaxe
+{cPEEK$ ( {ihexadecimal address{c , {inumber of nibbles{c )
+
+.examples
+.ex
+A$=PEEK$(ADDR$("EXAMPLE"),2)
+.co
+Stores "54" into variable A$, this is the internal representation
+of the file name first character.
+
+.input
+.it
+hexadecimal address
+.de
+String expression containing hexadecimal digits.
+.re
+Up to five uppercase or lowercase digits.
+.it
+number of nibbles
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 524287.
+
+.operation
+\{cPEEK$} is essentially identical to the standard {cPEEK$} function.
+This version allows you to peek into protected areas.\
+
+\{cPEEK$} is reserved for HP-71 experts. For example, to return
+the current contrast setting, use :\
+
+{cHTD(PEEK$("2E3FE",1))}
+.references
+{iJPC 23} (page 37) first version by Pierre David, Laurent
+Istria and Michel Martinet.
+
+{iInternal Design Specification} volume I, and specially chapter
+3.
+.related
+ADBUF$
+ADDR$
+ENTRY$
+HTA$
+HTD
+PEEK$
+POKE
+.author
+Pierre David
+Laurent Istria
+Michel Martinet
+.end keyword
+
+.keyword
+PERF
+
+.purpose
+{cPERF} enables or disables the {iperforation skip} mode on the
+current printer device.
+
+.options
+SKI
+
+.syntaxe
+{cPERF ON
+{cPERF OFF
+
+.examples
+.ex
+PERF ON
+.co
+Enables the perforation skip mode.
+
+.operation
+{gPerforation skip mode :}
+
+\Hewlett-Packard printers using fanfold paper often have a mode preventing
+them from printing in the perforation area.\
+
+\{cPERF ON} enables this mode. When done, printing the last line
+in a page advances paper to the top of next page. So, no printing
+occurs on the perforations between the two pages.\
+
+\{cPERF OFF} disables this mode.\
+
+
+{gEscape sequences sent to the printer :}
+
+{cPERF ON } : {cESC & l 0 L}
+{cPERF OFF} : {cESC & l 1 L}
+.references
+{iJPC 26} (page 39) first version by Pierre David.
+
+{iJPC 40} (page 16) second version by Pierre David.
+
+Consult also your printer reference manual.
+.related
+PAGELEN
+PLF
+PRINT
+.author
+Pierre David
+.end keyword
+
+.keyword
+PFF
+
+.purpose
+{cPFF} (Print Form Feed) advances paper to the beginning of next
+page.
+
+.options
+SKI
+
+.syntaxe
+PFF
+
+.examples
+.ex
+IF K+L>=N THEN PFF
+.co
+Begins a new page if K+L>=N.
+
+.operation
+{gForm feed :}
+
+\{cPFF} advances the paper on the peripheral selected by the last
+{cPRINTER IS} command to the top of next page. The top of page is
+the beginning of the text area defined by the last {cPAGELEN}
+statement or by the default printer settings.\
+
+
+{gCodes sent to the printer :}
+
+carriage return (character code 13)
+form feed (character code 12)
+.references
+{iJPC 26} (page 39) first version by Pierre David.
+
+{iJPC 40} (page 16) second version by Pierre David.
+
+Consult the reference manual of your printer.
+
+{cPFF} was previously called {cFF}.
+.related
+PAGELEN
+PCR
+PRINTER IS
+.author
+Pierre David
+.end keyword
+
+.keyword
+PGCD
+
+.purpose
+{cPGCD} computes the greatest common divisor of two or more numbers.
+
+.options
+FKIDC
+
+.syntaxe
+{cPGCD ( {iarg{v1{c , {iarg{v2{c )
+{cPGCD ( {iarg{v1{c , {iarg{v2} {c, {iarg{v3{c )
+{c {c }:
+{cPGCD ( {iarg{v1{c , {iarg{v2} {c, {iarg{v3{c ,} ... {iarg{v10{c )
+.examples
+.ex
+A=PGCD(385,210,715)
+.co
+Stores 5 into A.
+
+.input
+.it
+arg{vi{-
+.de
+Numeric expressions.
+.re
+Integer numbers between -10{^12{-+1 and 10{^12{--1.
+
+.operation
+\{cPGCD} returns the greatest common divisor of up to 10 numbers.\
+.references
+{iJPC 35} (page 21) first version of DIVILEX by Guy Toublanc.
+
+{iJPC 38} (page 18) second version by Guy Toublanc.
+
+{iJPC 48} (page 23) third version by Guy Toublanc.
+.related
+DIV
+PPCM
+PHI
+.author
+Guy Toublanc
+.end keyword
+
+.keyword
+PHI
+
+.purpose
+{cPHI} returns the number of relatively prime numbers lower
+than the argument.
+
+.options
+FCKID
+
+.syntaxe
+{cPHI ( {iargument{c )
+
+.examples
+.ex
+A=PHI(251)
+.co
+Stores 250 into A.
+.ex
+A=PHI(999)
+.co
+648
+.ex
+A=PHI(1)
+.co
+1
+
+.input
+.it
+argument
+.de
+Numeric expression.
+.re
+Integer number, non-zero, between -10{^12{-+1 and 12{^12{--1.
+
+.operation
+\{cPHI({ix{c)} is the number of integers between 1 and {ix} that
+are relatively prime to {ix} ; this is the Euler indicator.\
+
+{gInterrupting the function with [ATTN] :}
+
+\This function can be interrupted by pressing 
+{l[ATTN]} twice. The HP-71 will then report the error
+{cJPC ERR:Function Interrupted}.\
+.references
+{iJPC 35} (page 21) first version of  DIVILEX by Guy Toublanc.
+
+{iJPC 38} (page 18) second version by Guy Toublanc.
+
+{iJPC 48} (page 23) third version by Guy Toublanc.
+.related
+PRIM
+NPRIM
+FPRIM
+.author
+Guy Toublanc
+.end keyword
+
+.keyword
+PLF
+
+.purpose
+{cPLF} (Print Line Feed) advances the paper by the number of
+lines specified.
+
+.options
+SKI
+
+.syntaxe
+PLF
+PLF {inumber of lines{c
+
+.examples
+.ex
+IF S THEN PLF
+.co
+Skips a line is S is non-zero.
+.ex
+PLF 10
+.co
+Skips 10 lines.
+
+.input
+.it
+number of lines
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 1048575
+.df
+1
+
+.operation
+\{cPLF} advances the paper on the current {cPRINTER IS}
+device.\
+
+\The paper is advanced by the number of lines specified. If no
+parameter is given, one line is skipped.\
+
+\If the paper reaches the end of the text area defined by either
+the
+last {cPAGELEN} statement or by the default settings of the printer,
+with {iperforation skip} mode enabled, the paper skips to the top
+of next page. Remaining lines, at the bottom of the page, are skipped.\
+
+
+{gCodes sent to the printer :}
+
+Carriage return (character code 13)
+\Line feed (character code 10) as needed.\
+.references
+{iJPC 26} (page 39) first version by Pierre David.
+
+{iJPC 40} (page 16) second version by Pierre David.
+
+Consult the reference manual of your printer.
+
+{cPLF} was previously called {cLF}.
+.related
+PAGELEN
+PERF
+PFF
+PRINT
+.author
+Pierre David
+.end keyword
+
+.keyword
+POKE
+
+.purpose
+{cPOKE} writes to memory at the specified hexadecimal address.
+
+.options
+SKID
+
+.syntaxe
+POKE {ihexadecimal address{c , {idata
+
+.examples
+.ex
+{iBe careful...}
+
+.input
+.it
+hexadecimal address
+.de
+String expression containing hexadecimal digits.
+.re
+Up to five uppercase or lowercase digits.
+
+.it
+data
+.de
+String expression containing hexadecimal digits.
+.re
+None.
+
+.operation
+\{cPOKE} is similar to the standard {cPOKE} command, but does not
+check for file protection.\
+
+\{iWarning} : {cPOKE} is a keyword for experts. Careless use will
+corrupt memory and cause Memory Lost.\
+.references
+{iJPC 23} (page 37) first version by Pierre David, Laurent
+Istria and Michel Martinet.
+
+{iInternal Design Specification}, Volume I specially chapter 3.
+.related
+ADBUF$
+ADDR$
+ATH$
+DTH$
+PEEK$
+POKE
+.author
+Pierre David
+Laurent Istria
+Michel Martinet
+.end keyword
+
+.keyword
+POSI
+
+.purpose
+{cPOSI} (POSition in an Interval) returns the position in a
+string of the first character whose value falls within a
+specified range.
+
+.options
+FKID
+
+.syntaxe
+POSI ( {istring{c , {imin{c )
+POSI ( {istring{c , {imin{c , {imax{c )
+
+.examples
+.ex
+A=POSI("Valeur = 1000 F",48,57)
+.co
+Returns the position of the first digit in the string, because 48
+is the code of "0" and 57 of "9".
+.ex
+A=POSI(A$,"a","z")
+.co
+Returns the position of the first lowercase letter in A$.
+
+.input
+.it
+string
+.de
+String expression.
+.re
+None.
+.it
+min
+.de
+String expression or numeric expression rounded to an integer.
+.re
+If a number, must be between 0 and 255.
+.it
+max
+.de
+String expression or numeric expression rounded to an integer.
+.re
+If a number, must be between 0 and 255.
+.df
+255.
+
+.operation
+\{cPOSI} returns the position in {istring} of the first character
+that falls in the range between {imin} and {imax}.\
+
+\These values can be specified using numeric values, between 0
+and 255, or string expressions. If string expressions are used,
+only the first character is considered, this is similar to
+{cNUM}. A null string is equivalent to 0.\
+
+\If {imax} is not given, the maximum is taken by default.  In
+other words, any code greater than {imin} will be taken into
+account.\
+
+\If {imin} > {imax}, both values are swapped before
+searching.\
+
+\If no character is found, 0 is returned.\
+
+\For example, if you look for an uppercase letter, you can do :\
+
+{cPOSI(A$,65,90)} or {cPOSI(A$,"A","Z")} or {cPOSI(A$,"A",90)}
+
+\To search for a lowercase letter :\
+
+{cPOSI(A$,97,122)} or {cPOSI(A$,"a","z")} or {cPOSI(A$,97,"z")}
+
+\To search for an uppercase or lowercase letter :\
+
+{cPOSI(UPRC$(A$),"A","Z")}
+.reference
+{iJPC 37} (page 25) first version of {cPOSI} by Jean-Pierre
+Bondu.
+
+{iTo be published} : second version by Pierre David and Janick
+Taillandier.
+.related
+POS
+NUM
+.author
+Jean-Pierre Bondu
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+PPCM
+
+.purpose
+{cPPCM} returns the smallest common multiple of all arguments.
+
+.options
+FKIDC
+
+.syntaxe
+PPCM ( {iarg{v1{c , {iarg{v2{c )
+PPCM ( {iarg{v1{c , {iarg{v2{c , {iarg{v3{c )
+{c {c }:
+PPCM ( {iarg{v1{c , {iarg{v2{c , {iarg{v3} ... {iarg{v10{c )
+
+.examples
+.ex
+A=PPCM(385,210,715)
+.co
+returns 30030, the smallest common multiple of 385, 210
+and 715.
+
+.input
+.it
+arg{vi{-
+.de
+Numeric expressions.
+.re
+Integer numbers between -10{^12{-+1 and 10{^12{--1.
+
+.operation
+\{cPPCM} returns the smallest common multiple of all the
+arguments {iarg{vi}.\
+.references
+{iJPC 35} (page 21) first version of DIVILEX by Guy Toublanc.
+
+{iJPC 38} (page 18) second version by Guy Toublanc.
+
+{iJPC 48} (page 23) third version by Guy Toublanc.
+.related
+PGCD
+DIV
+.author
+Guy Toublanc
+.end keyword
+
+.keyword
+PRIM
+
+.purpose
+{cPRIM} returns 0 if a number is prime, or the smallest divisor
+of that number.
+
+.options
+FCKID
+
+.syntaxe
+{cPRIM ( {inumber{c )
+{cPRIM ( {ihigher part{c , {ilower part{c )
+
+.examples
+.ex
+A=PRIM(9999999967)
+.co
+Returns 0 (this is a prime number) in 1'01".
+.ex
+A=PRIM(100071000730,021)
+.co
+Returns 10007 in 11"15, the smallest divisor of
+100071000730021.
+
+.input
+.it
+number
+.de
+Numeric expression.
+.re
+Integer between 1 and 10{^12{--1.
+
+.it
+higher part
+.de
+Numeric expression.
+.re
+Integer between -10{^12{-+1 and 10{^12{--1.
+
+.it
+lower part
+.de
+Numeric expression.
+.re
+Integer between 1 and 999.
+
+.operation
+\{cPRIM} tests if a number is prime, and returns either 0 if it is, or
+the smallest divisor.\
+
+\Numbers are limited to 15 digits precision. If the number falls
+in the 13 to 15 digits range, it must be entered as two
+parameters (see the above example) where :\
+
+{inumber} = {ihigher part} * 1000 + {ilower part}
+
+
+{gInterrupting the function with [ATTN] :}
+
+\This function can be interrupted by pressing 
+{l[ATTN]} twice. The HP-71 will then report the error
+{cJPC ERR:Function Interrupted}.\
+.references
+{iJPC 26} (page 37) first version of {cPRIM} by Olivier Arbey.
+
+{iJPC 35} (page 21) first version of DIVILEX by Guy Toublanc.
+
+{iJPC 38} (page 18) second version by Guy Toublanc.
+
+{iJPC 48} (page 23) third version by Guy Toublanc.
+.related
+PGCD
+NPRIM
+FPRIM
+.author
+Olivier Arbey
+Guy Toublanc
+.end keyword
+.end

@@ -1,0 +1,666 @@
+.language
+A
+
+.keyword
+SELECT ... CASE ... END SELECT
+
+.purpose
+The construct {cSELECT} ... {cCASE} ... {cEND SELECT} provides
+conditional execution of program segments.
+
+.options
+SKID
+
+.syntaxe
+SELECT {iexpression
+  CASE {imatch item
+    {iprogram segment
+  CASE {imatch item
+    {iprogram segment
+   }:
+  }[{c CASE ELSE
+      {iprogram segment} ]
+END SELECT
+
+.examples
+.ex
+10 SELECT E+2
+20   CASE <0
+30     DISP "Positive"
+40   CASE =0
+50     DISP "Zero"
+60   CASE ELSE
+70     DISP "Other" @ BEEP
+80 END SELECT
+.co
+returns a message according to the value of E+2.
+.ex
+10 SELECT E$
+20   CASE "A" TO "Z"
+30     DISP "Uppercase"
+40   CASE ":",";",",","."
+50     DISP "Punctuation"
+60 END SELECT
+.co
+There is no {lCASE ELSE{p. The first choice is an interval type,
+the second one is an enumerated type.
+
+.input
+.it
+expression
+.de
+Numeric or string expression.
+.re
+None.
+.it
+match item
+.de
+See {lCASE{p statement.
+.re
+Must be the same type as the {lSELECT{p expression.
+.it
+program segment
+.de
+Any number of contiguous line.
+.re
+None.
+
+.operation
+\{cSELECT} ... {cEND SELECT} is similar to the 
+{cIF} ... {cTHEN} ... {cELSE} ... {cEND IF} construct, but allows
+{gseveral} conditional program segments to be defined. Only one
+will be executed. Each segment starts after a {cCASE} or {cCASE
+ELSE} statement and ends when the next program line is a 
+{cCASE}, {cCASE ELSE} or {cEND SELECT} statement.\
+
+\The {cSELECT} statement specifies an expression whose value is
+compared to the list of values found in each {cCASE} statement.
+When a match is found, the corresponding program segment is
+executed. The remaining segments are skipped and execution
+continues with the first statement following {cEND SELECT}.\
+
+\All the {imatch item} must be of the same type, (either numeric or
+string) and must agree in type with the corresponding 
+{cSELECT} expression.\
+
+\The optional {cCASE ELSE} statement defines a program segment to
+be executed when the selected expression's value fails to match
+any {imatch item}.\
+
+\Errors encountered in evaluating the {imatch items} are reported
+as having occurred in the corresponding {cSELECT} statement.\
+
+\Program segments may contain other loop or choice structures,
+provided that nesting is correct. Otherwise {cJPC ERR:Structure 
+Mismatch} will be reported.\
+.references
+{iJPC 52} : first version by Pierre David and Janick
+Taillandier.
+
+HP 9000 series 200/300 Basic 4.0. 
+.related
+IF} ... {cTHEN} ... {cELSE} ... {cEND IF
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+SHRINK
+
+.purpose
+{cSHRINK} minimizes the size of a text file in Ram, releasing
+memory that is not used to store text.
+
+.options
+SKID
+
+.syntaxe
+{cSHRINK {ifile
+
+.examples
+.ex
+10 COPY :TAPE TO A$
+20 SHRINK A$
+30 PURGE A$&":TAPE"
+40 COPY A$ TO :TAPE
+.co
+Copy the file whose name is in variable A$, shrinks it, purge it
+from the medium (very important), and copy it back to the
+medium.
+
+.input
+.it
+file
+.de
+String expression or unquoted string.
+.re
+File name with optional device specifier (the device may not be
+an external one).
+
+.operation
+{gThe problem :}
+
+\When text files are stored onto magnetic media, the file size is
+rounded up to a multiple of 256 bytes.\
+
+\If you copy a text file from mass storage and add only one
+character to it, using your favourite editor, its size will grow.
+Then, when you copy it back to mass storage, the new copy will
+have increased by 256 bytes, 255 of which are unused. After you
+repeat this process a few times, as with frequently updated
+files, the file may include thousands of unused bytes. This
+wastes limited available memory.\
+
+\It is also possible to get a text file with unused space if you
+specify a file size with the {cCREATE} command or if you issue a
+{cPRINT #} when the file pointer is in the middle of the file.\
+
+\The unused space is to be found between the end-of-file mark and
+the physical file end.\
+
+{gThe solution :}
+
+\The {cSHRINK} statement returns unused space to available
+memory.\
+
+\The old file must be purged from the mass memory device before
+being copied back onto it, otherwise the old size is
+unchanged.\
+.references
+{iJPC 35} (page 35) first version by Jean-Jacques Moreau.
+.related
+COPY
+EDTEXT
+PURGE
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+SLEEP
+
+.purpose
+{cSLEEP} puts the HP-71 into light sleep mode.
+
+.options
+SKID
+
+.syntaxe
+{cSLEEP
+
+.examples
+.ex
+10 IF NOT KEYDOWN THEN SLEEP
+.co
+puts the HP-71 into light sleep mode if no key is pressed.
+
+.operation
+\Under some conditions, it is necessary to respond quickly
+reactions to distant events. This occurs, for example, in data
+acquisition applications.\
+
+\An HP-71 placed in the deep sleep mode by {cBYE} or {cOFF} needs
+too much time to power on. On the other hand, remaining in the
+run mode wastes power.\
+
+\{cSLEEP} puts the HP-71 in the light sleep mode. The display is kept
+on and HP-IL or keyboard interruptions can be processed quicker.\
+
+\Pressing any key, or any interrupt, will wake the HP-71.\
+.references
+{iJPC 30} (page 50) first version by Jean-Franµois Garnier.
+
+{iJPC 37} (page 33) second version by Jean-Franµois Garnier.
+.related
+BYE
+KEYWAIT$
+OFF
+ON TIMER
+ON INTR
+.author
+Jean-Franµois Garnier
+.end keyword
+
+.keyword
+SPACE$
+
+.purpose
+{cSPACE$} returns a string consisting of the specified number of
+characters or strings.
+
+.options
+FKID
+
+.syntaxe
+{cSPACE$ ( {irepeat{c )
+{cSPACE$ ( {istring{c , {irepeat{c )
+{cSPACE$ ( {icharacter{c , {irepeat{c )
+
+.examples
+.ex
+A$=SPACE$(5)
+.co
+Stores a 5 spaces string into A$.
+.ex
+10 DIM X$[50]
+20 X$=SPACE$('TRIAL',10)
+.co
+Repeats the string "TRIAL" ten times and stores it in X$.
+.ex
+DISP SPACE$(65,20)
+.co
+Displays the character A (code 65) 20 times.
+
+.input
+.it
+repeat
+.de
+Numeric expression rounded to an integer.
+.re
+-1048575 through 1048575.
+.it
+string
+.de
+String expression.
+.re
+None
+.it
+character
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 255.
+
+.operation
+\{cSPACE$} returns a string composed of the specified number of
+characters. If this number is negative or zero, a null string is
+returned.\
+
+\{cSPACE$} is useful in all kinds of text formatting
+applications, to set margins, align columns, center text, and
+more. It can also help initialize string arrays to be used with.\
+
+\{cSPACES$} allows you to repeat any string. This corresponds to
+the second and third forms. In the third case, the string is
+specified by the numeric code of the character.\
+
+\So, {cSPACE$("TRIAL ",3)} returns the string TRIAL TRIAL TRIAL .
+And {cSPACE$(65,2)} returns AA, as 65 is the ASCII code of letter
+A.\
+.references
+{iJPC 21} (page 34) first version of the Basic text formatter by
+Pierre David.
+
+{iJPC 26} (page 50) second version of the Basic text formatter with
+assembly language functions by Pierre David and Michel Martinet.
+.related
+CENTER$
+FORMAT$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+SRQ
+
+.purpose
+{cSRQ} (Service ReQuest) sends a message on the HP-IL loop to
+check whether a peripheral requires service.
+
+.options
+FCKI
+
+.syntaxe
+{cSRQ
+{cSRQ ( {iloop number{c )
+
+.examples
+.ex
+N=SRQ(2) @ IF N THEN GOSUB 'INTERPT'
+.co
+If a peripheral requests service on the second loop, executes the
+specified subprogram.
+
+.input
+.it
+loop number
+.de
+Numeric expression rounded to an integer.
+.re
+1 through 3.
+.df
+1
+
+.operation
+{gService request :}
+
+\The service request is a process which allows peripheral request
+service from the HP-IL controller.\
+
+\For example, the ThinkJet printer signals an "out-of-paper"
+condition using service requests.\
+
+\If the controller (HP-71) sends data ({cDAB}) frames or
+identification messages ({cIDY} frames), the peripheral sets a dedicated
+bit in the frame, to indicate its service request.\
+
+\After receiving the request, the HP-71 will typically query each
+peripheral, one at a time, with the {cSPOLL} function to identify
+the device that is requesting service and to determine the
+problem.\
+
+\{cSRQ} provides a fast method to determine whether some
+peripheral requires service. Unlike parallel poll, it does not
+help identify the device that is requesting service see
+({cPARPOLL}). On the other hand, {cSRQ} does not require an
+initialization routine.\
+
+
+{gThe function :}
+
+\{cSRQ} sends an {cIDY 00} frame on the specified loop, and
+returns the state of the service request bit. The value returned
+by {cSRQ} will be :\
+
+\- 1 if one or more peripheral request service, or\
+\- 0 if no peripheral request service.\
+
+
+{gInterrupting the function with [ATTN] :}
+
+\This function can be interrupted by pressing the 
+{l[ATTN]} key twice. This causes the message
+{cHPIL ERR:Aborted}. It may then be necessary to execute {cRESTORE
+IO} to reactivate the HP-IL system.\
+.references
+{iJPC 30} (page 50) first version by Jean-Franµois Garnier.
+
+{iJPC 37} (page 33) second version by Jean-Franµois Garnier.
+
+{iThe HP-IL System : An Introductory Guide to the Hewlett-Packard
+Interface Loop}, by Gerry Kane, Steve Harper, and David Ushijima
+(McGraw Hill).
+
+{iThe HP-IL Interface Specification}, part number HP-82166-90017.
+Difficult, but the most precise reference.
+.related
+PARPOLL
+SEND
+.author
+Jean-Franµois Garnier
+.end keyword
+
+.keyword
+STACK
+
+.purpose
+{cSTACK} sets the size of the command stack to the specified
+number of levels.
+
+.options
+SKID
+
+.syntaxe
+{cSTACK {inumber of levels
+
+.examples
+.ex
+STACK 15
+.co
+Initialize the command stack to 15 levels.
+
+.input
+.it
+number of levels
+.de
+Numeric expression rounded to an integer.
+.re
+1 through 16.
+
+.operation
+{gThe command stack :}
+
+\The command stack provides a convenient way to reexecute
+keystroke sequences without retyping the entire sequence. In
+the standard HP-71, this stack is limited to only 5 levels.\
+
+{gThe STACK statement :}
+
+\The {cSTACK} statement changes the size of the command stack to
+the specified number of levels.\
+
+\A one level stack maximizes available memory but is not very
+useful as a typing aid. A sixteen level stack can use up to
+1400 bytes of Ram. Also when you use the {cINPUT} or {cLINPUT}
+statements, the {l[v]} key will wrap-around the top of the
+command stack. This is unexpected, and can confuse the user.\
+
+\A 15 level stack is a good compromise, as it saves a maximum of
+keystroke sequences while avoiding unexpected behavior. This is
+the type of command to use in the {cML} program, automatically
+activated after a Memory Lost.\
+.references
+{iUser's Library Solutions - Utilities}, SETCMDST subprogram
+(page 3).
+
+{iJPC 25} (page 57) first version by Michel Martinet.
+
+{iTo be published} : second version by Henri Kudelski.
+.related
+{cINIT 3}
+.author
+Henri Kudelski
+Michel Martinet
+.end keyword
+
+.keyword
+STARTUP$
+
+.purpose
+{cSTARTUP$} returns the {cSTARTUP} command string.
+
+.options
+FKID
+
+.syntaxe
+STARTUP$
+
+.examples
+.ex
+A$=STARTUP$
+.co
+Stores in A$ the command string executed each time the HP-71
+is turned on.
+
+.operation
+\{cSTARTUP$} returns the command string to be executed each time
+the HP-71 is turned on. This string cannot be more than 95 characters
+long.\
+
+\{cSTARTUP$} returns a null string unless you have previously
+stored a command string in the startup buffer with the {cSTARTUP}
+statement.\
+.reference
+{iJPC 25} (page 43) first version by Jean-Jacques Moreau.
+
+{iJPC 31} (page 29) second version by Jean-Jacques Moreau.
+.related
+ENDUP$
+STARTUP
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+SYSEDIT
+
+.purpose
+{cSYSEDIT} (SYStem EDITor) puts the HP-71 into an interactive
+memory editor / disassembler mode.
+
+.options
+SKID
+
+.syntaxe
+{cSYSEDIT {ihexadecimal address
+
+.examples
+.ex
+SYSEDIT "0BD38"
+.co
+Display the memory contents beginning at address 0BD38, i.e. at
+the start of POP1S.
+.ex
+SYSEDIT ADDR$("JPCLEX")
+.co
+Display memory starting at JPCLEX file header.
+
+
+.input
+.it
+hexadecimal address
+.de
+String expression containing hexadecimal digits.
+.re
+Up to 5 uppercase or lowercase digits.
+
+.operation
+\{cSYSEDIT} sets the HP-71 into an interactive memory editor /
+disassembler mode. In this mode, the contents of memory are
+displayed as either hexadecimal characters or as assembler
+instructions or macro-instructions. The display initially looks
+like :\
+
+{c00000:2034EE100060F481}
+
+\The first part is the {iaddress}.\
+\The second part which is separated from the first one by a
+"{c:}" is the contents of memory at that address.\
+
+\The following keystroke sequences allow you to use the
+interactive editor :\
+
+{g[ATTN]} or {g[f][OFF]} - Exits the editor
+\{cSYSEDIT} exit.\
+
+{g[+]}, {g[-]}, {g[*]} or {g[/]} - Moves the editor window
+through memory
+\Operations on the current address, respectively : +1, -1,
++16 et -16. In each case, hexadecimal display mode is turned on
+by default.\
+
+{g[A][1]} to {g[A][8]} - Display memory as ASCII characters
+\Displays the contents of memory as a {cNIBASC} assembler
+instruction. The number following {l[A]} is the number of
+characters you wish to display. Non displayable characters
+(outside the 32 to 126 range) are displayed as a dot.\
+
+{g[N][1]} to {g[N][9]} and {g[N][.][0]} to {g[N][.][6]} -
+Display memory as hexadecimal nibbles
+\Displays the contents of memory as a {cNIBHEX} assembler
+instruction. The number following {l[N]} is the number of
+hexadecimal digits you wish to be displayed. If this number is
+greater than 9, it must be preceded by a dot. For this example,
+{l[N][8]} displays 8 digits, but {l[N][.][6]} displays 16
+digits.\
+
+{g[C][1]} to {g[C][6]} - Display memory as a constant
+\Displays the contents of memory as a {cCON} assembler instruction.
+The number following {l[C]} is the constant number of nibbles
+you wish displayed. If this number is less than 4, the constant
+value is given in decimal form, otherwise it is given in
+hexadecimal form(with a {c#}).\
+
+{g[C][H][1]} to {g[C][H][6]} - Display memory as hexadecimal
+constants
+\This option is the same as the previous one, but the display is
+set to hexadecimal mode.\
+
+{g[R][1]} to {g[R][5]} - Display relative address
+\Display the memory contents as a relative address
+(macro-operation {cREL}). The computed address is always
+displayed in hexadecimal.\
+
+{g[H]} - Hexadecimal mode (default)
+\Set hexadecimal mode : display memory contents as 16 hexadecimal
+digits.\
+
+{g[D]} - Disassembler mode
+\Enter the disassembler mode : display memory contents as
+assembler mnemonics. See {cOPCODE$} for more details about the
+format used to display this information.\
+
+{g[L]} - Load ASCII constant
+\If disassembler mode is active and if the currently disassembled
+instruction is a {cLC({in{c)}, with {in} even, the instruction is
+displayed as a {cLCASC} mnemonic. Non displayable characters, whose code
+is not between 32 and 126) are displayed as a dot.\
+
+{g[F]} - Saving disassembler output
+\Asks for a file name. Thereafter, each time you press
+{l[ENDLINE]}, the contents of the display will be appended to the
+file you specify. The file is created if needed, otherwise the
+pointer is moved to the end of the file. To exit from this mode,
+clear the display with{l[f][-LINE]} and press {l[ENDLINE]}.\
+
+{g[=]} - Direct move
+\If an address is in the display, the editor will branch to the
+address.\
+
+{g[(]} - Move and push address
+\If an address is in the display, the current address is pushed
+on the stack and the editor will branch to the address displayed.
+The stack can contain up to 7 addresses. This allows you to trace
+subroutine calls.\
+
+{g[)]} - Return
+\If the address stack is not empty, pop the last address and
+return the editor to the address specified by the stack.\
+
+{g[ENDLINE]} - Validation
+\If file mode is active this stores the display contents in the
+file, skip the current object and increment the address by the
+length of the object (opcode, characters, relative address,
+constant) being displayed. If the disassembler mode is active,
+displays the mnemonic of the next instruction, otherwise defaults
+to hexadecimal display mode.\
+
+{g[Z]} - Address editing
+\Interactive editing of the address. To store the modifications,
+press {l[ENDLINE]}. To stop without making changes, press
+{l[ATTN]}.\
+
+{g[f][Z]} or {g[M]} - Memory editing
+\Interactive editing of the contents of memory displayed in
+hexadecimal characters. To store any changes, press {l[ENDLINE]}.
+To exit without making any change, press {l[ATTN]}.\
+
+.references
+{iJPC 22} (page 31) first version of a Basic disassembler by
+Michel Martinet.
+
+Not published : first version of {cSYSEDIT} in Basic by Pierre David.
+
+Not published : {cSYSEDIT} by Pierre David and Janick Taillandier.
+
+{iForth / Assembler Owner's Manual} : page 55.
+Good introduction to HP-71 microprocessor instructions.
+
+{iInternal Design Specification} Volume I (Chapter 16).
+Complete and detailed description of the instruction set.
+
+{iInternal Design Specification} Volume III. The way the HP-71
+uses its instructions...
+.related
+ADDR$
+OPCODE$
+PEEK$
+POKE
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.end

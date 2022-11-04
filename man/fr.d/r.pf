@@ -1,0 +1,663 @@
+.language
+F
+
+.keyword
+RED$
+
+.purpose
+{cRED$} enl…ve les espaces en t¡te et en queue de la cha—ne
+fournie en param…tre.
+
+.options
+FKID
+
+.syntaxe
+{cRED$ ( {icha—ne{c )
+
+.examples
+.ex
+A$=RED$("  A b   c  ")
+.co
+Enl…ve les espaces en d≈but et en fin de la cha—ne, mais laisse
+les 3 espaces entre "b" et "c".
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+
+.operation
+\{cRED$} supprime tous les espaces en t¡te et en queue de la
+cha—ne fournie en param…tre.\
+
+\Exemple d'utilisation :{c\
+
+10 DIM C$[50]
+20 I=0
+30 REPEAT
+40   I=I+1
+50   C$=CAT$(I)
+60   C$=RED$(C$[1,8]) ! isole le nom du fichier, enl…ve les espaces
+70   DISP C$
+80 UNTIL LEN(C$)=0    ! jusqu'» plus de nom de fichier
+.reference
+{iJPC 21} (page 31) premi…re version de {cRED$} par Michel
+Martinet.
+
+{iJPC 22} (page 35) deuxi…me version par Michel Martinet et
+Pierre David.
+
+{iJPC 27} (page 34) troisi…me version par Michel Martinet.
+.related
+REDUCE$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+REDUCE$
+
+.purpose
+{cREDUCE$} r≈duit la cha—ne, c'est » dire enl…ve tous les espaces
+superflus.
+
+.options
+FKID
+
+.syntaxe
+{cREDUCE$ ( {icha—ne{c )
+
+.examples
+.ex
+A$=REDUCE$("     P   P     C    ")
+.co
+Enl…ve les espaces en t¡te et en queue de la cha—ne, et r≈duit le
+nombre d'espaces entre les mots » un.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+
+.operation
+\{cREDUCE$} r≈duit une cha—ne, c'est » dire en ¬te tous les
+espaces superflus. Sont consid≈r≈s comme tels :\
+
+\- tous les espaces en d≈but ou en fin de cha—ne,\
+
+\- tous les espaces doubl≈s, tripl≈s, ou plus g≈n≈ralement r≈p≈t≈s
+entre deux mots.\
+.references
+{iJPC 21} (page 34) premi…re version du programme de formattage
+en Basic par Pierre David.
+
+{iJPC 26} (page 50) deuxi…me version du programme en Basic avec
+les fonctions en assembleur par Pierre David et Michel Martinet.
+.related
+CESURE
+RED$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+RENUMREM
+
+.purpose
+{cRENUMREM} (RENUMber REMarks) renum≈rote un programme en tenant
+compte des lignes de remarques.
+
+.options
+SKID
+
+.syntaxe
+RENUMREM
+RENUMREM {inouveau d≈but{c
+RENUMREM {inouveau d≈but{c , {iincr≈ment{c
+RENUMREM {inouveau d≈but{c , {iincr≈ment{c , {iancien d≈but{c
+RENUMREM {inouveau d≈but{c , {iincr≈ment{c , {iancien d≈but{c , {iancienne fin
+
+.examples
+.ex
+RENUMREM 1000,10,1000,2000
+.co
+Renum≈rote le programme » partir de la ligne 1000, de 10 en 10, en
+commenµant » la ligne 1000 jusqu'» la ligne 2000.
+.ex
+RENUMREM
+.co
+Renum≈rote tout le programme » partir de la ligne 10, de 10 en
+10.
+
+.input
+.it
+nouveau d≈but
+.de
+Constante enti…re.
+.re
+1 » 9999.
+.df
+10
+.it
+incr≈ment
+.de
+Constante enti…re.
+.re
+1 » 9999.
+.df
+10
+.it
+ancien d≈but
+.de
+Constante enti…re.
+.re
+1 » 9999.
+.df
+d≈but du fichier.
+.it
+ancienne fin
+.de
+Constante enti…re.
+.re
+1 » 9999.
+.df
+fin du fichier.
+
+.operation
+\Lorsqu'un programme Basic est list≈ avec {cDBLIST} ou {cPBLIST},
+les num≈ros des lignes de remarque ({cREM} ou {c!}) ne sont pas
+imprim≈s. Ceci donne {iapparemment} une num≈rotation quelque peu
+erratique.\
+
+\{cRENUMREM} renum≈rote le programme Basic courant de la m¡me
+mani…re que {cRENUMBER}, mais traite diff≈remment les lignes de
+remarques.\
+
+\Les lignes de remarques sont ˚†coll≈es†˝ le plus possible » la
+ligne pr≈c≈dente, c'est » dire renum≈rot≈es de 1 en 1.
+Ainsi, le programme :{c\
+
+10 PRINT TAB(18);"HP-71"
+30 ! premi…re ligne de commentaire
+40 ! deuxi…me ligne de commentaire
+42 ! troisi…me ligne de commentaire
+45 ! quatri…me ligne de commentaire
+50 IF KEY$="" THEN 50
+
+\}deviendra, apr…s un {cRENUMREM 100,10} : {c\
+
+100 PRINT TAB(18);"HP-71"
+101 ! premi…re ligne de commentaire
+102 ! deuxi…me ligne de commentaire
+103 ! troisi…me ligne de commentaire
+104 ! quatri…me ligne de commentaire
+110 IF KEY$="" THEN 110
+
+\}Les lignes de commentaires ont ≈t≈ {itass≈es} contre la ligne
+100. La ligne 100 et 110 sont bien num≈rot≈es. Ce programme,
+list≈ par {cDBLIST} ou {cPBLIST} donnera :{c\
+
+ 100 PRINT TAB(18);"HP-71"
+   - premi…re ligne de commentaire
+     deuxi…me ligne de commentaire
+     troisi…me ligne de commentaire
+     quatri…me ligne de commentaire
+ 110 IF KEY$="" THEN 110
+
+\}Ceci rend les programmes plus faciles » taper sans les
+commentaires, et le listage est bien plus lisible.\
+.references
+{iJPC 18} (page 25) premi…re version du programme JPCLISTE en
+Basic par Pierre David et Michel Martinet.
+
+{iJPC 38} (page 24) premi…re version de {cRENUMREM} par
+Jean-Pierre Bondu.
+.related
+DBLIST
+PBLIST
+RENUMBER
+.author
+Jean-Pierre Bondu
+.end keyword
+
+.keyword
+REPEAT ... UNTIL
+
+.purpose
+{cREPEAT} ... {cUNTIL} (R≈p≈ter ... jusqu'») d≈finit une boucle
+qui est r≈p≈t≈e jusqu'» ce que l'expression dans {cUNTIL} soit
+vraie.
+
+.options
+SKID
+
+.syntaxe
+REPEAT
+  {isegment de programme
+{cUNTIL {iexpression logique
+
+.examples
+.ex
+10 REPEAT
+20   CALL AA(I,N)
+30   I=I+1
+40 UNTIL I+2>N
+.co
+Ex≈cute le sous programme "AA" jusqu'» ce que la condition soit
+vraie.
+.ex
+10 DATA FICHIER1,ESSAI,EXEMPLE,
+20 REPEAT
+30   READ F$
+40   DISP F$
+50 UNTIL F$=""
+.co
+Lit les donn≈es et les affiche, jusqu'» ce qu'il n'y en ait
+plus (la derni…re {lDATA{p est vide).
+
+.input
+.it
+segment de programme
+.de
+Tout nombre de lignes de programme contiguÕs.
+.re
+Aucune.
+.it
+expression logique.
+.de
+Expression num≈rique ≈valu≈e comme vraie si diff≈rente de 0.
+.re
+Aucune.
+
+.operation
+\La boucle {cREPEAT} ... {cUNTIL} ex≈cute le {isegment de
+programme} de mani…re r≈p≈titive, jusqu'» ce que l'expression
+situ≈e dans le {cUNTIL} soit vraie, c'est » dire non nulle.\
+
+\L'ex≈cution commence au premier ordre suivant le {cREPEAT}, et
+continue jusqu'au {cUNTIL} oÀ un test est effectu≈.  Si le test
+est faux, un branchement est r≈alis≈ » l'ordre suivant
+imm≈diatement le {cREPEAT}.\
+
+\Quand le test conditionnel est vrai, l'ex≈cution du programme
+continue au premier ordre suivant le {cUNTIL}.\
+
+\La boucle est effectu≈e au moins une fois.\
+
+\L'ordre {cLEAVE} peut ¡tre utilis≈ pour sortir pr≈matur≈ment (et
+proprement) de la boucle.\
+
+\Le segment de programme peut lui-m¡me contenir des structures de
+type boucle ou choix. L'emboitement doit ¡tre correct, sinon
+l'erreur {cJPC ERR:Structure Mismatch} est renvoy≈e.\
+.references
+{iJPC 31} (page 38) premi…re version par Janick Taillandier.
+
+{iJPC 52} (page 10) deuxi…me version par Pierre David et Janick
+Taillandier.
+
+Basic 4.0 pour HP 9000 s≈ries 200/300.
+.related
+LEAVE
+LOOP} ... {cEND LOOP
+WHILE} ... {cEND WHILE
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+REPLACE$
+
+.purpose
+{cREPLACE$} remplace une cha—ne par une autre dans la cha—ne
+sp≈cifi≈e, avec ou sans les conventions de l'≈diteur de
+textes HP.
+
+.options
+FKID
+
+.syntaxe
+{cREPLACE$ ( {icha—ne{c , {imotif1{c , {imotif2{c )
+{cREPLACE$ ( {icha—ne{c , {imotif1{c , {imotif2{c , {id≈but{c )
+{cREPLACE$ ( {icha—ne{c , {imotif1{c , {imotif2{c , {ijoker{c )
+
+.examples
+.ex
+REPLACE$ ("A B   D   E F   "," ","")
+.co
+Enl…ve tous les espaces dans la cha—ne sp≈cifi≈e, et renvoie donc
+la cha—ne "ABCDEF".
+.ex
+REPLACE$ ("ABxCDxEF", ".x", "", ".")
+.co
+Affiche la cha—ne "ACEF".
+.ex
+A$=REPLACE$("X1 X2 X3","X\.","X")
+.co
+Place la cha—ne "X X X" dans la variable A$.
+.ex
+A$=REPLACE$("X1 X2 X3","X\.","X",3)
+.co
+Place la cha—ne "X1 X X" dans la variable A$, c'est » dire
+la cha—ne originale trait≈e » partir du 3{^…me{-
+caract…re.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+motif1
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+motif2
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+d≈but
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 1048575.
+.df
+1
+.it
+joker
+.de
+Expression alphanum≈rique.
+.re
+Cha—ne vide ou non vide.
+
+.operation
+\{cREPLACE$} remplace, dans la cha—ne {icha—ne}, toutes les
+occurences de la cha—ne {imotif1} par la cha—ne {imotif2}.\
+
+\{cREPLACE$} d≈finit des conventions lors du
+remplacement. Elles sont identiques » celles de l'≈diteur de
+textes {cEDTEXT} des modules {iEditeur de Textes},
+{iForth / Assembleur} ou {iTranslator Pac}.\
+
+\Ces conventions comprennent des caract…res sp≈ciaux qui
+permettent des op≈rations plus ≈volu≈es. Ces caract…res sont {c.},
+{c@}, {c&}, {c^} et {c$}. Ils prennent leur signification
+particuli…re lorsqu'ils sont pr≈c≈d≈s par le caract…re {c\}. Pour
+retourner » la signification normale des caract…res, il faut un
+deuxi…me {c\}. Deux caract…res {c\} cons≈cutifs sont consid≈r≈s
+comme un simple caract…re {c\}, et non comme deux bascules.{l\
+
+Caract…re Signification
+--------- -------------------------------------------------
+   .      Caract…re quelconque
+   @      Nombre ind≈termin≈ de caract…res quelconques
+   &      Le texte de {imotif1{l quand employ≈ dans {imotif2{l
+   ^      D≈but de ligne  (doit ¡tre en d≈but de {imotif1{l)
+   $      Fin de ligne (doit ¡tre en fin de {imotif1{l)
+
+
+\}Le param…tre {id≈but} sp≈cifie » partir de quel caract…re de
+{icha—ne} la recherche et la substitution doivent commencer.  Par
+d≈faut, {imotif1} est cherch≈ dans toute la cha—ne {icha—ne}.\
+
+\Si la cha—ne {ijoker} est pr≈sente et non nulle, elle repr≈sente
+un caract…re quelconque de {imotif1}. Dans ce cas, les
+caract…res sp≈ciaux de l'≈diteur de texte HP sont
+neutralis≈s.\
+.references
+{iJPC 23} (page 34) premi…re version par Michel Martinet.
+
+{iJPC 35} (page 28) premi…re version de {cRPLC$} par Jean-Jacques
+Moreau.
+
+Manuel de l'≈diteur de textes.
+
+{cREPLACE$} inclut les fonctionnalit≈s de l'ancienne
+fonction {cRPLC$}.
+.related
+MAP
+MAP$
+.author
+Michel Martinet
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+ROMAN
+
+.purpose
+{cROMAN} valide le jeu de caract…res ≈tendu {iRoman}.
+
+.options
+SKID
+
+.syntaxe
+{cROMAN ON
+{cROMAN OFF
+
+.examples
+.ex
+10 SUB ML
+20   ROMAN ON
+30 END SUB
+.co
+Apr…s une r≈initialisation de la m≈moire (Memory Lost),
+valide le jeu de caract…res ≈tendu Roman.
+
+.operation
+{gLe jeu de caract…res Roman}
+
+\Les imprimantes Hewlett-Packard ou les interfaces vid≈o
+admettent g≈n≈ralement la possibilit≈ d'utiliser des
+caract…res accentu≈s. Pour cela, il faut utiliser le jeu de
+caract…res baptis≈ {iRoman}.\
+
+\Pour imprimer le caract…re "≈" sur une imprimante ThinkJet
+ou LaserJet par exemple, il suffit de faire :\
+
+{cPRINT CHR$(201)}
+
+\La table suivante r≈sume le jeu de caract…re ≈tendu
+{iRoman}.{l\
+
+   0   1   2   3   4   5   6   7   8   9   A   B   C   D   E   F
+
+0              0   @   P   ©   p               ∞   ¿   –   ‡   
+1          !   1   A   Q   a   q           °       ¡   —   ·   Ò
+2          "   2   B   R   b   r           ¢       ¬   “   ‚    
+3          #   3   C   S   c   s           £   ≥   √   ”   „    
+4          $   4   D   T   d   t           §   ¥   ƒ   ‘   ‰    
+5          %   5   E   U   e   u           •   µ   ≈   ’   Â    
+6          &   6   F   V   f   v           ¶   ∂   ∆   ÷   Ê   ˆ
+7          ®   7   G   W   g   w           ß   ∑   «   ◊   Á   ˜
+8          (   8   H   X   h   x           ®   ∏   »   ÿ   Ë   ¯
+9          )   9   I   Y   i   y           ©   π   …   Ÿ   È   ˘
+A          *   :   J   Z   j   z           ™   ∫       ⁄   Í   ˙
+B          +   ;   K   [   k   {{           ´   ª   À   €   Î   ˚
+C          ,   <   L   \   l   |           ¨   º   Ã   ‹   Ï   ¸
+D          -   =   M   ]   m   }}           ≠   Ω   Õ   ›   Ì   ˝
+E          .   >   N   ^   n   ~           Æ   æ   Œ   ﬁ   Ó   ˛
+F          /   ?   O   _   o               Ø   ø   œ   ﬂ   Ô   ˇ
+
+
+\}La premi…re moiti≈ de la table est l'alphabet ASCII
+standard (voir la fonction {cASC$}). La deuxi…me est appel≈e
+{iExtension romane}.\
+
+\Dans les deux moiti≈s, on remarque que les deux premi…res
+colonnes ne sont pas utilis≈es. Ce sont les caract…res de
+contr¬le.\
+
+
+{gLe jeu de caract…res du HP-71}
+
+\Le HP-71 ne conna—t que la premi…re moiti≈ de la table
+ci-dessus. Il repr≈sente les caract…res de la deuxi…me
+moiti≈ par des caract…res de la premi…re, » moins
+que vous n'ayez d≈fini ces caract…res (selon vos
+d≈sirs) » l'"aide de l'ordre {cCHARSET} standard.\
+
+\L'exemple d'impression ci-dessus fonctionne que vous ayez
+fait {cROMAN ON} ou
+non. Dans ce cas, c'est l'imprimante qui reconna—t le caract…re.
+En revanche, votre HP-71 affichera un caract…re sans aucun
+raport avec "≈" si vous n'avez pas fait {cROMAN ON}.\
+
+\L'utilisation de {cROMAN†ON} permet d'avoir les caract…res
+accentu≈s {i» l'≈cran} du HP-71.\
+
+\Si vous aviez d≈fini des caract…res » l'aide de
+{cCHARSET}, ils seront r≈activ≈s lorsque vous
+ferez {cROMAN†OFF}.\
+
+
+{gAu clavier}
+
+\Dans les programmes que vous rentrez, vous pouvez utiliser
+des caract…res accentu≈s sous la forme {cCHR$(}...{c)}.
+Cependant, il est plus facile et plus lisible de vous cr≈er
+des d≈finitions de touches. Par exemple, pour faire le
+journal, nous utilisons les d≈finitions suivantes :{c\
+
+DEF KEY 'fW', CHR$(197);      }≈{c
+DEF KEY 'fE', CHR$(193);      }¡{c
+DEF KEY 'fR', CHR$(201);      }…{c
+DEF KEY 'fY', CHR$(203);      }À{c
+DEF KEY 'fU', CHR$(195);      }√{c
+DEF KEY 'fI', CHR$(209);      }—{c
+DEF KEY 'fO', CHR$(194);      }¬{c
+DEF KEY 'f/', CHR$(92);       }\{c
+DEF KEY 'fA', CHR$(192);      }¿{c
+DEF KEY 'fS', CHR$(200);      }»{c
+DEF KEY 'fD', CHR$(205);      }Õ{c
+DEF KEY 'fJ', CHR$(207);      }œ{c
+DEF KEY 'fK', CHR$(221);      }›{c
+DEF KEY 'f*', CHR$(124);      }|{c
+DEF KEY 'fC', CHR$(181);      }µ{c
+
+\}Notez le point virgule apr…s les d≈finitions et l'absence
+de guillemets autour de {cCHR$(}...{c)}. Cela a pour effet
+d'introduire le caract…re et non la cha—ne {cCHR$(}...{c)}.
+Il nous suffit donc d'appuyer sur la touche {l[f][W]} pour
+avoir un "≈" » l'affichage.\
+
+
+{gPour r≈sumer}
+
+\Les imprimantes HP utilisent le jeu de caract…res {iRoman}.\
+
+\{cROMAN†ON} remplace le jeu de caract…res (de
+codes sup≈rieurs » 128) par l'extension
+{iRomane}.\
+
+\Les d≈finitions de touches permettent de faciliter
+l'introduction au clavier des caract…res {iRoman}.\
+
+\{cROMAN†OFF} enl…ve l'extension {iRomane} et
+active le pr≈c≈dent jeu de caract…res.\
+.references
+{iJPC 35} (page 8) premi…re version de CHARLEX par Pierre
+David.
+
+{iA para—tre} : premi…re version de {cROMAN} par Pierre David
+et Janick Taillandier.
+
+Consultez en outre le manuel de votre imprimante.
+.related
+ASC$
+CHARSET$
+CHARSET
+CHR$
+DEF KEY
+NUM
+MAP
+MAP$
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+RREC$
+
+.purpose
+{cRREC$} (Read RECord) lit un enregistrement sur le support de
+m≈moire de masse indiqu≈.
+
+.options
+FKI
+
+.syntaxe
+{cRREC$ ( {iadresse{c , {isp≈cificateur de p≈riph≈rique{c )
+
+.examples
+.ex
+DIM A$[256]
+A$=RREC$(2,":TAPE")
+.co
+Lit le premier enregistrement de la partie r≈pertoire du support.
+.ex
+A$=RREC$(2,".VOLLBL:2")
+.co
+Lit le deuxi…me enregistrement du support rep≈r≈ par le
+volume label VOLLBL sur la deuxi…me boucle HP-IL.
+
+.input
+.it
+adresse
+.de
+Expression num≈rique arrondie » un entier, ou expression
+alphanum≈rique contenant des nombres hexad≈cimaux repr≈sentant
+une adresse sur le support.
+.re
+Valeur comprise entre 0 et la taille maximum du support.
+.it
+sp≈cificateur de p≈riph≈rique
+.de
+Expression num≈rique ou alphanum≈rique.
+Voir les definitions standard HP-IL.
+.re
+Ne peut pas ¡tre une cha—ne non comprise entre guillemets.
+
+.operation
+\L'unit≈ de base des transferts entre HP-71 et unit≈ de m≈moire de
+masse est le {isecteur}, ou bloc de 256 octets.\
+
+\{cRREC$} lit les 256 octets d'un enregistrement du support.\
+
+
+{gInterruption par [ATTN] :}
+
+\Cette fonction est interruptible par deux appuis successifs sur
+la touche {l[ATTN]}. Le HP-71 affiche alors le message d'erreur
+{cHPIL ERR:Aborted}. Il peut ¡tre n≈cessaire d'ex≈cuter {cRESTORE
+IO} pour r≈activer le syst…me HP-IL.\
+.references
+{iJPC 45} (page 15) premi…re version par Michel Martinet.
+
+Manuel d'utilisation du lecteur de cassettes num≈riques
+HP-82161A.
+
+Manuel du module HP-IL pour le HP-71, chapitre 3 et annexe D.
+.related
+ENTER
+WREC
+.author
+Michel Martinet
+.end keyword
+.end

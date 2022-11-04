@@ -1,0 +1,8 @@
+
+if [ $# != 1 ]
+then
+    echo "usage: $0 <fichier garde>" >&2
+    exit 1
+fi
+
+pf -e -fgarde.font $1 | imp -h230 -l175 -m25 

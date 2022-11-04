@@ -1,0 +1,493 @@
+.language
+A
+
+.keyword
+EDIT
+
+.purpose
+{cEDIT} allows merging of Lex files, or editing files on external
+peripherals. {cEDIT} is nonprogrammable.
+
+.options
+SK
+
+.syntaxe
+{cEDIT
+{cEDIT {ifile1
+{cEDIT {ifile1{c TO {ifile2}
+
+.examples
+.ex
+EDIT AREUH:TAPE
+.co
+File AREUH is copied from :TAPE to main memory, and becomes
+current file.
+.ex
+EDIT AREUH:TAPE TO TOTO:PORT(0)
+.co
+File AREUH is copied from :TAPE to :PORT(0), changes its
+name and becomes current file.
+.ex
+EDIT STRINGLX
+.co
+Edit Lex file STRINGLX.
+
+.input
+.it
+file1
+.de
+String expression or unquoted string.
+.re
+File name with optional external device specifier.
+.df
+System workfile
+.it
+file2
+.de
+String expression or unquoted string.
+.re
+The device specifier must be in Ram.
+.df
+File with same name in main Ram.
+
+.operation
+{gCopying and editing files :}
+
+\If the first file specifier indicates an external mass memory device,
+the file is first copied into the HP-71.\
+
+\If a second file specifier is provided, the first file is copied into
+it. Then the file is made the current workfile.\
+
+\So {cEDIT} on external files is similar to 
+{cCOPY} followed by a standard {cEDIT} on this file.\
+
+\If the type of the copied file is invalid (i.e. different from
+Basic, Keys or Lex), the copy is done and 
+{cERR:Invalid Filetype} is reported.\
+
+
+{gChaining Lex files :}
+
+\The edited file can be a Lex file. This  is the first step in
+linking Lex files. See {cMERGE} for further details.\
+
+
+{gCaution !}
+
+\When you edit a Lex file, it becomes the current workfile. If you
+execute a {cPURGE} command on this file, the workfile is not changed
+to the standard {cworkfile} ; instead it leads to strange results.\
+
+\To prevent this be sure to do an {cEDIT} to edit the system
+workfile after you finish merging (linking) Lex files.\
+
+.references
+{iJPC 31} (page 54) editing files on external peripherals by
+Jean-Pierre Bondu.
+
+{iJPC 23} (page 47) Basic program to merge Lex files by
+Michel Martinet.
+
+{iJPC 37} (page 22) assembly language merging of Lex files by
+Pierre David and Michel Martinet.
+.related
+COPY
+EDIT
+MERGE
+.author
+Jean-Pierre Bondu
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+ENDUP
+
+.purpose
+{cENDUP} defines a command string to be executed when the HP-71
+turns off.
+
+.options
+SKID
+
+.syntaxe
+{cENDUP {icommand string{c
+
+.examples
+.ex
+ENDUP "BEEP@'Bye...'"
+.co
+The HP-71 will beep and display "Bye..." each time it turns off.
+
+.input
+.it
+command string
+.de
+String expression.
+.re
+0 through 95 characters.
+
+.operation
+\The {cENDUP} command string can include any instruction
+you wish, provided that it can be executed from the keyboard.\
+
+\When you execute {cENDUP}, the command string is stored without
+checking for syntactical errors. The computer may have only 
+one {cENDUP} string at any given time.
+When you turn the HP-71 off, the {cENDUP} string is executed if it
+is error free. Otherwise, an error is reported and the computer is 
+left in a state such that you have only to push on {l[ATTN]} to turn it
+off.\
+
+\The specified string is kept in a buffer. See
+{cADBUF$} for more informations on buffers and their use.\
+
+\Note : the string specified by {cENDUP} is not executed when the
+HP-71 is turned off in CALC mode or within {cKA}.\
+.references
+{iJPC 25} (page 43) first version by Jean-Jacques Moreau.
+
+{iJPC 31} (page 29) second version by Jean-Jacques Moreau.
+.related
+ADBUF$
+ENDUP$
+STARTUP$
+STARTUP
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+ENDUP$
+
+.purpose
+{cENDUP$} returns the command string specified in {cENDUP}.
+
+.options
+FKID
+
+.syntaxe
+ENDUP$
+
+.examples
+.ex
+A$=ENDUP$
+.co
+Stores into A$ the command string to be executed when the HP-71 is
+powered off.
+
+.operation
+\{cENDUP$} returns the command string to be executed when the HP-71 is
+powered off. The length of this string cannot be greater than 95
+characters.\
+
+\If no command has been specified by {cENDUP}, {cENDUP$}
+returns a null string.\
+.references
+{iJPC 25} (page 43) first version by Jean-Jacques Moreau.
+
+{iJPC 31} (page 29) second version by Jean-Jacques Moreau.
+.related
+ENDUP
+STARTUP
+STARTUP$
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+ENTRY$
+
+.purpose
+{cENTRY$} (entry point) returns the entry point address for the specified
+keyword.
+
+.options
+FKID
+
+.syntaxe
+{cENTRY$ ( {ikeyword{c )
+{cENTRY$ ( {ikeyword{c , {isequence{c )
+
+.examples
+.ex
+A$=ENTRY$("ENTRY$")
+.co
+Stores execution address of {lENTRY${p in variable A$.
+.ex
+DISP ENTRY$("EDIT",2)
+.co
+Returns the address of the second {lEDIT{p, i.e. system {lEDIT{p.
+Lex files are searched before standard functions.
+
+.input
+.it
+keyword
+.de
+String expression.
+.re
+The keyword must exist.
+.it
+sequence
+.de
+Numeric expression rounded to an integer.
+.re
+The keyword must exist.
+.df
+1
+
+.operation
+\{cENTRY$} returns the entry point address of the specified function
+or statement. This address is equivalent to the start address
+of the run-time execution code.\
+
+\{cENTRY$}  is specially useful when used with the Debugger
+(HP-82178A) to easily locate entry points.\
+
+\Caution : files in HP-71 main memory are frequently moved.
+For example, if a file is purged or its size changed and if 
+it is located before the Lex file containing the function, the entry
+point address will change. You can avoid these problems by
+keeping code under study in independent Ram.\
+
+\The entry point is the address of the execution code, or
+the address specified by the {cENTRY} pseudo-op used by the HP-71
+Forth / Assembler Rom.\
+
+\If a second parameter is provided, {cENTRY$} looks for the function
+in all available Lex files. This includes all functions
+provided by the built-in operating system.\
+
+\If the keyword does not exist or if the sequence number is
+greater than the number of times the keyword occurs in your
+HP-71, {cENTRY$} will return the
+{cERR:Invalid Arg} error.\
+
+\For keywords of more than 8 characters in length, special processing is 
+required from the system. So, keywords like {cUNDERLINE} or 
+{cRANDOMIZE} are recognized as {cUNDERLIN} or {cRANDOMIZ}.
+The final "E" is processed by the function itself. {cENTRY$}
+cannot process these extra characters. {cENTRY} recognizes
+{cUNDERLIN} and does not take care of the "E". So, {cENTRY$("RANDOMIZE")}
+and {cENTRY$("RANDOMIZ----")} ignore extra characters and return 
+the same address.\
+
+\The keyword found is the longest keyword corresponding to the
+characters specified, others are ignored. So,
+{cENTRY$("MEMORY")} returns the entry point address of function
+{cMEM}.\
+
+.references
+{iJPC 31} (page 22) first version by Jean-Jacques Moreau.
+
+{iForth/Assembler Rom Owner's Manual} (page 63).
+
+{iInternal Design Specification}, Volume I.
+.related
+ADDR$
+LEX
+PEEK$
+TOKEN
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+ESC$
+
+.purpose
+{cESC$} (ESCape) returns the string with a leading "escape" character.
+
+.options
+FKID
+
+.syntaxe
+{cESC$
+{cESC$ ( {istring{c )
+
+.examples
+.ex
+PRINT ESC$("Y")
+.co
+Puts a printer such as the ThinkJet into monitor mode : all characters received will be
+printed.
+.ex
+PRINT ESC$("*b80W")&G$
+.co
+Sends a graphic line to a ThinkJet or LaserJet.
+.ex
+DISP ESC$&"j";
+.co
+Enables the Roman8 character set on an HP92198B video interface.
+
+.input
+.it
+string
+.de
+Alphanumeric expression.
+.re
+None.
+.df
+Null string.
+
+.operation
+{gEscape sequences :}
+
+\Escape sequences are used by most computers to control
+peripherals. For example, the HP-71 uses escape sequences to
+control the internal LCD display and with HP-IL peripherals.\
+
+\An escape sequence is prefixed by a character "escape" or {iESC} 
+(code 27). It is recognized by the peripheral as the beginning
+of a command and not as normal data.\
+
+\The {iESC} code is followed  by a string coding the command.
+If the peripheral recognizes it, it will respond
+accordingly.\
+
+\For example, with a ThinkJet, if you execute :\
+{cPRINT "THE HP-71";}
+\the printer will print "THE HP-71". Now, if you try :\
+{cPRINT CHR$(27)&"&dD";}
+\the printer will interpret the 4 characters as a command to enter
+underline mode, the characters will not be printed. This is an escape
+sequence.\
+
+\You don't have to remember the most frequently used escape
+sequences
+for the ThinkJet. You can use statements like
+{cBOLD}, {cPAGELEN}, {cUNDERLINE} or {cWRAP}.\
+
+
+{gThe ESC$ function :}
+
+\The {cESC$} function adds an {iescape} character before the specified
+string. If no string is specified, {cESC$} is equivalent to 
+{cCHR$(27)}.\
+.references
+{iJPC 26} (page 39) first version by Pierre David.
+
+{iJPC 40} (page 16) second version by Pierre David.
+
+Consult the reference manuals of your peripherals...
+.related
+BOLD
+CHR$
+PAGELEN
+UNDERLINE
+WRAP
+.author
+Pierre David
+.end keyword
+
+.keyword
+EXECUTE
+
+.purpose
+{cEXECUTE} executes the specified command string and stops program
+execution.
+
+.options
+SKD
+
+.syntaxe
+{cEXECUTE {icommand string{c
+
+.examples
+.ex
+10 EXECUTE "FREEPORT(0)@RUN,'A'"
+20 'A':
+.co
+Switches port 0 to independent Ram and resumes execution at label 'A'.
+
+.input
+.it
+command string
+.de
+Alphanumeric expression.
+.re
+0 through 95 characters.
+
+.operation
+\{cEXECUTE} executes the {icommand string} and stops program
+execution.\
+
+\This allows "programming" of some non-programmable functions.\
+
+\{cEXECUTE} should never be used in a subprogram or loop and
+choice structures such as {cLOOP}, {cIF} or {cSELECT} : it
+destroys calling environments.\
+
+\The programme is considered as {iexecuting} until the whole
+string has been executed. This allows using {cCONT} to resume
+programme execution.\
+.references
+{iJPC 31} (page 29) second version of ENDUPLEX by Jean-Jacques
+Moreau.
+.related
+ENDUP
+STARTUP
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+EXIT
+
+.purpose
+{cEXIT} allows orderly exits from a {cFOR} ... {cNEXT} loop.
+
+.options
+SKID
+
+.syntaxe
+{cEXIT {iloop variable
+
+.examples
+.ex
+10 FOR I=1 TO INF
+20   IF FNC(I) THEN EXIT I
+30 NEXT I @ BEEP
+.co
+Exits the {lFOR ... NEXT{p loop and resumes execution at the instruction
+that follows {lNEXT I} ({lBEEP}) if {lFNC(I){p is different from 0.
+
+.input
+.it
+loop variable
+.de
+Simple numeric variable.
+.re
+None.
+
+.operation
+\{cEXIT} exits conveniently from a {cFOR} ... {cNEXT} loop.
+Information necessary to control the loop is cleared.\
+
+\Normal loop exit is through statement {cNEXT} when the loop counter
+exceeds the final value specified.\
+
+\On some occasions it is useful to exit a loop prematurely,
+whenever special conditions are met. {cEXIT} provides an elegant
+solution for handling such situations. For example the
+following programs compute 10 squared roots, unless an argument
+is negative :{c\
+
+10 DATA 1,2,3,4,5,-6,7,8,9,10
+20 FOR I=1 TO 10
+30   READ X
+40   IF X<0 THEN EXIT I
+50   DISP SQRT(X)
+60 NEXT I
+70 DISP 'Ended'
+.references
+{iJPC 30} (page 49) first version by Janick Taillandier.
+.related
+FOR} ... {cNEXT
+LEAVE
+.author
+Janick Taillandier
+.end keyword
+.end
+

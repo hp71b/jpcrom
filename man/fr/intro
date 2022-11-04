@@ -1,0 +1,56 @@
+^{hINTRODUCTION}
+
+
+
+
+
+
+
+\Ce document est le manuel de JPC†Rom. Il s'agit d'un outil
+de r≈f≈rence pour les utilisateurs de JPC†Rom. L'utilisateur
+est suppos≈ ¡tre d≈j» familiaris≈ avec le fonctionnement du
+HP-71 et la programmation en langage Basic.\
+
+\JPC†Rom combine plus de 130 nouveaux mots-clefs dans
+un seul fichier de 44 Ko. Ceci apporte les extensions les plus utiles,
+et augmente la performance globale du HP-71.\
+
+\Ce fichier Lex est constitu≈ par les contributions
+des membres
+de PPC-Paris. 
+Tout ce travail a ≈t≈ accompli par des membres b≈n≈voles.\
+
+\Ce manuel repr≈sente, » lui seul, une somme de travail
+colossale. Toutes les remarques, suggestions ou critiques visant
+» am≈liorer son contenu seront bienvenues. Il a ≈t≈ r≈alis≈ par
+Pierre David, Jean-Jacques Dh≈nin, Michael Markov et Janick Taillandier.\
+
+\Pr≈cisons enfin que toute l'impression a ≈t≈ faite par un HP-71
+et une imprimante LaserJet.\
+
+\Nous esp≈rons que vous appr≈cierez le r≈sultat. N'h≈sitez » nous
+faire part de vos r≈flexions :\
+
+
+     PPC Paris
+     B.P. 604
+     75028 Paris Cedex 01
+     France
+
+
+
+
+
+
+
+\{pPPC Paris n'offre aucune garantie en ce qui concerne
+les proc≈dures d≈crites, le contenu de cette biblioth…que ou
+l'application de ces programmes » une situation particuli…re. Les
+proc≈dures et programmes sont propos≈s uniquement tels quels et
+l'utilisateur assume enti…rement le risque de leur qualit≈ et
+performance. Si les proc≈dures ou programmes s'av…rent
+d≈fectueux, l'utilisateur (et non PPC Paris ni toute
+autre partie) est responsable de l'ensemble des co√ts de
+correction et de tous les dommages en r≈sultant. PPC Paris
+n'est pas responsable des dommages r≈sultants ou
+connect≈s » l'utilisation de ces proc≈dures ou programmes.\

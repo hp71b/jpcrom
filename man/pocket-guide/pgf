@@ -1,0 +1,697 @@
+^{eJPC ROM
+
+^Aide-m≈moire
+
+
+
+
+{cADBUF$ ( {iidentificateur de buffer{c )
+\{nFonction : Renvoie l'adresse du buffer
+sp≈cifi≈ par son num≈ro d'identification. La table
+ci-dessous liste quelques identificateurs de
+buffers du HP-71 :\
+\-†808 : Stockage de la cha—ne utilis≈e par {kSTARTUP},\
+\- 83B : Param…tres du graphique,\
+\- 83C : Param…tres du graphique (raster),\
+\-†83D : Valeur de {kMARGIN},\
+\-†83E : Stockage de la cha—ne utilis≈e par {kENDUP},\
+\-†BFB : Jeu de caract…res d≈fini par {kCHARSET}, et\
+\-†BFC : Adresses des fichiers Lex reconnus.}\
+
+{cADCREATE {ifichier{c }[{c , {imot de passe{c }]{c
+\{nOrdre : Cr≈e un fichier d'adresses vide. Une fiche
+est compos≈e de :\
+\- le nom, un caract…re {c/} et le pr≈nom,\
+\- le t≈l≈phone,\
+\- 4 lignes d'adresses,\
+\- une note, et\
+\- un crit…re.\
+
+{cADDELETE {ifichier{c , {inum≈ro{c }[{c , {imot de passe{c }]{c
+\{nOrdre : Efface une fiche dans un fichier d'adresses.\
+
+{cADFIND ( {ifichier{c , {icha—ne{c }[{c , {imot de passe{c }]{c )
+\{nFonction : Cherche un nom dans un
+fichier d'adresses et renvoie le num≈ro de la fiche trouv≈e.
+Les conventions utilis≈es lors de la recherche
+sont :\
+\- nom seul (sans caract…re {c/}),\
+\- nom et pr≈nom (avec caract…re {c/}), et\
+\- recherche abr≈g≈e (termin≈e avec un point).\
+
+{cADGET {ifichier{c , {itableau{c , {inum≈ro{c }[{c , {imot de passe{c }]{c
+\{nOrdre : Lit une fiche dans un fichier d'adresses et la stocke dans un
+tableau alphanum≈rique.\
+
+{cADPUT {ifichier{c , {itableau{c }[{c , {imot de passe{c }]{c
+\{nOrdre : Stocke une fiche dans un fichier d'adresses.\
+
+{cADSIZE ( {ifichier{c }[{c , {imot de passe{c }]{c )
+\{nFonction : Renvoie le nombre de fiches dans un fichier d'adresses.\
+
+{cARR ( {in{c , {ip{c )
+\{nFonction : Renvoie le nombre d'arrangements possibles
+de p ≈l≈ments pris dans un ensemble de n ≈l≈ments.\
+
+{cASC$ ( {icha—ne{c )
+\{nFonction : Renvoie la cha—ne d≈barass≈e des codes
+ASCII non affichables.\
+
+{cATH$ ( {icha—ne{c }[{c , {imode{c }]{c )
+\{nFonction : Renvoie la cha—ne hexad≈cimale
+correspondant » la cha—ne fournie en param…tre. La
+repr≈sentation ˚†classique†˝ est utilis≈e si
+{imode}†=†1.\
+
+{cATTN ON }/{c OFF
+\{nOrdre : Active ou d≈sactive l'action de la touche
+{l[ATTN]} pour interrompre les programmes.\
+
+{cBELL
+\{nOrdre : Fait sonner l'imprimante si elle en a la
+capacit≈.\
+
+{cBOLD ON }/{c OFF
+\{nOrdre : Active ou d≈sactive le mode ˚†caract…res gras†˝ sur
+l'imprimante.\
+
+{cBOX {ix1{c , {iy1{c , {ix2{c , {iy2
+\{nOrdre : Trace un rectangle dans la zone de trac≈
+d≈finie par {kGINIT}.\
+
+{cCASE {i≈l≈ment{c ,} ...
+{cCASE {iop≈rateur relationnel{c {c {i ≈l≈ment{c ,} ...
+{cCASE {i≈l≈ment{c TO {i≈l≈ment{c ,} ...
+{cCASE ELSE
+\{nOrdre : {kCASE} est un ≈l≈ment de la structure
+{kSELECT} ... {kCASE} ... {kEND†SELECT}.\
+
+{cCENTER$ ( {icha—ne{c , {ilargeur{c )
+\{nFonction : Centre la cha—ne fournie en argument en ajoutant des
+espaces en t¡te.\
+
+{cCESURE ( {icha—ne{c , {ilargeur{c )
+\{nFonction : Renvoie le premier emplacement oÀ on peut couper la
+cha—ne fournie en param…tre.\
+
+{cCOMB ( {in{c , {ip{c )
+\{nFonction : Renvoie le nombre de combinaisons d'un
+ensemble de p ≈l≈ments parmi n.\
+
+{cCONTRAST
+\{nFonction : Retourne la valeur du contraste courant.\
+
+{cCSIZE {ihauteur{c }[{c , {irapport{c }]
+\{nOrdre : Sp≈cifie la taille et l'aspect (rapport entre la
+largeur et la hauteur) des caract…res trac≈s dans la zone
+d≈finie par {kGINIT}.\
+
+{cDATEADD ( {idate{c , {inombre de jours{c )
+\{nFonction : Renvoie la date correspondant » la
+date donn≈e plus un nombre de jours sp≈cifi≈.\
+
+{cDATESTR$ ( {idate{c )
+\{nFonction : Convertit une date num≈rique en format
+alphanum≈rique "{iaaaa/mm/jj}".\
+
+{cDBLIST }[{c {ifichier{c }[{c , {iligne d≈part{c }[{c , {iligne fin{c }]]]}
+		[{c INDENT {iindentation{c }] [{c TO {idestination{c }]
+\{nOrdre : Liste un programme Basic sous forme structur≈e.\
+
+{cDDAYS ( {idate1{c , {idate2{c )
+\{nFonction : Calcule le nombre de jours entre deux dates.\
+
+{cDDIR }[{c {isp≈cificateur de fichier{c }] [{c TO {idestination{c }]
+{cDDIR ALL }[{c TO {idestination{c }]
+\{nOrdre : Liste le r≈pertoire du
+p≈riph≈rique sp≈cifi≈.\
+
+{cDMY
+\{nOrdre : Valide l'introduction des dates au format
+num≈rique {ijj.mmaaaa}.\
+
+{cDOW }[{c ( {idate{c ) }]{c
+\{nFonction : Renvoie le jour de la semaine correspondant
+» la date sp≈cifi≈e sous la forme d'un num≈ro de jour.\
+
+{cDOW$ }[{c ( {idate{c ) }]{c
+\{nFonction : Renvoie le nom du jour sp≈cifi≈, ou de la
+date courante.\
+
+{cDRAW {ix{c , {iy
+\{nOrdre : Trace une ligne entre le point courant et le
+point sp≈cifi≈ dans la zone de trac≈ d≈finie par {kGINIT}.\
+
+{cEDIT }[{c {ifichier1{c }[{c TO {ifichier2} }]]{c
+\{nOrdre : Permet de r≈unir des fichiers Lex, ou ≈dite des
+fichiers r≈sidant sur un p≈riph≈rique. {iNon programmable}.\
+
+{cENDUP {icha—ne de commande{c
+\{nOrdre : D≈finit une cha—ne de commandes » ex≈cuter lorsque le
+HP-71 se met hors tension.\
+
+{cENDUP$
+\{nFonction : Renvoie la cha—ne de commandes sp≈cifi≈e par {kENDUP}.\
+
+{cENTRY$ ( {imot-clef{c }[{c , {inum≈ro d'ordre{c }]{c )
+\{nFonction : Renvoie l'adresse du point d'entr≈e du
+mot-clef sp≈cifi≈.\
+
+{cESC$ }[{c ( {icha—ne{c ) }]{c
+\{nFonction : Renvoie la cha—ne pr≈c≈d≈e du caract…re ˚†≈chappement†˝.\
+
+{cEXECUTE {icha—ne de commandes{c
+\{nOrdre : Ex≈cute la cha—ne de commandes sp≈cifi≈e et arr¡te le
+programme.\
+
+{cEXIT {ivariable de boucle
+\{nOrdre : Sort pr≈matur≈ment d'une boucle {kFOR}†...†{kNEXT}.\
+
+{cFILEPOS ( {ifichier{c , {imotif{c }[{c , {id≈but{c }[{c , {ifin{c }[{c , {icolonne{c }]]]{c )
+{cFILEPOS ( {icanal{c , {imotif{c }[{c , {id≈but{c }[{c , {ifin{c }[{c , {icolonne{c }]]]{c )
+\{nFonction : cherche une cha—ne g≈n≈rique dans un fichier
+texte et renvoie le num≈ro d'enregistrement trouv≈.
+Voir {kGENRPLC$} pour la
+signification des caract…res g≈n≈riques.\
+
+{cFILESIZE ( {ifichier{c )
+\{nFonction : Renvoie la taille totale en octets du fichier sp≈cifi≈.\
+
+{cFIND {icha—ne g≈n≈rique{c }[{c , {iligne d≈but{c }[{c , {iligne fin{c }]]
+\{nOrdre : Trouve une cha—ne de caract…res g≈n≈rique
+dans un programme Basic. Voir {kGENRPLC$} pour la
+signification des caract…res g≈n≈riques. {iNon programmable}.\
+
+{cFINPUT {iinput{c , {iprompt{c }[{c , {iformat{c }]{c , {iattn
+\{nOrdre : Cr≈e un masque de saisie, et attend
+l'introduction de l'utilisateur.\
+
+{cFKEY {itouche
+\{nOrdre : Pousse une touche en premier dans la m≈moire
+tampon de touches.\
+
+{cFORMAT$ ( {icha—ne{c , {ilargeur{c )
+\{nFonction : Ins…re des espaces suppl≈mentaires dans la cha—ne de
+faµon » ce qu'elle fasse exactement le nombre de caract…res
+sp≈cifi≈.\
+
+{cFPRIM ( {iargument{c }[{c , {idirection{c }]{c )
+\{nFonction : Renvoie le premier nombre premier
+» partir d'un nombre donn≈.\
+
+{cFRAC$ ( {inombre r≈el{c }[{c , {ipr≈cision{c }]{c )
+\{nFonction : Approxime un nombre r≈el par une fraction.\
+
+{cFRAME
+\{nOrdre : Dessine un cadre autour de la zone de trac≈
+courante d≈finie par {kGINIT}.\
+
+{cGDUMP
+\{nOrdre : Imprime sur l'appareil d≈sign≈ par {kPLOTTER IS}
+la zone graphique d≈finie par {kGINIT},
+c'est » dire le contenu du fichier {lGRAPHILE}.\
+
+{cGEND
+\{nOrdre : Termine une session graphique ouverte par
+{kGINIT}.\
+
+{cGENLEN ( {icha—ne{c , {imotif{c }[{c , {id≈but{c }]{c )
+\{nFonction : Renvoie la longueur de l'occurrence d'une
+cha—ne g≈n≈rique dans une cha—ne. Voir {kGENRPLC$} pour la
+signification des caract…res g≈n≈riques.\
+
+{cGENPOS ( {icha—ne{c , {imotif{c }[{c , {id≈but{c }]{c )
+\{nFonction : Renvoie la position de l'occurrence d'une
+cha—ne g≈n≈rique dans une cha—ne, ou 0 si rien n'est trouv≈.
+Voir {kGENRPLC$} pour la
+signification des caract…res g≈n≈riques.\
+
+{cGENRPLC$ ( {icha—ne{c , {imotif{c , {iremplacement{c }[{c , {id≈but{c }]{c )
+\{nFonction : Renvoie la cha—ne oÀ toutes les occurrences du
+motif g≈n≈rique ont ≈t≈ remplac≈es par la cha—ne de
+remplacement. Les caract…res g≈n≈riques utilisables sont :\
+\- {t\} : annule la signification du caract…re suivant,\
+\- {t^} : d≈but de ligne,\
+\- {t$} : fin de ligne,\
+\-†{t.} : caract…re quelconque,\
+\- {t[}...{t]} : ensemble de caract…res,\
+\- {t[^}...{t]} : compl≈ment de l'ensemble,\
+\-†{t*} : r≈p≈tition du motif pr≈c≈dent 0 ou n fois,\
+\Dans la cha—ne de remplacement, les caract…res g≈n≈riques
+sont :\
+\- {t\} : annule la signification du caract…re suivant,\
+\-†{t&} : substitue par l'occurrence trouv≈e,\
+
+{cGINIT "RASTER" , {idimension
+\{nOrdre : Initialise une session graphique et cr≈e une zone
+de trac≈ de la hauteur sp≈cifi≈e.\
+
+{cGLINE {ix{c , {ilongueur{c , {ipremier{c , {itaille{c , {i≈cart{c
+\{nOrdre : Pr≈pare le trac≈ d'une ligne graphique
+sur les imprimantes ThinkJet ou LaserJet.\
+
+{cGPSET {ix{c
+\{nOrdre : Pr≈pare le trac≈ d'un point sur les
+imprimantes ThinkJet ou LaserJet.\
+
+{cHMS ( {iargument{c )
+\{nFonction : Convertit des heures ou des
+degr≈s en leur ≈quivalent au format HMS.\
+
+{cHMSADD ( {iarg1{c , {iarg2{c )
+\{nFonction : Renvoie la somme des deux
+arguments interpr≈t≈s en format HMS.\
+
+{cHMSSUB ( {iarg1{c , {iarg2{c )
+\{nFonction : Renvoie la soustraction des
+deux arguments interpr≈t≈s en format HMS.\
+
+{cHR ( {iargument{c )
+\{nFonction : Convertit un nombre r≈el exprim≈ au format HMS
+en son ≈quivalent d≈cimal.\
+
+{cHTA$ ( {icha—ne hexad≈cimale{c }[{c , {imode{c }]{c )
+\{nFonction : Convertit une cha—ne de codes
+hexad≈cimaux en cha—ne de caract…res.  La
+repr≈sentation ˚†classique†˝ est utilis≈e si
+{imode}†=†1.\
+
+{cIDRAW {iincr≈ment x{c , {iincr≈ment y}
+\{nOrdre : trace un segment de droite
+» partir de la position courante de la plume jusqu'» la
+position sp≈cifi≈e par les incr≈ments en x et y dans la zone
+de trac≈ d≈finie par {kGINIT}.\
+
+{cIF {iexpression logique{c THEN
+{c  {isegment de programme
+{cEND IF
+{c}ou bien :
+{cIF {iexpression logique{c THEN
+{c  {isegment de programme
+{cELSE
+{c  {isegment de programme
+{cEND IF
+\{nOrdre : Etend la structure {kIF} standard au
+traitement multi-lignes.\
+
+{cIMOVE {iincr≈ment x{c , {iincr≈ment y}
+\{nOrdre : d≈place la plume
+depuis la position courante jusqu'» la
+position sp≈cifi≈e par les incr≈ments en x et y dans la zone
+de trac≈ d≈finie par {kGINIT}.\
+
+{cINVERSE }[{c {id≈but{c , {ifin{c }]{c
+\{nOrdre : Inverse tout ou partie de l'affichage graphique.\
+
+{cKA }[{c {ifichier{c }]{c
+\{nOrdre : Mode interactif de gestion de carnet
+d'adresses. Les touches utilisables sont :\
+\-†{l[ATTN]} : sortie de {kKA},\
+\-†{l[(]}, {l[)]}, {l[g][(]} et {l[g][)]} : d≈placement
+dans le fichier,\
+\-†{l[v]}, {l[^]}, {l[g][v]} et {l[g][^]} : d≈placement
+dans la fiche,\
+\-†{l[<]}, {l[>]}, {l[g][<]} et {l[g][>]} : d≈filement
+de l'affichage,\
+\-†{l[0]} » {l[7]} : acc…s direct » un champ,\
+\-†{l[f][CAT]} : affiche le nombre de fiches,\
+\-†{l[f][DELETE]} : supprime la fiche courante,\
+\-†{l[f][EDIT]} : modifie la fiche courante,\
+\-†{l[f][INPUT]} : introduit une nouvelle fiche,\
+\-†{l[f][KEY]} : introduit un mot de passe, et\
+\-†{l[A]} » {l[Z]} : recherche un nom.\
+
+{cKEYWAIT$
+\{nFonction : Attend une pression de touche et renvoie la
+cha—ne repr≈sentant cette touche.\
+
+{cLABEL {icha—ne alphanum≈rique}{c }[{c ; }]
+\{nOrdre : Trace des caract…res alphanum≈riques » partir de
+la position courante de la plume dans la zone de trac≈
+d≈finie par {kGINIT}.\
+
+{cLDIR {iangle
+\{nOrdre : Sp≈cifie l'angle des labels (trac≈s dans la zone
+d≈finie par {kGINIT}) par rapport » l'axe
+des {ix}.\
+
+{cLEAVE }[{c {iprofondeur{c }]
+\{nOrdre : Sort proprement d'une boucle structur≈e de type {kWHILE},
+{kREPEAT} ou {kLOOP}.\
+
+{cLEX {ifichier{c ON }/{c OFF
+\{nOrdre : D≈sactive ou active un fichier Lex.\
+
+{cLINETYPE {itype{c }[{c , {ilongueur du motif{c }]
+\{nOrdre : S≈lectionne le type et la longueur du motif pour
+le trac≈ de lignes, axes et rectangles dans la zone d≈finie
+par {kGINIT}.\
+
+{cLOOP
+{c  {isegment de programme}
+{cEND LOOP
+\{nOrdre : D≈finit une boucle sans fin.\
+
+{cLORG {iposition
+\{nOrdre : D≈finit la position des labels (trac≈s dans la zone
+d≈finie par {kGINIT}) par rapport
+» la position courante de la plume.\
+
+{cMAP {ifichier{c , {icha—ne1{c , {icha—ne2{c }[{c , {id≈but{c }[{c , {ifin{c }]]{c
+{cMAP # {icanal{c , {icha—ne1{c , {icha—ne2{c }[{c , {id≈but{c }[{c , {ifin{c }]]{c
+\{nOrdre : Applique une fonction de conversion aux caract…res d'un
+fichier texte.\
+
+{cMAP$ ( {icha—ne1{c , {icha—ne2{c , {icha—ne3{c )
+\{nFonction : Applique une fonction de conversion aux caract…res d'une
+cha—ne alphanum≈rique.\
+
+{cMARGIN }[{c {iposition{c }]{c
+\{nOrdre : Valide un signal sonore lorsque le curseur arrive » la
+position sp≈cifi≈e, ou l'invalide lorsque
+{iposition} n'est pas pr≈sent ou est nul.\
+
+{cMAXD ( {isp≈cificateur d'unit≈{c )
+\{nFonction : Retourne le nombre d'entr≈es
+maximum du r≈pertoire d'un support magn≈tique.\
+
+{cMAXM ( {isp≈cificateur d'unit≈{c )
+\{nFonction : Renvoie la taille maximum du support en
+octets.\
+
+{cMDY
+\{nOrdre : Valide l'introduction des dates au format
+num≈rique {imm.jjaaaa}.\
+
+{cMEMD ( {isp≈cificateur d'unit≈{c )
+\{nFonction : Renvoie le nombre d'entr≈es
+disponibles dans le r≈pertoire du support indiqu≈ pour de
+nouveaux fichiers.\
+
+{cMEMM ( {isp≈cificateur d'unit≈{c )
+\{nFonction : Renvoie la taille disponible pour
+stocker des fichiers sur le support sp≈cifi≈.\
+
+{cMENU ( {inombre d'≈l≈ments{c }[{c , {ipremier ≈l≈ment{c }]{c )
+\{nFonction : Lit les {kDATA} courantes et les
+affiche pour faire un menu interactif. Les touches
+utilisables sont :\
+\- {l[ATTN]} : sortie de {kMENU},\
+\- {l[v]}, {l[^]}, {l[g][v]} et {l[g][^]} :
+d≈placement dans le menu,\
+\- {l[ENDLINE]} : validation de l'≈l≈ment affich≈,\
+
+{cMERGE {ifichier{c }[{c , {iligne d≈but{c }[{c , {iligne fin{c }]]{c
+\{nOrdre : Etend le mot-clef standard pour le cha—nage des fichiers
+Lex. {iNon programmable}.\
+
+{cMODE {iargument
+\{nOrdre : Change le jeu de caract…res sur l'appareil d'impression
+courant.\
+
+{cMOVE {ix{c , {iy
+\{nOrdre : D≈place la plume jusqu'au point sp≈cifi≈ par
+les coordonn≈es {ix} et {iy} dans la zone de trac≈ d≈finie
+par {kGINIT}.\
+
+{cNEXTOP$ ( {iadresse{c )
+\{nFonction : Renvoie l'adresse hexad≈cimale de la prochaine
+instruction assembleur.\
+
+{cNLOOP }[{c ( {inum≈ro de boucle{c ) }]{c
+\{nFonction : Renvoie le nombre d'appareils sur
+la boucle HP-IL.\
+
+{cNPRIM ( {in1{c , {in2{c )
+\{nFonction : Renvoie le nombre de nombres
+premiers entre deux nombres.\
+
+{cOPCODE$ ( {iadresse{c )
+\{nFonction : Renvoie en clair la mn≈monique de l'instruction
+assembleur situ≈e » l'adresse sp≈cifi≈e en d≈cimal ou en
+hexad≈cimal.\
+
+{cPAGELEN }[{c {itaille physique{c }[{c , {itaille logique{c }]]{c
+\{nOrdre : S≈lectionne les longueurs physique et
+logique sur l'appareil d'impression.\
+
+{cPAINT ( }[{c {i≈tat{c , }]{c {ix{c , {iy{c )
+\{nFonction : Teste ou allume un point sur l'≈cran graphique du HP-71, et
+retourne l'≈tat du point avant modification ≈ventuelle.\
+
+{cPARPOLL }[{c ( {inum≈ro de boucle{c ) }]{c
+\{nFonction : Retourne le r≈sultat d'une interrogation
+parall…le de la boucle HP-IL.\
+
+{cPBLIST }[{c {ifichier{c }[{c , {iligne d≈part{c }[{c , {iligne fin{c }]]]}
+		[{c INDENT {iindentation{c }] [{c TO {idestination{c }]
+\{nOrdre : Liste un programme Basic sous
+forme structur≈e sur  l'unit≈ d'impression courante.\
+
+{cPCR
+\{nOrdre : Remet la t¡te d'impression de
+l'imprimante en premi…re position.\
+
+{cPDIR }[{c {isp≈cificateur de fichier{c }] [{c TO {idestination{c }]
+{cPDIR ALL }[{c TO {idestination{c }]
+\Ordre : Imprime le r≈pertoire du
+p≈riph≈rique sp≈cifi≈.\
+
+{cPEEK$ ( {iadresse{c , {inombre de quartets{c )
+\{nFonction : Renvoie le contenu d'une zone de m≈moire sp≈cifi≈e par
+son adresse d≈cimale ou hexad≈cimale.\
+
+{cPEN {inum≈ro de plume
+\{nOrdre : S≈lectionne une plume pour les trac≈s dans la
+zone d≈finie par {kGINIT}.\
+
+{cPENDOWN
+\{nOrdre : Baisse la plume et imprime un point » la
+position courante de la plume dans la zone d≈finie par
+{kGINIT}.\
+
+{cPENUP
+\{nOrdre : L…ve la plume.\
+
+{cPERF ON }/{c OFF
+\{nOrdre : Active ou d≈sactive le mode {isaut de perforations} sur
+l'appareil d'impression courant.\
+
+{cPFF
+\{nOrdre : Avance le papier jusqu'au d≈but de la page suivante.\
+
+{cPGCD ( {iarg{v1{c , {iarg{v2{c }[{c , {iarg{v3{c }[{c ,} ... {iarg{v10{c }]...]{c )
+\{nFonction : Calcule le plus grand commun diviseur de plusieurs nombres.\
+
+{cPHI ( {iargument{c )
+\{nFonction : Indicateur d'Euler, donne le nombre
+de nombres relativement premiers inf≈rieurs » l'argument.\
+
+{cPLF }[{c {inombre de lignes{c }]{c
+\{nOrdre : Avance le papier du nombre de lignes sp≈cifi≈.\
+
+{cPLOTTER IS {isp≈cificateur d'unit≈
+\{nOrdre : D≈clare un appareil comme unit≈ graphique pour
+tous les ordres graphiques et en particulier {kGDUMP}.\
+
+{cPOKE {iadresse{c , {idonn≈e
+\{nOrdre : Place une donn≈e » partir de l'adresse d≈cimale
+ou hexad≈cimale donn≈e.\
+
+{cPOSI ( {icha—ne{c , {imin{c }[{c , {imax{c }]{c )
+\{nFonction : Renvoie la position dans la
+cha—ne du  premier caract…re compris entre deux bornes,
+qui peuvent ¡tre sp≈cifi≈es soit sous forme
+d'un entier, soit sous forme du premier caract…re
+d'une cha—ne.\
+
+{cPPCM ( {iarg{v1{c , {iarg{v2{c }[{c , {iarg{v3{c }[{c ,} ... {iarg{v10{c }]...]{c )
+\{nFonction : Renvoie le plus petit commun multiple des arguments.\
+
+{cPRIM ( {iargument{c )
+{cPRIM ( {ipartie haute{c , {ipartie basse{c )
+\{nFonction : Teste la primalit≈ et renvoie 0 ou
+le plus grand diviseur de l'argument.\
+
+{cRED$ ( {icha—ne{c )
+\{nFonction : Enl…ve les espaces en t¡te et en queue de la cha—ne
+fournie en param…tre.\
+
+{cREDUCE$ ( {icha—ne{c )
+\{nFonction : R≈duit la cha—ne, c'est » dire enl…ve tous les espaces
+superflus.\
+
+{cRENUMREM }[{c {inouveau d≈but{c }[{c , {iincr≈ment{c }[{c ,}
+		{iancien d≈but{c }[{c , {iancienne fin{c }]]]]{c
+\{nOrdre : Renum≈rote un programme en tenant
+compte des lignes de remarques.\
+
+{cREPEAT
+{c  {isegment de programme
+{cUNTIL {iexpression logique
+\{nOrdre : D≈finit une boucle
+qui est r≈p≈t≈e jusqu'» ce que l'expression dans {kUNTIL} soit
+vraie.\
+
+{cREPLACE$ ( {icha—ne{c , {imotif1{c , {imotif2{c }[{c , {id≈but{c }]{c )
+{cREPLACE$ ( {icha—ne{c , {imotif1{c , {imotif2{c , {ijoker{c )
+\{nFonction : Remplace une cha—ne par une autre dans la cha—ne
+sp≈cifi≈e, avec les conventions de l'≈diteur de
+textes {kTEDIT} (premi…re syntaxe) ou avec un caract…re
+{ijoker} (deuxi…me syntaxe).\
+
+{cROMAN ON }/{c OFF
+\{nOrdre : Valide ou invalide le jeu de caract…res ≈tendu {iRoman}
+(voir table ci-dessous).{t\
+} {t
+       0 1 2 3 4 5 6 7 8 9 A B C D E F
+} {t
+     0       0 @ P © p     † ∞ ¿ – ‡ 
+     1     ! 1 A Q a q     ° † ¡ — · Ò
+     2     " 2 B R b r     ¢ † ¬ “ ‚ †
+     3     # 3 C S c s     £ ≥ √ ” „ †
+     4     $ 4 D T d t     § ¥ ƒ ‘ ‰ †
+     5     % 5 E U e u     • µ ≈ ’ Â †
+     6     & 6 F V f v     ¶ ∂ ∆ ÷ Ê ˆ
+     7     ® 7 G W g w     ß ∑ « ◊ Á ˜
+     8     ( 8 H X h x     ® ∏ » ÿ Ë ¯
+     9     ) 9 I Y i y     © π … Ÿ È ˘
+     A     * : J Z j z     ™ ∫   ⁄ Í ˙
+     B     + ; K [ k {{     ´ ª À € Î ˚
+     C     , < L \ l |     ¨ º Ã ‹ Ï ¸
+     D     - = M ] m }}     ≠ Ω Õ › Ì ˝
+     E     . > N ^ n ~     Æ æ Œ ﬁ Ó ˛
+     F     / ? O _ o       Ø ø œ ﬂ Ô †
+
+{cRREC$ ( {iadresse{c , {isp≈cificateur de p≈riph≈rique{c )
+\{nFonction : Lit un enregistrement sur le support de
+m≈moire de masse indiqu≈.\
+
+{cSELECT {iexpression
+{c  CASE {iclauses de choix
+{c    {isegment de programme
+{c  CASE {iclauses de choix
+{c    {isegment de programme
+{c   }:
+{c  }[{c CASE ELSE
+{c      {isegment de programme} ]
+{cEND SELECT
+\{nOrdre : Produit une
+ex≈cution conditionn≈e de segments de programmes. Voir {kCASE} pour
+la syntaxe de {iclause de choix}.\
+
+{cSHRINK {ifichier
+\{nOrdre : Minimise en m≈moire la taille d'un fichier texte
+provenant d'une unit≈ de m≈moire de masse, et r≈cup…re la
+place inutilis≈e.\
+
+{cSLEEP
+\{nOrdre : Place le HP-71 en ≈tat de sommeil l≈ger.\
+
+{cSPACE$ ( }[{c {icaract…re{c }/{c {icha—ne{c , }]{c {inombre de r≈p≈titions{c )
+\{nFonction : Renvoie la cha—ne compos≈e du nombre
+sp≈cifi≈ de caract…res ou de cha—nes (ou d'espaces par d≈faut).\
+
+{cSRQ }[{c ( {inum≈ro de boucle{c ) }]{c
+\{nFonction : Envoie un message d'identification sur la boucle HP-IL
+pour tester si un p≈riph≈rique demande service.\
+
+{cSTACK {inombre de niveaux
+\{nOrdre : Initialise la pile de commandes au nombre d'entr≈es sp≈cifi≈.\
+
+{cSTARTUP$
+\{nFonction : Renvoie la cha—ne de commandes sp≈cifi≈e par {kSTARTUP}.\
+
+{cSYSEDIT {iadresse
+\{nOrdre : Place le HP-71 dans un mode interactif d'≈dition
+et de d≈sassemblage de la m≈moire. Dans ce
+mode, les touches ont la signification suivante :\
+\-†{l[ATTN]} ou {l[f][OFF]} : Sortie de l'≈diteur,\
+\-†{l[+]}, {l[-]}, {l[*]} ou {l[/]} : D≈place la fen¡tre d'affichage,\
+\-†{l[A][1]} » {l[A][8]} : NIBASC,\
+\-†{l[N][1]} » {l[N][9]} et {l[N][.][0]} » {l[N][.][6]}
+: NIBHEX,\
+\-†{l[C][1]} » {l[C][6]} : Constante d≈cimale,\
+\-†{l[C][H][1]} » {l[C][H][6]} : Constante hexad≈cimale,\
+\-†{l[R][1]} » {l[R][5]} : Adresse relative,\
+\-†{l[H]} : Mode hexad≈cimal,\
+\-†{l[D]} : Mode d≈sassemblage,\
+\-†{l[L]} : LCASC si mode d≈sassemblage actif,\
+\-†{l[F]} : Sauvegarde dans un fichier,\
+\-†{l[=]} : D≈placement direct,\
+\-†{l[(]} : D≈placement et empilement,\
+\-†{l[)]} : Retour,\
+\-†{l[ENDLINE]} : Validation,\
+\-†{l[Z]} : Edition du pointeur, et\
+\-†{l[f][Z]} ou {l[M]} : Edition de la m≈moire.\
+
+{cTEDIT {ifichier{c }[{c , {icha—ne de commandes{c }]
+\{nOrdre : d≈marre l'≈diteur de textes en mode compatibilit≈
+{kEDTEXT}. Voir {kXEDIT} pour les commandes disponibles.\
+\Les caract…res g≈n≈riques de {kTEDIT} sont :\
+\-†{t.} : caract…re quelconque,\
+\-†{t@} : nombre ind≈termin≈ de caract…res quelconques,\
+\-†{t&} : le texte de motif1 quand employ≈ dans motif2,\
+\-†{t^} : d≈but de ligne  (doit ¡tre en d≈but de motif1),\
+\-†{t$} : fin de ligne (doit ¡tre en fin de motif1), et\
+\-†{t\} : annule la signification du \ pr≈c≈dent}.\
+
+{cTICLEN {ilongueur des marques}
+\{nOrdre : D≈finit la longueur des marques de
+graduation trac≈es dans la zone d≈finie par {kGINIT}.\
+
+{cTOKEN ( {imot-clef{c }[{c , {inum≈ro d'ordre{c }]{c )
+\{nFonction : Renvoie le code interne (Lex ID et
+token) du mot-clef sp≈cifi≈.\
+
+{cUNDERLINE ON }/{c OFF
+\{nOrdre : Active ou d≈sactive le mode ˚†caract…res soulign≈s†˝
+sur l'imprimante.\
+
+{cVARSWAP {ivariable1{c , {ivariable2{c
+\{nOrdre : Permute deux variables ou ≈l≈ments de tableau.\
+
+{cWHILE {iexpression logique
+{c  {isegment de programme
+{cEND WHILE
+\{nOrdre : D≈finit une boucle qui est ex≈cut≈e
+tant que {iexpression logique} est vraie.\
+
+{cWRAP ON }/{c OFF
+\{nOrdre : Active ou d≈sactive le mode ˚saut » la ligne˝ sur
+l'imprimante.\
+
+{cWREC {isecteur{c , {iadresse{c , {isp≈cificateur de p≈riph≈rique
+\{nOrdre : Ecrit une cha—ne de 256 caract…res sur
+le secteur sp≈cifi≈ du support de m≈moire de masse indiqu≈.\
+
+{cXAXIS {iordonn≈e y{c }[{c , {iespacement{c }[{c , {ixmin{c }[{c , {ixmax{c }]]]
+\{nOrdre : Trace dans la zone d≈finie par {kGINIT}
+un axe horizontal avec des marques de
+graduation optionnelles, » l'ordonn≈e {iy} sp≈cifi≈e.\
+
+{cXEDIT {ifichier{c }[{c , {icha—ne de commandes{c }]
+\{nOrdre : d≈marre l'≈diteur de textes. Les commandes
+disponibles sont :\
+\- [{id≈but}[{ifin}]]{l C} [{ifichier}] : copie des lignes,\
+\- [{id≈but}[{ifin}]]{l D} [{ifichier}[{l+}]] : supprime des lignes,\
+\- {lE} : sort de l'≈diteur,\
+\- {lH }[{icmd}] : affiche la syntaxe d'une commande,\
+\- [{iligne}]{l I} : rentre en mode insertion de texte,\
+\- [{id≈but}[{ifin}]][{l?}]{l J} [{inb}] : r≈unit des lignes,\
+\- [{id≈but}[{ifin}]]{l L} [{inb}][{lN}] : liste des lignes,\
+\- [{id≈but}[{ifin}]]{l M} [{ifichier}] : d≈place des lignes,\
+\- [{id≈but}[{ifin}]]{l P} [{inb}][{lN}] : imprime des lignes,\
+\- {lQ} : sort de l'≈diteur,\
+\- [{id≈but}[{ifin}]][{l?}]{l R /{icha—ne1}{l/{icha—ne2}[{l/}] :
+remplace,\
+\- [{id≈but}[{ifin}]][{l?}]{l S /{icha—ne}[{l/}] : recherche,\
+\- [{iligne}]{l T} : rentre en mode saisie de texte,\
+\- {lX {ifichier} : change de fichier.\
+\Voir {kGENRPLC$} pour la
+signification des caract…res g≈n≈riques.\
+
+{cYAXIS {iabscisse x{c }[{c , {iespacement{c }[{c , {iymin{c }[{c , {iymax{c }]]]
+\{nOrdre : Trace dans la zone d≈finie par {kGINIT}
+un axe vertical avec des marques de
+graduation optionnelles, » l'abscisse {ix} sp≈cifi≈e.\

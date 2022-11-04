@@ -1,0 +1,997 @@
+.language
+F
+
+.keyword
+ADBUF$
+
+.purpose
+{cADBUF$} (adresse de buffer) renvoie l'adresse du buffer
+sp≈cifi≈ par son num≈ro d'identification.
+
+.options
+FKID
+
+.syntaxe
+ADBUF$ ( {iidentificateur de buffer{c )
+
+.examples
+.ex
+A$=ADBUF$("BFC")
+.co
+Place l'adresse du "Lex Buffer" dans la variable A$.
+
+.input
+.it
+identificateur de buffer
+.de
+Expression alphanum≈rique contenant des chiffres hexad≈cimaux.
+.re
+3 chiffres en majuscules ou minuscules.
+
+.operation
+{gLes buffers :}
+
+\Les buffers sont des emplacements dans la m≈moire du HP-71
+destin≈s » stocker des informations plus volatiles que celles
+contenues dans les fichiers, ou utilis≈es seulement par le
+syst…me.\
+
+\Ils sont utilis≈s par les programmes en assembleur et par le
+syst…me d'exploitation. La table ci-dessous liste quelques uns
+des buffers utilis≈s par le syst…me :{l\
+
+  Id  Description
+-----------------------------------------------------
+ 808  Cha—ne utilis≈e par STARTUP
+ 83B  Param…tres du graphique
+ 83C  Param…tres du graphique (raster)
+ 83D  Valeur de MARGIN
+ 83E  Cha—ne utilis≈e par ENDUP
+ BFB  Jeu de caract…res d≈fini par CHARSET
+ BFC  Adresses des fichiers Lex reconnus
+
+\}Les buffers sont constitu≈s d'un en-t¡te de longueur fixe (7
+quartets), puis d'une zone de donn≈es contenant les informations
+utiles. Le codage de la zone d'en-t¡te est :\
+
+\1 quartet : le nombre d'adresses » actualiser quand la m≈moire
+bouge,\
+\3 quartets : le num≈ro d'identification du buffer,\
+\3 quartets : la longueur en quartets de la partie ˚donn≈es˝ du
+buffer.\
+
+\Les buffers sont des zones tr…s mobiles. Leur adresse change
+souvent, notamment quand :\
+\- un fichier est cr≈≈, d≈truit, r≈duit ou agrandi,\
+\- un autre buffer est d≈truit, r≈duit ou agrandi.\
+
+\Le syst…me maintient en outre des buffers temporaires, c'est » dire
+que leur Id n'est pas attribu≈ d≈finitivement, mais
+chaque programme (en assembleur) qui le souhaite peut
+chercher un Id disponible (entre E00 et FFF) et l'utiliser
+pour ses besoins propres. {cXEDIT}, par exemple, utilise ce
+principe pour stocker sa table d'acc…s rapide et les cha—nes
+g≈n≈riques.\
+
+
+{gLa fonction ADBUF$ :}
+
+\{cADBUF$} retourne l'adresse du buffer dont le num≈ro
+d'identification est donn≈. Si le buffer n'est pas trouv≈, la
+cha—ne vide est renvoy≈e.\
+
+\L'adresse donn≈e par la fonction correspond au d≈but de la
+partie en-t¡te du buffer. La partie ˚donn≈es˝ se situe 7 quartets
+plus loin.\
+.references
+{iJPC 22} (page 35) Premi…re version de {cADBUF$} par Michel
+Martinet et Pierre David.
+
+{iJPC 23} (page 30) Les buffers du HP-71, par Pierre David.
+Article d'initiation, petits utilitaires.
+
+{iJPC 27} (page 34) deuxi…me version par Michel Martinet.
+
+{iInternal Design Specification} Volume I, Chapitre 3.5.3. En
+anglais.
+.related
+DTH$
+HTD
+PEEK$
+POKE
+ADDR$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+ADCREATE
+
+.purpose
+Le mot-clef programmable {cADCREATE} cr≈e un fichier d'adresses
+vide.
+
+.options
+SKID
+
+.syntaxe
+{cADCREATE {ifichier{c
+{cADCREATE {ifichier{c , {imot de passe{c
+
+.examples
+.ex
+ADCREATE ESSAI
+.co
+Cr≈e un fichier d'adresses de nom ESSAI, sans mot de passe.
+.ex
+ADCREATE A$,"passe"
+.co
+Cr≈e un fichier d'adresses, et lui affecte le mot de passe
+˚passe˝.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Nom de fichier avec un sp≈cificateur de p≈riph≈rique
+optionnel.
+.it
+mot de passe
+.de
+Expression alphanum≈rique.
+.re
+Seuls les 8 premiers caract…res sont pris en compte.
+.df
+Aucun mot de passe
+
+.operation
+{gLes fichiers d'adresses}
+
+\Le mot-clef {cKA} est un mode {icarnet
+d'adresses} interactif. {cKA} stocke les adresses
+dans un fichier de type {cADRS}. {cKA} ≈tant exclusivement
+interactif, JPC Rom contient donc les fonctions
+{cADCREATE}, {cADGET}, {cADPUT}, {cADDELETE},
+{cADSIZE} et {cADFIND} pour acc≈der par programme
+aux adresses m≈moris≈es.\
+
+\Les fichiers d'adresses peuvent ¡tre vus comme
+un ensemble de fiches contenant chacune une
+adresse. Par exemple :{l\
+
+
+            -------------------
+           |           Nom     |
+           |-------------------|
+        -------------------    |
+       |           Nom     |---|
+       |-------------------| 1 |
+    -------------------    |---|
+   |           Nom     |---| 2 |
+   |-------------------| 1 |---|
+   |           T≈l     |---| 3 |
+   |-------------------| 2 |---|
+   |           Ligne 1 |---| 4 |
+   |-------------------| 3 |---|
+   |           Ligne 2 |---|   |
+   |-------------------| 4 |---|
+   |           Ligne 3 |---|re |
+   |-------------------|   |--- 
+   |           Ligne 4 |---|
+   |-------------------|re |
+   |           Note    |---
+   |-------------------|
+   |           Crit…re |
+    ------------------- 
+
+
+\Dans cette exemple, le fichier est constitu≈ de trois
+fiches. Voyons maintenant de quoi se composent les fiches.\
+
+
+{gLes fiches}
+
+\Chaque fiche est compos≈e de 8 lignes, organis≈es comme
+suit :\
+
+\- le nom et le pr≈nom, s≈par≈s par un caract…re {c/},\
+\- le num≈ro de t≈l≈phone,\
+\- 4 lignes pour m≈moriser l'adresse,\
+\- une ligne pour noter des informations g≈n≈rales, et\
+\- une ligne pour stocker un crit…re, que vous pouvez
+utiliser pour vos programmes personnels.\
+
+\Le premi…re ligne contient le nom et le pr≈nom, s≈par≈s par
+un caract…re barre oblique ({c/}). Les fonctions de gestion
+du carnet d'adresses le placeront pour vous si vous omettez
+de le mettre.\
+
+\Les fiches sont toujours tri≈es par ordre alphab≈tique.
+Ce tri est automatiquement fait lors de
+l'insertion dans le fichier, soit avec {cKA}, soit
+avec {cADPUT}.\
+
+
+{gLes fonctions de gestion d'adresses}
+
+\Elles sont au nombre de 6 :\
+
+\- {cADCREATE} cr≈e un fichier de type {cADRS} en
+lui affectant ou non un mot de passe,\
+
+\- {cADGET} lit une adresse (une fiche) et la
+place dans un tableau alphanum≈rique,\
+
+\- {cADPUT} stocke une fiche dans le fichier
+d'adresses,\
+
+\- {cADDELETE} d≈truit une fiche connaissant son
+num≈ro,\
+
+\- {cADSIZE} renvoie le nombre de fiches dans le
+fichier,\
+
+\- et {cADFIND} localise une fiche dans le
+fichier et renvoie son num≈ro.\
+
+
+\Toutes ces fonctions admettent un mot de passe
+optionnel. Si le mot de passe est pr≈sent dans le
+fichier, l'utilisateur doit fournir le mot de
+passe avec chaque fonction. Si le mot de passe
+n'est pas m≈moris≈ dans le fichier, le param…tre
+optionnel n'est pas pris en compte (autrement dit,
+sa pr≈sence n'est pas v≈rifi≈e).\
+
+
+{gLe mot-clef ADCREATE}
+
+\{cADCREATE} cr≈e un fichier d'adresses (de type {cADRS})
+vide, en lui
+affectant ≈ventuellement un mot de passe initial.\
+
+\{cADCREATE} refuse de cr≈er le fichier si celui-ci existe
+d≈j», et affiche le message d'erreur : {cJPC†ERR:File†Exists}.\
+
+\La taille occup≈e par un fichier d'adresses peut ¡tre
+calcul≈ par la formule :\
+30,5 octets + somme des tailles des fiches
+
+\La taille d'une fiche peut ¡tre calcul≈e par la formule :\
+10 octets + nombre de caract…res dans la fiche
+.references
+Programme AGENDA pour HP-75 par Pierre David.
+.related
+ADDELETE
+ADFIND
+ADGET
+ADPUT
+ADSIZE
+KA
+.author
+Pierre David
+.end keyword
+
+.keyword
+ADDELETE
+
+.purpose
+Le mot-clef programmable {cADDELETE} efface une fiche dans
+un fichier d'adresses.
+
+.options
+SKID
+
+.syntaxe
+{cADDELETE {ifichier{c , {inum≈ro{c
+{cADDELETE {ifichier{c , {inum≈ro{c , {imot de passe{c
+
+.examples
+.ex
+ADDELETE ESSAI,5
+.co
+Efface la fiche num≈ro 5 dans le fichier
+d'adresses ESSAI, sans mot de passe.
+.ex
+ADDELETE A$,I+1,P$
+.co
+Efface la fiche num≈ro I+1 du fichier
+d'adresse identifi≈ par la variable A$ et
+poss≈dant le mot de passe contenu dans la
+variable P$.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Le fichier doit ¡tre en m≈moire vive.
+.it
+num≈ro
+.de
+Expression num≈rique arrondie » un
+entier.
+.re
+Doit ¡tre compris entre 1 et le nombre de
+fiches.
+.it
+mot de passe
+.de
+Expression alphanum≈rique.
+.re
+Seuls les 8 premiers caract…res sont pris en compte.
+.df
+Pas de mot de passe.
+
+.operation
+\Le mot-clef {cADDELETE} supprime dans le
+fichier d'adresse la fiche dont le num≈ro est fourni.\
+
+\{cADDELETE} refuse d'effacer la fiche si :\
+\- le fichier n'est pas en m≈moire vive,\
+\- le fichier n'est pas du type {cADRS},\
+\- le fichier contient un mot de passe et
+le mot de passe fourni n'est pas le bon,\
+\- le num≈ro de fiche n'est pas valide.\
+
+\Se reporter au mot-clef {cADCREATE} pour plus
+d'explications sur les fichiers d'adresses.\
+.references
+Programme AGENDA pour HP-75 par Pierre David.
+.related
+ADCREATE
+ADFIND
+ADGET
+ADPUT
+ADSIZE
+KA
+.author
+Pierre David
+.end keyword
+
+.keyword
+ADFIND
+
+.purpose
+La fonction {cADFIND} cherche un nom dans un
+fichier d'adresses.
+
+.options
+FKID
+
+.syntaxe
+{cADFIND ( {ifichier{c , {icha—ne{c )
+{cADFIND ( {ifichier{c , {icha—ne{c , {imot de passe{c )
+
+.examples
+.ex
+A=ADFIND(ESSAI,"Dupond",P$)
+.co
+Renvoie le num≈ro de la fiche correspondant au
+nom ˚ Dupond ˝ dans le fichier ESSAI avec le mot
+de passe P$.
+.ex
+ADDELETE A$,ADFIND(A$,"Dup.")
+.co
+Efface la fiche correspondant au premier nom
+commenµant par ˚ Dup ˝ dans le fichier d'adresses
+A$.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique.
+.re
+Le fichier doit ¡tre en m≈moire vive.
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+mot de passe
+.de
+Expression alphanum≈rique.
+.re
+Seuls les 8 premiers caract…res sont pris en compte.
+.df
+Pas de mot de passe.
+
+.operation
+\La fonction {cADFIND} renvoie le num≈ro de la
+fiche correspondant au nom fourni avec le
+param…tre {icha—ne}.\
+
+\Ce num≈ro de fiche peut ensuite ¡tre utilis≈ avec
+les fonctions {cADGET} et {cADDELETE} pour
+r≈cup≈rer une fiche dans un tableau ou pour
+l'effacer du fichier.\
+
+\La cha—ne de recherche r≈pond aux m¡mes r…gles
+que pour le mode {irecherche} de {cKA} :\
+
+\- Nom seul : recherche sur le nom seulement. Le
+premier nom trouv≈ est renvoy≈, peu importe le
+pr≈nom.\
+
+\- Nom et pr≈nom (s≈par≈s par le caract…re {c/}) :
+recherche sur le nom {iet} le pr≈nom.\
+
+\- Cha—ne se terminant par un point : la recherche
+est abr≈g≈e. Les noms n'ont pas besoin d'¡tre
+introduits en entier. La fiche renvoy≈e est la
+premi…re apr…s la cha—ne trouv≈e. Il n'y a pas
+d'erreur si la cha—ne abr≈g≈e n'est pas exactement
+trouv≈e.\
+
+\La recherche ne tient pas compte de la diff≈rence entre
+caract…res majucules et minuscules.\
+
+\Voir {cKA} pour plus d'explications sur la
+recherche.\
+
+\Si {cADFIND} ≈choue pour une raison ou pour une
+autre, un nombre n≈gatif est renvoy≈. La valeur
+absolue de ce nombre est le num≈ro de l'erreur qui
+a caus≈ l'≈chec.\
+
+\Se reporter au mot-clef {cADCREATE} pour plus
+d'explications sur les fichiers d'adresses.\
+.references
+Programme AGENDA pour HP-75 par Pierre David.
+.related
+ADCREATE
+ADDELETE
+ADGET
+ADPUT
+ADSIZE
+KA
+.author
+Pierre David
+.end keyword
+
+.keyword
+ADGET
+
+.purpose
+Le mot-clef programmable {cADGET} lit une fiche et
+la stocke dans un tableau alphanum≈rique.
+
+.options
+SKID
+
+.syntaxe
+{cADGET {ifichier{c , {itableau{c , {inum≈ro{c
+{cADGET {ifichier{c , {itableau{c , {inum≈ro{c , {imot de passe{c
+
+.examples
+.ex
+ADGET ESSAI,T$,5
+.co
+Lit la fiche num≈ro 5 du fichier ESSAI et la
+stocke dans le tableau alphanum≈rique T$.
+.ex
+ADGET A$,T$,I+1,P$
+.co
+Lit la fiche de num≈ro I+1 du fichier
+d'adresse identifi≈ par la variable A$ et
+poss≈dant le mot de passe contenu dans la
+variable P$.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Le fichier doit ¡tre en m≈moire vive.
+.it
+tableau
+.de
+Nom de tableau alphanum≈rique.
+.re
+Doit comporter exactement 8 ≈l≈ments.
+.it
+num≈ro
+.de
+Expression num≈rique arrondie » un
+entier.
+.re
+Doit ¡tre compris entre 1 et le nombre de
+fiches.
+.it
+mot de passe
+.de
+Expression alphanum≈rique.
+.re
+Seuls les 8 premiers caract…res sont pris en compte.
+.df
+Pas de mot de passe.
+
+.operation
+\Le mot-clef {cADGET} lit la fiche sp≈cifi≈e dans
+un fichier d'adresses et la stocke dans un tableau
+alphanum≈rique, de mani…re » ¡tre exploit≈e par un
+programme utilisateur.\
+
+\Attention : le tableau doit contenir exactement 8
+≈l≈ments. Chaque ≈l≈ment doit ¡tre de longueur
+suffisante pour m≈moriser une ligne compl…te. La
+taille limite ne peut exc≈der 91 caract…res.\
+
+\Exemple de programme exploitant le mot-clef
+{cADGET} pour r≈aliser l'impression des adresses
+du fichier ADRS :{c\
+
+100 F$="ADRS"           ! nom du fichier
+110 OPTION BASE 1
+120 DIM T$(8)[91]
+130 FOR I=1 TO ADSIZE(F$)
+140   ADGET F$,T$,I
+150   PRINT T$(1)       ! le nom
+160   PRINT T$(3)       ! adresse 1
+170   PRINT T$(4)       ! adresse 2
+180   PRINT T$(5)       ! adresse 3
+190   PRINT T$(6)       ! adresse 4
+200 NEXT I
+
+\{cADGET} refuse de lire la fiche si :\
+\- le fichier n'est pas en m≈moire vive,\
+\- le fichier n'est pas du type {cADRS},\
+\- le fichier contient un mot de passe et
+le mot de passe fourni n'est pas le bon,\
+\- le num≈ro de fiche n'est pas valide.\
+\- le tableau ne contient pas assez d'≈l≈ments,\
+\- un des champs de la fiche ne rentre pas dans un des
+≈l≈ments du tableau.\
+
+\Se reporter au mot-clef {cADCREATE} pour plus
+d'explications sur les fichiers d'adresses.\
+.references
+Programme AGENDA pour HP-75 par Pierre David.
+.related
+ADCREATE
+ADDELETE
+ADFIND
+ADPUT
+ADSIZE
+KA
+.author
+Pierre David
+.end keyword
+
+.keyword
+ADPUT
+
+.purpose
+Le mot-clef programmable {cADPUT} ≈crit une fiche
+dans un fichier d'adresses.
+
+.options
+SKID
+
+.syntaxe
+{cADPUT {ifichier{c , {itableau{c
+{cADPUT {ifichier{c , {itableau{c , {imot de passe{c
+
+.examples
+.ex
+ADPUT ESSAI,T$
+.co
+Ecrit la fiche m≈moris≈e dans le tableau T$ dans
+le fichier ESSAI.
+.ex
+ADPUT A$,T$,P$
+.co
+Ecrit la fiche T$ dans le fichier
+d'adresse identifi≈ par la variable A$ et
+poss≈dant le mot de passe contenu dans la
+variable P$.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Le fichier doit ¡tre en m≈moire vive.
+.it
+tableau
+.de
+Nom de tableau alphanum≈rique.
+.re
+Doit comporter exactement 8 ≈l≈ments.
+.it
+mot de passe
+.de
+Expression alphanum≈rique.
+.re
+Seuls les 8 premiers caract…res sont pris en compte.
+.df
+Pas de mot de passe.
+
+.operation
+\Le mot-clef {cADPUT} ≈crit une fiche dans le
+fichier d'adresses identifi≈ par le param…tre
+{ifichier}.\
+
+\La fiche est plac≈e automatiquement dans l'ordre
+alphab≈tique.\
+
+\Attention : le tableau doit contenir exactement 8
+≈l≈ments, et chaque ligne ne peut contenir plus de
+91 caract…res.\
+
+\{cADPUT} refuse de stocker la fiche si :\
+\- le fichier n'est pas en m≈moire vive,\
+\- le fichier n'est pas du type {cADRS},\
+\- le fichier contient un mot de passe et
+le mot de passe fourni n'est pas le bon,\
+\- le tableau ne contient pas assez ou trop d'≈l≈ments,\
+\- il n'y a pas assez de m≈moire,\
+
+\Se reporter au mot-clef {cADCREATE} pour plus
+d'explications sur les fichiers d'adresses.\
+.references
+Programme AGENDA pour HP-75 par Pierre David.
+.related
+ADCREATE
+ADDELETE
+ADFIND
+ADGET
+ADSIZE
+KA
+.author
+Pierre David
+.end keyword
+
+.keyword
+ADSIZE
+
+.purpose
+La fonction {cADSIZE} renvoie le nombre de fiches
+dans un fichier d'adresses.
+
+.options
+FKID
+
+.syntaxe
+{cADSIZE ( {ifichier{c )
+{cADSIZE ( {ifichier{c , {imot de passe{c )
+
+.examples
+.ex
+N=ADSIZE("ESSAI")
+.co
+Stocke dans la variable N le nombre de fiches du
+fichier d'adresses ESSAI sans mot de passe.
+.ex
+FOR I=1 TO ADSIZE(A$,P$)
+.co
+Fait une boucle sur toutes les fiches du fichier
+A$, connaissant le mot de passe contenu dans la
+variable P$.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique.
+.re
+Le fichier doit ¡tre en m≈moire vive.
+.it
+mot de passe
+.de
+Expression alphanum≈rique.
+.re
+Seuls les 8 premiers caract…res sont pris en compte.
+.df
+Pas de mot de passe.
+
+.operation
+\La fonction {cADSIZE} renvoie le nombre de fiches
+pr≈sentes dans le fichier d'adresses sp≈cifi≈.\
+
+\Si {cADSIZE} ≈choue pour une raison ou pour une
+autre, un nombre n≈gatif est renvoy≈. La valeur
+absolue de ce nombre est le num≈ro de l'erreur qui
+a caus≈ l'≈chec.\
+
+\{cADSIZE} refuse de retourner le nombre de fiches si :\
+\- le fichier n'est pas en m≈moire vive,\
+\- le fichier n'est pas du type {cADRS},\
+\- le fichier contient un mot de passe et
+le mot de passe fourni n'est pas le bon,\
+
+\Se reporter au mot-clef {cADCREATE} pour plus
+d'explications sur les fichiers d'adresses.\
+.references
+Programme AGENDA pour HP-75 par Pierre David.
+.related
+ADCREATE
+ADDELETE
+ADFIND
+ADGET
+ADPUT
+KA
+.author
+Pierre David
+.end keyword
+
+.keyword
+ARR
+
+.purpose
+{cARR} (Arrangements) renvoie le nombre d'arrangements possibles
+de p ≈l≈ments pris dans un ensemble de n ≈l≈ments.
+
+.options
+FKCID
+
+.syntaxe
+{cARR ( {in{c , {ip{c )
+
+.examples
+.ex
+A=ARR(4,3)
+.co
+Met 24 dans la variable A.
+
+.input
+.it
+n
+.de
+Expression num≈rique.
+.re
+Nombre entier compris entre 0 et 10{^12{--1.
+.it
+p
+.de
+Expression num≈rique.
+.re
+Nombre entier compris entre 0 et n.
+
+.operation
+ARR (n,p) = A{p{vn{^p} = n! / (n-p)!
+
+\{cARR ({in{c, {ip{c)} renvoie le nombre d'arrangements de {ip}
+≈l≈ments dans un ensemble de {in} ≈l≈ments. Cette fonction est tr…s
+utilis≈e dans le domaine des probabilit≈s.\
+
+\Pour des raisons de pr≈cision, {cARR} n'utilise pas la
+fonction factorielle, mais un algorithme multiplicatif qui permet
+d'≈tendre le domaine de validit≈ de la fonction. Ceci explique
+aussi un temps d'ex≈cution un peu long pour de grandes valeurs.\
+.references
+{iJPC 25} (page 50) premi…re version par Laurent Istria.
+
+{iJPC 41} (page 32) deuxi…me version par Guy Toublanc.
+.related
+COMB
+FACT
+
+.author
+Laurent Istria
+Guy Toublanc
+.end keyword
+
+.keyword
+ASC$
+
+.purpose
+{cASC$} (ASCII string) renvoie la cha—ne d≈barass≈e des codes
+ASCII non affichables.
+
+.options
+FKID
+
+.syntaxe
+{cASC$ ( {icha—ne{c )
+
+.examples
+.ex
+DISP ASC$("AbC"&CHR$(27))
+.co
+Affiche la cha—ne "AbC.". Le point remplace le caract…re de code
+27 (ESC) non affichable.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+
+.operation
+{gL'alphabet ASCII :}
+
+\L'alphabet ASCII (American Standard Code for Information
+Interchange) est un syst…me de codage des lettres largement
+r≈pandu en informatique.\
+
+\Dans cette norme, les caract…res affichables sont les caract…res
+dont le code est compris entre 32 et 126. Les codes de 0 » 31,
+ainsi que 127 servent » la transmission des informations, et ne
+sont pas des caract…res affichables. Enfin, les caract…res dont
+le code est sup≈rieur » 128 ne sont pas d≈finis.\
+
+
+{gLa fonction ASC$ :}
+
+\{cASC$} renvoie la cha—ne fournie en param…tre en remplaµant les
+caract…res non affichables par des caract…res "." (point).\
+.references
+{iJPC 22} (page 31) premi…re version par Michel Martinet.
+
+{iJPC 27} (page 34) deuxi…me version par Michel Martinet.
+.related
+ATH$
+HTA$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+ATH$
+
+.purpose
+{cATH$} (Ascii To Hexadecimal) renvoie la cha—ne hexad≈cimale
+correspondant » la cha—ne fournie en param…tre.
+
+.options
+FKID
+
+.syntaxe
+{cATH$ ( {icha—ne{c )
+{cATH$ ( {icha—ne{c , {imode{c )
+
+.examples
+.ex
+A$=ATH$("ABCDE")
+.co
+Place la repr≈sentation hexad≈cimale interne  "1424344454" dans
+la variable A$.
+.ex
+A$=ATH$("ABCDE",1)
+.co
+Place la repr≈sentation hexad≈cimale standard "4142434445" dans
+la variable A$.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+mode
+.de
+Expression num≈rique nulle ou non nulle.
+.re
+Aucune.
+.df
+0
+
+.operation
+\{cATH$} renvoie la cha—ne de codes hexad≈cimaux repr≈sentant la
+cha—ne fournie en param…tre.\
+
+\Cette repr≈sentation peut se faire de deux mani…res diff≈rentes,
+suivant le param…tre {imode} :\
+
+\Si {imode} = 0, valeur logique {ifaux} (valeur par d≈faut),
+la repr≈sentation se
+fait en inversant les chiffres hexad≈cimaux deux par deux. Ainsi,
+le caract…re "A" (code hexad≈cimal 41) sera transform≈ en "14".
+Cette repr≈sentation est conforme » la repr≈sentation interne des
+donn≈es dans le HP-71.\
+
+\Si {imode} est diff≈rent de 0, valeur logique
+{ivrai}, la repr≈sentation est standard. Le caract…re "A" (code
+hexad≈cimal 41) sera bien transform≈ en "41".\
+.references
+{iJPC 22} (page 31) premi…re version par Michel Martinet.
+
+{iJPC 27} (page 34) deuxi…me version par Michel Martinet.
+
+{iA para—tre} : troisi…me version par Pierre David.
+.related
+HTA$
+ASC$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+ATTN
+
+.purpose
+{cATTN} (ATTeNtion) active ou d≈sactive l'action de la touche
+{l[ATTN]} pour interrompre les programmes.
+
+.options
+SKID
+
+.syntaxe
+{cATTN ON
+{cATTN OFF
+
+.examples
+.ex
+10 ATTN OFF
+20 REPEAT
+30   K$=KEYWAIT$
+40   DISP K$
+50 UNTIL K$="#43"
+60 ATTN ON
+.co
+D≈finit une boucle qui affiche les touches appuy≈es jusqu'»
+ce que l'utilisateur appuie sur {l[ATTN]{p.
+.ex
+ATTN OFF @ BEEP INF,INF
+.co
+N'essayez pas cet exemple ! Vous ne pourrez l'arr¡ter que par
+{lINIT 1{p.
+
+.operation
+{gLa touche [ATTN] :}
+
+\En temps normal, la touche {l[ATTN]} interrompt l'ex≈cution des
+programmes. Pendant l'ex≈cution de certaines fonctions du module
+HP-IL, du module Math≈matiques ou de JPC Rom, {l[ATTN]} press≈e
+deux fois interrompt la fonction.\
+
+
+{gL'ordre ATTN :}
+
+\{cATTN OFF} d≈sactive l'action de la touche {l[ATTN]}.  Ceci
+signifie qu'un appui sur cette touche ne peut plus interrompre
+les programmes ou les fonctions.  Cette touche est alors trait≈e
+comme n'importe quelle autre touche du HP-71 (code #43).\
+
+\Cependant, lors d'une introduction de donn≈es ou de
+commandes, la touche {l[ATTN]} efface la ligne que l'on ait
+ex≈cut≈ {cATTN†OFF} ou non. {cATTN†OFF} ne fait que
+d≈sactiver l'interruption des programmes par la touche
+{l[ATTN]}.\
+
+\Attention : le seul moyen d'interrompre un programme est la
+s≈quence d'initialisation de premier niveau {cINIT 1}, qui
+restaure l'environnement et les variables du programme
+principal.\
+
+\{cATTN OFF} d≈sactive l'action de {l[ATTN]}, mais ceci n'a pas
+d'effet lors d'un {cINPUT} ou {cLINPUT}. Pour masquer l'effet de
+cette touche, il faut lui assigner une d≈finition nulle. Ceci se
+fait, par exemple, avec les lignes suivantes :\
+{c10 DEF KEY "#43","";
+20 INPUT A$}
+\et en mettant le HP-71 en mode {cUSER}. Ainsi, la touche {l[ATTN]}
+est d≈sactiv≈e lorsque le {cINPUT} est actif.\
+
+\Une alternative » cette d≈finition de touche est l'utilisation
+de l'ordre {cFINPUT}.\
+
+\{cATTN ON} r≈active l'action de la touche {l[ATTN]}.\
+.references
+{iJPC 23} (page 38) par Pierre David et Michel Martinet.
+.related
+DEF KEY
+FINPUT
+KEY$
+USER
+.author
+Pierre David
+Michel Martinet
+.end keyword
+.end

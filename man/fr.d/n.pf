@@ -1,0 +1,206 @@
+.language
+F
+
+.keyword
+NEXTOP$
+
+.purpose
+{cNEXTOP$} (NEXT OPcode) renvoie l'adresse de la prochaine
+instruction assembleur.
+
+.options
+FKID
+
+.syntaxe
+{cNEXTOP$ ( {iadresse hexad≈cimale{c )
+
+.examples
+.ex
+A$=NEXTOP$("0BD38")
+.co
+Place 0BD3C, soit l'adresse de la deuxi…me instruction de la
+routine POP1S qui commence a l'adresse 0BD38, dans la variable
+A$.
+.ex
+10 A$="00000"
+20 LOOP
+30   DISP OPCODE$(A$)
+40   A$=NEXTOP$(A$)
+50 END LOOP
+.co
+Ce petit programme r≈alise un d≈sassemblage automatique » partir
+de l'adresse 00000. La mn≈monique de l'instruction est affich≈e,
+puis l'adresse est actualis≈e.
+
+.input
+.it
+adresse hexad≈cimale
+.de
+Expression alphanum≈rique contenant des chiffres hexad≈cimaux.
+.re
+Jusqu'» 5 chiffres en majuscules ou en minuscules.
+
+.operation
+\{cNEXTOP$} renvoie l'adresse de correspondant » l'instruction
+suivant celle point≈e par l'adresse hexad≈cimale fournie.  Cette
+fonction, associ≈e » la fonction {cOPCODE$}, permet de d≈sassembler
+tr…s simplement du code HP-71 en langage machine.\
+
+\La longueur (en quartets) de l'instruction courante peut ¡tre
+calcul≈e de mani…re tr…s simple par la soustraction de l'adresse
+hexad≈cimale courante et de l'adresse renvoy≈e par {cNEXTOP$} :\
+{ilen} = {cHTD(NEXTOP$({iadresse courante{c))-HTD({iadresse courante{c)}
+
+\Attention : si l'adresse que vous sp≈cifiez pointe dans une
+zone de donn≈es (une table ou un en-t¡te de fichier par
+exemple), les donn≈es seront d≈cod≈es comme des instructions
+plut¬t que des donn≈es. Ce probl…me peut ¡tre r≈solu par une
+utilisation du d≈sassembleur interactif {cSYSEDIT}.\
+.related
+OPCODE$
+PEEK$
+SYSEDIT
+
+.author
+Pierre David
+Jean-Jacques Dh≈nin
+Janick Taillandier
+.end keyword
+
+.keyword
+NLOOP
+
+.purpose
+{cNLOOP} (Number on the LOOP) renvoie le nombre d'appareils sur
+la boucle HP-IL.
+
+.options
+FCKI
+
+.syntaxe
+{cNLOOP
+{cNLOOP ( {inum≈ro de boucle{c )
+
+.examples
+.ex
+A=NLOOP
+.co
+Place dans la variable A le nombre d'appareils sur la boucle
+HP-IL num≈ro 1.
+.ex
+10 RESTORE IO
+20 FOR I=1 TO NLOOP
+30   DISP I;DEVID$(I)
+40 NEXT I
+.co
+Affiche le num≈ro et le nom de tous les appareils sur la
+boucle HP-IL.
+
+.input
+.it
+num≈ro de boucle
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 3.
+.df
+1
+
+.operation
+\{cNLOOP} retourne le nombre de p≈riph≈riques sur la boucle
+sp≈cifi≈e. L'acc…s » plusieurs boucles HP-IL est possible gr¿ce
+» l'adaptateur double boucles HP-82402.\
+
+\Si {cNLOOP} est utilis≈ en mode {iadressage ≈tendu} (flag -22
+arm≈), un nombre de la forme {isseepp} est renvoy≈, oÀ :\
+
+\{iss} est la r≈ponse au message {cAES},\
+\{iee} est la r≈ponse au message {cAEP}, et\
+\{ipp} est la r≈ponse au message {cAAD}.\
+
+\Note : {cNLOOP} repr≈sente le nombre de p≈riph≈riques connu par
+le HP-71 » un instant donn≈. Le HP-71 conserve ce nombre en
+m≈moire, il n'y a donc pas besoin d'envoyer un message sur la
+boucle. En cas de doute, utilisez {cRESTORE IO} pour mettre
+» jour l'information.\
+
+\Apr…s un {cRESET†HPIL}, la valeur renvoy≈e par {cNLOOP} est
+0.\
+
+\Note : en mode {inon controleur}, le nombre ne peut ¡tre
+mis » jour. Pour cette raison, {cNLOOP} ne peut renvoyer de
+r≈sultat valide.\
+.references
+{iJPC 30} (page 50) premi…re version par Jean-Franµois Garnier.
+
+{iJPC 37} (page 33) deuxi…me version par Jean-Franµois Garnier.
+
+{iHP-IL Module Internal Design Specification}, chapitre 5.9.1.2.
+
+{iThe HP-IL System : An Introductory Guide to the Hewlett-Packard
+Interface Loop}, par Gery Kane, Steve Harper et David Ushijima,
+aux ≈ditions Mc Graw-Hill.
+
+{iThe HP-IL Interface Specification} r≈f≈rence HP-82166-90017.
+D'abord difficile, mais r≈f≈rence la plus pr≈cise.
+.related
+RESTORE IO
+SEND
+.author
+Jean-Franµois Garnier
+.end keyword
+
+.keyword
+NPRIM
+
+.purpose
+{cNPRIM} (Number of PRIMe numbers) renvoie le nombre de nombres
+premiers entre deux nombres.
+
+.options
+FCKID
+
+.syntaxe
+{cNPRIM ( {in1{c , {in2{c )
+
+.examples
+.ex
+A=NPRIM(10,10000)
+.co
+Renvoie 1225 en 1'30". Il y a 1225 nombres premiers entre 10 et
+10000.
+
+.input
+.it
+n1, n2
+.de
+Expressions num≈riques.
+.re
+Nombres entiers compris entre -10{^12{-+1 et 10{^12{--1.
+
+.operation
+\{cNPRIM} renvoie le nombre de nombres premiers dans un
+intervalle, y compris les bornes.\
+
+
+{gInterruption par [ATTN] :}
+
+\Cette fonction est interruptible par deux appuis successifs sur
+la touche {l[ATTN]}. Le HP-71 affiche alors le message d'erreur
+{cJPC ERR:Function Interrupted}.\
+.references
+{iJPC 35} (page 21) premi…re version de DIVILEX par Guy Toublanc.
+
+{iJPC 38} (page 18) deuxi…me version par Guy Toublanc.
+
+{iJPC 48} (page 23) troisi…me version de DIVILEX par Guy Toublanc.
+
+L'ancienne appellation de {cNPRIM} ≈tait {cNPRM}.
+.related
+FPRIM
+PHI
+PRIM
+.author
+Guy Toublanc
+.end keyword
+.end

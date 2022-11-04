@@ -1,0 +1,201 @@
+.language
+A
+
+.keyword
+NEXTOP$
+
+.purpose
+{cNEXTOP$} (NEXT OPcode) returns the address of the next
+assembler instruction.
+
+.options
+FKID
+
+.syntaxe
+{cNEXTOP$ ( {ihexadecimal address pointer{c )
+
+.examples
+.ex
+A$=NEXTOP$("0BD38")
+.co
+Stores 0BD3C, the address of the first instruction of the POP1S
+routines (at address 0BD38), into A$.
+.ex
+10 A$="00000"
+20 LOOP
+30   DISP OPCODE$(A$)
+40   A$=NEXTOP$(A$)
+50 END LOOP
+.co
+This little program provides an automatic disassembler,
+starting from address 00000. Each instruction mnemonic is
+displayed, then the address is updated.
+
+.input
+.it
+hexadecimal address pointer
+.de
+String expression containing hexadecimal digits.
+.re
+Up to 5 uppercase or lowercase digits.
+
+.operation
+\{cNEXTOP$} returns the address of the opcode that follows the
+one located at the hexadecimal address pointer you specify.
+Together with {cOPCODE$}, this function allows you to easily
+disassemble HP-71 machine language.\
+
+\The current instruction length (in nibble) can be computed by
+subtracting the current address from the address returned by
+{cNEXTOP$} :\
+{ilen} = {cHTD(NEXTOP$({icurrent address{c))-HTD({icurrent address{c)
+
+\}Warning : if the hexadecimal address points to a data field
+rather than to a machine language instruction, the data will be
+decoded as an instruction rather than as data. This problem can
+be overcome by means of the interactive disassembler provided by
+the {cSYSEDIT} keyword.\
+.related
+OPCODE$
+PEEK$
+SYSEDIT
+
+.author
+Pierre David
+Jean-Jacques Dh≈nin
+Janick Taillandier
+.end keyword
+
+.keyword
+NLOOP
+
+.purpose
+{cNLOOP} (Number on the LOOP) returns the number of devices on
+the HP-IL loop.
+
+.options
+FCKI
+
+.syntaxe
+{cNLOOP
+{cNLOOP ( {iloop number{c )
+
+.examples
+.ex
+A=NLOOP
+.co
+Stores in A the number of devices on loop number 1.
+.ex
+10 RESTORE IO
+20 FOR I=1 TO NLOOP
+30   DISP I;DEVID$(I)
+40 NEXT I
+.co
+Displays the number and name of all devices in the HP-IL loop.
+
+.input
+.it
+loop number
+.de
+Numeric expression rounded to an integer.
+.re
+1 through 3.
+.df
+1
+
+.operation
+\{cNLOOP} returns the number of devices on the specified loop.
+Multiple loops are available through the dual HP-IL adapter
+HP-82402.\
+
+\If {cNLOOP} is used in {iextended addressing} scheme (flag -22
+set), a number {isseepp} is returned, where :\
+
+\{iss} is the answer to message {cAES},\
+\{iee} is the answer to message {cAEP}, and\
+\{ipp} is the answer to message {cAAD}.\
+
+\Note : {cNLOOP} returns the number of devices expected to be on
+the specified loop. Since this information is kept in memory, the
+HP-71 has no need to send a message on the loop. Use {cRESTORE
+IO} to update the loop information\
+
+\After {cRESET HPIL}, {cNLOOP} returns 0.\
+
+\Note : in device mode, loop data cannot be updated, therefore
+{cNLOOP} cannot return valid result.\
+.references
+{iJPC 30} (page 50) first version by Jean-Franµois Garnier.
+
+{iJPC 37} (page 33) second version by Jean-Franµois Garnier.
+
+{iHP-IL Module Internal Design Specification}, chapter 5.9.1.2.
+
+{iThe HP-IL System : An Introductory Guide to the Hewlett-Packard
+Interface Loop}, by Gery Kane, Steve Harper and David Ushijima,
+(Mc Graw-Hill).
+
+{iThe HP-IL Interface Specification} part number HP-82166-90017.
+Difficult, but the most precise reference.
+.related
+RESTORE IO
+SEND
+.author
+Jean-Franµois Garnier
+.end keyword
+
+.keyword
+NPRIM
+
+.purpose
+{cNPRIM} (Number of PRIMe numbers) returns the number of prime
+numbers in an interval.
+
+.options
+FCKID
+
+.syntaxe
+{cNPRIM ( {in1{c , {in2{c )
+
+.examples
+.ex
+A=NPRIM(10,10000)
+.co
+Returns 1225 in 1'30". There are 1225 prime numbers between 10
+and 10000.
+
+.input
+.it
+n1, n2
+.de
+Numeric expressions.
+.re
+Integer numbers between -10{^12{-+1 and 10{^12{--1.
+
+.operation
+\{cNPRIM} returns the number of prime numbers in an interval. If
+{in1} or {in2} are prime, they are counted in the result.\
+
+
+{gInterrupting the function with [ATTN] :}
+
+\This function can be interrupted by pressing 
+{l[ATTN]} twice. The HP-71 will then report the error
+{cJPC ERR:Function Interrupted}.\
+.references
+{iJPC 35} (page 21) first version of DIVILEX by Guy Toublanc.
+
+{iJPC 38} (page 18) second version by Guy Toublanc.
+
+{iJPC 48} (page 23) third version of DIVILEX by Guy Toublanc.
+
+{cNPRIM} was previously called {cNPRM}.
+.related
+FPRIM
+PHI
+PRIM
+.author
+Guy Toublanc
+.end keyword
+.end
+

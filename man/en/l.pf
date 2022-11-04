@@ -1,0 +1,185 @@
+.language
+A
+
+.keyword
+LEAVE
+
+.purpose
+{cLEAVE} exits from a structured programming loop, see {cWHILE},
+{cREPEAT} or {cLOOP}.
+
+.options
+SKID
+
+.syntaxe
+LEAVE
+
+.examples
+.ex
+IF I=INF THEN LEAVE
+.co
+Exits the loop if I is infinite.
+
+.operation
+\{cLEAVE} allows early exit from {cWHILE} ... {cEND WHILE} or
+{cREPEAT} ... {cUNTIL} loops.\
+
+\{cLEAVE} is the only way to exit from a
+{cLOOP} ... {cEND LOOP} structure.\
+.references
+{iJPC 31} (page 38) first version by Janick Taillandier.
+
+{iJPC 52} second version by Pierre David and Janick
+Taillandier.
+.related
+EXIT
+LOOP} ... {cEND LOOP
+REPEAT} ... {cUNTIL
+WHILE} ... {cEND WHILE
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+LEX
+
+.purpose
+{cLEX} enables or disables a Lex file.
+
+.options
+SKID
+
+.syntaxe
+{cLEX {ifile{c OFF
+{cLEX {ifile{c ON
+
+.examples
+.ex
+LEX STRINGLX OFF
+.co
+Disables the LEX file STRINGLX. Functions in this Lex are no
+longer available. The file type is changed to D-LEX.
+.ex
+LEX STRINGLX ON
+.co
+Enables the D-LEX file STRINGLX. Functions in this Lex are again
+available.
+
+.input
+.it
+file
+.de
+String expression or unquoted string.
+.re
+File name with optional device specifier.
+
+.operation
+{gDisabling Lex files}
+
+\The processing speed of the HP-71 is directly related to the
+number of Lex files in memory. The more files, the slower the
+machine. It is better to have one big Lex file with 90 functions
+than 9 files with 10 functions each. If your HP-71 is loaded with
+many small Lex files, you may wish to disable some, and reenable
+them back when you need them.\
+
+\Also, if Lex files contain two keywords with the same
+identification (ID) and token, you can use either keywords
+disabling the Lex you do not wish to use.\
+
+\Files in Rom or Eprom cannot be disabled.\
+
+{gThe LEX ON/OFF command}
+
+\{cLEX {ifile{c OFF} changes the type of {ifile} from LEX to
+D-LEX, so that it is no longer active. Its functions can no
+longer be used until a {cLEX {ifile{c ON} is executed on this file.\
+
+
+{gD-LEX files}
+
+\Disabled files are listed with a {cD-LEX} type during a {cCAT}
+or {cCAT$} as long as JPC Rom is plugged in your HP-71. These
+files can be copied to a mass storage but can be copied back to
+Ram only if JPC Rom is plugged in the HP-71.\
+.references
+{iJPC 24} (page 30) first version by Michel Martinet.
+
+{iTo be published} : new version by Pierre David and Janick
+Taillandier.
+
+{cLEX} was called {cENABLE} and {cDISABLE}
+.related
+EDIT
+MERGE
+.author
+Pierre David
+Michel Martinet
+Janick Taillandier
+.end keyword
+.keyword
+LOOP ... END LOOP
+
+.purpose
+{cLOOP} ... {cEND LOOP} defines an endless loop.
+
+.options
+SKID
+
+.syntaxe
+{cLOOP
+  {iprogram segment}
+{cEND LOOP
+
+.examples
+.ex
+10 INPUT X
+20 LOOP
+30   DISP X;X*X
+40   X=X+1
+50 END LOOP
+.co
+Defines an endless loop displaying a sequence of numbers and
+their squares. The only way to stop this loop is by pressing 
+{l[ATTN]{p.
+
+.input
+.it
+program segment
+.de
+Any number of contiguous lines.
+.re
+None.
+
+.operation
+\The structure {cLOOP} ... {cEND LOOP} allows endless looping
+with conditional exits through {cLEAVE}.\
+
+\The repeated code segment begins after the keyword {cLOOP} and
+ends before the keyword {cEND LOOP}. When you reach {cEND LOOP}
+execution branches to the first statement following {cLOOP}.\
+
+\The program segment can contain any number of {cLEAVE}. The only
+restriction is that {cLEAVE} instructions may not be placed
+inside nested structures.\
+
+\Program segments may contain any kind of loop structure.
+However, these structures must be properly matched, or the
+error {cJPC ERR:Structure Mismatch} will be reported.\
+.references
+{iJPC 52} first version by Pierre David and Janick
+Taillandier.
+
+HP 9000 series 200/300 Basic 4.0.
+.related
+ATTN
+LEAVE
+FOR} ... {cNEXT
+WHILE} ... {cEND WHILE
+REPEAT} ... {cUNTIL
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+.end

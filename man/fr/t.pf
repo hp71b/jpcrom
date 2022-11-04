@@ -1,0 +1,354 @@
+.language
+F
+
+.keyword
+TEDIT
+
+.purpose
+{cTEDIT} (Text EDITor) est un ≈diteur de textes extr¡mement
+rapide, compatible avec l'≈diteur de textes Hewlett-Packard.
+
+.options
+SKID
+
+.syntaxe
+TEDIT {ifichier{c
+TEDIT {ifichier{c , {icha—ne de commandes{c
+
+.examples
+.ex
+TEDIT ESSAI
+.co
+Cr≈e le fichier {lESSAI{p et rentre sous
+l'≈diteur de textes en mode commandes.
+.ex
+TEDIT ESSAI,"1#R/TOTO/TATA/;E"
+.co
+Appelle l'≈diteur de textes sur le ficher {lESSAI{p, substitue
+toutes les occurrences de la cha—ne {lTOTO{p par la cha—ne {lTATA{p
+et sort de l'≈diteur.
+.ex
+TEDIT ESSAI:TAPE
+.co
+Copie le fichier {lESSAI{p en m≈moire et rentre sous l'≈diteur
+de textes en mode commandes.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Sp≈cificateur de p≈riph≈rique en option.
+.it
+cha—ne de commandes
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.df
+Aucune commande n'est ex≈cut≈e.
+
+.operation
+\{cTEDIT} n'est inclus dans JPC Rom que pour des raisons de
+compatibilit≈, et son utilisation n'est conseill≈e que dans ce cas.\
+
+\{cTEDIT} est un ≈diteur de textes compatible avec l'≈diteur de textes
+{cEDTEXT} inclus dans les modules Forth / Assembleur et Text Editor
+de Hewlett-Packard. Il est cependant conseill≈ d'utiliser {cXEDIT},
+plus agr≈able et plus puissant.\
+
+\Le lecteur d≈sirant utiliser {cTEDIT} pour des raisons de compatibilit≈
+avec {cEDTEXT} est invit≈ » se reporter au manuel de ce dernier pour
+r≈f≈rence, puis au paragraphe {gdiff≈rences entre TEDIT et EDTEXT}.\
+
+\Le lecteur d≈sirant utiliser {cXEDIT} et connaissant d≈j» {cEDTEXT} ou
+{cTEDIT} est invit≈ » se reporter au paragraphe {gdiff≈rences
+entre TEDIT et XEDIT}, puis au manuel de {cXEDIT} pour la r≈f≈rence.\
+
+
+{gDiff≈rences entre TEDIT et EDTEXT}
+
+\Ce paragraphe suppose que vous connaissez d≈j» le fonctionnement de
+{cEDTEXT}. Si ce n'est pas le cas, nous vous conseillons d'apprendre
+directement le fonctionnement de {cXEDIT}.\
+
+\La principale diff≈rence entre {cTEDIT} et {cEDTEXT} est 
+la rapidit≈. {cTEDIT} est enti…rement en assembleur et optimis≈
+sp≈cialement pour les grands fichiers, {cEDTEXT} est
+pour une grande partie en Basic, et est donc tr…s lent.\
+
+\Les autres diff≈rences sont r≈sum≈es ci-dessous.\
+
+{iCommandes ajout≈es}
+
+\{cTEDIT} dispose de commandes suppl≈mentaires :\
+\- {cH} ({iHelp}) : affiche une aide,\
+\- {cJ} ({iJoin}) : r≈unit plusieurs lignes cons≈cutives en une seule,\
+\- {cQ} ({iQuit}) : ≈quivalent » {cE} ({iExit}), et\
+\- {cX} ({ieXchange file}) : ≈dite un autre fichier sans sortir de {cTEDIT}.\
+
+\Pour plus de d≈tails sur ces commandes, voir le manuel de {cXEDIT}.\
+
+{iCommandes diff≈rentes}
+
+\Les commandes {cC} ({iCopy}) et {cM} ({iMove}) de {cEDTEXT}
+n'autorisent pas la copie ou le d≈placement d'un bloc de texte incluant
+la ligne courante, sauf si cette ligne est la premi…re ou la derni…re
+du bloc. Les commandes {cC} et {cM} de {cTEDIT} ne sont sujettes »
+aucune restriction.\
+
+{iFonctionnalit≈s suppl≈mentaires}
+
+\{cTEDIT} diff…re de {cEDTEXT} par quelques d≈tails de comportement, qui
+sont le plus souvent des ajouts motiv≈s par une longue utilisation de
+{cEDTEXT} :\
+
+\- La touche {l[g][CMDS]} active la pile de commandes, et permet d'utiliser
+les touches de curseur verticales
+({l[{m£{l]}, {l[{m°{l]}, {l[g][{m£{l]} et {l[g][{m°{l]}), que ce soit en mode
+{icommandes} ou en mode {isaisie de texte}. {cEDTEXT} ne le permet
+pas, ou ne le permet qu'au prix d'une manipulation hasardeuse.\
+
+\- La touche {l[f][CONT]} affiche le nom du fichier, la ligne
+courante et le nombre total de lignes du fichier. {cEDTEXT} n'affiche que
+le nom du fichier.\
+
+\- En mode commandes, les touches de curseur verticales
+({l[{m£{l]}, {l[{m°{l]}, {l[g][{m£{l]} et {l[g][{m°{l]})
+n'affichent pas la nouvelle ligne. {cEDTEXT} affiche la nouvelle ligne.
+{cTEDIT} permet ainsi de se d≈placer plus vite dans le fichier, l'affichage
+d'une ligne ≈tant maintenant demand≈ explicitement par l'utilisateur en
+appuyant sur {l[ENDLINE]}\
+
+\- La touche {l[RUN]} est d≈sactiv≈e. Avec {cEDTEXT}, elle agit comme
+la touche {l[ATTN]}, ce qui provoque souvent la perte d'une ligne
+de texte en cours de frappe.\
+
+\- La touche {l[f][USER]} est maintenant active, ce qui permet de valider ou
+non le mode {iuser}. {cEDTEXT}, » cause de sa programmation,
+interdit de passer en dehors du mode {iuser} (ou ne le permet qu'au prix
+d'une manipulation hasardeuse).\
+
+\- La sortie de {cTEDIT} ne provoque pas l'affichage du message {cDone},
+car la sortie est instantan≈e.\
+
+\- La touche {l[f][OFF]} (ou une inactivit≈ de plus de 10 minutes) sort de
+{cTEDIT}. Avec {cEDTEXT}, cela ne provoque que la perte de la
+ligne courante avec retour au mode {icommandes}, sans possibilit≈
+ult≈rieure d'extinction.\
+
+
+
+
+{gDiff≈rences entre TEDIT et XEDIT}
+
+
+\Les ≈diteurs {cTEDIT} et {cXEDIT} sont tr…s proches l'un de l'autre.
+L'objectif de {cTEDIT} est de rester compatible avec {cEDTEXT}, alors
+que l'objectif de {cXEDIT} est d'offrir un environnement d'≈dition
+proche de celui de l'≈diteur {ced} sous le syst…me Unix (Unix est une
+marque d≈pos≈e par AT&T).
+Ces deux objectifs ont conduit » des divergences entre {cTEDIT} et {cXEDIT}
+lorsqu'ils ≈taient incompatibles.\
+
+{iDiff≈rences dans les cha—nes g≈n≈riques}
+
+\Le principe des cha—nes g≈n≈riques sous {cEDTEXT} est d'offrir
+deux modes : un mode {inormal} et un mode {ig≈n≈rique}. Par exemple, la cha—ne
+{cA\@1\$} signifie :\
+\- chercher un caract…re {cA} en mode normal, puis\
+\- passer en mode g≈n≈rique, puis\
+\- chercher un caract…re quelconque de caract…res quelconques (caract…re
+sp≈cial {c@}), puis\
+\- chercher un caract…re {c1} (le caract…re {c1} n'est pas sp≈cial), puis\
+\- repasser en mode normal, et enfin\
+\- chercher un caract…re {c$} (le caract…re {c$} est sp≈cial, mais nous ne
+sommes plus en mode g≈n≈rique).\
+
+\Sous {cXEDIT}, on est en permanence en mode {ig≈n≈rique}. Si on veut
+utiliser un caract…re sp≈cial comme un caract…re normal (exemple du {c$}
+ci-dessous), il faut le faire pr≈c≈der par le caract…re {c\}. On passe
+donc en mode {inormal} pour un et un seul caract…re.\
+
+\Hormis cette diff≈rence li≈e au mode, le caract…re {c@} n'a pas
+de signification sp≈ciale sous {cXEDIT} (il est remplac≈ par la
+s≈quence {c..*}). La table ci-dessous repr≈sente les caract…res sp≈ciaux
+utilis≈s lors des recherches avec {cXEDIT} :{l\
+
+          Caract…re       Signification
+          ---------       ----------------------------------------------
+              \           annule la signification du caract…re suivant
+              ^           d≈but de ligne
+              $           fin de ligne
+              .           caract…re quelconque
+             [ ]          ensemble de caract…res
+            [^ ]          compl≈mentaire de l'ensemble
+              *           r≈p≈tition du motif pr≈c≈dent 0 ou n fois}
+
+\L'exemple ci-dessus est donc {cA..*\$} avec {cXEDIT}.\
+
+
+{iDiff≈rences dans le format des param…tres}
+
+\Les param…tres des commandes de {cTEDIT} sont de simples num≈ros de lignes.
+Avec {cXEDIT}, ce sont de v≈ritables expressions contenant :\
+\- des num≈ros de lignes classiques,\
+\- le symbole {c.} pour d≈signer la ligne courante,\
+\- le symbole {c$} pour d≈signer la derni…re ligne du fichier,\
+\- des cha—nes g≈n≈riques.\
+
+\Par exemple, pour d≈truire toutes les lignes entre la suivante et
+celle juste avant la prochaine occurrence d'une majuscule en d≈but de
+ligne, on fera sous {cXEDIT} :{c\
+        .+1 , /^[A-Z]/-1 D}
+\Les espaces ont ≈t≈ mis ici pour plus de clart≈, ils ne sont bien ≈videmment
+pas n≈cessaires lorsque vous tapez la ligne.\
+
+\On comprend ais≈ment, au vu de cet exemple, la diff≈rence de puissance
+entre {cTEDIT} et {cXEDIT}.\
+.references
+{iA para—tre} : Premi…re version de {cTEDIT} par Pierre
+David et Janick Taillandier.
+
+{iManuel du module Editeur de Textes} par Hewlett-Packard.
+
+{iManuel du module Forth / Assembleur} par Hewlett-Packard.
+.related
+XEDIT
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+TICLEN
+
+.purpose
+{cTICLEN} (TICk LENgth) d≈finit la longueur des marques de
+graduation.
+
+.options
+SKID
+.syntaxe
+TICLEN {ilongueur des marques}
+
+.examples
+.ex
+TICLEN 10
+.co
+d≈finit des marques de graduation de 10 unit≈s de long.
+
+.input
+.it
+longueur des marques
+.de
+Expression num≈rique arrondie » un nombre entier.
+.re
+-32767 » +32767
+
+.operation
+\La longueur des marques de graduation s'exprime en unit≈s
+graphiques.\
+
+\Les marques sont trac≈es de part et d'autre de l'axe.
+L'argument de {cTICLEN} sp≈cifie la longueur totale des marques.\
+
+.related
+XAXIS
+YAXIS
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+TOKEN
+
+.purpose
+{cTOKEN} renvoie le code interne (Lex ID et token) de la fonction sp≈cifi≈e.
+
+.options
+FKID
+
+.syntaxe
+{cTOKEN ( {imot-clef{c )
+{cTOKEN ( {imot-clef{c , {inum≈ro d'ordre{c )
+
+.examples
+.ex
+A=TOKEN("TOKEN",1)
+.co
+Place 225073 dans la variable A, soit le token de la fonction
+{lTOKEN{p. L'Id est 225, et le token est 73.
+
+.input
+.it
+mot-clef
+.de
+Expression alphanum≈rique.
+.re
+Le mot-clef doit exister.
+
+.it
+num≈ro d'ordre
+.de
+Expression num≈rique arrondie » un entier.
+.re
+Le mot-clef doit exister.
+.df
+1
+
+.operation
+\{cTOKEN} renvoie le code interne de la fonction sp≈cifi≈e. Le
+code interne est le num≈ro affich≈ avec {cXWORD} ou {cXFN} quand
+le Lex auquel appartient la fonction n'est pas pr≈sent.\
+
+\{cTOKEN} renvoie le code interne sous la forme {iiiittt},
+form≈ par l'identificateur du Lex (Id) et du
+code proprement dit (token). Par exemple, {cTOKEN} a comme token
+73 dans Lex d'identificateur 225. Le r≈sultat est donc
+225*1000+73, soit 225073.\
+
+\S'il existe plusieurs mots-clef de m¡me nom, le param…tre
+{inum≈ro d'ordre} permet de les distinguer. Par d≈faut, {inum≈ro
+d'ordre} vaut 1.\
+
+\Si le mot-clef n'existe pas, ou s'il n'y a pas assez
+d'occurences du mot-clef, l'erreur {cERR:Invalid Arg} est
+renvoy≈e.\
+
+\Les mots-clefs de plus de 8 caract…res n≈cessitent un traitement
+sp≈cial par le syst…me. Ainsi, des mots comme {cUNDERLINE} ou
+{cRANDOMIZE} sont reconnus comme {cUNDERLIN} ou {cRANDOMIZ}. Ce
+sont ces fonctions qui reconnaissent le {cE} final. {cTOKEN} ne
+peut conna—tre ces caract…res suppl≈mentaires. Pour les trouver,
+cette fonction reconna—t {cUNDERLIN} et ignore le {cE} final.
+Ainsi, {cTOKEN("RANDOMIZE")} comme {cTOKEN("RANDOMIZ----")}
+ignorent les caract…res suppl≈mentaires et renvoient le m¡me
+num≈ro.\
+
+\{cTOKEN} identifie le plus long mot-clef dont le nom est
+une sous-cha—ne du param…tre fourni. Par exemple,
+{cTOKEN("MEMORY")} renvoie 1056, le num≈ro de la fonction
+{cMEM}.\
+
+\{cTOKEN} ne reconna—t pas seulement les fonctions et
+mots-clefs, mais tous les ≈l≈ments syntaxiques du Basic du
+HP-71. Ainsi, {cTOKEN(",")} est l≈gal, ainsi que
+{cTOKEN("3")}, etc.\
+
+\{cTOKEN} fournit un moyen rapide et pratique pour
+identifier d'≈ventuels conflits entre mots-clefs.\
+.reference
+{iJPC 31} (page 22) premi…re version par Jean-Jacques Moreau.
+
+Manuel du module Forth / Assembler (page 64).
+
+{iInternal Design Specification}, Volume I
+.related
+ENTRY$
+.author
+Jean-Jacques Moreau
+.end keyword
+.end

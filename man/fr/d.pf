@@ -1,0 +1,900 @@
+.language
+F
+
+.keyword
+DATEADD
+
+.purpose
+{cDATEADD} (DATE ADDition) renvoie la date correspondant È la
+date donnÅe plus un nombre de jours spÅcifiÅ.
+
+.options
+FCKID
+
+.syntaxe
+DATEADD ( {idate{c , {inombre de jours{c )
+
+.examples
+.ex
+A=DATEADD (1.011986, 364)
+.co
+Place 31.121986 (31 dÅcembre 1986) dans la variable A, si le
+mode DMY est actif.
+.ex
+DATEADD (DATE$,-1)
+.co
+Renvoie la date correspondant È hier.
+
+.input
+.it
+date
+.de
+Expression numÅrique interprÅtÅe suivant le format courant, ou
+expression alphanumÅrique.
+.re
+doit Átre comprise entre le 15 octobre 1582 et le 31 dÅcembre
+9999.
+.it
+nombre de jours
+.de
+Expression numÅrique arrondie È un entier.
+.re
+nÅgatif ou positif.
+
+.operation
+\{cDATEADD} renvoie la date correspondant È la date donnÅe plus
+un certain nombre de jours.\
+
+\Pour une description complÉte des formats de date, voir la
+fonction {cDATESTR$}.\
+.references
+{iJPC 28} (page 40) premiÉre version par Laurent Istria.
+
+{iJPC 31} (page 35) deuxiÉme version par Franµois Le Grand.
+
+{iJPC 49} (Page 24) troisiÉme version par Pierre David et Janick
+Taillandier.
+
+{iManuel du module Horloge du HP-41}.
+
+L'ancienne appellation de {cDATEADD} Åtait {cDATE+}.
+.related
+DATE$
+DATESTR$
+DDAYS
+DMY
+MDY
+.author
+Pierre David
+Laurent Istria
+Franµois Le Grand
+Janick Taillandier
+.end keyword
+
+.keyword
+DATESTR$
+
+.purpose
+{cDATESTR$} (DATE to STRing) convertit une date au format
+alphanumÅrique "aaaa/mm/jj".
+
+.options
+FKID
+
+.syntaxe
+DATESTR$ ( {idate{c )
+
+.examples
+.ex
+A$=DATESTR$ (14.071789)
+.co
+Place "1789/07/14" dans la variable A$.
+
+.input
+.it
+date
+.de
+Expression numÅrique interprÅtÅe suivant le format courant, ou
+expression alphanumÅrique.
+.re
+doit Átre comprise entre le 15 octobre 1582 et le 31 dÅcembre
+9999.
+
+.operation
+{gLes formats des dates :}
+
+\Le HP-71 ûde baseý dispose de deux formats de dates :\
+
+{iLe format alphanumÅrique}
+
+\Les dates exprimÅes dans ce format sont des chaÑnes
+alphanumÅriques composÅes de deux ou quatre chiffres pour
+l'annÅe, de deux chiffres pour le mois et de deux chiffres pour
+le jour. On peut les symboliser par :  {i"aaaa/mm/jj"} ou
+{i"aa/mm/jj"}.\
+
+\Par exemple, "1987/05/15" ou "87/05/15" sont des dates
+valides (15 mai 1987).\
+
+\Si l'annÅe est sur deux chiffres, elle correspondra È 19aa si
+aa>=60, È 20aa ou aa<60.\
+
+\Les fonctions de date de JPC Rom utilisent ces deux formats
+alphanumÅriques.\
+
+{iLe format numÅrique de base}
+
+\Les dates sont exprimÅes sous la forme d'un nombre du type :
+{iaajjj}, oË {iaa} est l'annÅee et {ijjj} le numÅro du jour dans
+l'annÅe.\
+
+\Par exemple, le 15 mai 1987 est reprÅsentÅ par le nombre 87135.
+L'annÅe est 1987, et le 15 mai est le 135{p{^Éme} jour de
+l'annÅe.\
+
+\Ce format est malcommode d'emploi. Il est principalement
+utilisÅ, sur un HP-71 ûde baseý pour faire des calculs de dates.\
+
+
+\Avec JPC Rom et ses fonctions de dates, ce format devient
+inutile. Il a ÅtÅ remplacÅ par un autre format numÅrique,
+identique È celui utilisÅ par le module horloge du HP-41.\
+
+{iLe format numÅrique de JPC Rom}
+
+\C'est un format qui permet d'introduire les dates È l'europÅenne
+oË È l'amÅricaine. Le choix entre ces deux options est fait en
+utilisant les mots clefs {cDMY} et {cMDY}.\
+
+\En format DMY (Day Month Year, ou Jour Mois AnnÅe), les dates
+sont introduites suivant le modÉle {ijj.mmaaaa}. Ainsi, notre 15
+mai 1987 sera reprÅsentÅ de la faµon suivante :\
+15.051987
+
+\En format amÅricain, ou MDY (Month Day Year), les dates sont
+introduites suivant le modÉle {imm.jjaaaa}. Le 15 mai 1987 sera
+donc le nombre :\
+5.151987
+
+\Le choix entre ces deux modes est reprÅsentÅ par un l'indicateur
+binaire -53, valant 0 pour le mode MDY (mode par dÅfaut) et 1
+pour le mode DMY. Vous pouvez changer de mode avec les mots clefs
+{cDMY} ou {cMDY}.\
+
+
+{gLes formats utilisÅs :}
+
+\Les fonctions de dates de JPC Rom admettent donc deux types de
+dates :\
+
+\- les dates au format alphanumÅrique ({i"aaaa/mm/jj"} ou
+{i"aa/mm/jj"}), ou\
+
+\- les dates au format numÅrique ({ijj.mmaaaa} en mode DMY, ou
+{imm.jjaaaa} en mode MDY).\
+
+
+{gLa fonction DATESTR$ :}
+
+\La fonction {cDATESTR$} est une fonction de conversion d'une
+date au format numÅrique JPC Rom ({ijj.mmaaaa} ou {imm.jjaaaa}) en
+une date au format alphanumÅrique ({i"aaaa/mm/jj"}).\
+
+\Vous pouvez donc l'utiliser en complÅment des fonctions de
+calculs de dates pour isoler plus facilement les composantes de
+la date, par exemple.\
+.references
+{iJPC 49} (Page 24) troisiÉme version de DATELEX comportant
+{cDATESTR$} par Pierre David et Janick Taillandier.
+.related
+DATE$
+DMY
+MDY
+SETDATE
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+DBLIST
+
+.purpose
+{cDBLIST} (Display Basic LIST) liste un programme Basic sous forme
+structurÅe.
+
+.options
+SKID
+
+.syntaxe
+DBLIST{c }[{c INDENT {iindentation{c }] [ {cTO {idestination{c }]
+DBLIST {ifichier{c }[{c INDENT {iindentation{c }] [ {cTO {idestination{c }]
+DBLIST {ifichier{c , {iligne dÅpart{c }[{c INDENT {iindentation{c }] [ {cTO {idestination{c }]
+DBLIST {ifichier{c , {iligne dÅpart {c, {iligne fin{c }[{c INDENT {iindentation{c }] [ {cTO {idestination{c }]
+
+.examples
+.ex
+DBLIST MONSUB INDENT 3
+.co
+Liste le programme MONSUB, de la premiÉre È la derniÉre
+ligne, en indentant les structures par trois espaces.
+.ex
+DBLIST MONSUB,10
+.co
+Liste la ligne 10 du programme MONSUB, sans indentation
+des structures.
+.ex
+DBLIST MONSUB,10,100 INDENT 2 TO LISTE
+.co
+Liste le programme MONSUB, de la ligne 10 È la ligne 100,
+en indentant les structures de deux espaces et en envoyant
+le rÅsultat dans le fichier LISTE.
+
+.input
+.it
+fichier
+.de
+Expression alphanumÅrique ou chaÑne sans guillemets.
+.re
+Nom de fichier avec spÅcificateur d'unitÅ en option.
+.df
+fichier courant.
+.it
+ligne dÅpart
+.de
+Constante entiÉre identifiant une ligne de programme.
+.re
+1 È 9999.
+.df
+premiÉre ligne du programme.
+.it
+ligne fin
+.de
+Constante entiÉre identifiant une ligne de programme.
+.re
+Ligne de dÅpart jusqu'È 9999.
+.df
+ligne de dÅpart si spÅcifiÅe ; sinon, derniÉre ligne du
+programme.
+.it
+indentation
+.de
+Expression numÅrique arrondie È un entier.
+.re
+0 È 255.
+.df
+0
+.it
+destination
+.de
+Expression alphanumÅrique ou chaÑne sans guillemets.
+.re
+Nom de fichier avec spÅcificateur d'unitÅ en option.
+.df
+Le listage va sur le pÅriphÅrique dÅsignÅ par {lDISPLAY IS{p.
+
+.operation
+\L'exÅcution de {cDBLIST} provoque un listage du fichier BASIC
+sous forme û structurÅe ý sur l'appareil dÅsignÅ par le
+dernier ordre {cDISPLAY IS} ou sur l'Åcran interne si aucun
+appareil n'a ÅtÅ spÅcifiÅ.\
+
+\{cDBLIST} liste le programme Basic en cadrant les numÅros de
+ligne È 4 caractÉres (en complÅtant par des espaces s'ils
+font moins de 4 caractÉres). Ainsi, toutes les lignes de
+votre programme seront bien alignÅes, quel que soit leur
+numÅro de ligne.\
+
+\{cDBLIST} ne liste pas les numÅros des lignes ne contenant
+qu'une remarque (avec le symbole {c!}, mais pas avec {cREM}).
+Il met un tiret pour marquer la premiÉre remarque
+d'une sÅrie. L'ordre {cRENUMREM} permet de faciliter la
+numÅrotation des remarques. Avec ce traitement, les lignes
+de remarques n'aparaissent plus comme n'importe quelle
+autre ligne Basic.\
+
+\{cDBLIST} saute une ligne avant toute dÅfinition de
+fonction ({cDEF FN}), tout bloc de {cDATA} ou tout label. De
+mÁme, une ligne est sautÅe aprÉs les dÅfinitions de
+fonctions et les blocs de {cDATA}. Les blocs constituant
+votre programme sont ainsi mieux sÅparÅs.\
+
+\{cDBLIST} saute une ligne, trace un trait et saute une
+nouvelle ligne avant tout nouveau sous-programme ({cSUB}).
+Ceci permet de mieux scinder le programme en parties
+indÅpendantes.\
+
+\Enfin, {cDBLIST} permet l'indentation des structures.
+Le corps des structures, que ce soit avec des boucles standard
+({cFOR}...{cNEXT}) ou de JPC Rom ({cWHILE}...{cEND WHILE} ou
+les tests ou {cSELECT}), est dÅcalÅ vers la droite du nombre
+d'espaces {iindentation} fourni en paramÉtre par {cINDENT}.
+Par dÅfaut, cette valeur est nulle, c'est È dire que les
+structures ne sont pas indentÅes.\
+
+\L'indentation des structures fait trÉs vite apparaÑtre tous
+les dÅfauts de structuration de vos programmes. C'est un
+complÅment indispensable des ordres de programmation
+structurÅe de JPC Rom.\
+
+
+\L'adjonction de {cTO {ifichier} permet de rÅcupÅrer le
+listage non plus sur l'affichage mais dans un fichier. A
+titre indicatif, c'est ainsi que sont listÅs les programmes
+en Basic dans
+{iJPC}. Le fichier est crÅÅ, puis rempli. Si le fichier
+existait dÅjÈ, une erreur {cJPC ERR:File Exists} est
+gÅnÅrÅe.\
+
+
+\La valeur courante de {cDELAY} dÅtermine le dÅlai d'affichage de
+chaque ligne. La valeur de {cWIDTH}, quant È elle, dÅtermine la
+largeur de la ligne imprimÅe.\
+
+\Pour arrÁter un listage et afficher le curseur, il suffit
+d'appuyer sur la touche {l[ATTN]}.\
+.references
+{iJPC 18} (page 25) premiÉre version du programme JPCLISTE en
+Basic par Pierre David et Michel Martinet.
+
+{iJPC 38} (page 24) premiÉre version de {cBLIST} par Jean-Pierre
+Bondu.
+
+{iJPC 53} (page 16) deuxiÉme version de {cDBLIST} par Pierre
+David et Janick Taillandier.
+
+L'ancienne appellation de {cDBLIST} Åtait {cBLIST}.
+.related
+DELAY
+LIST
+PBLIST
+PLIST
+WIDTH
+}tous les mots-clefs de programmation structurÅe
+.author
+Jean-Pierre Bondu
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+DDAYS
+
+.purpose
+{cDDAYS} (Delta DAYS) calcule le nombre de jours entre deux
+dates.
+
+.options
+FCKID
+
+.syntaxe
+{cDDAYS ( {idate1{c , {idate2{c )
+
+.examples
+.ex
+A=DDAYS(1.011986,31.121986)
+.co
+Stocke 364 jours dans la variable A.
+.ex
+DISP DDAYS(DATE$,14.071789)
+.co
+Calcule et affiche le nombre de jours nous sÅparant du 14 juillet
+1789.
+
+.input
+.it
+date1, date2
+.de
+Expressions numÅriques interprÅtÅes suivant le format courant, ou
+expressions alphanumÅriques.
+.re
+doivent Átre comprises entre le 15 octobre 1582 et le 31 dÅcembre
+9999.
+
+.operation
+\{cDDAYS} calcule le nombre de jours entre {idate1} et {idate2}.
+Si {idate1} est postÅrieure È {idate2}, le rÅsultat est positif.\
+
+\Pour une description complÉte des formats d'introduction de
+dates, voir la fonction {cDATESTR$}.\
+.references
+{iJPC 28} (page 40) premiÉre version par Laurent Istria.
+
+{iJPC 49} (page 24) troisiÉme version par Pierre David et Janick
+Taillandier.
+
+{iManuel du module Horloge du HP-41}.
+.related
+DATEADD
+DATESTR$
+DMY
+MDY
+.author
+Pierre David
+Laurent Istria
+Janick Taillandier
+.end keyword
+
+.keyword
+DDIR
+
+.purpose
+{cDDIR} (Display DIRectory) liste le rÅpertoire du
+pÅriphÅrique spÅcifiÅ.
+
+.options
+SKI
+
+.syntaxe
+{cDDIR }[{c TO {idestination{c }]
+{cDDIR {ispÅcificateur de fichier{c [{c TO {idestination{c }]
+{cDDIR ALL }[{c TO {idestination{c }]
+
+.examples
+.ex
+DDIR :TAPE
+.co
+Liste le rÅpertoire de l'unitÅ de stockage de
+masse {l:TAPE{l.
+.ex
+DDIR :PORT(0) TO LISTE
+.co
+Liste le contenu du port numÅro
+0 dans le fichier LISTE.
+.ex
+DDIR ALL
+.co
+Liste tous les fichiers prÅsents dans le HP-71.
+.ex
+DDIR ESSAI:TAPE(2) TO A$
+.co
+Liste tous les fichiers situÅs aprÉs le fichier
+ESSAI sur l'unitÅ de stockage de masse
+{l:TAPE(2){p dans le fichier dont le nom est
+contenu dans la variable A$.
+
+.input
+.it
+spÅcificateur de fichier
+.de
+Expression alphanumÅrique ou chaÑne sans guillemets.
+.re
+Un spÅcificateur d'unitÅ ou un nom de fichier avec
+spÅcificateur d'unitÅ en option.
+.df
+{l:MAIN
+.it
+destination
+.de
+Expression alphanumÅrique ou chaÑne sans guillemets.
+.re
+Nom de fichier avec spÅcificateur d'unitÅ en
+option.
+.df
+Le listage est effectuÅ sur l'Åcran.
+
+.operation
+\Le mot-clef {cDDIR} liste sur le pÅriphÅrique d'affichage
+le rÅpertoire de
+l'unitÅ spÅcifiÅe. Le listage est
+similaire È celui produit par l'ordre standard
+{cCAT}.\
+
+\L'affichage se fait en respectant les valeurs
+spÅcifiÅes par l'ordre {cDELAY}. Pour une bonne
+lecture, nous conseillons un {cDELAY {ix{c,8} qui
+Åvitera le dÅfilement de l'affichage.\
+
+
+{gLa spÅcification du fichier}
+
+\La syntaxe de {cDDIR} vous permet de sÅlectionner
+un pÅriphÅrique ou une partie de rÅpertoire.\
+
+
+{iSpÅcificateur de pÅriphÅrique seul}
+
+\Si vous ne fournissez que le nom d'un
+pÅriphÅrique, seul le rÅpertoire de ce
+pÅriphÅrique sera listÅ. Par exemple :\
+
+\- {cDDIR :PORT(0.01)} liste le rÅpertoire du port
+numÅro 0.01,\
+\- {cDDIR :TAPE} liste le rÅpertoire du support de
+mÅmoire de masse HP-IL,\
+\- {cDDIR :PORT} liste le contenu de {itous} les
+ports du HP-71,\
+\- {cDDIR :MAIN} liste exlucivement le contenu de la mÅmoire
+principale.\
+
+
+{iSpÅcificateur de fichier et de pÅriphÅrique}
+
+\Si vous spÅcifiez È la fois le fichier et le
+pÅriphÅrique, le listage dÅbute È partir de ce
+fichier, et continue jusqu'au dernier fichier
+du pÅriphÅrique. Par exemple :\
+
+\- {cDDIR ESSAI:MAIN} liste le rÅpertoire de la
+mÅmoire principale aprÉs le fichier ESSAI
+inclus,\
+\- {cDDIR ESSAI:TAPE} fait de mÁme sur l'unitÅ de
+mÅmoire de masse,\
+\- {cDDIR ESSAI:PORT(0.01)} fait de mÁme sur le
+port numÅro 0.01,\
+\- {cDDIR ESSAI:PORT} cherche le fichier dans les
+ports, et liste le rÅpertoire du port trouvÅ.\
+
+
+{iCas particuliers}
+
+\{cDDIR ALL} liste le rÅpertoire de tous les
+fichiers prÅsents dans le HP-71.\
+
+\{cDDIR} liste exclusivement le rÅpertoire de la mÅmoire
+principale.\
+
+\{cDDIR} suivi d'un spÅcificateur de fichier seul
+(sans spÅcificateur de pÅriphÅrique) cherche le
+fichier dans toute la mÅmoire, puis liste le reste
+de l'unitÅ (port ou mÅmoire principale) trouvÅe.\
+
+
+{gLa redirection de la sortie}
+
+\Lorsque {cDDIR} est suivi de {cTO}, puis d'un
+spÅcificateur de fichier, le listage est stockÅ
+dans ce fichier. Aucune ligne n'est affichÅe
+È l'Åcran. Utiliser {cDDIR} ou {cPDIR} est
+strictement Åquivalent lorsqu'une redirection est
+demandÅe.\
+
+\Si le fichier existe dÅjÈ, une erreur
+{cERR:File Exists} est gÅnÅrÅe.\
+
+\Le format des informations stockÅes dans le
+fichier est identique È celui fourni par la
+fonction {cCAT$}. Se reporter È cette derniÉre
+pour plus de dÅtails.\
+
+\Cette caractÅristique est identique È celle
+fournie par les ordres {cPDIR}, {cDBLIST} et
+{cPBLIST}.\
+
+
+{gApplications}
+
+\La redirection est avantageuse, car elle vous
+permet d'effectuer une action sur tous les
+fichiers d'un pÅriphÅrique donnÅ. Par exemple :{c\
+
+100 DIM P$[8],F$[43],T$[8],A
+110 T$="TMP"                 ! fichier temporaire 
+120 FINPUT P$,"PÅriphÅrique: :MAIN","15PU",A
+130 IF NOT A THEN END
+140 SFLAG -1 @ PURGE T$ @ CFLAG -1
+150 DDIR ":"&P$ TO T$
+160 ASSIGN #1 TO T$
+170 LOOP
+180   READ #1;F$
+190   F$[POS(F$," ")]=""     ! supprime caractÉres inutiles
+  -   l'action È effectuer
+200   SECURE F$&":"&P$       ! par exemple...
+  -   fin de l'action
+210 END LOOP
+
+\}Cet exemple simple exÅcute une action (voir
+ligne 200) pour chaque fichier du pÅriphÅrique
+demandÅ. En remplaµant l'action par une autre,
+vous pouvez trÉs simplement copier tous les
+fichiers d'un port dans un autre port, effacer des
+fichiers, changer des noms, etc.\
+.references
+{iA paraÑtre} : premiÉre version par Jean-Jacques
+DhÅnin.
+.related
+CAT$
+CAT
+DBLIST
+PBLIST
+PDIR
+.author
+Jean-Jacques DhÅnin
+.end keyword
+
+.keyword
+DMY
+
+.purpose
+{cDMY} (Day Month Year) valide l'introduction des dates au format
+numÅrique {ijj.mmaaaa}.
+
+.options
+SKID
+
+.syntaxe
+{cDMY
+
+.examples
+.ex
+DMY
+
+.operation
+\Dans le mode sÅlectionnÅ par {cDMY}, les dates utilisÅes dans
+les fonctions de calcul de dates de JPC Rom peuvent Átre
+introduites sous la forme {ijj.mmaaaa} (format numÅrique).\
+
+\Le format alphanumÅrique, quant È lui, est toujours utilisable.\
+
+\Par exemple, pour calculer le jour correspondant au 14 juillet
+1789, il faut faire en mode DMY :\
+
+{cDOW$(14.071789)}, ou {cDOW$("1789/07/14")}
+
+\Pour plus de dÅtails sur les formats d'introduction des dates,
+consulter la fonction {cDATESTR$}.\
+.references
+{iJPC 28} (page 40) premiÉre version par Laurent Istria.
+
+{iJPC 49} (page 24) troisiÉme version par Pierre David et Janick
+Taillandier.
+
+{iManuel du module Horloge du HP-41}.
+.related
+DATEADD
+DATESTR$
+DDAYS
+DOW
+DOW$
+MDY
+.author
+Pierre David
+Laurent Istria
+Janick Taillandier
+.end keyword
+
+.keyword
+DOW
+
+.purpose
+{cDOW} (Day Of Week) renvoie le jour de la semaine correspondant
+È la date spÅcifiÅe sous la forme d'un numÅro de jour.
+
+.options
+FCKID
+
+.syntaxe
+{cDOW
+{cDOW ( {idate{c )
+
+.examples
+.ex
+A=DOW(1.011986)
+.co
+Place dans la variable A le jour de la semaine correspondant au
+1{^er{- janvier 1986.
+.ex
+A=DOW(DATE$)
+.co
+Renvoie le numÅro du jour de la semaine correspondant È
+aujourd'hui. Une mÅthode plus astucieuse consiste È faire
+simplement {lA=DOW{p.
+.ex
+DISP DOW
+.co
+Affiche le numÅro du jour courant.
+
+.input
+.it
+date
+.de
+Expression numÅrique interprÅtÅe suivant le format courant, ou
+expression alphanumÅrique.
+.re
+doit Átre comprise entre le 15 octobre 1582 et le 31 dÅcembre
+9999.
+.df
+aujourd'hui
+
+.operation
+\A la diffÅrence de {cDOW$}, {cDOW} renvoie le jour de la semaine
+correspondant È une date donnÅe sous une forme numÅrique. Vous
+pouvez ainsi incorporer cette date plus facilement dans vos
+calculs.\
+
+\RÅfÅrez-vous È la fonction {cDATESTR$} pour une
+complÉte description des formats de dates.\
+
+Par exemple :{c
+
+100 SELECT DOW
+110   CASE 0
+120     A$="Dimanche"
+130   CASE 1
+140     A$="Lundi"
+150   CASE 2
+160     A$="Mardi"
+170   CASE 3
+180     A$="Mercredi"
+190   CASE 4
+200     A$="Jeudi"
+210   CASE 5
+220     A$="Vendredi"
+230   CASE 6
+240     A$="Samedi"
+250 END SELECT
+260 DISP DATE$;" : ";A$}
+
+\0 correspond È Dimanche, 1 È Lundi... et 6 È Samedi.\
+.references
+{iJPC 17} (page 25) programme de calcul du jour de la semaine en
+Basic par Pierre David.
+
+{iJPC 28} (page 40) premiÉre version par Laurent Istria.
+
+{iJPC 49} (page 24) troisiÉme version par Pierre David et Janick
+Taillandier.
+
+{iManuel du module Horloge du HP-41}.
+.related
+DATE$
+DATESTR$
+DMY
+DOW$
+MDY
+SETDATE
+.author
+Pierre David
+Laurent Istria
+Janick Taillandier
+.end keyword
+
+.keyword
+DOW$
+
+.purpose
+{cDOW$} (Day Of Week) renvoie le nom du jour spÅcifiÅ, ou de la
+date courante.
+
+.options
+FKID
+
+.syntaxe
+{cDOW$
+{cDOW$ ( {idate{c )
+
+.examples
+.ex
+A$=DOW$(1.011986)
+.co
+Place la chaÑne {lWednesday{p dans la variable A$.
+.ex
+DISP DOW$
+.co
+Affiche le nom du jour courant.
+
+.input
+.it
+date
+.de
+Expression numÅrique interprÅtÅe suivant le format courant, ou
+expression alphanumÅrique.
+.re
+doit Átre comprise entre le 15 octobre 1582 et le 31 dÅcembre
+9999.
+.df
+aujourd'hui
+
+.operation
+\{cDOW$} renvoie le jour de la semaine correspondant È la date
+spÅcifiÅe.\
+
+\Si aucune date n'est fournie, {cDOW$} renvoie le jour de la
+semaine correspondant È la date courante.\
+
+\Les noms des jours sont en anglais. Leur signification est :{l\
+
+Sunday     Dimanche
+Monday     Lundi
+Tuesday    Mardi
+Wednesday  Mercredi
+Thursday   Jeudi
+Friday     Vendredi
+Saturday   Samedi
+
+\}Les noms des jours correspondent È des messages contenus dans
+le lex JPC Rom. Vous pouvez utiliser la fonction {cMSG$} (module
+Forth/Assembler ou Editeur de textes, ou disponible È la User's
+Library) pour visualiser tous les jours de la semaine :\
+
+\Dimanche correspond au message 225008+0, Lundi au message
+225008+1, et ainsi de suite jusqu'È Samedi au message 225008+6.\
+
+\Du fait que les noms des jours sont dans une table de messages
+dans un Lex, ils peuvent Átre traduits par l'intermÅdiaire d'un
+Lex traducteur.\
+
+.references
+{iJPC 17} (page 25) programme de calcul du jour de la semaine en
+Basic par Pierre David.
+
+{iJPC 28} (page 40) premiÉre version par Laurent Istria.
+
+{iJPC 49} (page 24) troisiÉme version par Pierre David et Janick
+Taillandier.
+
+{iManuel du module Horloge du HP-41}.
+.related
+DATE$
+DATESTR$
+DMY
+DOW
+MDY
+SETDATE
+.author
+Pierre David
+Laurent Istria
+Janick Taillandier
+.end keyword
+
+.keyword
+DRAW
+
+.purpose
+{cDRAW} trace une ligne entre le point courant et le point
+spÅcifiÅ.
+
+.options
+SKID
+
+.syntaxe
+{cDRAW {ix{c, {iy
+
+.examples
+.ex
+DRAW 10,20
+.co
+trace une ligne droite entre le point courant et le point de
+coordonnÅes (10,20).
+.ex
+DRAW X+R*COS(T),Y+R*SIN(T)
+.co
+trace un segment de droite entre le point courant et le point de
+coordonnÅes (x + rcos t, y + r sin t).
+
+.input
+.it
+x, y
+.de
+Expressions numÅriques arrondies È des entiers.
+.re
+-32767 È +32767
+
+.operation
+\{cDRAW} trace un trait entre la position courante de la plume et
+le point spÅcifiÅ.\
+
+\Le trait est tracÅ suivant le type de ligne dÅfini par le
+prÅcÅdent ordre {cLINETYPE}.\
+
+\Si vous spÅcifiez un point en dehors de la zone de traµage, la
+plume trace effectivement le trait de la position courante dans
+la direction du point spÅcifiÅ, mais s'arrÁte lorsqu'elle
+rencontre la limite de la zone. Si vous effectuez ensuite un
+traµage vers un point dans la zone de traµage, la plume se
+dÅplace sur la limite de la zone au point oË le trait couperait
+la zone, puis trace le reste du trait jusqu'au nouveau point
+dans les limites. Si les deux extrÅmitÅs d'un trait se trouvent
+en dehors des limites, seule la partie du trait situÅe dans les
+limites est tracÅe.\
+
+.related
+LINETYPE
+IDRAW
+MOVE
+
+.author
+Pierre David
+.end keyword
+
+.end

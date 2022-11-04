@@ -1,0 +1,643 @@
+.language
+F
+
+.keyword
+La fonction VER$
+
+.purpose
+La fonction {cVER$} renvoie une cha—ne identifiant la
+version de JPC Rom pr≈sente dans le HP-71.
+
+.operation
+\La fonction {cVER$} renvoie une cha—ne indiquant la version
+de JPC Rom.\
+
+\La version de JPC Rom d≈crite dans ce manuel est la version :
+{cJPC:C}.\
+
+.references
+{iManuel de r≈f≈rence du HP-71B}
+
+{iJPC 23} (page 33) article d'initiation aux polls par Laurent
+Istria.
+
+{iInternal Design Specification} Volume I, chapitre 8.4 et page
+17.14.
+.related
+VER$
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+Tabulations assembleur
+
+.purpose
+Les fichiers source pour l'assembleur sont plus lisibles quand
+les champs sont bien align≈s.
+
+.operation
+{gLes tabulations :}
+
+\Bien que l'assembleur accepte les fichiers source en format
+{ilibre}, ceux-ci sont plus lisibles s'ils sont bien align≈s.\
+
+\Les tabulations sont accessibles par la touche {l[SPC]} en mode
+≈diteur de texte. Chaque appui sur la touche fait passer » la
+tabulation suivante, sauf apr…s la derni…re tabulation.\
+
+\Les tabulations sont r≈gl≈es aux colonnes 9, 16 et 25. Une
+≈toile dans la ligne annule les tabulations de la ligne, l'≈toile
+signifiant un commentaire.\
+
+
+{gL'acc…s au mode tabulations :}
+
+\La touche {l[SPC]} d≈place le curseur » la prochaine tabulation
+quand :\
+
+\- le mode {itabulations} est actif,\
+\- le HP-71 est en mode ≈diteur de textes,\
+\- quand il n'y a pas d'≈toile ({c*}) dans la ligne.\
+
+\Le mode {itabulation} est activ≈ ou d≈sactiv≈ par l'appui sur la
+touche {l[CALC]} en mode ≈diteur de textes.\
+.references
+{iJPC 30} (page 42) la troisi…me version du Lex par St≈phane
+Barizien, Pierre David et Michel Martinet.
+
+Manuel du module Forth / Assembleur, page 46.
+.related
+EDTEXT
+.author
+St≈phane Barizien
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+Correction et Mode CALC
+
+.purpose
+En mode CALC, l'acc…s » la touche de correction est difficile.
+JPC Rom donne acc…s » la touche {l[<]} pour corriger
+l'introduction.
+
+.operation
+{gLe mode CALC :}
+
+\Le mode CALC (Calcul) est tr…s pratique pour effectuer des
+calculs. Toutefois, les corrections ne sont pas tr…s ais≈es,
+puisqu'il faut appuyer sur deux touches ({l[g]} et {l[<-]}) pour
+revenir sur le dernier caract…re introduit.\
+
+\Avec JPC Rom dans votre HP-71, il suffit d'appuyer sur la touche
+{l[<-]} pour revenir en arri…re. Les corrections se trouvent
+grandement facilit≈es.\
+.references
+{iJPC 27} (page 26) premi…re version du Lex par Pierre David.
+.related
+}mode CALC
+.author
+Pierre David
+.end keyword
+
+.keyword
+Position du curseur
+
+.purpose
+Sans interface vid≈o, il est quelquefois difficile de savoir oÀ
+le curseur se situe dans la ligne.
+
+.operation
+\En mode USER, une pression sur la touche {l[f][VIEW]} affiche la
+position du curseur. Cet affichage se maintient tant que la
+touche est maintenue enfonc≈e.\
+
+\La position du curseur est un nombre variant entre les valeurs 1
+et 96.\
+
+\Cette caract≈ristique est accessible uniquement en mode USER,
+gardant ainsi la possibilit≈ d'acc≈der » la fonction VIEW pour
+les touches assign≈es.\
+
+\Cette caract≈ristique est accessible dans la plupart des
+modes du HP-71, m¡me en mode ≈diteur de
+Textes, en mode Forth ou sous {cINPUT}, {cLINPUT}, {cFINPUT}
+ou encore {cKA}.\
+.references
+{iJPC 24} (page 33) premi…re version par Pierre David.
+.related
+DEF KEY
+EDTEXT
+FORTH
+FINPUT
+INPUT
+KA
+LINPUT
+.author
+Pierre David
+.end keyword
+
+.keyword
+Acc≈l≈ration du curseur
+
+.purpose
+La pr≈sence de JPC Rom dans votre HP-71 acc≈l…re la r≈p≈tition du
+curseur.
+
+.operation
+\Sit¬t JPC Rom dans votre HP-71, vous pouvez constater que la
+r≈p≈tition automatique du curseur est acc≈l≈r≈e
+notablement.\
+
+\Cette caract≈ristique est permanente. Elle est accessible en
+mode ≈diteur de Textes, en mode Forth et m¡me sous {cINPUT},
+{cLINPUT}, {cFINPUT} et sous {cKA}. En revanche, le curseur n'est pas
+acc≈l≈r≈ durant un {cCAT}.\
+.references
+{iJPC 26} (page 29) premi…re version par Jean-Jacques Moreau.
+
+{iA para—tre} : deuxi…me version par Pierre David et Janick
+Taillandier.
+.related
+EDTEXT
+FORTH
+FINPUT
+INPUT
+LINPUT
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+Initialisation au Memory-Lost
+
+.purpose
+Apr…s une initialisation compl…te du HP-71, JPC Rom cherche »
+ex≈cuter un sous-programme nomm≈ {cML}.
+
+.operation
+\Ceci est utile pour initialiser toutes sortes de choses apr…s un
+Memory Lost. Par exemple, l'heure et la date, le d≈lai, le
+constraste, etc. Voici un exemple :{c\
+
+100 SUB ML
+110   DIM D$
+120   FINPUT D$,"Heure : Hr:Mn:Sc","8P2UP2UP2UP",A
+130   SETTIME D$[1,2]&":"&D$[3,4]&":"&D$[5]
+120   FINPUT D$,"Date : Jr/Mo/An","7P2UP2UP2UP",A
+130   SETDATE D$[5]&"/"&D$[3,4]&"/"&D$[1,2]
+140   DELAY 0,0
+150   USER ON
+160   STACK 15
+170   LC ON
+180   WIDTH 80
+190   PWIDTH INF
+200   DMY
+210   ROMAN ON
+220   DEF KEY "#46","RUN ";
+230 END SUB
+
+\}Bien s√r, ce programme doit se trouver en port ind≈pendant ou
+en module Rom ou Eprom pour ne pas ¡tre perdu lors d'un Memory
+Lost.\
+
+\Attention : le sous programme ne doit pas contenir d'ordre
+faisant appel » une configuration. De tels ordres sont, par
+exemple, {cLEX†ON/OFF} ou {cCOPY} de fichiers Lex en
+m≈moire, etc.\
+.references
+{iJPC 31} (page 24) premi…re version par Jean-Jacques Moreau.
+.related
+CALL
+SUB
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+Reconnaissance des types de fichiers
+
+.purpose
+JPC Rom reconna—t de nouveaux types de fichiers non standard
+et les affiche en clair lors d'un {cCAT} ou {cDDIR}.
+
+.operation
+\Lorsque JPC Rom est dans le HP-71, il affiche en clair le
+nom des fichiers non standard lors d'un ordre {cCAT}, d'une
+fonction {cCAT$} ou d'un ordre {cDDIR} ou {cPDIR}.\
+
+\Ceci permet de distinguer et de reconna—tre facilement
+des fichiers produits par d'autres appareils (par exemple
+HP-41 ou HP-75) lorsqu'ils sont sur un support de m≈moire de
+masse.\
+
+\La liste des types de fichiers reconnus est :\
+
+Fichiers produits par le HP-71
+
+{cGRAPH      }Images graphiques du module GRAPHIC
+{cFORTH      }Forthrams des modules Forth ou Translator
+{cROM        }Images de ports ind≈pendants (fichier Lex ROMCOPY)
+{cOBJ        }Fichiers objets (Module de d≈veloppement, non commercialis≈)
+{cSYM        }Table des symboles (Module de d≈veloppement, non commercialis≈)
+
+Fichiers produits par le HP-41
+
+{c41:XM      }Sauvegarde de la m≈moire ≈tendue
+{c41:WA      }Sauvegarde du contenu total du HP-41 (fonction WRTA)
+{c41:KE      }Sauvegarde des assignations (fonction WRTK)
+{c41:ST      }Sauvegarde de l'≈tat (fonction WRTS)
+{c41:PR      }Programme HP-41
+{c41:ML      }Programmes en micro-code pour MLDL
+
+Fichiers produits par le HP-75
+
+{c75:T       }Fichier Texte
+{c75:A       }Fichier d'alarmes (Appt)
+{c75:B       }Programme Basic
+{c75:L       }Fichier Lex
+{c75:W       }Feuille de calcul VisiCalc
+{c75:G       }Fichier » usage g≈n≈ral de la Rom I/O
+{c75:R       }Rom PMS
+.references
+{iA para—tre} : premi…re version par Jan Buitenhuis et
+Janick Taillandier.
+.related
+CAT
+CAT$
+DDIR
+PDIR
+.author
+Jan Buitenhuis
+Janick Taillandier
+.end keyword
+
+.keyword
+Les messages du module HP-IL
+
+.purpose
+Les messages d'erreur du module HP-IL ne sont pas toujours tr…s
+explicites. JPC Rom les red≈finit de mani…re » avoir des
+diagnostics clairs et pr≈cis.
+
+.operation
+\Le module HP-IL fait exactement 16384 octets, c'est » dire qu'il
+ne reste m¡me pas un seul quartet de disponible dans le module
+HP-IL.  On comprend mieux maintenant pourquoi les messages
+renvoy≈s sont souvent r≈p≈titifs.  Hewlett-Packard a d√ ignorer
+des messages d'erreur pour pouvoir faire tenir la ROM HP-IL dans
+un module de 16 Kilo octets.\
+
+\JPC Rom red≈finit ces messages de mani…re » les rendre clairs et
+pr≈cis.\
+
+\Voici   la  liste  des   messages,   en   premi…re
+position  on trouve le message standard,  puis  en
+deuxi…me position le message de JPC Rom :\
+
+
+0 : {iinexistant}
+0 : {cHPIL}
+
+\Message  0, il est utilis≈  par  le  syst…me  dans
+l'affichage des erreurs.\
+Exemple:   {cHPIL ERR:Blank Medium}
+
+
+1 : {cASSIGN IO Needed}
+1 : {cASSIGN IO Needed}
+
+\Tentative d'ex≈cution de {cLIST IO} sans {cASSIGN IO} pr≈alable.
+Ex≈cuter {cASSIGN IO}.\
+
+
+3 : {cExcess Chars}
+3 : {cExcess Chars}
+
+\Le HP-71 a trouv≈ plus de caract…res qu'il en attendait dans un
+ordre. V≈rifier la syntaxe.\
+
+
+4 : {cMissing Parm}
+4 : {cMissing Parm}
+
+\Un des param…tres requis pour l'ordre manque.  V≈rifier la
+syntaxe.\
+
+
+5 : {cInvalid Parm}
+5 : {cInvalid Parm}
+
+\Un des param…tres utilis≈ pour l'ordre n'est pas valide.
+V≈rifier les param…tres.\
+
+
+6 : {cInvalid Expr}
+6 : {cInvalid Expr}
+
+\L'expression ne peut pas ¡tre ≈valu≈e » cause d'un type non
+valide (tel que l'utilisation d'une variable alpha » la place
+d'une valeur num≈rique). V≈rifier l'expression.\
+
+
+7 : {cSyntax}
+7 : {cSyntax}
+
+\Le HP-71 ne reconna—t pas l'ordre.  V≈rifier l'orthographe des
+mots-cl≈s et la validit≈ des param…tres.\
+
+
+16 : {cFile Protect}
+16 : {cFile Protect}
+
+\Le   fichier  est  s≈curis≈  ou  priv≈ ;  vous   ne
+pouvez   pas  effectuer  cette  op≈ration.  Si  le
+fichier est s≈curis≈, ex≈cuter l'ordre {cUNSECURE}.\
+
+
+17 : {cEnd Of Medium}
+17 : {cEnd of Medium}
+
+\Le fichier est trop grand pour l'espace disponible sur le
+support ; le support est plein ; condition d'erreur d'entra—neur.
+V≈rifier le support ; recr≈er le fichier ; compacter le support ;
+utiliser un autre support de m≈moire de masse.\
+
+
+18 : {cInvalid Medium}
+18 : {cDisk Drive Error}
+
+\Le moteur de l'unit≈ de stockage de masse ne fonctionne pas.
+V≈rifier que le support (disquette ou cassette) n'est pas
+bloqu≈.\
+
+
+19 : {cInvalid Medium}
+19 : {cNot LIF Format}
+
+\Le support n'est pas initialis≈ avec un format correct. Ex≈cuter
+l'ordre {cINITIALIZE}.\
+
+
+20 : {cNo Medium}
+20 : {cNo Medium}
+
+\Le HP-71 ne trouve pas de support dans l'unit≈ de stockage de
+masse. V≈rifier que la porte est ferm≈e ; ins≈rer un support.\
+
+
+21 : {iinexistant}
+21 : {cLow Battery}
+
+\L'alimentation de l'unit≈ de stockage de masse est d≈fectueuse.
+Recharger ou changer les batteries.\
+
+
+22 : {cFile Not Found}
+22 : {cFile Not Found}
+
+\Le fichier sp≈cifi≈ est absent ; le nom de fichier sp≈cifi≈
+diff…re de l'≈tiquette reµue de l'unit≈ de stockage de masse.
+V≈rifier le catalogue et le nom de fichier.\
+
+
+23 : {cInvalid Medium}
+23 : {cNew Medium}
+
+\Ouverture et fermeture de la porte de l'unit≈ de stockage de
+masse pendant une op≈ration de stockage ou pendant l'ex≈cution
+d'un ordre de positionnement du support.  Le support est mal
+positionn≈ : recommencer l'op≈ration ou l'ordre.\
+
+
+24 : {cInvalid Medium}
+24 : {cBlank Medium}
+
+\Support  neuf  non  initialis≈.  Utiliser  l'ordre
+{cINITIALIZE}.\
+
+
+25 : {cInvalid Medium}
+25 : {cWrong dir # records}
+
+\Le nombre d'enregistrements indiqu≈ dans l'≈tiquette ne
+correspond pas au nombre r≈el d'enregistrements sur le support.
+Recommencer l'op≈ration.  Si vous obtenez la m¡me erreur,
+initialisez le support (ordre {cINITIALIZE}) puis recr≈ez le
+fichier.\
+
+
+26 : {cInvalid Medium}
+26 : {cChecksum}
+
+\Le processeur de l'unit≈ de stockage a d≈tect≈ une erreur de
+somme de contr¬le.  Recr≈er le fichier.\
+
+
+28 : {cSize of File}
+28 : {cSize of File}
+
+\Fichier trop grand pour ¡tre stock≈ ou rappel≈ d'une unit≈ de
+stockage de masse.  Ajouter un module m≈moire au HP-71 ou
+utiliser un autre support.\
+
+
+29 : {iinexistant}
+29 : {cWrite Protected}
+
+\Erreur r≈serv≈e au lecteur de disquettes.  La disquette se
+trouvant dans l'unit≈ de m≈moire de masse est prot≈g≈e contre
+l'≈criture.\
+
+30 : {cFile Exists}
+30 : {cFile Exists}
+
+\Le nom de fichier sp≈cifi≈ dans un ordre {cCREATE} ou en
+destination d'un ordre {cCOPY} existe d≈j».  Supprimer l'ancien
+fichier ou changer le nom de l'ancien ou du nouveau fichier.\
+
+
+31 : {cDirectory Full}
+31 : {cDirectory Full}
+
+\Le catalogue du support est plein.  Supprimer les fichiers
+inutiles et compacter le catalogue ou le support.\
+
+
+32 : {cDevice Not Found}
+32 : {cDevice Not Found}
+
+\L'unit≈ demand≈e n'est pas sur la boucle.  V≈rifier le
+sp≈cificateur d'appareil ; v≈rifier l'organisation du syst…me ;
+ex≈cuter {cRESTORE IO}.\
+
+
+34 : {cDevice Not Ready}
+34 : {cDevice Not Ready}
+
+\Une unit≈ n'a pas r≈pondu (n'a pas envoy≈ de donn≈es ou n'a pas
+accept≈ le contr¬le, par exemple).  V≈rifier le sp≈cificateur
+d'unit≈ ; v≈rifier l'unit≈ ; ex≈cuter {cRESTORE IO}.\
+
+
+35 : {cLoop Broken}
+35 : {cLoop Broken}
+
+\La boucle n'est pas ferm≈e.  V≈rifier les connexions et que
+toutes les unit≈s sont allum≈es.\
+
+
+36 : {cMessage Error}
+36 : {cToo Many Frames}
+
+\Le HP-71 a reµu trop de messages.  Recommencer l'op≈ration.\
+
+
+37 : {cMessage Error}
+37 : {cFrames Lost}
+
+\Message perdu » cause d'une retransmission trop lente.
+Recommencer l'op≈ration.\
+
+
+38 : {cMessage Error}
+38 : {cFrames Altered}
+
+\Message modifi≈ pendant une transmission.  Recommencez
+l'op≈ration.\
+
+
+39 : {cUnexpected Message}
+39 : {cUnexpected Message}
+
+\Violation du protocole HP-IL (plusieurs ≈metteurs ≈taient actifs
+en m¡me temps) ; l'≈metteur indique une erreur de transmission.
+Recommencer l'op≈ration.\
+
+
+40 : {cMessage Error}
+40 : {cToo Many Frames}
+
+\Le HP-71 a reµu trop de messages.  Recommencer l'op≈ration.\
+
+
+41 : {cInvalid Mode}
+41 : {cInvalid Mode}
+
+\Tentative d'ex≈cution d'un ordre de contr¬leur lorsque le HP-71
+op…re en tant qu'unit≈.  V≈rifier le mode (contr¬leur ou unit≈)
+requis par l'ordre.\
+
+
+42 : {cLoop Broken}
+42 : {cMessage Altered}
+
+\Le HP-71 a reµu un message partiel » cause d'une erreur de
+transmission.  Recommencer l'op≈ration.\
+
+
+43 : {cLoop Broken}
+43 : {cLoop Timeout}
+
+\Un  message n'a pas  parcouru  la  boucle  pendant
+le  d≈lai d'attente sp≈cifi≈ par {cSTANDBY}.  Annulez  les  ≈tats
+r≈cepteurs et recommencer l'op≈ration.\
+
+
+44 : {cSystem Error}
+44 : {cBad Addresses}
+
+\Adresses d'unit≈s probablement non valides (si l'indicateur -24
+est arm≈). Effacer l'indicateur -24 ou affecter de nouvelles
+adresses (ex≈cuter {cRESTORE IO}).\
+
+\Erreur interne concernant les canaux d'entr≈e/sortie.  Ex≈cuter
+{cRUN} et recommencer l'op≈ration ; ex≈cuter {cINIT:1} ; ex≈cuter
+{cINIT:3}.  Si l'erreur se maintient, l'interface HP-IL est
+d≈fectueuse et doit ¡tre r≈par≈e.\
+
+
+45 : {cSelf-test failed}
+45 : {cSelf Test Failed}
+
+\L'interface n'a pas pass≈ son auto-test interne.  R≈p≈ter
+l'auto-test en ex≈cutant {cRESET HPIL}.  Si l'erreur persiste,
+L'interface est d≈fectueuse et doit ¡tre r≈par≈e.\
+
+
+47 : {cDevice Type}
+47 : {cDevice Type}
+
+\L'unit≈ sp≈cifi≈e n'est pas du type correct pour cet ordre.
+V≈rifier le type l'unit≈ adress≈e.\
+
+
+52 : {cAborted}
+52 : {cAborted}
+
+\Vous avez appuy≈ deux fois sur {l[ATTN]} pour interrompre le
+fonctionnement de la boucle.  Ex≈cuter {cRESTORE IO} ; si
+n≈cessaire, {cRESET HPIL} puis {cRESTORE IO}. V≈rifier les
+connexions HP-IL ; v≈rifier que les unit≈s sont allum≈es.\
+
+
+53 : {cInvalid Device Spec}
+53 : {cInvalid Device Spec}
+
+\Le sp≈cificateur d'unit≈ n'est pas valide pour cet ordre.
+V≈rifier le sp≈cificateur d'unit≈.\
+
+
+54 : {cData Type}
+54 : {cData Type}
+
+\Le type de variable sp≈cifi≈e est incorrect (num≈rique ou
+alphanum≈rique).  Changer l'argument de faµon que le type soit
+correct.\
+
+
+56 : {cInvalid Arg}
+56 : {cInvalid Arg}
+
+\Argument   en  dehors  de   l'intervalle   permis.
+V≈rifier la valeur de l'argument.\
+
+\L'≈tiquette (enregistrement de d≈but ou longueur) reµue pendant
+une op≈ration de stockage de masse est incorrect. Re-stocker le
+fichier.\
+
+
+57 : {cNo Loop}
+57 : {cNo Loop}
+
+\L'interface n'est pas install≈e.  V≈rifier la configuration du
+syst…me.\
+
+
+59 : {cInsufficient Memory}
+59 : {cInsufficient Memory}
+
+\Pas assez de m≈moire principale pour effectuer l'op≈ration.
+Ajouter un module m≈moire ; supprimer des fichiers ou des
+affectations de touches ; r≈allouez la m≈moire vive interne.\
+
+
+60 : {cRESTORE IO Needed}
+60 : {cRESTORE IO Needed}
+
+\Tentative d'ex≈cution d'une op≈ration d'entr≈es sorties apr…s
+l'ex≈cution de {cOFF IO}. Ex≈cuter {cRESTORE IO}.\
+.references
+{iJPC 37} (page 27) premi…re version par Michel Martinet.
+
+Manuel du module HP-IL, Annexe E.
+.related
+MSG$
+}Tous les mots-clefs du module HP-IL
+.author
+Michel Martinet
+.end keyword
+.end

@@ -1,0 +1,61 @@
+.language
+A
+
+.keyword
+VARSWAP
+
+.purpose
+{cVARSWAP} swaps the contents of two variables or array elements.
+
+.options
+SKID
+
+.syntaxe
+{cVARSWAP {ivariable1{c , {ivariable2{c
+
+.examples
+.ex
+VARSWAP A,B
+.co
+Swaps the contents of numeric variables A and B.
+.ex
+VARSWAP A$,B$
+.co
+Swaps the contents of string variables A and B.
+
+.input
+.it
+variable1, variable2
+.de
+Name of numeric or string variables.
+.re
+Variable types must be compatible.
+
+.operation
+\{cVARSWAP} swaps the contents of two variables provided that they are
+of the same type and dimensions.\
+
+
+{gWarning !}
+
+\{cVARSWAP} does not work if {ivariable2} does not exist and must be
+created by {cVARSWAP}.\
+
+\This may cause a memory lost.\
+.references
+{iJPC 31} (page 50) first version by Jean-Jacques Moreau.
+
+{iTo be published} : second version by Pierre David and Janick
+Taillandier.
+
+{cVARSWAP} was previously called {cSWAP}.
+.related
+LET
+.author
+Pierre David
+Jean-Jacques Moreau
+Janick Taillandier
+.end keyword
+
+.end
+.end

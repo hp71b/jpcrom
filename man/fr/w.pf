@@ -1,0 +1,207 @@
+.language
+F
+
+.keyword
+WHILE ... END WHILE
+
+.purpose
+{cWHILE} ... {cEND WHILE} d≈finit une boucle qui est ex≈cut≈e
+tant que l'expression bool≈enne dans le {cWHILE} est vraie.
+
+.options
+SKID
+
+.syntaxe
+{cWHILE {iexpression logique
+  {isegment de programme
+{cEND WHILE
+
+.examples
+.ex
+10 WHILE I+2<=N
+20   CALL AA(I,N)
+30   I=I+1
+40 END WHILE
+.co
+R≈p…te l'appel au sous programme AA tant que la condition est
+vraie.
+
+.input
+.it
+expression logique
+.de
+Expression num≈rique ≈valu≈e comme vraie si non nulle.
+.re
+Aucune.
+.it
+segment de programme
+.de
+Tout nombre de lignes de programme contiguÕs.
+.re
+Aucune.
+
+.operation
+\La construction {cWHILE} ... {cEND WHILE} autorise la r≈p≈tition
+conditionnelle d'un segment de programme. Si la condition est
+vraie, le segment compris entre le {cWHILE} et le {cEND WHILE}
+est ex≈cut≈, et un branchement est fait sur le {cWHILE}.\
+
+\Le segment de programme est r≈p≈t≈ jusqu'» ce que le test soit
+faux. Quand cela arrive, le segment de programme est saut≈, et
+l'ex≈cution reprend » la ligne suivant le {cEND WHILE}.\
+
+\Le segment de programme peut ne jamais ¡tre ex≈cut≈, si
+l'expression est ≈valu≈e comme fausse la premi…re fois.\
+
+\Tout comme pour les boucles de type {cLOOP} ... {cEND LOOP} ou
+{cREPEAT} ... {cUNTIL}, l'ordre {cLEAVE} permet de sortir
+pr≈matur≈ment d'une boucle {cWHILE} ... {cEND WHILE}.\
+
+\Le segment de programme peut lui-m¡me contenir des structures de
+type boucle ou choix. L'emboitement doit ¡tre correct, sinon
+l'erreur {cJPC ERR:Structure Mismatch} est renvoy≈e.\
+.references
+{iJPC 31} (page 38) premi…re version par Janick Taillandier.
+
+{iJPC 52} (page 10) deuxi…me version par Pierre David et Janick
+Taillandier.
+
+Basic 5.0 pour HP 9000 s≈ries 200/300.
+.related
+LEAVE
+LOOP} ... {cEND LOOP
+REPEAT} ... {cUNTIL
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+WRAP
+
+.purpose
+{cWRAP} active ou d≈sactive le mode ˚saut » la ligne˝ sur
+l'imprimante.
+
+.options
+SKI
+
+.syntaxe
+WRAP ON
+WRAP OFF
+
+.examples
+.ex
+WRAP ON @ PBLIST
+.co
+Liste le programme courant sur l'imprimante, en passant » la
+ligne quand le chariot de l'imprimante arrive en fin de course.
+
+.operation
+\Le mode ˚saut » la ligne˝ est utilis≈ quand le HP-71 doit
+imprimer des lignes plus longues que la longueur admissible par
+l'imprimante. Celle-ci passe automatiquement » la ligne suivante
+quand le chariot arrive en bout de course.\
+
+\Le HP-71 dispose d≈j» de cette possibilit≈ avec l'ordre
+{cPWIDTH}. Cependant, {cWRAP} est g≈r≈ par l'imprimante, donc
+d≈charge le HP-71 de cette gestion. D'autre part, le HP-71
+compte les ≈ventuelles s≈quences d'≈chappement envoy≈es avec
+{cPRINT} dans ses calculs, ce qui induit des erreurs.
+L'utilisation de {cWRAP} donne des r≈sultats plus exacts, sans
+faire intervenir le HP-71.\
+
+
+{gCodes envoy≈s » l'imprimante :}
+
+{cWRAP ON } : {cESC & s 0 C
+{cWRAP OFF} : {cESC & s 1 C
+.references
+{iJPC 26} (page 39) premi…re version par Pierre David.
+
+{iJPC 40} (page 16) deuxi…me version par Pierre David.
+
+Consultez aussi le manuel de votre imprimante.
+.related
+BOLD
+ENDLINE
+ESC$
+PRINT
+PRINTER IS
+UNDERLINE
+.author
+Pierre David
+.end keyword
+
+.keyword
+WREC
+
+.purpose
+WREC (Write RECord) ≈crit une cha—ne de 256 caract…res sur
+le secteur sp≈cifi≈ du support de m≈moire de masse indiqu≈.
+
+.options
+SKI
+
+.syntaxe
+WREC {isecteur{c , {iadresse{c , {isp≈cificateur de p≈riph≈rique
+
+.examples
+.ex
+WREC A$,1,:TAPE
+.co
+Ecrit la cha—ne A$ (256 caract…res) dans
+l'enregistrement num≈ro 1 du support indiqu≈ par {l:TAPE{p.
+
+.input
+.it
+secteur
+.de
+Expression alphanum≈rique.
+.re
+La longueur doit valoir exactement 256 caract…res.
+.it
+adresse
+.de
+Expression num≈rique arrondie » un entier, ou expression
+alphanum≈rique contenant des nombres hexad≈cimaux, repr≈sentant
+un num≈ro de secteur sur le support.
+.re
+Valeur comprise entre 0 et la taille maximum du support.
+.it
+sp≈cificateur de p≈riph≈rique
+.de
+Expression num≈rique ou alphanum≈rique.
+Voir les definitions standard HPIL.
+.re
+Ne peut pas ¡tre une cha—ne non comprise entre guillemets.
+
+.operation
+\{cWREC} ≈crit une cha—ne de 256 octets repr≈sentant un
+secteur, ou enregistrement sur le support indiqu≈ par
+{isp≈cificateur de p≈riph≈rique}.\
+
+\L'adresse est un num≈ro de secteur en d≈cimal, ou une cha—ne
+repr≈sentant un num≈ro hexad≈cimal de secteur.\
+
+
+{gInterruption par [ATTN] :}
+
+\Cette fonction est interruptible par deux appuis successifs sur
+la touche {l[ATTN]}. Le HP-71 affiche alors le message d'erreur
+{cHPIL ERR:Aborted}. Il peut ¡tre n≈cessaire d'ex≈cuter {cRESTORE
+IO} pour r≈activer le syst…me HP-IL.\
+.references
+{iJPC 45} (page 15) premi…re version par Michel Martinet.
+
+Manuel d'utilisation du lecteur de cassettes num≈riques
+HP-82161A.
+
+Manuel du module HP-IL pour HP-71, chapitre 3 et Annexe D.
+.related
+RREC$
+OUTPUT
+.author
+Michel Martinet
+.end keyword
+.end

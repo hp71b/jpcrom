@@ -1,0 +1,397 @@
+.language
+F
+
+.keyword
+KA
+
+.purpose
+{cKA} est un mode interactif de gestion de carnet
+d'adresses.
+
+.options
+SKID
+
+.syntaxe
+KA
+KA {ifichier
+
+.examples
+.ex
+KA
+.co
+Active le mode carnet d'adresses en utilisant le fichier par d≈faut
+ADRS.
+.ex
+KA EXEMPLE
+.co
+Active le mode carnet d'adresses en utilisant les adresses
+contenues dans le fichier EXEMPLE.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Sp≈cificateur de p≈riph≈rique en option.
+.df
+ADRS
+
+.operation
+{gUn premier essai}
+
+\Pour commencer, faisons une petite visite guid≈e »
+l'int≈rieur de {cKA}. Nous allons rentrer trois fiches, puis
+nous apprendrons » parcourir le fichier, faire des
+recherches et modifier des fiches.\
+
+\Faites tout d'abord {cKA} pour rentrer dans le gestionnaire
+de carnet d'adresses. {cKA} vous r≈pond que le fichier est
+vide (message {cEmpty†file}), et attend vos ordres.\
+
+\Introduisez une premi…re fiche. Pour cela, appuyez sur les
+touches {l[f]} (touche pr≈fixe jaune) et {l[INPUT]} (touche
+correspondant » la lettre G).\
+
+\Introduisez le nom et le pr≈nom s≈par≈s par une barre
+oblique (caract…re {c/}). Par exemple :\
+{cSelere/Jacques                }puis {l[ENDLINE]}
+
+\Introduisez ensuite le num≈ro de t≈l≈phone :\
+{c(3) 14 15 92 65               }puis {l[ENDLINE]}
+
+\Introduisez maintenant l'adresse. Nous avons 4 lignes »
+notre disposition, mais nous n'en utiliserons que 2 dans cet
+exemple :\
+{c33, rue des Marguerites       }puis {l[ENDLINE]}
+{c75028 Paris                   }puis {l[ENDLINE]}
+
+\Achevez de rentrer cette fiche. Il reste deux lignes
+d'adresse vides, plus une ligne de note » usage g≈n≈ral et
+une ligne de crit…re. Ne rentrez rien dans ces lignes.
+Appuyez 4 fois sur {l[ENDLINE]}, puis encore une derni…re
+fois pour valider la fiche.\
+
+\Parce qu'un carnet d'adresses ne contenant qu'une seule
+adresse, cela fait pauvre, vous allez rentrer deux fiches
+suppl≈mentaires en vous d≈brouillant tout seul (n'oubliez
+pas d'appuyer sur {l[f][INPUT]} pour rentrer une nouvelle
+fiche) :\
+
+Caux/Harry
+(2) 71 18 28 18
+14 bd des Paquerettes
+27085 Paris
+
+            et
+
+Breille/Jean
+(0) 69 31 47 18
+1, all≈e du Mimosa
+82705 Paris
+
+
+\Maintenant que votre fichier contient trois adresses
+(appuyez sur la touche {l[f][CAT]} et maintenez-la
+enfonc≈e pour v≈rifier), nous allons voir comment nous
+d≈placer dans les adresses.\
+
+\Essayez les touches de curseur {l[{m°{l]} et {l[{m£{l]}
+pour vous d≈placer dans la fiche. Il est normal que vous
+voyez des lignes vides. Ce sont celles que vous avez
+rentr≈es plus haut. Vous pouvez vous rendre directement en
+haut ou en bas en pr≈fixant les touches de curseur par
+{l[g]} (touche pr≈fixe bleue).\
+
+\Si une ligne d≈passe 22 caract…res, vous pouvez la voir
+dans sa totalit≈ en faisant d≈rouler l'affichage avec les
+touches {l[{m¢{l]} et {l[{m§{l]} (ou les m¡mes pr≈fix≈es par
+la touche {l[g]}).\
+
+\Pour se d≈placer de fiche en fiche, vous utiliserez les
+touches {l[(]} et {l[)]} (parenth…ses), ou les m¡mes
+pr≈fix≈es par la touche bleue {l[g]} pour aller » une
+extr≈mit≈ du fichier. Remarquez que les fiches sont tri≈es
+par ordre alphab≈tique.\
+
+\Placez vous maintenant au d≈but du fichier (touche
+{l[g][(]}). Nous allons chercher l'adresse de Jacques Selere.
+Appuyez sur la touche {l[S]}, rentrez {l[E][L][E][R][E]} et appuyez
+sur {l[ENDLINE]}.\
+
+\Vous ¡tes maintenant positionn≈ sur la fiche de Jacques
+Selere. Remarquez que la recherche ne tient pas compte des
+diff≈rences entre majuscules et minsucules.\
+
+\Continuons dans la recherche. Vous d≈sirez vous rendre sur
+la fiche dont le nom commence par ˚†BR†˝. Appuyez sur la
+touche {l[B]}, entrez les caract…res {cR} et {c.}
+(point) et appuyez sur {l[ENDLINE]}. C'est la recherche
+abr≈g≈e.\
+
+\Supposons pour continuer que vous vouliez supprimer la fiche de
+Jacques Selere. Rendez-vous sur cette fiche, et appuyez sur
+{l[f][DELETE]}. Confirmation vous est demand≈e, et vous
+appuyez sur la touche {l[Y]} pour enregistrer la
+suppression.\
+
+\Enfin, nous allons modifier une fiche. Allez sur la fiche
+de Harry Caux et appuyez sur la touche {l[f][EDIT]}. Vous
+pouvez maintenant modifier chaque champ de la fiche. Vous
+sortez de ce mode en enregistrant les modifications en
+appuyant sur {l[RUN]} ou deux fois sur {l[ENDLINE]} sur la
+derni…re ligne.\
+
+
+{gLes fichiers d'adresses}
+
+\{cKA} est un gestionnaire interactif de carnet d'adresses.
+Les adresses sont contenues dans un fichier, de type
+{cADRS}. Le fichier d'adresses par d≈faut se nomme {cADRS},
+et est cherch≈ automatiquement lorsque {cKA} est ex≈cut≈
+sans param…tre.\
+
+\Lorsque le fichier d'adresses indiqu≈ est sur un support
+externe (tel qu'unit≈ de disquette, par exemple), {cKA} le
+copie d'abord en m≈moire, puis cherche » lire les adresses
+qui s'y trouvent.\
+
+
+{gLes adresses}
+
+\Un fichier d'adresses contient des fiches, chacune
+contenant une adresse et ≈ventuellement d'autres
+informations. Une fiche est identifi≈e par le nom qui lui
+est associ≈.\
+
+\Il n'y a pas d'autre limite au nombre de fiches g≈r≈es par
+{cKA} que la m≈moire disponible dans votre HP-71B.\
+
+\Chaque fiche contient 8 lignes, organis≈e comme suit :\
+- le nom et le pr≈nom,
+- le num≈ro de t≈l≈phone,
+- 4 lignes pour m≈moriser l'adresse,
+- une ligne pour noter des informations, et
+\- une ligne pour stocker un crit…re, que vous pouvez
+utiliser pour vos programmes personnels.\
+
+\La premi…re ligne contient le nom et le pr≈nom, s≈par≈s par
+un caract…re barre oblique ({c/}). S'il n'y est pas, {cKA}
+l'ajoute automatiquement » la fin de votre ligne.\
+
+\Chaque ligne peut occuper jusqu'» 90 caract…res.\
+
+
+{gFonctionnement de KA}
+
+\Lorsque vous entrez dans {cKA}, vous vous trouvez en mode
+consultation de fichier. Dans ce mode, vous pouvez
+consulter toutes vos adresses. \
+
+\En cas de difficult≈, appuyez sur la touche {l[ATTN]}. Cela
+a pour effet de sortir de {cKA} lorsqu'on est en mode
+{iconsultation}, ou de revenir au mode {iconsultation} dans
+les autres modes.\
+
+
+{iLe mode consultation}
+
+\Dans ce mode, vous pouvez vous d≈placer de fiche en fiche
+avec les touches {l[(]} et {l[)]}. Les touches {l[g][(]} et
+{l[g][)]} servent » se rendre directement au d≈but et » la
+fin du fichier respectivement.\
+
+\Vous pouvez ≈galement vous d≈placer dans une fiche avec les
+touches {l[{m°{l]} et {l[{m£{l]}. Vous pouvez ≈galement utiliser les
+touches {l[g][{m°{l]} et {l[g][{m£{l]} pour vous rendre sur le premier
+champ ou sur le dernier respectivement.\
+
+\Les touches {l[0]} » {l[7]} permettent en outre de se
+rendre directement sur une ligne sans passer par les lignes
+interm≈diaires.\
+
+\La touche {l[f][CAT]} (maintenue enfonc≈e) affiche le
+nombre de fiches
+introduites dans le fichier, et une estimation du nombre de
+fiches que l'on peut encore rentrer. Attention : ce dernier
+chiffre est purement indicatif. C'est une estimation bas≈e
+sur la taille moyenne d'une fiche et sur la place restant
+dans la m≈moire ou le port dans lequel r≈side le fichier
+d'adresses.\
+
+\La touche {l[f][DELETE]} demande l'effacement d'une fiche.
+Un message vous demande confirmation. Si vous appuyez sur la
+touche {l[Y]} ({iyes}), la fiche sera d≈truite. Sinon, la
+fiche ne sera pas d≈truite.\
+
+
+{iMode ≈dition de fiche}
+
+\Le mode {iconsultation} ne permettait que la visualisation
+de fiches d≈j» introduites. Le mode {i≈dition} permet de
+modifier une fiche (touche {l[f][EDIT]}) ou d'en introduire
+une nouvelle (touche {l[f][INPUT]}).\
+
+\En mode {iconsultation}, vous rentrer en mode {i≈dition}
+par la touche :\
+\- {l[f][EDIT]} (la fiche ≈dit≈e est la fiche courante), ou\
+\- {l[f][INPUT]} (la fiche ≈dit≈e est vide).\
+
+\Vous pouvez d…s lors modifier ou saisir la fiche ≈dit≈e.
+Les touches disponibles sont :\
+
+\- {l[{m°{l]}, {l[{m£{l]}, {l[g][{m°{l]} ou {l[g][{m£{l]} :
+d≈placement sur une autre ligne sans valider la ligne
+courante,\
+\- {l[ENDLINE]} : validation d'une ligne et passage » la
+ligne suivante,\
+\- {l[ATTN]} : efface la ligne courante,\
+\- deux fois sur {l[ATTN]} : sort du mode {i≈dition}
+sans enregistrer aucune modification,\
+\- deux fois {l[ENDLINE]} sur la derni…re ligne, ou {l[RUN]}
+: validation de la fiche et insertion dans le fichier.\
+
+\Une fois valid≈e, la fiche est ins≈r≈e automatiquement dans
+le fichier dans l'ordre alphab≈tique.\
+
+
+{iMode recherche}
+
+\Le mode {irecherche} permet de rechercher un nom dans tout
+le fichier. Depuis le mode {iconsultation}, il suffit d'appuyer
+sur une des touches {l[A]} » {l[Z]} pour introduire le
+premier caract…re du nom. Vous pouvez ensuite taper le reste
+du nom. Lorsque vous appuyez sur {l[ENDLINE]}, le nom (et
+≈ventuellement le pr≈nom) sont recherch≈s dans tout le
+fichier. Un message d'erreur ({cNot†Found}) vous indique
+lorsque la recherche a ≈t≈ vaine.\
+
+\Le mode {irecherche} permet trois sortes de recherches :\
+
+\- La recherche sur le nom :\
+\Lorsque vous rentrez un nom et pas de pr≈nom (c'est » dire
+sans caract…re {c/}), le nom est recherch≈ dans le fichier,
+de la fiche courante » la fin, puis du d≈but jusqu'» la
+fiche courante. Le premier nom trouv≈ devient la fiche
+courante.\
+
+\- La recherche sur le nom et le pr≈nom :\
+\La fiche est cherch≈e suivant le m¡me parcours que
+pr≈c≈demment. Si une fiche porte le m¡me nom, mais pas le
+m¡me pr≈nom, elle ne sera pas trouv≈e.\
+
+\- La recherche abr≈g≈e :\
+\C'est le type de recherche le plus souvent utilis≈. Il
+suffit de taper le d≈but du nom, puis un point. {cKA} va
+alors rechercher la premi…re fiche dont le nom commence par
+les caract…res rentr≈s. Si aucune fiche ne r≈pond au
+crit…re, la suivante est ≈dit≈e.\
+
+\Il n'y a pas de distinction entre lettres majuscules et
+minuscules au niveau de la recherche.\
+
+\La recherche abr≈g≈e est la plus simple et la plus rapide
+pour trouver une fiche. C'est la plus largement utilis≈e
+dans l'utilisation courante de {cKA}.\
+
+
+{gMot de passe}
+
+\Chaque fichier d'adresses peut contenir un mot de passe.
+D…s lors, chaque appel de {cKA} demandera votre mot de
+passe, et vous devrez le fournir ≈galement aux fonctions
+programmables de gestion du carnet d'adresses (voir
+{cADCREATE}).\
+
+\Vous pouvez modifier le mot de passe (et c'est la seule
+m≈thode pour le faire) associ≈ » un fichier en appuyant sur
+la touche {l[f][KEY]} en mode {iconsultation}. Un nouveau
+mot de passe vous est demand≈.\
+
+\- si vous appuyez sur {l[ATTN]}, le mot de passe n'est pas
+chang≈,\
+\- si vous ne rentrez rien, et appuyez sur {l[ENDLINE]},
+votre mot de passe est supprim≈, et enfin\
+\- si vous rentrez un mot de passe (jusqu'» 8 caract…res),
+et le validez avec {l[ENDLINE]}, celui-ci est enregistr≈.\
+
+\Si vous utilisez un interface vid≈o HP-IL, le mot de passe
+ne sera pas affich≈ sur l'≈cran lorsque vous l'introduirez.\
+.references
+Mode d'emploi du programme AGENDA pour HP-75.
+.related
+ADCREATE
+ADDELETE
+ADFIND
+ADGET
+ADPUT
+ADSIZE
+.author
+Pierre David
+.end keyword
+
+.keyword
+KEYWAIT$
+
+.purpose
+{cKEYWAIT$} attend une pression de touche et renvoie la
+cha—ne repr≈sentant cette touche.
+
+.options
+FKID
+
+.syntaxe
+KEYWAIT$
+
+.examples
+.ex
+A$=KEYWAIT$
+.co
+Attend une pression de touche et place dans A$ le code de la
+touche.
+.ex
+10 LOOP
+20   DISP KEYWAIT$
+30 END LOOP
+.co
+Fait une boucle et affiche les touches press≈es au clavier.
+.ex
+10 SELECT KEYWAIT$
+20   CASE "A" TO "Z"
+30     DISP "LETTRE"
+40   CASE "#46"
+50     DISP "TOUCHE [RUN]"
+60   CASE ELSE
+70     DISP "AUTRE"
+80 END SELECT
+.co
+Attend une pression de touche, et affiche ensuite
+"LETTRE" si la touche appuy≈e ≈tait une lettre,
+"[RUN]" si c'≈tait la touche [l[RUN]{p, ou "AUTRE"
+si ce n'≈tait pas une de celles-ci.
+
+.operation
+\{cKEYWAIT$} place le HP-71 dans un ≈tat de faible
+consommation ≈lectrique et attend une pression de touche.\
+
+\La cha—ne repr≈sentant la touche est similaire » la cha—ne
+renvoy≈e par la fonction standard {cKEY$}.\
+
+\L'utilisation de {cKEYWAIT$} permet d'≈viter la
+programmation de boucles pour attendre un caract…re telles
+que :{c\
+
+10 K$=KEY$ @ IF K$="" THEN 10
+.references
+{iJPC 20} (page 50) d≈sassemblage de {cKEYWAIT$} par Pierre
+David et Michel Martinet.
+.related
+ATTN
+FKEY
+KEY$
+PUT
+.author
+Hewlett-Packard
+.end keyword
+
+.end

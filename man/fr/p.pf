@@ -1,0 +1,1367 @@
+.language
+F
+
+.keyword
+PAGELEN
+
+.purpose
+{cPAGELEN} (PAGE LENgth) s≈lectionne les longueurs physique et
+logique sur l'appareil d'impression.
+
+.options
+SKI
+
+.syntaxe
+{cPAGELEN
+{cPAGELEN {itaille physique
+{cPAGELEN {itaille physique{c , {itaille logique
+
+.examples
+.ex
+IF K=72 THEN PAGELEN ELSE PAGELEN K,K-6 @ PERF ON
+
+.input
+.it
+taille physique
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 999.
+.it
+taille logique
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 999.
+.df
+72, 66
+
+.operation
+\{cPAGELEN} sert » d≈finir la taille des pages sur les
+imprimantes Hewlett-Packard.\
+
+{gG≈n≈ralit≈s :}
+
+\La taille physique des pages correspond » la taille d'une
+feuille, compt≈e en nombre de lignes. Cette taille peut varier
+si le nombre de lignes par pouces varie.\
+
+\Par exemple, pour un nombre de lignes par pouces ≈gal » 6
+(valeur par d≈faut des imprimantes en g≈n≈ral), les feuilles
+au format 12 pouces ont 72 lignes, et 66 pour le format 11
+pouces.\
+
+\Le format 12 pouces correspond » peu pr…s au format A4
+international. Le format 11 pouces est le format utilis≈ aux
+Etats-Unis.\
+
+\La taille logique, quant » elle, d≈limite la zone imprimable dans une
+feuille.  C'est le nombre de lignes que l'on peut imprimer avant que
+l'imprimante ne passe » la page suivante, si le mode ˚saut de
+perforations˝ est actif.  Positionner cette taille
+» 66 quand la taille physique vaut 72 ≈quivaut » cr≈er une marge de 6
+lignes, r≈partie entre marge haute et marge basse.\
+
+{gLe mot-clef PAGELEN :}
+
+\{cPAGELEN} admet 3 formes :\
+
+\La premi…re s'utilise sans param…tre. Elle r…gle la taille
+physique » 72, la taille logique » 66, et demande un saut de
+perforations.  {cPAGELEN} sans aucun param…tre est donc
+≈quivalent » :\
+{cPAGELEN 72,66 @ PERF ON}
+
+\La taille internationale est prise par d≈faut. Si vous utilisez
+du papier 11 pouces, il suffira de faire {cPERF ON}, car les
+imprimantes sont en g≈n≈ral en format 11 pouces par d≈faut.\
+
+\La deuxi…me forme admet comme seul param…tre la taille physique
+du papier. Il faut faire attention, car certaines imprimantes,
+notament la ThinkJet, mettent une valeur par d≈faut » la taille
+logique apr…s avoir reµu une taille physique. Reportez-vous au
+manuel de votre imprimante.\
+
+\La troisi…me forme admet les deux param…tres.\
+
+\Attention : seule la premi…re forme demande » l'imprimante un
+saut de perforations. Les deux derni…res ne le font pas, il
+faudra l'ex≈cuter vous-m¡me par l'ordre {cPERF ON}.\
+
+{gCodes envoy≈s » l'imprimante :}
+
+{cPAGELEN} : {cESC & l 72 p 66 f 1 L}
+{cPAGELEN {ix} : {cESC & l {ix{c P
+{cPAGELEN {ix{c, {iy} : {cESC & l {ix{c P ESC & l {iy{c F
+.references
+{iJPC 26} (page 39) premi…re version par Pierre David.
+
+{iJPC 40} (page 16) deuxi…me version par Pierre David.
+
+Consultez aussi le manuel de votre imprimante.
+
+L'ancienne d≈nomination de {cPAGELEN} ≈tait {cPL}.
+.related
+PERF
+PFF
+.author
+Pierre David
+.end keyword
+
+.keyword
+PAINT
+
+.purpose
+{cPAINT} teste ou allume un point sur l'≈cran graphique du HP-71, et
+retourne l'≈tat du point avant modification ≈ventuelle.
+
+.options
+FCKID
+
+.syntaxe
+PAINT ( {ix{c , {iy{c )
+PAINT ( {i≈tat{c , {ix{c , {iy{c )
+
+.examples
+.ex
+C=PAINT(X,Y)
+.co
+Retourne dans la variable C la valeur du point de
+coordonn≈es X et Y.
+.ex
+10 FOR X=1 TO 132
+20   A=PAINT(1,X,5)
+30 NEXT X
+.co
+Trace une ligne horizontale sur l'≈cran du HP-71.
+
+.input
+.it
+≈tat
+.de
+Expression num≈rique nulle ou non nulle.
+.re
+Aucune
+.it
+x
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0<=x<=131
+.it
+y
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0<=y<=7
+
+.operation
+\{cPAINT} est utilis≈ pour faire du graphique sur l'afficheur
+interne du HP-71. Cette fonction a deux objectifs :\
+
+\- Changer l'≈tat des points individuellement sur l'≈cran. Si
+{i≈tat} est nul, le point de coordonn≈es {i(x,y)} est ≈teint.
+Sinon, le point est allum≈.\
+
+\- Renvoyer l'ancien ≈tat du point. Le r≈sultat de {cPAINT} est
+cet ≈tat.\
+
+\L'origine des coordonn≈es est le coin sup≈rieur gauche de la
+fen¡tre d'affichage. Le coin inf≈rieur droit a comme
+coordonn≈es {ix}=131 et {iy}=7.\
+
+\Par exemple, pour tracer une droite sur l'afficheur du HP-71,
+on peut faire :{c\
+
+10 FOR X=0 TO 131
+20   C=PAINT(1,X,5)
+30 NEXT X
+.references
+{iJPC 19} (page 25) routine d'inversion de l'afficheur graphique
+en Forth par Jean-Pierre Bondu.
+
+{iJPC 24} (page 37) premi…re version par Jean-Jacques Moreau.
+
+{iJPC 25} (page 59) programme en Forth renvoyant l'adresse d'une
+colonne graphique par Jean-Pierre Bondu.
+
+{iA para—tre} : deuxi…me version par Pierre David et Janick
+Taillandier.
+
+{iInternal Design Specification} Volume I, chapitre 3.2.1.
+.related
+GDISP
+GDISP$
+INVERSE
+.author
+Pierre David
+Jean-Jacques Moreau
+Janick Taillandier
+.end keyword
+
+.keyword
+PARPOLL
+
+.purpose
+{cPARPOLL} (Parallel POLL) retourne le r≈sultat d'une interrogation
+parall…le de la boucle HP-IL.
+
+.options
+FCKI
+
+.syntaxe
+{cPARPOLL}
+{cPARPOLL ( {inum≈ro de boucle{c )
+
+.examples
+.ex
+IF PARPOLL(1) THEN GOSUB 'INTERPT'
+.co
+Ex≈cute la routine 'INTERPT' si un p≈riph≈rique valid≈ demande
+service.
+
+.input
+.it
+num≈ro de boucle
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 3.
+.df
+1
+
+.operation
+{gL'interrogation parall…le :}
+
+\L'interrogation parall…le permet » un p≈riph≈rique de signaler
+au controleur (le HP-71) une demande de service.
+L'interrogation parall…le est le moyen le plus efficace de
+surveiller l'≈tat d'un ou plusieurs p≈riph≈riques.\
+
+\Avant de pouvoir utiliser l'interrogation parall…le,
+un p≈riph≈rique doit
+¡tre valid≈ par le controleur en utilisant le message HP-IL {cPPE
+{in} (Parallel Poll Enable). Le contr¬leur attribue le num≈ro
+{in} (de 0 » 7) au p≈riph≈rique par cette op≈ration.  C'est la
+phase d'initialisation.\
+
+\Le contr¬leur peut alors envoyer un message {cIDY 00}. Si le
+p≈riph≈rique demande un service, il positionne le bit num≈ro
+{in} de la partie donn≈e du message {cIDY}, ainsi que le bit de
+demande de service. Le {cIDY 00} se transforme donc en {cISR
+{im}, avec {im} = 2{p{^n}.\
+
+\Certains p≈riph≈riques n'ont pas la capacit≈ de r≈pondre
+aux interrogations parall…les. Consulter le manuel
+d'utilisation de vos p≈riph≈riques pour plus de d≈tails.\
+
+
+{gUtilisation de PARPOLL :}
+
+\Par exemple, supposons que nous voulions configurer le
+p≈riph≈rique situ≈ » l'adresse 3, en lui ordonnant de mettre » 1
+le bit 4, ainsi que le p≈riph≈rique situ≈ » l'adresse 7 en lui
+ordonnant de mettre » 1 le bit 2, lorsqu'ils auront une demande
+de service. La routine d'initialisation sera donc :{c\
+
+100 SEND UNL UNT   ! d≈configure la boucle
+110 SEND LISTEN 3  ! adresse le p≈riph≈rique » l'adresse 3
+120 SEND CMD 128+4 ! PPE 4
+130 SEND UNL       ! d≈configure le p≈riph≈rique » l'adresse 3
+140 SEND LISTEN 7  ! adresse le p≈riph≈rique » l'adresse 7
+150 SEND CMD 128+2 ! PPE 2
+160 SEND UNL UNT   ! fin de s≈quence
+
+\}Cette s≈quence d'initialisation ≈tant faite, le programme peut
+utiliser l'interrogation parall…le :{c\
+
+500 P=PARPOLL
+510 IF BIT(P,4) THEN GOSUB 'DEV3'
+520 IF BIT(P,2) THEN GOSUB 'DEV7'
+
+\}Ce segment de programme branche au sous programme 'DEV3'
+(respectivement 'DEV7') si le p≈riph≈rique situ≈ » l'adresse 3
+(respectivement 7) demande un service.\
+
+
+{gInterruption par [ATTN] :}
+
+\Cette fonction est interruptible par deux appuis successifs sur
+la touche {l[ATTN]}. Le HP-71 affiche alors le message d'erreur
+{cHPIL ERR:Aborted}. Il peut ¡tre n≈cessaire d'ex≈cuter {cRESTORE
+IO} pour r≈activer le syst…me HP-IL.\
+
+.references
+{iJPC 30} (page 50) premi…re version par Jean-Franµois Garnier.
+
+{iJPC 37} (page 33) deuxi…me version par jean-Franµois Garnier.
+
+{iThe HP-IL System : An Introductory Guide to the Hewlett-Packard
+Interface Loop}, par Gerry Kane, Steve Harper et David Ushijima,
+aux ≈ditions Mc Graw-Hill.
+
+{iThe HP-IL Interface Specification}, r≈f≈rence HP-82166-90017.
+D'abord difficile, mais r≈f≈rence la plus pr≈cise.
+
+L'ancienne appellation de {cPARPOLL} ≈tait {cPPOLL}.
+.related
+SRQ
+BIT
+SEND
+SPOLL
+.author
+Jean-Franµois Garnier
+.end keyword
+
+.keyword
+PBLIST
+
+.purpose
+{cPBLIST} (Printer Basic List) liste un programme Basic sous
+forme structur≈e sur  l'unit≈ d'impression courante.
+
+.options
+SKI
+
+.syntaxe
+PBLIST{c }[{c INDENT {iindentation{c }] [ {cTO {idestination{c }]
+PBLIST {ifichier{c }[{c INDENT {iindentation{c }] [ {cTO {idestination{c }]
+PBLIST {ifichier{c , {iligne d≈part{c }[{c INDENT {iindentation{c }] [ {cTO {idestination{c }]
+PBLIST {ifichier{c , {iligne d≈part {c, {iligne fin{c }[{c INDENT {iindentation{c }] [ {cTO {idestination{c }]
+
+.examples
+.ex
+PBLIST MONSUB INDENT 3
+.co
+Liste le programme MONSUB, de la premi…re » la derni…re
+ligne, en indentant les structures par trois espaces.
+.ex
+PBLIST MONSUB,10
+.co
+Liste la ligne 10 du programme MONSUB, sans indentation
+des structures.
+.ex
+PBLIST MONSUB,10,100 INDENT 2 TO LISTE
+.co
+Liste le programme MONSUB, de la ligne 10 » la ligne 100,
+en indentant les structures de deux espaces et en envoyant
+le r≈sultat dans le fichier LISTE.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Nom de fichier avec sp≈cificateur d'unit≈ en option.
+.df
+fichier courant.
+.it
+ligne d≈part
+.de
+Constante enti…re identifiant une ligne de programme.
+.re
+1 » 9999.
+.df
+premi…re ligne du programme.
+.it
+ligne fin
+.de
+Constante enti…re identifiant une ligne de programme.
+.re
+Ligne de d≈part jusqu'» 9999.
+.df
+ligne de d≈part si sp≈cifi≈e ; sinon, derni…re ligne du
+programme.
+.it
+indentation
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 255.
+.df
+0
+.it
+destination
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Nom de fichier avec sp≈cificateur d'unit≈ en option.
+.df
+Le listage va sur le p≈riph≈rique d≈sign≈ par {lPRINTER†IS{p.
+
+.operation
+\Le fonctionnement de {cPBLIST} est identique » celui de
+{cDBLIST}, » l'exception du fait que la sortie passe sur le
+p≈riph≈rique d'impression au lieu du p≈riph≈rique d'affichage.\
+
+\Le fait de sp≈cifier un fichier qui n'est pas un fichier Basic
+g≈n…re une erreur {cInvalid File Type} (Type de fichier invalide,
+erreur 63).\
+
+\Le fait de sp≈cifier une seule ligne ne fait appara—tre sur la
+liste que cette ligne. Si vous sp≈cifiez un intervalle et que le
+HP-71 ne trouve pas la ligne de d≈part mais trouve une ligne
+portant un num≈ro plus ≈lev≈, le listage commence par cette
+ligne. L'ex≈cution de {cPBLIST} sans sp≈cifier de ligne g≈n…re
+un listage du ficher complet.\
+
+\Si le p≈riph≈rique d'impression est le p≈riph≈rique d'affichage,
+la valeur courante de {cDELAY} d≈termine le d≈lai d'affichage de
+chaque ligne.\
+
+\La valeur de {cPWIDTH} d≈termine la largeur de la ligne
+imprim≈e.\
+
+\Pour arr¡ter le listage et afficher le curseur, il suffit
+d'appuyer sur {l[ATTN]} sauf si on est en mode {cATTN OFF}.\
+.references
+{iJPC 18} (page 25) premi…re version du programme JPCLISTE en
+Basic par Pierre David et Michel Martinet.
+
+{iJPC 38} (page 24) premi…re version de {cPBLIST} par Jean-Pierre
+Bondu.
+
+{iJPC 53} (page 17) deuxi…me version de {cPBLIST} par Pierre
+David et Janick Taillandier.
+.related
+ATTN
+DBLIST
+PLIST
+DELAY
+PWIDTH
+MODE
+}tous les mots-clefs de programmation structur≈e
+.author
+Jean-Pierre Bondu
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+PCR
+
+.purpose
+{cPCR} (Print Carriage Return) remet la t¡te d'impression de
+l'imprimante en premi…re position.
+
+.options
+SKI
+
+.syntaxe
+PCR
+
+.examples
+.ex
+PCR @ PRINT TAB(55);CHR$(124)
+.co
+Place le chariot en d≈but de ligne, puis place une barre
+verticale en cinquante cinqui…me colonne.
+
+.operation
+{gLe retour chariot :}
+
+\{cPCR} envoie un caract…re "Retour-Chariot" (code 13) au
+p≈riph≈rique d≈sign≈ par l'ordre {cPRINTER IS}, ce qui a pour
+effet de ramener le chariot de l'imprimante » la position
+initiale.\
+
+\Le HP-71 garde en m≈moire la position th≈orique de la t¡te
+d'impression de l'imprimante. C'est cette valeur qui est utilis≈e
+par l'option {cTAB} de {cPRINT}.\
+
+\Cette position est remise » 0 apr…s l'ex≈cution de {cPCR}. Ceci
+permet d'utiliser l'option {cTAB} plus efficacement.\
+
+\Note : ce mot-clef est tr…s utile lorsque vous envoyez des
+s≈quences d'≈chappement ou des codes de contr¬le » une
+imprimante. Le HP-71 les compte en effet dans son compte de
+caract…res envoy≈s, ce qui peut induire une impression
+pr≈matur≈e.\
+
+
+{gCodes envoy≈s » l'imprimante :}
+
+Caract…re de code 13.
+.references
+{iJPC 26} (page 39) premi…re version par Pierre David.
+
+{iJPC 40} (page 16) deuxi…me version par Pierre David.
+
+Consultez aussi le manuel de votre imprimante.
+
+L'ancienne d≈nomination de {cPCR} ≈tait {cCR}.
+.related
+PFF
+PLF
+PRINT TAB
+.author
+Pierre David
+.end keyword
+
+.keyword
+PDIR
+
+.purpose
+{cPDIR} (Print DIRectory) imprime le r≈pertoire du
+p≈riph≈rique sp≈cifi≈.
+
+.options
+SKI
+
+.syntaxe
+{cPDIR }[{c TO {idestination{c }]
+{cPDIR {isp≈cificateur de fichier{c [{c TO {idestination{c }]
+{cPDIR ALL }[{c TO {idestination{c }]
+
+.examples
+.ex
+PDIR :TAPE
+.co
+Liste le r≈pertoire de l'unit≈ de stockage de
+masse {l:TAPE{l.
+.ex
+PDIR :PORT(0) TO LISTE
+.co
+Liste le contenu du port num≈ro
+0 dans le fichier LISTE.
+.ex
+PDIR ALL
+.co
+Liste tous les fichiers pr≈sents dans le HP-71.
+.ex
+PDIR ESSAI:TAPE(2) TO A$
+.co
+Liste tous les fichiers situ≈s apr…s le fichier
+ESSAI sur l'unit≈ de stockage de masse
+{l:TAPE(2){p dans le fichier dont le nom est
+contenu dans la variable A$.
+
+.input
+.it
+sp≈cificateur de fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Un sp≈cificateur d'unit≈ ou un nom de fichier avec
+sp≈cificateur d'unit≈ en option.
+.df
+{l:MAIN
+.it
+destination
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Nom de fichier avec sp≈cificateur d'unit≈ en
+option.
+.df
+Le listage est effectu≈ sur l'imprimante.
+
+.operation
+\L'utilisation de {cPDIR} est identique » celle de
+{cDDIR}, » l'exception du fait que la sortie est
+faite sur le p≈riph≈rique d'impression au lieu du
+p≈riph≈rique d'affichage.\
+
+\Toutefois, si une redirection (par {cTO}) est
+sp≈cifi≈e, il n'y a plus aucune diff≈rence entre
+{cDDIR} et {cPDIR}.\
+.references
+{iA para—tre} : premi…re version par Jean-Jacques
+Dh≈nin.
+.related
+CAT$
+CAT
+DBLIST
+DDIR
+PBLIST
+.author
+Jean-Jacques Dh≈nin
+.end keyword
+
+.keyword
+PEEK$
+
+.purpose
+{cPEEK$} renvoie le contenu d'une zone de m≈moire sp≈cifi≈e par
+son adresse.
+
+.options
+FKID
+
+.syntaxe
+{cPEEK$ ( {iadresse hexad≈cimale{c , {inombre de quartets{c )
+{cPEEK$ ( {iadresse d≈cimale{c , {inombre de quartets{c )
+
+.examples
+.ex
+A$=PEEK$(ADDR$("EXEMPLE"),2)
+.co
+Place la cha—ne "54" dans la variable alphanum≈rique A$, soit la
+repr≈sentation hexad≈cimale du premier caract…re du nom du
+fichier.
+.ex
+DISP PEEK$(X+5,1)
+.co
+Retourne le quartet situ≈ 5 quartets apr…s l'adresse contenue dans
+la variable num≈rique X.
+
+.input
+.it
+adresse hexad≈cimale
+.de
+Expression alphanum≈rique contenant des chiffres hexad≈cimaux.
+.re
+Jusqu'» 5 chiffres en majuscules ou en minuscules.
+.it
+adresse d≈cimale
+.de
+Expression num≈rique arrondie » un nombre entier.
+.re
+0 » 1048575.
+.it
+nombre de quartets
+.de
+Expression num≈rique arrondie » un nombre entier.
+.re
+0 » 524287.
+
+.operation
+\{cPEEK$} fonctionne de mani…re similaire » la fonction {cPEEK$}
+interne au HP-71, » ceci pr…s qu'elle ne v≈rifie pas la
+protection des zones m≈moire concern≈es.\
+
+\{cPEEK$} est r≈serv≈ aux connaisseurs du HP-71. Pour donner un
+exemple d'utilisation, la s≈quence suivante retourne la valeur du
+contraste courant :\
+
+{cHTD(PEEK$("2E3FE",1))}
+.references
+{iJPC 23} (page 37) premi…re version par Pierre David, Laurent
+Istria et Michel Martinet.
+
+{iInternal Design Specification} volume I, et plus
+particuli…rement le chapitre 3.
+.related
+ADBUF$
+ADDR$
+ENTRY$
+HTA$
+HTD
+PEEK$
+POKE
+.author
+Pierre David
+Laurent Istria
+Michel Martinet
+.end keyword
+
+.keyword
+PEN
+
+.purpose
+{cPEN} s≈lectionne une plume.
+.options
+SKID
+.syntaxe
+PEN {inum≈ro de plume}
+.examples
+.ex
+PEN 2
+.co
+S≈lectionne la plume 2.
+.ex
+PEN X
+.co
+S≈lectionne la plume num≈ro X.
+
+.input
+.it
+num≈ro de plume
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-32767 » +32767
+
+.operation
+\{cPEN} s≈lectionne une plume sur l'appareil d≈sign≈ par
+{cPLOTTER IS}. Inactif pour les graphiques de type "raster".\
+
+.related
+PLOTTER IS
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+PENDOWN
+
+.purpose
+{cPENDOWN} baisse la plume et imprime un point » la position
+courante de la plume.
+
+.options
+SKID
+
+.syntaxe
+PENDOWN
+
+.examples
+.ex
+IF X THEN PENDOWN
+.co
+Baisse la plume si le contenu de la variable X est diff≈rent de
+0.
+
+.operation
+\{cPENDOWN} baisse la plume. Ceci a pour effet d'imprimer un
+point » la position courante de la plume.\
+
+.related
+PENUP, PEN, MOVE, DRAW
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+PENUP
+.purpose
+{cPENUP} l…ve la plume
+.options
+SKID
+.syntaxe
+PENUP
+.examples
+.ex
+IF NOT X THEN PENUP
+.co
+L…ve la plume si le contenu de la variable X est nul.
+
+.operation
+\{cPENUP} l…ve la plume. Cet ordre est inactif pour les
+graphiques de type "raster".\
+
+.related
+PEN
+PENDOWN
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+PERF
+
+.purpose
+{cPERF} active ou d≈sactive le mode {isaut de perforations} sur
+l'appareil d'impression courant.
+
+.options
+SKI
+
+.syntaxe
+{cPERF ON
+{cPERF OFF
+
+.examples
+.ex
+PERF ON
+.co
+Active le mode ˚saut de perforations˝
+
+.operation
+{gLe saut de perforations :}
+
+\Les imprimantes Hewlett-Packard qui utilisent le papier en
+continu ont en g≈n≈ral un mode qui leur permet de ne pas ≈crire
+sur la jonction de deux feuilles.\
+
+\{cPERF ON} active ce mode. D…s lors, l'impression de la derni…re
+ligne d'une page provoque automatiquement l'avancement du papier
+jusqu'en haut de la page suivante. On ≈vite ainsi l'impression du
+texte sur les perforations s≈parant deux pages.\
+
+\{cPERF OFF} d≈sactive ce mode.\
+
+{gCodes envoy≈s » l'imprimante :}
+
+{cPERF ON } : {cESC & l 0 L}
+{cPERF OFF} : {cESC & l 1 L}
+.references
+{iJPC 26} (page 39) premi…re version par Pierre David.
+
+{iJPC 40} (page 16) deuxi…me version par Pierre David.
+
+Consultez aussi le manuel de votre imprimante.
+.related
+PAGELEN
+PLF
+PRINT
+.author
+Pierre David
+.end keyword
+
+.keyword
+PFF
+
+.purpose
+{cPFF} (Print Form Feed) avance le papier jusqu'au d≈but de la
+page suivante.
+
+.options
+SKI
+
+.syntaxe
+PFF
+
+.examples
+.ex
+IF K+L>=N THEN PFF
+.co
+Commence une nouvelle page si K+L>=N.
+
+.operation
+{gLe saut de page :}
+
+\{cPFF} agit sur le p≈riph≈rique d≈sign≈ par le dernier ordre
+{cPRINTER IS} effectu≈.\
+
+\{cPFF} passe au d≈but de la page suivante. Le d≈but de la page
+correspond au d≈but de la page logique telle que d≈finie par le
+dernier ordre {cPAGELEN} effectu≈ ou aux conditions par d≈faut de
+l'imprimante.\
+
+
+{gCodes envoy≈s » l'imprimante :}
+
+Retour chariot (caract…re de code 13)
+Avance page (caract…re de code 12)
+.references
+{iJPC 26} (page 39) premi…re version par Pierre David.
+
+{iJPC 40} (page 16) deuxi…me version par Pierre David.
+
+Consultez aussi le manuel de votre imprimante.
+
+L'ancienne appellation de {cPFF} ≈tait {cFF}.
+.related
+PAGELEN
+PCR
+PRINTER IS
+.author
+Pierre David
+.end keyword
+
+.keyword
+PGCD
+
+.purpose
+{cPGCD} calcule le plus grand commun diviseur de plusieurs
+nombres.
+
+.options
+FKIDC
+
+.syntaxe
+{cPGCD ( {iarg{v1{c , {iarg{v2{c )
+{cPGCD ( {iarg{v1{c , {iarg{v2} {c, {iarg{v3{c )
+{c {c }:
+{cPGCD ( {iarg{v1{c , {iarg{v2} {c, {iarg{v3{c ,} ... {iarg{v10{c )
+.examples
+.ex
+A=PGCD(385,210,715)
+.co
+Place 5 dans la variable A.
+
+.input
+.it
+arg{vi{-
+.de
+Expressions num≈riques.
+.re
+Nombres entiers entre -10{^12{-+1 et 10{^12{--1.
+
+.operation
+\{cPGCD} retourne le plus grand commun diviseur des nombres
+pass≈s en param…tre. Ceux-ci peuvent ¡tre jusqu'» 10.\
+.references
+{iJPC 35} (page 21) premi…re version de DIVILEX par Guy Toublanc.
+
+{iJPC 38} (page 18) deuxi…me version par Guy Toublanc.
+
+{iJPC 48} (page 23) troisi…me version par Guy Toublanc.
+.related
+DIV
+PPCM
+PHI
+.author
+Guy Toublanc
+.end keyword
+
+.keyword
+PHI
+
+.purpose
+{cPHI}, ou indicateur d'Euler, donne le nombre de nombres relativement premiers
+inf≈rieurs » l'argument.
+
+.options
+FCKID
+
+.syntaxe
+{cPHI ( {iargument{c )
+
+.examples
+.ex
+A=PHI(251)
+.co
+Place 250 dans la variable A.
+.ex
+A=PHI(999)
+.co
+648
+.ex
+A=PHI(1)
+.co
+1
+
+.input
+.it
+argument
+.de
+Expression num≈rique.
+.re
+Nombre entier non nul entre -10{^12{-+1 » 10{^12{--1.
+
+.operation
+\{cPHI} retourne la valeur de l'indicateur d'Euler, c'est »
+dire le nombre d'entiers entre 1 et {iargument} qui sont
+relativement premiers avec {iargument}.\
+
+{gInterruption par [ATTN] :}
+
+\Cette fonction est interruptible par deux appuis successifs sur
+la touche {l[ATTN]}. Le HP-71 affiche alors le message d'erreur
+{cJPC ERR:Function Interrupted}.\
+.references
+{iJPC 35} (page 21) premi…re version de DIVILEX par Guy Toublanc.
+
+{iJPC 38} (page 18) deuxi…me version par Guy Toublanc.
+
+{iJPC 48} (page 23) troisi…me version par Guy Toublanc.
+.related
+PRIM
+NPRIM
+FPRIM
+.author
+Guy Toublanc
+.end keyword
+
+.keyword
+PLF
+
+.purpose
+{cPLF} (Print Line Feed) avance le papier du nombre de lignes
+sp≈cifi≈.
+
+.options
+SKI
+
+.syntaxe
+PLF
+PLF {inombre de lignes{c
+
+.examples
+.ex
+IF S THEN PLF
+.co
+Saute une ligne si le contenu de la variable S est non nul.
+.ex
+PLF 10
+.co
+Saute dix lignes.
+
+.input
+.it
+nombre de lignes
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 1048575
+.df
+1
+
+.operation
+\{cPLF} fait avancer le papier sur l'appareil d≈sign≈ par le
+dernier ordre {cPRINTER IS}.\
+
+\Le papier est avanc≈ du nombre de lignes sp≈cifi≈. Par d≈faut,
+le papier avance d'une seule ligne.\
+
+\Si le papier arrive » la fin de la page logique d≈finie par le
+dernier ordre {cPAGELEN} effectu≈ ou par les conditions par
+d≈faut de votre imprimante, et si le mode ˚†saut de perforations†˝
+est actif, le papier avance jusqu'au d≈but de la page suivante.
+Ce qu'il restait » sauter » la fin de la page est maintenant
+saut≈.\
+
+
+{gCodes envoy≈s » l'imprimante :}
+
+Retour Chariot (caract…re de code 13)
+\Avance Papier (caract…re de code 10) autant de fois que
+n≈cessaire.\
+.references
+{iJPC 26} (page 39) premi…re version par Pierre David.
+
+{iJPC 40} (page 16) deuxi…me version par Pierre David.
+
+Consultez aussi le manuel de votre imprimante.
+
+L'ancienne d≈nomination de {cPLF} ≈tait {cLF}.
+.related
+PAGELEN
+PERF
+PFF
+PRINT
+.author
+Pierre David
+.end keyword
+
+.keyword
+PLOTTER IS
+
+.purpose
+{cPLOTTER IS} d≈clare un appareil comme unit≈ graphique.
+
+.options
+SKID
+
+.syntaxe
+{cPLOTTER IS {isp≈cificateur d'unit≈
+
+.examples
+.ex
+PLOTTER IS PRINTER(2)
+.co
+D≈finit la deuxi…me imprimante de la boucle comme unit≈ graphique
+.ex
+PLOTTER IS :RS232
+.co
+D≈clare l'interface HP-IL / RS232 comme unit≈ graphique
+.ex
+PLOTTER IS *
+.co
+Annule la d≈claration courante.
+
+.input
+.it
+sp≈cificateur d'unit≈
+.de
+Voir d≈finition standard dans le module HPIL.
+.re
+Aucune.
+
+.operation
+\L'ordre {cPLOTTER IS} d≈clare une unit≈ HPIL comme unit≈
+graphique.\
+
+\{cPLOTTER IS} et {cGINIT} sont les seuls ordres ex≈cutables en
+dehors d'une session graphique.\
+
+.related
+GINIT
+GDUMP
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+POKE
+
+.purpose
+{cPOKE} place une donn≈e » partir de l'adresse hexad≈cimale donn≈e.
+
+.options
+SKID
+
+.syntaxe
+POKE {iadresse hexad≈cimale{c , {idonn≈e
+POKE {iadresse d≈cimale{c , {idonn≈e
+
+.examples
+.ex
+{iSoyez prudents...
+
+.input
+.it
+adresse hexad≈cimale
+.de
+Expression alphanum≈rique contenant des chiffres hexad≈cimaux.
+.re
+Jusqu'» 5 chiffres en majuscules ou minuscules.
+.it
+adresse d≈cimale
+.de
+Expression num≈rique arrondie » un nombre entier.
+.re
+0 » 1048575.
+.it
+donn≈e
+.de
+Expression alphanum≈rique contenant des chiffres hexad≈cimaux.
+.re
+Aucune.
+
+.operation
+\{cPOKE} est identique » l'ordre syst…me {cPOKE}, mais ne v≈rifie pas
+la protection des fichiers.\
+
+\{gAttention} : {cPOKE} est r≈serv≈ aux experts. Une
+utilisation sans pr≈caution peut endommager le contenu de la
+m≈moire, et peut conduire au Memory Lost.\
+.references
+{iJPC 23} (page 37) premi…re version par Pierre David, Laurent
+Istria et Michel Martinet.
+
+{iInternal Design Specification}, Volume I, et plus particuli…rement le
+chapitre 3.
+.related
+ADBUF$
+ADDR$
+ATH$
+DTH$
+PEEK$
+POKE
+.author
+Pierre David
+Laurent Istria
+Michel Martinet
+.end keyword
+
+.keyword
+POSI
+
+.purpose
+{cPOSI} (POSition in an Interval) renvoie la position dans la
+cha—ne du  premier caract…re compris entre deux bornes.
+
+.options
+FKID
+
+.syntaxe
+POSI ( {icha—ne{c , {imin{c )
+POSI ( {icha—ne{c , {imin{c , {imax{c )
+
+.examples
+.ex
+A=POSI("Valeur = 1000 F",48,57)
+.co
+Retourne la position du premier chiffre de la cha—ne car 48 est
+le code du caract…re "0", 57 est le code du caract…re "9".
+.ex
+A=POSI(A$,"a","z")
+.co
+Recherche la position de la premi…re minuscule dans la cha—ne A$.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+min
+.de
+Expression alphanum≈rique, ou expression num≈rique arrondie » un
+entier.
+.re
+Si c'est un nombre, il doit ¡tre compris entre 0 et 255.
+.it
+max
+.de
+Expression alphanum≈rique, ou expression num≈rique arrondie » un
+entier.
+.re
+Si c'est un nombre, il doit ¡tre compris entre 0 et 255.
+.df
+255.
+
+.operation
+\{cPOSI} renvoie la position dans la cha—ne {icha—ne} du premier
+caract…re dont le code est compris entre les deux valeurs {imin}
+et {imax}.\
+
+\Ces valeurs sont sp≈cifi≈es soit par des valeurs num≈riques,
+auquel cas elles doivent ¡tre comprises entre 0 et 255, soit par
+des cha—nes alphanum≈riques. Dans ce dernier cas, seule la valeur
+du premier caract…re (code ASCII) est prise en compte, comme pour
+la fonction {cNUM}. La cha—ne vide est interpr≈t≈e comme une
+valeur nulle.\
+
+\Si la valeur {imax} n'est pas fournie, le maximum est pris par
+d≈faut. Autrement dit, tout code sup≈rieur » {imin} sera pris en
+compte.\
+
+\Si {imin} > {imax}, les deux valeurs sont permut≈es avant de
+commencer la recherche.\
+
+\Si aucun caract…re n'est trouv≈, la valeur 0 est renvoy≈e.\
+
+\Par exemple, si vous voulez chercher une lettre majuscule dans
+une cha—ne de caract…res, vous ferez :\
+
+{cPOSI(A$,65,90)} ou {cPOSI(A$,"A","Z")} ou {cPOSI(A$,"A",90)}
+
+\pour chercher une lettre minuscule :\
+
+{cPOSI(A$,97,122)} ou {cPOSI(A$,"a","z")} ou {cPOSI(A$,97,"z")}
+
+\Pour chercher une lettre minuscule ou majuscule :\
+
+{cPOSI(UPRC$(A$),"A","Z")}
+.reference
+{iJPC 37} (page 25) premi…re version de {cPOSI} par Jean-Pierre
+Bondu.
+
+{iA para—tre} : deuxi…me version par Pierre David et Janick
+Taillandier.
+.related
+POS
+NUM
+.author
+Jean-Pierre Bondu
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+PPCM
+
+.purpose
+{cPPCM} renvoie le plus petit commun multiple des arguments.
+
+.options
+FKIDC
+
+.syntaxe
+PPCM ( {iarg{v1{c , {iarg{v2{c )
+PPCM ( {iarg{v1{c , {iarg{v2{c , {iarg{v3{c )
+{c {c }:
+PPCM ( {iarg{v1{c , {iarg{v2{c , {iarg{v3} ... {iarg{v10{c )
+
+.examples
+.ex
+A=PPCM(385,210,715)
+.co
+Renvoie 30030, le plus petit commun multiple des nombres 385, 210
+et 715.
+
+.input
+.it
+arg{vi{-
+.de
+Expression num≈rique.
+.re
+Nombres entiers compris entre -10{^12{-+1 et 10{^12{--1.
+
+.operation
+\{cPPCM} renvoie le plus petit commun multiple de tous les arguments
+{iarg{vi}.\
+.references
+{iJPC 35} (page 21) premi…re version de DIVILEX par Guy Toublanc.
+
+{iJPC 38} (page 18) deuxi…me version par Guy Toublanc.
+
+{iJPC 48} (page 23) troisi…me version par Guy Toublanc.
+.related
+PGCD
+DIV
+.author
+Guy Toublanc
+.end keyword
+
+.keyword
+PRIM
+
+.purpose
+{cPRIM} teste la primalit≈. Il renvoie 0 ou
+le plus grand diviseur de l'argument.
+
+.options
+FCKID
+
+.syntaxe
+{cPRIM ( {iargument{c )
+{cPRIM ( {ipartie haute{c , {ipartie basse{c )
+
+.examples
+.ex
+A=PRIM(999997874844)
+.co
+Renvoie 31622743 en 3"01.
+.ex
+A=PRIM(100071000730,021)
+.co
+Renvoie 10007 en 11"15.
+
+.input
+.it
+argument
+.de
+Expression num≈rique.
+.re
+Nombre entier compris entre 1 et 10{^12{--1.
+
+.it
+partie haute
+.de
+Expression num≈rique.
+.re
+Nombre entier compris entre -10{^12{-+1 et 10{^12{--1.
+
+.it
+partie basse
+.de
+Expression num≈rique.
+.re
+Entier compris entre 1 et 999.
+
+.operation
+\{cPRIM} teste la primalit≈ de l'argument, et renvoie 0 si le
+nombre est premier, ou le plus petit diviseur sinon.\
+
+\Les nombres sont limit≈s » 15 chiffres significatifs. Si l'argument
+comprend entre 13 et 15 chiffres, il doit ¡tre entr≈ en deux
+param…tres. Voir le deuxi…me exemple, oÀ :\
+
+{iargument} = {ipartie haute} * 1000 + {ipartie basse}
+
+
+{gInterruption par [ATTN] :}
+
+\Cette fonction est interruptible par deux appuis successifs sur
+la touche {l[ATTN]}. Le HP-71 affiche alors le message d'erreur
+{cJPC ERR:Function Interrupted}.\
+.references
+{iJPC 26} (page 37) premi…re version de {cPRIM} par Olivier
+Arbey.
+
+{iJPC 35} (page 21) premi…re version de DIVILEX par Guy Toublanc.
+
+{iJPC 38} (page 18) deuxi…me version par Guy Toublanc.
+
+{iJPC 48} (page 23) troisi…me version par Guy Toublanc.
+.related
+PGCD
+NPRIM
+FPRIM
+.author
+Olivier Arbey
+Guy Toublanc
+.end keyword
+.end

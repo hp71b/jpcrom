@@ -1,0 +1,273 @@
+\documentclass {report}
+
+\newcommand{\repertoire}{D}
+\newcommand{\chap}[1]{\include{\repertoire/#1}}
+
+\usepackage [french] {babel}
+\raggedbottom   % par defaut, babel aligne les bas de page. Pas booooo !
+
+\usepackage [a4paper, margin=20mm] {geometry}
+
+\frenchspacing
+\parskip=1mm
+\parindent=0mm
+
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{ifthen}
+
+\newcommand{\chooselang}{%
+    Please use \textbackslash jlangfr or \textbackslash jlangen\par}
+\newcommand{\textS}{\chooselang}
+\newcommand{\textF}{\chooselang}
+\newcommand{\textO}{\chooselang}
+\newcommand{\textK}{\chooselang}
+\newcommand{\textC}{\chooselang}
+\newcommand{\textI}{\chooselang}
+\newcommand{\textD}{\chooselang}
+
+\newcommand{\textExample}{\chooselang}
+\newcommand{\textExamples}{\chooselang}
+\newcommand{\textInput}{\chooselang}
+\newcommand{\textInputs}{\chooselang}
+\newcommand{\textOperation}{\chooselang}
+
+\newcommand{\textElement}{\chooselang}
+\newcommand{\textDescription}{\chooselang}
+\newcommand{\textRestriction}{\chooselang}
+\newcommand{\textDefault}{\chooselang}
+
+\newcommand{\textReference}{\chooselang}
+\newcommand{\textReferences}{\chooselang}
+
+\newcommand{\textRelated}{\chooselang}
+
+\newcommand{\textAuthor}{\chooselang}
+
+\newcommand{\jlangfr} {
+    \renewcommand{\textS}{Ordre}
+    \renewcommand{\textF}{Fonction}
+    \renewcommand{\textO}{Opérateur}
+    \renewcommand{\textK}{Exécution au clavier}
+    \renewcommand{\textC}{Mode CALC}
+    \renewcommand{\textI}{IF...THEN...ELSE}
+    \renewcommand{\textD}{Opération d'unité}
+
+    \renewcommand{\textExample}{Exemple}
+    \renewcommand{\textExamples}{Exemples}
+    \renewcommand{\textInput}{Paramètre d'entrée}
+    \renewcommand{\textInputs}{Paramètres d'entrée}
+    \renewcommand{\textOperation}{Opération}
+
+    \renewcommand{\textElement}{Élément}
+    \renewcommand{\textDescription}{Description}
+    \renewcommand{\textRestriction}{Restriction}
+    \renewcommand{\textDefault}{Défaut :}
+
+    \renewcommand{\textReference}{Référence}
+    \renewcommand{\textReferences}{Références}
+
+    \renewcommand{\textRelated}{Mots-clés associés}
+
+    \renewcommand{\textAuthor}{Auteurs}
+}
+
+\newcommand{\jlangen} {
+    \renewcommand{\textS}{Statement}
+    \renewcommand{\textF}{Function}
+    \renewcommand{\textO}{Operator}
+    \renewcommand{\textK}{Keyboard Execution}
+    \renewcommand{\textC}{CALC Mode}
+    \renewcommand{\textI}{IF...THEN...ELSE}
+    \renewcommand{\textD}{Device Operation}
+
+    \renewcommand{\textExample}{Example}
+    \renewcommand{\textExamples}{Examples}
+    \renewcommand{\textInput}{Input Parameter}
+    \renewcommand{\textInputs}{Input Parameters}
+    \renewcommand{\textOperation}{Operation}
+
+    \renewcommand{\textElement}{Item}
+    \renewcommand{\textDescription}{Description}
+    \renewcommand{\textRestriction}{Restrictions}
+    \renewcommand{\textDefault}{Default :}
+
+    \renewcommand{\textReference}{Reference}
+    \renewcommand{\textReferences}{References}
+
+    \renewcommand{\textRelated}{Related Keywords}
+
+    \renewcommand{\textAuthor}{Authors}
+}
+
+% \jkeyword {keyword}
+\newcommand{\jkeyword}[1] {\clearpage\section*{#1}%
+	\addcontentsline{toc}{chapter}{\protect\numberline{}#1}}
+\newcommand{\jendkeyword} {}
+
+% \jopt {statement} {function} {keyboard} {calc} {ifthenelse} {device}
+\newcommand{\jopt}[6] {
+    \par
+    \framebox[\linewidth] {%
+	\hspace*{.03\linewidth}
+	\parbox[t]{.47\linewidth}{
+	    \vspace*{1ex}
+	    \ifthenelse{\equal{#1}{x}}{$\blacksquare$}{$\Box$}
+	    \textS
+	    \\
+	    \ifthenelse{\equal{#2}{x}}{$\blacksquare$}{$\Box$}
+	    \textF
+	    \\
+	    $\Box$
+	    \textO
+	}%
+	\parbox[t]{.5\linewidth}{
+	    \vspace*{1ex}
+	    \ifthenelse{\equal{#3}{x}}{$\blacksquare$}{$\Box$}
+	    \textK
+	    \\
+	    \ifthenelse{\equal{#4}{x}}{$\blacksquare$}{$\Box$}
+	    \textC
+	    \\
+	    \ifthenelse{\equal{#5}{x}}{$\blacksquare$}{$\Box$}
+	    \textI
+	    \\
+	    \ifthenelse{\equal{#6}{x}}{$\blacksquare$}{$\Box$}
+	    \textD
+	    \\
+	}
+    }
+    \par
+}
+
+% \begin{jsyntax} ... \end{jsyntax}
+\newsavebox{\jsyntaxbox}
+\newenvironment{jsyntax}{%
+	\begin{lrbox}{\jsyntaxbox}
+	    \begin{minipage}{.95\linewidth}
+		\vspace*{1.2ex}
+		\Fc\obeycr\catcode32=12
+    }{%
+		\vspace*{-1.0ex}
+	    \end{minipage}
+	\end{lrbox}%
+	\vspace{1ex}
+	\framebox[\linewidth][l]{\hspace*{.03\linewidth}\usebox{\jsyntaxbox}}
+	\par
+    }
+
+% \begin{jexample} ... \end{jexample}	all examples as a whole
+\newenvironment{jexample}[1]{%
+    \vspace* {1ex}
+    \subsection*{\ifthenelse{\equal{#1}{s}}{\textExamples}{\textExample}}
+    \par
+} {}
+% \begin{jexex} ... \end{jexex}		one example...
+\newenvironment{jexex}{%
+	\begin{minipage}[t]{.5\linewidth}
+	    \Fc\obeycr\catcode32=12
+    }{%
+	\end{minipage}%
+    }
+% \begin{jexco} ... \end{jexco}		... and the associated comment
+\newenvironment{jexco}{%
+	\begin{minipage}[t]{.5\linewidth}
+	    \Fn\small
+    }{%
+	\end{minipage}
+	\par
+    }
+
+% \begin{jinput} ... \end{jinput}	parameter specifications
+\newenvironment{jinput}[1]{%
+    \subsection*{\ifthenelse{\equal{#1}{s}}{\textInputs}{\textInput}}
+    \renewcommand{\arraystretch}{1.2}
+    \footnotesize
+    \begin{tabular}{|p{.20\linewidth}|p{.476\linewidth}|p{.25\linewidth}|}
+	\hline
+	\rule[-.5\baselineskip]{0pt}{1.6\baselineskip}
+	\bf\textElement & \bf\textDescription & \bf\textRestriction \\ \hline
+} {%
+	\hline
+    \end{tabular}
+}
+
+% \jinputitem {item} {desc} {restriction} {default value} {first|last|""}
+\newcommand{\jinputitem}[5]{%
+    \ifthenelse{\equal{#5}{first}}{%
+			\rule[-.5\baselineskip]{0pt}{1.6\baselineskip}%
+	}{\ifthenelse{\equal{#5}{last}}{%
+			\rule[-.7\baselineskip]{0pt}{1.3\baselineskip}%
+	    }{		\rule[-.5\baselineskip]{0pt}{1.3\baselineskip}%
+	}}%
+    #1
+      & #2 \ifthenelse{\equal{#4}{}}{}{\newline\hspace*{.5em}\textDefault{} #4}
+      & #3
+    \\
+}
+
+% \joperation				starts the operation section
+\newcommand{\joperation}{\subsection*{\textOperation}\Fn}
+
+% \jreference or \jreferences		starts the reference section
+\newcommand{\jreference} {\subsection*{\textReference} \rm}
+\newcommand{\jreferences} {\subsection*{\textReferences} \rm}
+
+% \jrelated				starts the related section
+\newcommand{\jrelated} {\subsection*{\textRelated} \tt}
+
+% \jauthor				starts the author section
+\newcommand{\jauthor} {\subsection*{\textAuthor} \rm}
+
+% \begin{jverb} ... \end{jverb}		pseudo-verbatim text
+\newenvironment{jverb}{%
+	\bgroup
+	\Fc\obeycr\catcode32=12\catcode`-=12
+    }{%
+	\egroup
+    }
+
+\usepackage{fontspec}
+
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setmonofont{Liberation Mono}[Scale=0.9]
+
+\newcommand{\Fn}{\rm}
+\newcommand{\Fc}{\tt}
+\newcommand{\Fi}{\it}
+\newcommand{\Fg}{\bf}
+\newcommand{\Fl}{\tt}
+\newcommand{\Fp}{\rm}			% ignore this font change
+\newcommand{\Fh}{\fontspec{Liberation Serif Bold}[Scale=1.2]}	% header
+
+\begin{document}
+\tableofcontents
+\chap{a}
+\chap{b}
+\chap{c}
+\chap{d}
+\chap{e}
+\chap{f}
+\chap{g}
+\chap{h}
+\chap{i}
+\chap{j}
+\chap{k}
+\chap{l}
+\chap{m}
+\chap{n}
+\chap{o}
+\chap{p}
+\chap{q}
+\chap{r}
+\chap{s}
+\chap{t}
+\chap{u}
+\chap{v}
+\chap{w}
+\chap{x}
+\chap{y}
+\chap{z}
+\chap{poll}
+\end{document}

@@ -1,0 +1,56 @@
+^{hMESSAGES DE JPC ROM}
+
+
+
+{l
+225000  JPC 
+225001  Driver Lex File
+225002  Not Found
+225003  Structure Mismatch
+225004  Invalid Prompt
+225005  Invalid Format
+225006  #Dims
+225007  Var Not Found
+225008  Sunday
+225009  Monday
+225010  Tuesday
+225011  Wednesday
+225012  Thursday
+225013  Friday
+225014  Saturday
+225015  Function Interrupted
+225016  Removed Keyword
+225017  Insufficient Memory
+225018  Invalid Cmd
+225019  Invalid Pattern
+225020  No Room for Pattern
+225021  Line {i#{l Cmd:
+225022  Eof, Cmd:
+225023  [Eof
+225024  Ok to Delete? Y/N:
+225025  Yes/No/Quit ?
+225026  YNQ
+225027  CDEHIJLMPQRSTX
+225028  Copy: [b[e]] C [<file>]
+225029  Delete: [b[e]] D [<file>[+]]
+225030  Exit: E
+225031  Help: H [<cmd>]
+225032  Insert: [l] I
+225033  Join: [b[e]] [?] J [n]
+225034  List: [b[e]] L [n][N]
+225035  Move: [b[e]] M [<file>]
+225036  Print: [b[e]] P [n][N]
+225037  Quit: Q
+225038  Replace: [b[e]] [?] R/str1/str2[/]
+225039  Search: [b[e]] [?] S/str[/]
+225040  Text: [l] T
+225041  Exchange File: X <file>
+225042  (c) 1986, 1987, 1988, 1989 PPC-Paris
+104000  GRPH 
+104001  Invalid Graph type
+104002  Graph not initialized
+104003  No Loop
+104004  Module missing
+104005  Severe error
+104006  Plotter not reachable
+104007  GRAPHILE Not found

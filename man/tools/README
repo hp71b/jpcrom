@@ -1,0 +1,9 @@
+Pour imprimer la page de garde (anglaise ou francaise) :
+
+    - rapatrier les fontes
+	    TR100RPN.R8P
+	    TR140BPN.R8P
+	    TR240BPN.R8P
+
+    - impgarde ../anglais/garde			ou bien :
+      impgarde ../francais/garde

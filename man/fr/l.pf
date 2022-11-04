@@ -1,0 +1,472 @@
+.language
+F
+
+.keyword
+LABEL
+
+.purpose
+{cLABEL} trace des caract…res alphanum≈riques » partir de la
+position courante de la plume.
+
+.options
+SKID
+
+.syntaxe
+{cLABEL {icha—ne alphanum≈rique} [{c;}]
+
+.example
+.ex
+LABEL "EXEMPLE DE TRACE";
+.co
+Ecrit la cha—ne "EXEMPLE DE TRACE" dans la zone de traµage, et
+laisse la plume apr…s la derni…re lettre.
+.ex
+LABEL A$&STR$(I)
+.co
+Ecrit la cha—ne sp≈cifi≈e dans la zone de traµage, et place la
+plume au d≈but de la ligne suivante.
+
+.input
+.it
+Cha—ne alphanum≈rique
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+
+.operation
+\Les titres et labels peuvent ¡tre ≈crits en tout endroit de la
+zone de trac≈.\
+
+\{cLABEL} les ≈crit » partir de la position courante de la plume,
+en utilisant le type de ligne num≈ro 1 (ligne pleine).\
+
+\Une s≈quence de fin de ligne est envoy≈e apr…s le dernier
+caract…re imprim≈. Elle est supprim≈e si un point-virgule (;) est
+ajout≈ apr…s la cha—ne.\
+
+{gAttributs des labels :}
+
+\L'ordre {cCSIZE} d≈termine la hauteur et le rapport d'aspect des
+caract…res.\
+
+\L'ordre {cLORG} d≈termine la position du label, en accord avec
+la position courante de la plume lors de l'ex≈cution de
+{cLABEL}.\
+
+\L'ordre {cLDIR} d≈termine la direction dans laquelle sont trac≈s
+les labels.\
+
+\Le jeu de caract…res est le jeu de caract…res Roman8.\
+
+.related
+CSIZE
+LDIR
+LORG
+ENDLINE
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+LDIR
+
+.purpose
+{cLDIR} (Label DIRection) sp≈cifie l'angle des labels par rapport
+» l'axe des {ix}.
+
+.options
+SKID
+
+.syntaxe
+{cLDIR {iangle
+
+.examples
+.ex
+LDIR 0
+.co
+Les labels seront trac≈s horizontalement (valeur par
+d≈faut d≈faut).
+.ex
+LDIR ASIN(.5)
+.co
+L'angle entre la direction des labels et l'axe des x est de 30
+degr≈s.
+
+.input
+.it
+angle
+.de
+Expression num≈rique, interpr¡t≈e suivant le mode trigonom≈trique
+en vigueur.
+.re
+0 » 360 degr≈s, ou 0 » 2*PI
+
+.operation
+\L'ordre {cLDIR} d≈finit l'angle de rotation pour l'impression
+des labels. L'angle est interpr≈t≈ dans le mode trigonom≈trique
+courant ({cDEGREES} ou {cRADIANS}).\
+
+\Cet angle mesure la rotation entre l'axe des {ix} (horizontal)
+et la direction des labels.\
+
+\L'ex≈cution de {cGINIT} initialise cet angle » 0.\
+
+.graph
+GLD1 500
+
+.related
+DEGREES
+RADIANS
+LABEL
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+LEAVE
+
+.purpose
+{cLEAVE} sort proprement d'une boucle structur≈e de type {cWHILE},
+{cREPEAT} ou {cLOOP}.
+
+.options
+SKID
+
+.syntaxe
+LEAVE
+LEAVE {iprofondeur
+
+.examples
+.ex
+IF I=INF THEN LEAVE
+.co
+Sort de la boucle si la valeur de la variable I est infinie.
+.ex
+10 WHILE X<0
+20   WHILE Y<0
+30     Z=FNN(X,Y)
+40     IF Z<0 THEN LEAVE 2
+50   END WHILE
+60 END WHILE
+.co
+Si la valeur de la variable {lZ{p devient n≈gative, le test en
+ligne 40 provoque la sortie pr≈matur≈e des deux boucles
+{lWHILE{p englobantes.
+
+.input
+.it
+profondeur
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 au nombre deboucles englobantes.
+.df
+1
+
+.operation
+\{cLEAVE} sort pr≈matur≈ment d'une boucle {cWHILE} ... {cEND WHILE} ou
+{cREPEAT} ... {cUNTIL}.\
+
+\Pour les boucles de type {cLOOP} ... {cEND LOOP}, {cLEAVE} repr≈sente
+la seule mani…re de sortir.\
+
+\Si le param…tre optionnel {iprofondeur} est fourni, {cLEAVE}
+sortira du nombre de boucles englobantes sp≈cifi≈.\
+.references
+{iJPC 31} (page 38) premi…re version par Janick Taillandier.
+
+{iJPC 52} (page 10) deuxi…me version par Pierre David et Janick
+Taillandier.
+.related
+EXIT
+LOOP} ... {cEND LOOP
+REPEAT} ... {cUNTIL
+WHILE} ... {cEND WHILE
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+LEX
+
+.purpose
+{cLEX} d≈sactive ou active un fichier Lex.
+
+.options
+SKID
+
+.syntaxe
+{cLEX {ifichier{c OFF
+{cLEX {ifichier{c ON
+
+.examples
+.ex
+LEX STRINGLX OFF
+.co
+D≈sactive le fichier LEX STRINGLX. Les fonctions de ce Lex
+ne sont plus disponibles, et le type du fichier est chang≈
+en D-LEX.
+.ex
+LEX STRINGLX ON
+.co
+Active le fichier D-LEX STRINGLX. Les fonctions de ce Lex
+redeviennent disponibles.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Nom de fichier avec un sp≈cificateur de p≈riph≈rique optionnel.
+
+.operation
+{gLa d≈sactivation des fichiers Lex}
+
+\La vitesse de traitement du HP-71 est li≈e au nombre de fichiers
+Lex en m≈moire. Plus il y a de fichiers, moins le HP-71 r≈agit
+rapidement. Il vaut mieux avoir un seul gros fichier Lex
+regroupant 90 fonctions que 9 petits regroupant 10 fonctions
+chacun. Si votre HP-71 comprend une multitude de petits fichiers
+Lex, vous souhaiterez peut ¡tre en d≈sactiver quelques uns,
+quitte » les r≈activer quand vous en aurez besoin.\
+
+\D'autre part, si des fichiers Lex comprennent deux
+mots-clefs ayant les m¡mes
+num≈ros d'identification (ID) et de token, vous pouvez
+utiliser l'un ou l'autre de ces mots-clefs en d≈sactivant le
+Lex que vous ne d≈sirez pas utiliser.\
+
+\Les fichiers en m≈moire morte ou en module Eprom ne sont pas
+d≈sactivables.\
+
+
+{gL'ordre LEX ON/OFF}
+
+\{cLEX†{ifichier{c†OFF} change le type de {ifichier} de LEX
+en type D-LEX, de telle
+sorte qu'il ne soit plus actif. Ses fonctions
+ne sont plus utilisables, jusqu'» ce qu'un ordre
+{cLEX†{ifichier{c†ON} soit ex≈cut≈ sur ce m¡me fichier.\
+
+
+{gLes fichiers D-LEX}
+
+\Les fichiers d≈sactiv≈s apparaissent sous le type {cD-LEX}
+lors d'un {cCAT} ou {cCAT$} tant que JPC Rom est connect≈
+sur votre HP-71. Ces fichiers peuvent ¡tre copi≈s sur
+support de m≈moire de masse, mais ils peuvent ¡tre recopi≈s
+dans la m≈moire du HP-71 seulement lorsque JPC Rom est
+dans votre HP-71.\
+.references
+{iJPC 24} (page 30) premi…re version par Michel Martinet.
+
+{iA para—tre} : nouvelle version par Pierre David et Janick
+Taillandier.
+
+Les anciennes appellations de {cLEX} ≈taient {cENABLE} et
+{cDISABLE}
+.related
+EDIT
+MERGE
+.author
+Pierre David
+Michel Martinet
+Janick Taillandier
+.end keyword
+
+.keyword
+LINETYPE
+
+.purpose
+{cLINETYPE} s≈lectionne le type et la longueur du motif pour le
+trac≈ de lignes, axes et rectangles.
+
+.options
+SKID
+
+.syntaxe
+LINETYPE {itype{c }[{c, {ilongueur du motif}]
+
+.examples
+.ex
+LINETYPE 1
+.co
+D≈finit la ligne pleine comme type de ligne
+.ex
+LINETYPE 6,48
+.co
+D≈finit le motif num≈ro 6, ainsi qu'une longueur de motif de 48
+unit≈s graphiques.
+
+.input
+.it
+type
+.de
+Expression num≈rique arrondie » un nombre entier.
+.re
+0 » +32767
+.it
+longueur du motif
+.de
+Expression num≈rique arrondie » un nombre entier.
+.re
+0 » +32767
+.df
+16
+
+.operation
+\{cLINETYPE} choisit un type de ligne parmi 8 suivant le
+param…tre {itype}. Le num≈ro 0 donne un trait plein.\
+
+\La longueur du motif est exprim≈e en unit≈s graphiques pour la
+totalit≈ du motif. La valeur par d≈faut est 16 unit≈s
+graphiques.\
+
+.graph
+GLI1 320
+
+.related
+DRAW
+IDRAW
+BOX
+FRAME
+XAXIS
+YAXIS
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+LOOP ... END LOOP
+
+.purpose
+{cLOOP} ... {cEND LOOP} d≈finit une boucle sans fin.
+
+.options
+SKID
+
+.syntaxe
+{cLOOP
+  {isegment de programme}
+{cEND LOOP
+
+.examples
+.ex
+10 INPUT "Nombre entier : ";X
+20 LOOP
+30   DISP X;X*X
+40   X=X+1
+50 END LOOP
+.co
+D≈finit une boucle sans fin affichant la suite des nombres entiers et
+de leur carr≈. La seule mani…re d'arr¡ter cette boucle est l'appui
+sur la touche {l[ATTN]{p.
+
+.input
+.it
+segment de programme
+.de
+Tout nombre de lignes de programme contiguÕs.
+.re
+Aucune.
+
+.operation
+\La structure {cLOOP} ... {cEND LOOP} permet de faire des boucles
+infinies, avec des sorties par {cLEAVE}.\
+
+\Le segment de programme » r≈p≈ter commence apr…s le mot-clef
+{cLOOP} et se termine avant le mot-clef {cEND LOOP}. Atteindre le
+mot-clef {cEND LOOP} revient » faire un branchement au premier
+ordre suivant {cLOOP}.\
+
+\Le segment de programme peut contenir un nombre quelconque de
+{cLEAVE}. La seule restriction est que ces {cLEAVE} ne soient pas
+imbriqu≈s dans des structures embo—t≈es.\
+
+\Le segment de programme peut lui-m¡me contenir des structures de
+type boucle ou choix. L'embo—tement doit ¡tre correct, sinon
+l'erreur :  {cJPC ERR:Structure Mismatch} est renvoy≈e.\
+.references
+{iJPC 52} (page 10) premi…re version par Pierre David et Janick
+Taillandier.
+
+Basic 5.0 pour HP 9000 s≈ries 200/300.
+.related
+ATTN
+LEAVE
+FOR} ... {cNEXT
+WHILE} ... {cEND WHILE
+REPEAT} ... {cUNTIL
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+LORG
+
+.purpose
+{cLORG} (Label ORiGin) d≈finit la position des labels par rapport
+» la position courante de la plume.
+
+.options
+SKID
+
+.syntaxe
+LORG {iposition
+
+.examples
+.ex
+LORG 5
+.co
+Les labels seront centr≈s par rapport » la position courante de
+la plume.
+.ex
+LORG X
+
+.input
+.it
+position
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-32767 » +32767
+
+.operation
+\{cLORG} d≈finit la position de l'origine du label, qui
+d≈termine l'emplacement des labels par rapport » la position
+courante de la plume. Le param…tre de position peut prendre
+toute valeur entre 1 et 9 et est interpr≈t≈ conform≈ment »
+l'illustration ci-apr…s (le centre des croix repr≈sente la
+position courante de la plume).\
+
+.graph
+GLO1 600
+
+\La fonction {cLORG} utilise la valeur absolue de la partie
+enti…re de l'argument. Si le nombre est sup≈rieur » 9, la
+fonction utilise cette valeur modulo 10. Si le param…tre est nul,
+{cLORG} utilise la valeur 1 d≈finie par d≈faut lors de
+l'ex≈cution de {cGINIT}.\
+
+\Note : Attention » l'introduction de {cLORG} avec un argument
+constant. L'espace avant le nombre est imp≈ratif, sinon le HP71
+comprendra {cLORG5} comme :\
+{cDISP L OR G5}
+\ce qui n'est ≈videmment pas le but recherch≈ !\
+
+.related
+LABEL
+MOVE
+
+.author
+Pierre David
+.end keyword
+
+.end

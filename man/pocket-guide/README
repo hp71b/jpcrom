@@ -1,0 +1,20 @@
+Pour imprimer le pocket-guide :
+
+    recopier les fontes suivantes dans le repertoire ./lj
+	TR080RPN.R8P
+	TR080IPN.R8P
+	HV090BPN.R8P
+	HV080RPN.R8P
+	HV070RPN.R8P
+	TR120BPN.R8P
+
+Pour imprimer le pocket-guide (anglais ou francais) :
+
+    prpg pga		ou bien prpg pgf
+
+Pour imprimer des brouillons du pocket-guide :
+
+    impg pga		ou bien impg pgf
+
+Ne pas oublier de modifier prpg.c et de le recompiler pour actualiser
+l'ann≈e dans "(c) PPC Paris, 1988, 1989..."

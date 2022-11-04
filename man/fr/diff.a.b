@@ -1,0 +1,74 @@
+^{1DIFFERENCES PRINCIPALES
+
+^{1ENTRE LA VERSION A ET LA VERSION B}
+
+
+
+\Le passage de la version A00 » la fonction B00 (voir la fonction 
+{cVER$} dans {iles caract≈ristiques additionnelles de JPC† Rom})
+r≈sulte d'un certain nombre de corrections,
+modifications et am≈liorations. Les principales sont
+r≈sum≈es ci-dessous :\
+
+
+{2Corrections}
+
+
+\{cMARGIN} voit maintenant son param…tre limit≈ » 96.\
+
+\le mot-clef {cFIND} trouvait parfois des cha—nes qui
+n'existaient pas (voir {iJPC 45}). Janick Taillandier a
+arrang≈ cela.\
+
+\{cCOMB} et {cARR} ont ≈t≈ r≈≈crits par Guy Toublanc pour ne
+plus utiliser la factorielle, mais un algorithme
+multiplicatif.\
+
+\{cCOMB} a ≈t≈ modifi≈ pour ne plus renvoyer de r≈sultat
+faux lorsqu'on utilise {cS=S+COMB(n,0)}.\
+
+\La version de {cFINPUT} publi≈e dans {iJPC} sortait
+lorsqu'on appuyait sur la touche {l[f][CONT]}. Cela n'≈tait
+gu…re normal.\
+
+
+{2Nouveaux mots-clefs et nouvelles caract≈ristiques}
+
+\La fonction {cDATESTR$} a ≈t≈ ajout≈e pour convertir le
+nouveau format de dates de JPC Rom.\
+
+\Les mots-clefs de programmation structur≈e ont ≈t≈ ajout≈s
+» cette version.\
+
+
+{2Modifications et am≈liorations}
+
+\Les fonctions de calculs de dates ont ≈t≈ r≈≈crites pour
+utiliser le nouveau format de dates de JPC Rom aussi bien
+que le format de dates standard.\
+
+\Le mot-clef {cKSPEED} a ≈t≈ enlev≈. L'acc≈l≈ration du
+curseur subsiste, mais la vitesse de r≈p≈tition est maximale
+et le d≈lai entre la premi…re pression de touche et la
+premi…re r≈p≈tition n'est plus modifiable.\
+
+\La fonction {cPOSI} a ≈t≈ modifi≈e pour accepter des
+param…tres aussi bien num≈riques qu'alphanum≈riques.\
+
+\La s≈quence envoy≈e » l'imprimante par {cBOLD} a ≈t≈
+modifi≈e pour ¡tre compatible avec toutes les imprimantes
+{iPCL}, notamment les ThinkJet et LaserJet.\
+
+\{cFF} a ≈t≈ renomm≈ en {cPFF}, {cLF} en {cPLF}, {cPL} en
+{cPAGELEN}, {cCR} en {cPCR}. {cFPRM} a ≈t≈ renomm≈ en
+{cFPRIM} et {cNPRM} en {cNPRIM}. {cHMS+} a ≈t≈ renomm≈ en
+{cHMSADD} et {cHMS-} en {cHMSSUB}.\
+
+
+{2Note}
+
+\Toutes ces am≈liorations ou corrections ont ≈t≈ faites
+en conservant la compatibilit≈ des programmes ≈crits avec
+l'ancienne version de JPC Rom. Ainsi, vos programmes ≈crits
+avec l'ancien JPC Rom sont-ils totalement compatibles avec
+le nouveau JPC Rom.\

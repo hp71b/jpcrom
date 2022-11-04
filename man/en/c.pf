@@ -1,0 +1,285 @@
+.language
+A
+
+.keyword
+CASE
+
+.purpose
+{cCASE} is part of {cSELECT} ... {cCASE} ...
+{cEND SELECT} structure.
+
+.options
+SKID
+
+.syntaxe
+CASE {ielement{c ,} ...
+CASE {irelational operator{c {c {i element{c ,} ...
+CASE {ielement{c TO {ielement{c ,} ...
+CASE ELSE
+
+.examples
+.ex
+CASE 8,5 TO 7,<0,>=10
+.co
+Selects this case if expression in {lSELECT{p is equal to 8,
+if it is between 5 and 7 or negative or greater or equal to 10.
+.ex
+CASE >"Z","A" TO "BCD","0" TO "9"
+.co
+Selects this case if expression in 
+{lSELECT{p is greater than "Z" or is between "A" and "BCD" or
+between "0" and "9".
+
+.input
+.it
+element
+.de
+Numeric or alphanumeric expression.
+.re
+All expressions must have the same type.
+.it
+relational operator
+.de
+<, =, >, <=, >=, <>, # and ?
+.re
+None.
+
+.operation
+\{cCASE} is one of the components of the choice structure
+{cSELECT} ... {cEND SELECT}.\
+
+\{cCASE} offers a choice of expressions. If the selected
+expression matches  a {cCASE} choice,
+execution will resume at the 
+statement following the selected {cCASE}.\
+.references
+{iJPC 52} : first version by Pierre David and Janick
+Taillandier.
+
+HP 9000 series 200/300 Basic 4.0 
+.related
+SELECT} ... {cEND SELECT
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+CENTER$
+
+.purpose
+{cCENTER$} adds spaces at the beginning of the string
+specified in the parameters in order to center it
+in the width specified in the parameters.
+
+.options
+FKID
+
+.syntaxe
+{cCENTER$ ( {istring{c , {iwidth{c )
+
+.examples
+.ex
+A$=CENTER$("Centered string", 22)
+.co
+Stores into A$ 3 spaces followed by the string specified in parameter.
+
+.input
+.it
+string
+.de
+Alphanumeric expression.
+.re
+None.
+.it
+width
+.de
+Numeric expression rounded to an integer.
+.re
+1 through 524287.
+
+.operation
+\{cCENTER$} adds spaces before the string specified, so that this string
+is at the center of a 
+{iwidth} characters string.\
+
+\Leading and trailing spaces are first removed from the parameter
+string (see {cREDUCE$}).\
+
+\If the number of spaces to be added to the string
+is odd, then the extra space is placed after the
+string.\
+.references
+{iJPC 21} (page 34) first version of the Basic text formatter by
+Pierre David.
+
+{iJPC 26} (page 50) second version of the Basic text formatter with
+assembly language functions by Pierre David and Michel Martinet.
+.related
+CESURE
+FORMAT$
+RED$
+REDUCE$
+SPACE$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+CESURE
+
+.purpose
+{cCESURE} returns the position of the first place in the string where
+a word-break can occur.
+
+.options
+FKID
+
+.syntaxe
+{cCESURE ( {istring{c , {iwidth{c )
+
+.examples
+.ex
+A=CESURE("PPC Paris",7)
+.co
+Stores 3 in variable A : word break can occur at the third character.
+
+.input
+.it
+string
+.de
+Alphanumeric expression.
+.re
+None.
+
+.it
+width
+.de
+Numeric expression rounded to an integer.
+.re
+1 through 524287.
+
+.operation
+\{cCESURE} scans the string from the character specified by
+{iwidth} back to the beginning of the string, looking for a place
+where a word-break can occur.\
+
+\{cCESURE} handles standard punctuation marks :
+{iquestion mark}, {iexclamation mark},
+{isemicolon}, {icolon}, {iperiod} and {iopening bracket}.
+The algorithm is devised such that the string will not be cut in
+front of one of these marks.\
+.references
+{iJPC 21} (page 34) first version of the Basic text formatter by
+Pierre David.
+
+{iJPC 26} (page 50) second version of the Basic text formatter with
+assembly language functions by Pierre David and Michel Martinet.
+.related
+CENTER$
+FORMAT$
+RED$
+REDUCE$
+SPACE$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+COMB
+
+.purpose
+{cCOMB} (combinations) computes the number of possible different
+sets of n items taken p at a time.
+
+.options
+CFKID
+
+.syntaxe
+COMB ( {in{c , {ip{c )
+
+.examples
+.ex
+A=COMB(4,3)
+.co
+Stores 4 into variable A.
+
+.input
+.it
+n
+.de
+Numeric expression.
+.re
+Integer between 0 and 10{^12{--1.
+.it
+p
+.de
+Numeric expression.
+.re
+Integer between 0 and n.
+
+.operation
+COMB(n,p) = C{p{vn{^p} = n! / (p! * (n-p)!)
+
+\{cCOMB} computes the number of possible different sets
+(combinations) of n items taken p at a time, not counting
+re-arrangements.\
+
+\In order to increase the range of valid parameters, and to
+improve accuracy, {cARR} uses a multiplication based
+algorithm instead of factorials. This results in long
+execution times for large numbers.\
+.references
+{iJPC 25} (page 50) first version by Laurent Istria.
+
+{iJPC 41} (page 32) second version by Guy Toublanc.
+.related
+ARR
+FACT
+.author
+Laurent Istria
+Guy Toublanc
+.end keyword
+
+.keyword
+CONTRAST
+
+.purpose
+{cCONTRAST} returns the current contrast setting.
+
+.options
+FKIDC
+
+.syntaxe
+CONTRAST
+
+.examples
+.ex
+A=CONTRAST
+
+.operation
+\{cCONTRAST} without a parameter returns the current contrast
+setting. This value can be changed by the statement {cCONTRAST}
+followed by an expression whose value falls between 0 and 15.\
+
+\The standard {cCONTRAST} statement is still
+available to set the contrast to the desired
+value. For example, {cCONSTRAT 9} sets the
+contrast value to 9 whereas {cDISP CONTRAST}
+returns the current contrast settings.\
+.references
+{iJPC 22} (page 42) first version by Laurent Istria.
+
+{iJPC 24} (page 41) second version by Jean-Jacques Moreau.
+
+{iForth / Assembler Owner's Manual} (page 52). A sample Forth
+primitive returning the current contrast setting.
+.related
+CONTRAST
+.author
+Laurent Istria
+Jean-Jacques Moreau
+.end keyword
+.end

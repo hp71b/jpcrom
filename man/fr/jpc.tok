@@ -1,0 +1,142 @@
+^{hLES AUTEURS}
+
+
+
+\Voici la liste des auteurs ayant contribu≈ » JPC†Rom. Chaque mot-clef
+est suivi de son token et des auteurs.{l\
+
+
+ADBUF$    XFN   225001  Pierre David, Michel Martinet
+ASC$      XFN   225002  Pierre David, Michel Martinet
+ATH$      XFN   225003  Pierre David, Michel Martinet
+HTA$      XFN   225004  Pierre David, Michel Martinet
+RED$      XFN   225005  Pierre David, Michel Martinet
+REPLACE$  XFN   225006  Michel Martinet, Jean-Jacques Moreau
+FILESIZE  XFN   225007  Henri Kudelski
+ATTN      XWORD 225008  Pierre David, Michel Martinet
+LEX OFF   XWORD 225009  Pierre David, Michel Martinet, Janick Taillandier
+LEX ON    XWORD 225010  Pierre David, Michel Martinet, Janick Taillandier
+FKEY      XWORD 225011  Jean-Pierre Bondu
+CONTRAST  XWORD 225012  Laurent Istria, Jean-Jacques Moreau
+INVERSE   XWORD 225013  Pierre David, Jean-Jacques Moreau, Janick Taillandier
+PAINT     XFN   225015  Pierre David, Jean-Jacques Moreau, Janick Taillandier
+ENDUP$    XFN   225016  Jean-Jacques Moreau
+ENDUP     XWORD 225017  Jean-Jacques Moreau
+STARTUP$  XFN   225018  Jean-Jacques Moreau
+EXECUTE   XWORD 225019  Jean-Jacques Moreau
+ARR       XFN   225020  Laurent Istria, Guy Toublanc
+COMB      XFN   225021  Laurent Istria, Guy Toublanc
+HMSADD    XFN   225022  Michel Martinet, Guy Toublanc
+HMSSUB    XFN   225023  Michel Martinet, Guy Toublanc
+HMS       XFN   225024  Michel Martinet, Guy Toublanc
+HR        XFN   225025  Michel Martinet, Guy Toublanc
+EDIT      XWORD 225026  Jean-Pierre Bondu, Pierre David, Michel Martinet
+STACK     XWORD 225027  Henri Kudelski, Michel Martinet
+MARGIN    XWORD 225029  Pierre David, Michel Martinet, Janick Taillandier
+MENU      XFN   225033  Jean-Jacques Dh≈nin
+CENTER$   XFN   225034  Pierre David, Michel Martinet
+CESURE    XFN   225035  Pierre David, Michel Martinet
+FORMAT$   XFN   225036  Pierre David, Michel Martinet
+REDUCE$   XFN   225037  Pierre David, Michel Martinet
+SPACE$    XFN   225038  Pierre David, Michel Martinet, Janick Taillandier
+BELL      XWORD 225039  Pierre David
+BOLD      XWORD 225040  Pierre David
+PCR       XWORD 225041  Pierre David
+ESC$      XFN   225042  Pierre David
+PFF       XWORD 225043  Pierre David
+PLF       XWORD 225044  Pierre David
+MODE      XWORD 225045  Pierre David
+PERF      XWORD 225046  Pierre David
+PAGELEN   XWORD 225047  Pierre David
+UNDERLINE XWORD 225048  Pierre David
+WRAP      XWORD 225049  Pierre David
+DATESTR$  XFN   225050  Pierre David, Janick Taillandier
+DATEADD   XFN   225051  Pierre David, Laurent Istria, Franµois Le Grand, Janick Taillandier
+DDAYS     XFN   225052  Pierre David, Laurent Istria, Janick Taillandier
+DMY       XWORD 225053  Pierre David, Laurent Istria, Janick Taillandier
+DOW$      XFN   225054  Pierre David, Laurent Istria, Janick Taillandier
+DOW       XFN   225055  Pierre David, Laurent Istria, Janick Taillandier
+MDY       XWORD 225056  Pierre David, Laurent Istria, Janick Taillandier
+MAXD      XFN   225057  Michel Martinet
+MAXM      XFN   225058  Michel Martinet
+MEMD      XFN   225059  Michel Martinet
+MEMM      XFN   225060  Michel Martinet
+EXIT      XWORD 225061  Janick Taillandier
+NLOOP     XFN   225062  Jean-Franµois Garnier
+PARPOLL   XFN   225063  Jean-Franµois Garnier
+SLEEP     XWORD 225064  Jean-Franµois Garnier
+SRQ       XFN   225065  Jean-Franµois Garnier
+END       XWORD 225066  Pierre David, Janick Taillandier
+WHILE     XWORD 225067  Pierre David, Janick Taillandier
+REPEAT    XWORD 225068  Pierre David, Janick Taillandier
+UNTIL     XWORD 225069  Pierre David, Janick Taillandier
+LEAVE     XWORD 225070  Pierre David, Janick Taillandier
+VARSWAP   XWORD 225071  Pierre David, Jean-Jacques Moreau, Janick Taillandier
+ENTRY$    XFN   225072  Jean-Jacques Moreau
+TOKEN     XFN   225073  Jean-Jacques Moreau
+FIND      XWORD 225075  Pierre David, Jean-Jacques Moreau, Janick Taillandier
+MAP$      XFN   225076  Tapani Tarvainen
+MAP       XWORD 225077  Tapani Tarvainen
+GLINE     XWORD 225078  Pierre David
+GPSET     XWORD 225079  Pierre David
+SHRINK    XWORD 225081  Jean-Jacques Moreau
+FPRIM     XFN   225082  Guy Toublanc
+NPRIM     XFN   225083  Guy Toublanc
+PGCD      XFN   225084  Guy Toublanc
+PHI       XFN   225085  Guy Toublanc
+PPCM      XFN   225086  Guy Toublanc
+PRIM      XFN   225087  Olivier Arbey, Guy Toublanc
+FRAC$     XFN   225088  Guy Toublanc
+POSI      XFN   225089  Jean-Pierre Bondu, Pierre David, Janick Taillandier
+DBLIST    XWORD 225090  Jean-Pierre Bondu, Pierre David, Janick Taillandier
+PBLIST    XWORD 225091  Jean-Pierre Bondu, Pierre David, Janick Taillandier
+RENUMREM  XWORD 225092  Jean-Pierre Bondu
+FINPUT    XWORD 225093  Pierre David, Janick Taillandier
+RREC$     XFN   225094  Michel Martinet
+WREC      XWORD 225095  Michel Martinet
+LOOP      XWORD 225096  Pierre David, Janick Taillandier
+SELECT    XWORD 225097  Pierre David, Janick Taillandier
+CASE      XWORD 225098  Pierre David, Janick Taillandier
+IF        XWORD 225099  Pierre David, Janick Taillandier
+ELSE      XWORD 225100  Pierre David, Janick Taillandier
+KA        XWORD 225101  Pierre David
+ADCREATE  XWORD 225102  Pierre David
+ADDELETE  XWORD 225103  Pierre David
+ADFIND      XFN 225104  Pierre David
+ADGET     XWORD 225105  Pierre David
+ADPUT     XWORD 225106  Pierre David
+ADSIZE      XFN 225107  Pierre David
+ROMAN     XWORD 225108  Pierre David, Janick Taillandier
+DDIR      XWORD 225110  Jean-Jacques Dh≈nin
+PDIR      XWORD 225111  Jean-Jacques Dh≈nin
+FILEPOS     XFN 225112  Pierre David, Janick Taillandier
+GENLEN      XFN 225113  Pierre David, Janick Taillandier
+GENPOS      XFN 225114  Pierre David, Janick Taillandier
+GENRPLC$    XFN 225115  Pierre David, Janick Taillandier
+TEDIT       XFN 225116  Pierre David, Janick Taillandier
+XEDIT       XFN 225117  Pierre David, Janick Taillandier
+BOX       XWORD 104001  Pierre David
+CSIZE     XWORD 104002  Pierre David
+DRAW      XWORD 104003  Pierre David
+FRAME     XWORD 104004  Pierre David
+GDUMP     XWORD 104005  Pierre David
+GEND      XWORD 104006  Pierre David
+GINIT     XWORD 104007  Pierre David
+IDRAW     XWORD 104008  Pierre David
+IMOVE     XWORD 104009  Pierre David
+LABEL     XWORD 104010  Pierre David
+LDIR      XWORD 104011  Pierre David
+LINETYPE  XWORD 104012  Pierre David
+LORG      XWORD 104013  Pierre David
+MOVE      XWORD 104014  Pierre David
+PENDOWN   XWORD 104015  Pierre David
+PENUP     XWORD 104016  Pierre David
+PEN       XWORD 104017  Pierre David
+PLOTTER   XWORD 104018  Pierre David
+TICLEN    XWORD 104019  Pierre David
+XAXIS     XWORD 104020  Pierre David
+YAXIS     XWORD 104021  Pierre David
+KEYWAIT$  XFN    82001  Hewlett-Packard
+MERGE     XWORD   1057  Pierre David, Michel Martinet
+PEEK$     XFN     1063  Pierre David, Michel Martinet
+POKE      XWORD   1064  Pierre David, Michel Martinet

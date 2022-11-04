@@ -1,0 +1,82 @@
+.language
+F
+
+.keyword
+YAXIS
+
+.purpose
+{cYAXIS} trace un axe vertical avec des marques de graduation
+optionnelles, » l'abscisse x sp≈cifi≈e.
+
+.options
+SKID
+.syntaxe
+{cYAXIS {iabscisse x
+{cYAXIS {iabscisse x{c, {iespacement
+{cYAXIS {iabscisse x{c, {iespacement{c, {iymin{c, {iymax
+
+.examples
+.ex
+YAXIS 20
+.co
+Trace un axe » l'abscisse 20.
+.ex
+YAXIS (X2-X1)/2,-5
+.co
+Trace un axe et des marques de graduation espac≈es de 5 unit≈s
+graphiques, en commenµant par le bas.
+
+.input
+.it
+abscisse x
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-32767 » +32767
+.it
+espacement
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-32767 » +32767
+.df
+0, pas de marques
+.it
+ymin
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-32767 » +32767
+.df
+0
+.it
+ymax
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-32767 » +32767
+.df
+hauteur maximum d≈finie par GINIT.
+
+.operation
+\{cYAXIS} trace un axe vertical » l'abscisse {ix}, de {iymin} »
+{iymax}.\
+
+\Si le param…tre {iespacement} est pr≈sent et non nul, des
+marques sont trac≈es toutes les {iespacement} unit≈s graphiques,
+en commenµant par {iymin} si {iespacement} est positif, par
+{iymax} si {iespacement} est n≈gatif.\
+
+\Les longueurs des marques de graduation sont d≈finies par
+{cTICLEN}. Apr…s ex≈cution de {cGINIT}, elles valent 4.\
+
+.related
+LINETYPE
+TICLEN
+XAXIS
+
+.author
+Pierre David
+.end keyword
+
+.end

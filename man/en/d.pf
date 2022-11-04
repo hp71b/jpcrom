@@ -1,0 +1,795 @@
+.language
+A
+
+.keyword
+DATEADD
+
+.purpose
+{cDATEADD} (DATE ADDition) computes the date corresponding to the
+specified date incremented by the specified number of days.
+
+.options
+FCKID
+
+.syntaxe
+DATEADD ( {idate{c , {idays{c )
+
+.examples
+.ex
+A=DATEADD (7.041776, 73048)
+.co
+Stores 7.041976 (July 4th, 1976) in variable A, in DMY
+mode (default mode).
+.ex
+DATEADD (DATE$, -1)
+.co
+Returns yesterday date.
+.ex
+A=DATEADD (1.011986, 364)
+.co
+Stores 31.121986 (December 31, 1986) in variable A, in DMY
+mode.
+
+.input
+.it
+date
+.de
+Numeric expression interpreted according to current format, or
+alphanumeric expression.
+.re
+From October 15, 1582 through December 31, 9999.
+.it
+days
+.de
+Numeric expression rounded to an integer.
+.re
+negative or positive.
+
+.operation
+\{cDATEADD} computes the date corresponding to the
+specified date incremented by the specified number of days.\
+
+\For a complete description of date formats see {cDATESTR$}.\
+.references
+{iJPC 28} (page 40) first version by Laurent Istria.
+
+{iJPC 28} (page 35) second version by Franµois Le Grand.
+
+{iJPC 49} (page 24) third version by Pierre David et Janick
+Taillandier.
+
+{iHP-41 Time Module Owner's Manual}.
+
+The keyword for {cDATEADD} was previously {cDATE+}.
+.related
+DATE$
+DATESTR$
+DDAYS
+DMY
+MDY
+.author
+Pierre David
+Laurent Istria
+Franµois Le Grand
+Janick Taillandier
+.end keyword
+
+.keyword
+DATESTR$
+
+.purpose
+{cDATESTR$} (DATE to STRing) converts a date to the HP-71 string 
+format for date : 
+"yyyy/mm/dd".
+
+.options
+FKID
+
+.syntaxe
+DATESTR$ ( {idate{c )
+
+.examples
+.ex
+A$=DATESTR$ (14.071789)
+.co
+Stores "1789/07/14" in variable A$.
+
+.input
+.it
+date
+.de
+Numeric expression interpreted according to current format, or
+alphanumeric expression.
+.re
+From October 15, 1582 through December 31, 9999.
+
+.operation
+{gDate formats :}
+
+\The basic HP-71 supports two date formats :\
+
+{iString format :}
+
+\Dates expressed in this format are alphanumeric strings
+with two or four digits for the year, two digits for the month 
+and two digits for the day. They can be represented by :
+{iyyyy/mm/dd} or {iyy/mm/dd}.\
+
+\For example, 1987/05/15 or 87/05/15 are valid date specifications
+(May 15, 1987).\
+
+\If the year is coded with two digits, it will be interpreted as
+19{iyy} if {iyy}>=60, or as  20{iyy} if {iyy}<60.\
+
+\Date functions in JPC Rom support both string formats.\
+
+{iStandard numeric format :}
+
+\Dates are expressed as a number of the form :
+{iyyddd}, where {iyy} represents the year and {iddd} the day in year.\
+
+\For example, May 15, 1987 is represented by 87135.
+Year is 1987 and May 15 is the 135th day in this year.\
+
+\This format is hard to use. It is primarily used, in the
+"basic" HP-71, for date computations.\
+
+\JPC Rom provides a more convenient alternative that
+uses the same format as the HP-41 Time Module.\
+
+{iJPC Rom numeric format :}
+
+\This format allows date input using European or American format.
+You can choose either mode with the {cDMY} and {cMDY} keywords.\
+
+\In DMY (Day Month Year) mode, during inputs, dates
+are interpreted as {idd.mmyyyy}. So, May 15, 1987 is represented as :
+15.051987.\
+
+\In MDY (Month Day Year) mode, dates are interpreted as
+{imm.ddyyyy}. So, May 15, 1987 is represented as :
+5.151987.\
+
+\The choice between both modes is reflected by the system flag -53.
+This flag is clear in MDY mode (default mode) and set in DMY mode.\
+
+
+{gSupported formats :}
+
+\Date functions in JPC Rom support two date formats :\
+
+\- dates in string format ({i"yyyy/mm/dd"} or
+{i"yy/mm/dd"}), or\
+
+\- dates in numeric format ({idd.mmyyyy} in DMY mode, or
+{imm.ddyyyy} in MDY mode).\
+
+
+{gThe DATESTR$ function :}
+
+\{cDATESTR$} converts a date from JPC Rom numeric format
+({idd.mmyyyy} or {imm.dddyyy}) to string format
+({i"yyyy/mm/dd"}).\
+
+\It can be used with other date functions to easily isolate a
+date component.\
+.references
+{iJPC 49} (page 24) third version of DATELEX including
+{cDATESTR$} by Pierre David and Janick Taillandier.
+
+.related
+DATE$
+DMY
+MDY
+SETDATE
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+DBLIST
+
+.purpose
+{cDBLIST} (Display Basic LIST) produces a structured listing of
+a Basic program.
+
+.options
+SKID
+
+.syntaxe
+DBLIST{c }[{c INDENT {iindentation{c }] [ {cTO {itarget{c }]
+DBLIST {ifile{c }[{c INDENT {iindentation{c }] [ {cTO {itarget{c }]
+DBLIST {ifile{c , {istart line{c }[{c INDENT {iindentation{c }] [ {cTO {itarget{c }]
+DBLIST {ifile{c , {istart line {c, {ifinal line{c }[{c INDENT {iindentation{c }] [ {cTO {itarget{c }]
+
+.examples
+.ex
+DBLIST MYSUB INDENT 3
+.co
+List program MYSUB, from the first to the last line, indenting
+structures by 3 spaces.
+.ex
+DBLIST MYSUB,10
+.co
+List line 10 of program MYSUB, without structure indenting.
+.ex
+DBLIST MYSUB,10,100 INDENT 2 TO LISTE
+.co
+List program MYSUB, from line 10 to line 100, indenting
+structures by 2 spaces. The output is sent to file LISTE.
+
+.input
+.it
+file
+.de
+String expression or unquoted string.
+.re
+File name with optional device specifier.
+.df
+current file.
+.it
+start line
+.de
+Integer constant identifying a program line.
+.re
+1 through 9999.
+.df
+First program line.
+.it
+end line
+.de
+Integer constant identifying a program line.
+.re
+Start line through 9999.
+.df
+Start line, if specified ; otherwise, last program line in file.
+.it
+indentation
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 255.
+.df
+0
+.it
+target
+.de
+String expression or unquoted string.
+.re
+File name with optional device specifier.
+.df
+Listing is output on current {lDISPLAY IS{p device.
+
+.operation
+\{cDBLIST} produce a "structured" listing of a Basic file on the
+current {cDISPLAY IS} device or on the LCD display if no device
+has been specified.\
+
+\Basic line numbers are justified, with a space to the left,
+to be 4 characters long. So all lines are aligned, no matter
+their line number.\
+
+\{cDBLIST} does not output line numbers for lines containing only
+comments (beginning with {c!}, but not with {cREM}). A dash
+({c-}) is output to mark the first comment line in a series.
+The statement {cRENUMREM} is intended to ease the
+renumbering of comment lines.
+With this special processing, comment lines are no
+longer considered as standard Basic lines.\
+
+\{cDBLIST} skips a line before a function definition ({cDEF FN}),
+a {cDATA} block or a label. A line is also skipped after function
+definitions and {cDATA} blocs. So, the various building
+blocs that make-up your program are well separated.\
+
+\{cDBLIST} skips a line, draws a line and skips another line
+before a sub-program ({cSUB}). This emphasizes independent
+program blocs.\
+
+\Finaly, {cDBLIST} allows indenting of logical structures.
+The body of logical structures, whether a
+standard ({cFOR}...{cNEXT}) or a JPC Rom
+({cWHILE}...{cEND WHILE} loop or tests or {cSELECT}) is shifted
+to the right by the number of spaces specified in the
+{iindentation} value of {cINDENT}. Default value is 0, i.e.
+structures are not indented.\
+
+\Structure indenting can help identify invalid
+structures in programs. This is a very useful complement 
+to the structured programming statements provide by JPC Rom.\
+
+\The {cTO} option allows you to direct the output to a
+text file of your choice. Incidentally, this option is
+used to prepare HP-71 Basic program listings published
+in the Journal of {iPPC Paris}. The file is created,
+then filled. If the file already
+exists, the error {cJPC ERR:File Exists} is generated.\
+
+\The current {cDELAY} setting determines how long each line will
+be displayed. The {cWIDTH} setting determines the width of the
+displayed line.\
+
+\To halt a listing and display the cursor, simply press {l[ATTN]}.\
+.references
+{iJPC 18} (page 25) first version of Basic program JPCLISTE
+by Pierre David and Michel Martinet.
+
+{iJPC 38} (page 24) first version of {cBLIST} by Jean-Pierre
+Bondu.
+
+{iTo be published} : second version of {cDBLIST} by Pierre David
+and Janick Taillandier.
+
+{cDBLIST} was previously called {cBLIST}.
+.related
+DELAY
+LIST
+PBLIST
+PLIST
+WIDTH
+}all structured programming keywords
+.author
+Jean-Pierre Bondu
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+DDAYS
+
+.purpose
+{cDDAYS} (Delta DAYS) compute the number of days between two dates.
+
+.options
+FCKID
+
+.syntaxe
+{cDDAYS ( {idate1{c , {idate2{c )
+
+.examples
+.ex
+A=DDAYS(7.141789,7.041776)
+.co
+Stores 4758 days between July 14th, 1789 and July 4th,
+1776, using MDY mode.
+.ex
+A=DDAYS(1.011986,31.121986)
+.co
+Stores -364 days in variable A, using DMY mode.
+.ex
+DISP DDAYS(DATE$,7.041776)
+.co
+Computes and displays the number of days between July 4th, 1776
+and today.
+
+.input
+.it
+date1, date2
+.de
+Numeric expressions interpreted according to current format, or
+alphanumeric expressions.
+.re
+From October 15, 1582 through December 31, 9999.
+
+.operation
+\{cDDAYS} compute the number of days between {idate1} and {idate2}.
+If {idate1} comes after {idate2}, the result will be positive.\
+
+\For a complete description of date formats, see {cDATESTR$}.\
+.references
+{iJPC 28} (page 40) first version by Laurent Istria.
+
+{iJPC 49} (page 24) third version by Pierre David et Janick
+Taillandier.
+
+{iHP-41 Time Module Owner's Manual}.
+.related
+DATEADD
+DATESTR$
+DMY
+MDY
+.author
+Pierre David
+Laurent Istria
+Janick Taillandier
+.end keyword
+
+.keyword
+DDIR
+
+.purpose
+{cDDIR} (Display DIRectory) lists directory of the specified
+device.
+
+.options
+SKI
+
+.syntaxe
+{cDDIR }[{c TO {itarget{c }]
+{cDDIR {ifile specifier{c [{c TO {itarget{c }]
+{cDDIR ALL }[{c TO {itarget{c }]
+
+.examples
+.ex
+DDIR :TAPE
+.co
+Lists directory of mass storage unit {l:TAPE{p.
+.ex
+DDIR :PORT(0) TO LISTE
+.co
+List directory of port number 0 into file LISTE.
+.ex
+DDIR ALL
+.co
+Lists all files in HP-71.
+.ex
+DDIR ESSAI:TAPE(2) TO A$
+.co
+Lists all files after file ESSAI on mass storage
+unit {l:TAPE(2){p into the text file whose name is
+specified by A$.
+
+.input
+.it
+file specifier
+.de
+String expression or unquoted string.
+.re
+Device specifier or file specifier with optional
+device specifier.
+.df
+{l:MAIN
+.it
+target
+.de
+String expression or unquoted string.
+.re
+File specifier with optional device specifier.
+.df
+Listing on {lDISPLAY IS{p device.
+
+.operation
+\The keyword {cDDIR} lists the directory of the
+specified unit on the display device. The list is
+similar to the one produced by the standard
+keyword {cCAT}.\
+
+\The current {cDELAY} setting determines how long
+the HP-71 displays each line. We recommand you to
+use a {cDELAY {ix{c,8} which eases the LCD display
+reading.\
+
+
+{gFile specification}
+
+\The {cDDIR} syntax allows to choose a peripheral
+or a part of a directory.\
+
+
+{iDevice specifier only}
+
+\If you provide a the device name alone, only the
+directory of this unit will be listed. For
+example :\
+
+\- {cDDIR :PORT(0.01)} lists the directory of
+port number 0.01,\
+\- {cDDIR :TAPE} lists the directory of the first
+HP-IL mass storage device,\
+\- {cDDIR :PORT} lists the contents of {iall}
+HP-71 ports,\
+\- {cDDIR :MAIN} lists only the contents of main
+memory.\
+
+
+{iBoth file and device specifiers}
+
+\If you specify both a file and a device, the
+listing will begin starting from this file until
+the last file in the device. For example :\
+
+\- {cDDIR ESSAI:MAIN} lists the directory of main
+memory from file ESSAI to the last file,\
+\- {cDDIR ESSAI:TAPE} lists the directory of the
+first mass storage unit from file ESSAI to the
+last file,\
+\- {cDDIR ESSAI:PORT(0.01)} lists the directory of
+port number 0.01 from file ESSAI to the last file,\
+\- {cDDIR ESSAI:PORT} looks for the file in all
+ports, and lists the directory of the port in
+which ESSAI is found.\
+
+
+{iSpecial cases}
+
+\{cDDIR ALL} lists the directory of all files in
+the HP-71.\
+
+\{cDDIR} lists only the directory of the main
+memory.\
+
+\{cDDIR} followed by a file specifier, without a
+device specifier, looks for the file in all
+memory, then lists the file followed by the
+remaining files in the
+corresponding unit (port or main memory).\
+
+
+{gOutput redirection}
+
+\When {cDDIR} is followed by {cTO}, then by a text
+file
+specifier}, the listing is stored into this text file.
+Nothing is displayed. When output redirection is
+required, {cDDIR} and {cPDIR} are equivalent.\
+
+\If the file already exists, the error {cERR:File
+Exists} is reported.\
+
+\Data stored in this file uses the same format
+as that used by {cCAT$}. Please, refer to
+this function for more details.\
+
+\This feature is similar to the one provided by
+statements {cPDIR}, {cDBLIST} and {cPBLIST}.\
+
+
+{gExample of use}
+
+\Redirection is useful because it allows you to
+execute an action on all files in a given device.
+For example :{c\
+
+100 DIM P$[8],F$[43],T$[8],A
+110 T$="TMP"                 ! temporary file
+120 FINPUT P$,"Device: :MAIN","8PU",A
+130 IF NOT A THEN END
+140 SFLAG -1 @ PURGE T$ @ CFLAG -1
+150 DDIR ":"&P$ TO T$
+160 ASSIGN #1 TO T$
+170 LOOP
+180   READ #1;F$
+190   F$[POS(F$," ")]=""     ! removes unused characters
+  -   what you want to do
+200   SECURE F$&":"&P$       ! for example...
+  -   done...
+210 END LOOP
+
+\}This simple example executes an action on line
+200 for all files in the specified device. By
+changing this action, you can easily copy files
+from one port to another, purge files, rename
+them, etc.\
+.references
+{iTo be published} : first version by Jean-Jacques
+DhÅnin.
+.related
+CAT$
+CAT
+DBLIST
+PBLIST
+PDIR
+.author
+Jean-Jacques DhÅnin
+.end keyword
+
+.keyword
+DMY
+
+.purpose
+{cDMY} (Day Month Year) enable date input in numeric format
+{idd.mmyyyy}.
+
+.options
+SKID
+
+.syntaxe
+{cDMY
+
+.examples
+.ex
+DMY
+
+.operation
+\In the mode selected by {cDMY}, numeric date parameters 
+used by JPC Rom date functions
+must use the {idd.mmyyyy} numeric format.\
+
+\Keep in mind that string format is independent of the
+DMY / MDY modes. It can always be used. For example, to
+compute the day corresponding to July 4, 1789, you can use
+either of the following expressions in DMY mode :\
+
+{cDOW$(4.071776)} or {cDOW$("1776/07/04")}
+
+\For a complete description of date formats, see {cDATESTR$}.\
+.references
+{iJPC 28} (page 40) first version by Laurent Istria.
+
+{iJPC 49} (page 24) third version by Pierre David et Janick
+Taillandier.
+
+{iHP-41 Time Module Owner's Manual}.
+.related
+DATEADD
+DATESTR$
+DDAYS
+DOW
+DOW$
+MDY
+.author
+Pierre David
+Laurent Istria
+Janick Taillandier
+.end keyword
+
+.keyword
+DOW
+
+.purpose
+{cDOW} (Day Of Week) returns the day of week corresponding to the
+specified date parameter.
+
+.options
+FCKID
+
+.syntaxe
+{cDOW
+{cDOW ( {idate{c )
+
+.examples
+.ex
+A=DOW(1.011986)
+.co
+Stores in A the day number in the week corresponding to January 1, 1986.
+.ex
+A=DOW(DATE$)
+.co
+Returns the day number corresponding to today. This give the
+same result as {lDOW} alone.
+
+.ex
+DISP DOW
+.co
+Display day number for today.
+
+.input
+.it
+date
+.de
+Numeric expression interpreted according to current format, or
+alphanumeric expression.
+.re
+From October 15, 1582 through December 31, 9999.
+.df
+today
+
+.operation
+\{cDOW} return the day of week for a given date as a number. So, you
+can easily use this value in your programs.
+For a complete description of date formats, see
+{cDATESTR$}.\
+
+For example, to display French day names :{c
+
+100 SELECT DOW
+110   CASE 0
+120     A$="Dimanche"
+130   CASE 1
+140     A$="Lundi"
+150   CASE 2
+160     A$="Mardi"
+170   CASE 3
+180     A$="Mercredi"
+190   CASE 4
+200     A$="Jeudi"
+210   CASE 5
+220     A$="Vendredi"
+230   CASE 6
+240     A$="Samedi"
+250 END SELECT
+260 DISP DATE$;" : ";A$}
+
+\0 corresponds to Sunday, 1 to Monday... and 6 to Saturday.\
+.references
+{iJPC 17} (page 25) day of week computation in Basic by Pierre David.
+
+{iJPC 28} (page 40) first version by Laurent Istria.
+
+{iJPC 49} (page 24) third version by Pierre David et Janick
+Taillandier.
+
+{iHP-41 Time Module Owner's Manual}.
+
+.related
+DATE$
+DATESTR$
+DMY
+DOW$
+MDY
+SETDATE
+.author
+Pierre David
+Laurent Istria
+Janick Taillandier
+.end keyword
+
+.keyword
+DOW$
+
+.purpose
+{cDOW$} (Day Of Week) returns the name of the day corresponding to the
+specified date or today.
+
+.options
+FKID
+
+.syntaxe
+{cDOW$
+{cDOW$ ( {idate{c )
+
+.examples
+.ex
+A$=DOW$(1.011986)
+.co
+Stores the string {lWednesday{p in variable A$.
+.ex
+DISP DOW$
+.co
+Display current day name.
+
+.input
+.it
+date
+.de
+Numeric expression interpreted according to current format, or
+alphanumeric expression.
+.re
+From October 15, 1582 through December 31, 9999.
+.df
+today
+
+.operation
+\{cDOW$} returns the day corresponding to the specified date.\
+
+\If no date is specified, {cDOW$} returns the day corresponding to the
+current date.\
+
+\Day names are expressed in English. These names correspond to messages
+included in JPC Rom. You can used the function {cMSG$} (in Forth/Assembler
+module or Text Editor or available through the User's Library) to
+get all days in a week.\
+
+\Sunday corresponds to message 225008+0, Monday to message
+225008+1, and so on to Saturday message 225008+6.\
+
+\As day names are stored in a message table, it is possible to
+use a translator Lex to translate the names. You
+can also access day names using the {cMSG$}
+keyword found in Text Editor or Forth Rom : message
+numbers 225008 ({cSunday}) to 225014 ({cSaturday}).\
+.references
+{iJPC 17} (page 25) day of week computation in Basic by Pierre David.
+
+{iJPC 28} (page 40) first version by Laurent Istria.
+
+{iJPC 49} (page 24) third version by Pierre David et Janick
+Taillandier.
+
+{iHP-41 Time Module Owner's Manual}.
+.related
+DATE$
+DATESTR$
+DMY
+DOW
+MDY
+MSG$
+SETDATE
+.author
+Pierre David
+Laurent Istria
+Janick Taillandier
+.end keyword
+.end
+

@@ -1,0 +1,194 @@
+.language
+A
+
+.keyword
+GLINE
+
+.purpose
+{cGLINE} (Graphic LINE) builds a raster graphics representation 
+of a drawn line for use with ThinkJet or LaserJet printers.
+
+.options
+SKID
+
+.syntaxe
+{cGLINE {ix{c , {ilength{c , {ifirst{c , {isize{c , {igap{c
+
+.examples
+.ex
+GLINE x1,x2-x1+1,1,1,0
+.co
+Plots a line between points x1 and x2 using
+variable G$.
+
+.input
+.it
+x
+.de
+Numeric expression rounded to an integer.
+.re
+1 through 640.
+.it
+length
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 640.
+.it
+first
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 640.
+.it
+size
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 640.
+.it
+gap
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 640.
+
+.operation
+{gGraphics on "raster" printers :}
+
+\Printers that use raster graphics include the ThinkJet, LaserJet
+or QuietJet.\
+
+\On such printers, graphic images are built row by row. Each line
+is one pixel (dot) in height. An 80 byte area is needed to store
+the "image" of the 640 points in a row. {cGLINE} and {cGPSET}
+both use an 80 character variable which must be named G$,
+previously created by a {cDIM G$[80]} command.\
+
+\Before storing graphic data into G$, you must initialize this
+variable with {cCHR$(0)} bytes. This can be done with a code
+sequence like :{c\
+
+100 DIM G$[80]
+110 G$=SPACE$(0,80)
+
+{gPrinting the graphic line :}
+
+\Printing is done via escape sequences (see {cESC$}) which are
+device dependent. With a ThinkJet, you will execute :{c\
+
+{cPRINT ESC$("*r640S"); @ PWIDTH INF}
+
+\to initialize
+the graphic mode of the printer. Note this only needs to be done
+once at the beginning of your program.\
+
+\To print each line, execute :\
+
+{cPRINT ESC$("*b80W")&G$;}
+
+\Warning : you should execute {cPWIDTH INF} before printing
+the graphics. This prevents the HP-71 from sending an unwanted 
+end-of-line sequence (see {cENDLINE}) in the middle of your 
+graphic row.\
+
+
+\Consult your printer manual to get more informations about
+graphics.\
+
+
+{gUsing GLINE :}
+
+\{cGLINE} is used to draw a line in the "image" G$, starting
+from {ix} and length {isize}. {cGLINE} can be used to plot
+nice patterns. For example :{l\
+
+ first   size     gap
+ <---><--------><------>
+ ___________________________________________________________
+|     xxxxxxxxxx        xxxxxxxxxx        xxxxxxxxx
+|   xxxxxxxxxx        xxxxxxxxxx        xxxxxxxxx
+| xxxxxxxxxx        xxxxxxxxxx        xxxxxxxxx
+|}
+
+\}Each line is build by specifying 5 parameters :\
+
+\1) the coordinate of the fist point : {ix}\
+\2) the line length : {ilength}\
+\3) the first gap : {ifirst}\
+\4) the size of a dash : {isize}\
+\5) the gap between dashes : {igap}.\
+
+\To draw a pattern similar to this one, you only have to set
+{ifirst} as follows :\
+
+{ifirst{c = MOD ( {ifirst{c - 2 , {igap{c )}
+
+\To draw a straight line, use :\
+
+{ifirst} = {isize} = 1
+{igap} = 0
+.references
+{iJPC 35} (page 38) {cGLINE} and {cGRAPH} subprogram by
+Pierre David.
+
+{iJPC 42} (page 29) sample of use by Eric Gengoux.
+
+{iHP-71 Graphic Module User's Manual} by Pierre David.
+.related
+ENDLINE
+ESC$
+GPSET
+PRINT
+PWIDTH
+.author
+Pierre David
+.end keyword
+
+.keyword
+GPSET
+
+.purpose
+{cGPSET} (Graphic Point SET) prepares for the drawing of a pixel on 
+ThinkJet or LaserJet printers.
+
+.options
+SKID
+
+.syntaxe
+{cGPSET {ix{c
+
+.examples
+.ex
+FOR X=X1 TO X2 @ GPSET X @ NEXT X
+.co
+Plots a line from x1 to x2.
+
+.input
+.it
+x
+.de
+Numeric expression rounded to an integer.
+.re
+1 through 640.
+
+.operation
+\{cGPSET} draws a pixel in the row "image" G$. For details,
+see {cGLINE}.\
+.references
+{iJPC 35} (page 38) {cGLINE} and {cGRAPH} subprogram by
+Pierre David.
+
+{iJPC 42} (page 29) sample of use by Eric Gengoux.
+
+{iHP-71 Graphic Module User's Manual} by Pierre David.
+.related
+ENDLINE
+ESC$
+GLINE
+PRINT
+PWIDTH
+.author
+Pierre David
+.end keyword
+.end

@@ -1,0 +1,927 @@
+.language
+A
+
+.keyword
+ADBUF$
+
+.purpose
+{cADBUF$} (buffer address) returns the address of the buffer
+specified by its identification number.
+.options
+FKID
+
+.syntaxe
+ADBUF$ ( {ibuffer id{c )
+
+.examples
+.ex
+A$=ADBUF$("BFC")
+.co
+Stores the "lex buffer" address in A$.
+
+.input
+.it
+buffer identifier
+.de
+String expression containing hexadecimal digits.
+.re
+3 upper or lower case digits.
+
+.operation
+{gBuffers :}
+
+\HP-71 buffers are used to store volatile information (more so than in 
+files) or data used only by the operating system.\
+
+\They are used by assembly language applications or by the system.
+The following table lists various buffers used by the system :{l\
+
+  Id  Description
+-----------------------------------------------------
+ 808  Hold a string of characters used by STARTUP
+ 83D  MARGIN setting
+ 83E  Hold a string of characters used by ENDUP
+ BFB  Character set defined by CHARSET
+ BFC  Address of Lex files}
+
+\Buffers consist of a 7 nibble header followed by the the data
+area itself. The header has the following structure :\
+
+\1 nibble : number of addresses in the beginning of the the 
+buffer that need to be updated when memory moves,\
+\3 nibbles : the buffer ID,\
+\3 nibbles : buffer length in nibbles (data part only).\
+
+\Buffer are mobile areas. Their address change often, especially when :\
+\- a file is created, deleted or when its size is changed,\
+\- another buffer is created, deleted or when its size is changed.\
+
+
+{gThe ADBUF$ function :}
+
+\{cADBUF$} returns the address of the buffer whose ID is given.
+If it can't be found a null string is returned.
+The address returned by the function is the address of the buffer header.
+Information stored in a buffer is located 7 nibbles further.\
+.references
+{iJPC 22} (page 35)  first version of {cADBUF$} by Michel
+Martinet et Pierre David.
+
+{iJPC 23} (page 30) HP-71 buffers, by Pierre David.
+Introductory article and various Basic utilities.
+
+{iJPC 27} (page 34) second version by Michel Martinet.
+
+{iInternal Design Specification} Volume I, Chapter 3.5.3.
+.related
+DTH$
+HTD
+PEEK$
+POKE
+ADDR$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+ADCREATE
+
+.purpose
+The {cADCREATE} keyword create an empty address file.
+
+.options
+SKID
+
+.syntaxe
+{cADCREATE {ifile{c
+{cADCREATE {ifile{c , {ipassword{c
+
+.examples
+.ex
+ADCREATE ESSAI
+.co
+Creates an address file, without password, whose name is ESSAI.
+.ex
+ADCREATE A$,"passe"
+.co
+Creates an address file and sets the password to
+û passe ý.
+
+.input
+.it
+file
+.de
+String expression or unquoted string.
+.re
+Filename with optional device specifier.
+.it
+password
+.de
+String expression.
+.re
+8 first characters only are used. Case sensitive.
+.df
+No password
+
+.operation
+{gAddress files}
+
+\{cKA} puts you in an {iaddress directory} interactive mode. {cKA}
+allows you to
+store addresses in a file whose filetype is {cADRS}. Since
+{cKA} has been designed to be used only in interactive mode,
+JPC Rom provides an additional set of functions ({cADCREATE}, {cADGET},
+{cADPUT}, {cADDELETE}, {cADSIZE} and {cADFIND}) to access stored
+addresses from a program.\
+
+\Address files can be considered as a set of index cards, each one
+containing an address. For example :{l\
+
+
+            -------------------
+           |           Name    |
+           |-------------------|
+        -------------------    |
+       |           Name    |---|
+       |-------------------| 1 |
+    -------------------    |---|
+   |           Name    |---| 2 |
+   |-------------------| 1 |---|
+   |           Phone   |---| 3 |
+   |-------------------| 2 |---|
+   |           Line 1  |---| 4 |
+   |-------------------| 3 |---|
+   |           Line 2  |---|   |
+   |-------------------| 4 |---|
+   |           Line 3  |---|   |
+   |-------------------|   |--- 
+   |           Line 4  |---|
+   |-------------------|   |
+   |           Note    |---
+   |-------------------|
+   |           Index   |
+    ------------------- 
+
+
+\}In this example, the file contains three cards. Let us examine
+the card contents.\
+
+
+{gThe cards}
+
+\Each card is made up of 8 lines, organized as follows :\
+
+\- name and first name, separated by a {c/},\
+\- phone number,\
+\- 4 lines to store the address,\
+\- a line to store general informations or comments, and\
+\- a line to store an index to be used by your own programs.\
+
+\The first line contains the name and first name, separated by a
+slash ({c/}). The address directory functions will add it for you
+if you forget to enter the slash.\
+
+
+{gAddress directory management functions}
+
+\You have 6 functions :\
+
+\- {cADCREATE} creates a file with the {cADRS} filetype ; this
+function may optionaly specify a password on the file,\
+
+\- {cADGET} reads an address (a card) from the file and stores it
+into a string array,\
+
+\- {cADPUT} stores a card into the address file,\
+
+\- {cADDELETE} removes a card from the file given its sequence
+number,\
+
+\- {cADSIZE} returns the number of cards in the file,\
+
+\- and {cADFIND} looks for a card in the file and returns its
+sequence number.\
+
+
+\It is possible to specify a password with all these functions.
+If a password has been defined for the file, you must specify it
+with all functions. If the password is not defined, the parameter
+is optional and is not used.\
+
+
+{gADCREATE keyword}
+
+\{cADCREATE} creates an empty address file (with type {cADRS})
+and may optionaly specify a password. The password
+string is case-senstive.\
+
+\{cADCREATE} cannot create the file if it already exists ; then
+it returns : {cJPC ERR:File Exists}.\
+
+\The memory requirements for the address directory can be computed
+using the
+following formula :\
+30,5 bytes + size of all cards
+
+\The size of a card can be computed using the following formula :\
+10 bytes + number of characters in the card
+.references
+Program AGENDA for the HP-75 by Pierre David.
+.related
+ADDELETE
+ADFIND
+ADGET
+ADPUT
+ADSIZE
+KA
+.author
+Pierre David
+.end keyword
+
+.keyword
+ADDELETE
+
+.purpose
+{cADDELETE} removes a card from an address file.
+
+.options
+SKID
+
+.syntaxe
+{cADDELETE {ifile{c , {inumber{c
+{cADDELETE {ifile{c , {inumber{c , {ipassword{c
+
+.examples
+.ex
+ADDELETE ESSAI,5
+.co
+Removes the fifth card in the file ESSAI, without password.
+.ex
+ADDELETE A$,I+1,P$
+.co
+Removes card number I+1 from the address file specified by variable
+A$ with password specified by P$.
+
+.input
+.it
+file
+.de
+String expression or unquoted string.
+.re
+The file must be in Ram.
+.it
+number
+.de
+Numeric expression rounded to an integer.
+.re
+Must be between 1 and the number of cards in the file.
+.it
+password
+.de
+String expression.
+.re
+8 first characters only are used.
+.df
+No password.
+
+.operation
+\The keyword {cADDELETE} removes from the address file the card
+whose sequence number is specified.\
+
+\{cADDELETE} cannot delete the card if :\
+\- the file is not in Ram,\
+\- the filetype is not {cADRS},\
+\- the file contains a password and the password specified by the
+keyword is invalid,\
+\- the card number is invalid.\
+
+\Please refer to keyword
+{cADCREATE} for more information about address files.\
+.references
+Program AGENDA for the HP-75 by Pierre David.
+.related
+ADCREATE
+ADFIND
+ADGET
+ADPUT
+ADSIZE
+KA
+.author
+Pierre David
+.end keyword
+
+.keyword
+ADFIND
+
+.purpose
+The {cADFIND} function looks for a name in an address file.
+
+.options
+FKID
+
+.syntaxe
+{cADFIND ( {ifile{c , {istring{c )
+{cADFIND ( {ifile{c , {istring{c , {ipassword{c )
+
+.examples
+.ex
+A=ADFIND(ESSAI,"Dup.",P$)
+.co
+Returns the card number corresponding to the first
+name beginning with "Dup" in file ESSAI
+with password P$.
+.ex
+ADDELETE A$,ADFIND(A$,"Dupond")
+.co
+Removes the card corresponding to the the name
+"Dupond" in the address file A$.
+
+.input
+.it
+file
+.de
+String expression.
+.re
+The file must be in Ram.
+.it
+string
+.de
+String expression.
+.re
+None.
+.it
+password
+.de
+String expression.
+.re
+8 first characters only are used.
+.df
+No password.
+
+.operation
+\The {cADFIND} function returns the number of the card
+corresponding to the name provided as parameter {istring}.\
+
+\This card number can then be used with
+{cADGET} and {cADDELETE} functions to copy a card in a string
+array or delete it from the file.\
+
+\The {istring} parameter follows the same rules as the {isearch
+mode} of {cKA} :\
+
+\- Name only : search only on the name. the first matching name
+is returned whatever may be the first name.\
+
+\- Name and first name (separated by a {c/}) :
+search on the name {iand} the first name.\
+
+\- string terminated by a dot : the search is generic. Names do
+not need to be input completely. The card returned is the first
+one matching the string. No error occurs if the string is
+not exactly matched.\
+
+\The search is not case sensitive : upper case and lower case
+characters are identical.\
+
+\See {cKA} for more information about the search.\
+
+\If {cADFIND} fails for any reason, a negative number is returned
+whose absolute value is equal to the number of the error that
+causes the failure.\
+
+\Please refer to  the {cADCREATE} keyword for more informations
+about address files.\
+.references
+Program AGENDA for the HP-75 by Pierre David.
+.related
+ADCREATE
+ADDELETE
+ADGET
+ADPUT
+ADSIZE
+KA
+.author
+Pierre David
+.end keyword
+
+.keyword
+ADGET
+
+.purpose
+The {cADGET} keyword reads a card and stores it into a string
+array.
+
+.options
+SKID
+
+.syntaxe
+{cADGET {ifile{c , {iarray{c , {inumber{c
+{cADGET {ifile{c , {iarray{c , {inumber{c , {ipassword{c
+
+.examples
+.ex
+ADGET ESSAI,T$,5
+.co
+Reads card number 5 in file ESSAI and stores it into the string
+array variable T$.
+.ex
+ADGET A$,T$,I+1,P$
+.co
+Reads card number I+1 in address file identified by variable A$
+with password P$.
+
+.input
+.it
+file
+.de
+String expression or unquoted string.
+.re
+The file must be in Ram.
+.it
+array
+.de
+String array name.
+.re
+Must have exactly 8 elements.
+.it
+number
+.de
+Numeric expression rounded to an integer.
+.re
+Must be between 1 and the number of cards in the file.
+.it
+password
+.de
+String expression.
+.re
+8 first characters only are used.
+.df
+No password.
+
+.operation
+\The {cADGET} keyword reads the specified card from the address
+file and stores it into a string array, to be processed by a user
+program.\
+
+\Warning : {iarray} must have exactly 8 elements. Each element
+must be long enough to store the data. A line holds at most 91
+characters. Errors are reported otherwise.\
+
+\Sample program using {cADGET} to print the addresses in the ADRS
+file :{c\
+
+100 F$="ADRS"           ! file name
+110 OPTION BASE 1
+120 DIM T$(8)[91]
+130 FOR I=1 TO ADSIZE(F$)
+140   ADGET F$,T$,I
+150   PRINT T$(1)       ! name
+160   PRINT T$(3)       ! address 1
+170   PRINT T$(4)       ! address 2
+180   PRINT T$(5)       ! address 3
+190   PRINT T$(6)       ! address 4
+200 NEXT I
+
+\{cADGET} cannot read the card if :\
+\- the file is not in Ram,\
+\- the file type is not {cADRS},\
+\- the file contains a password and the password provided is not
+valid,\
+\- the card number is not valid,\
+\- the {iarray} does not have enough elements,\
+\- one of the card fields is too long to be stored in an array
+element.\
+
+\Please refer to  the {cADCREATE} keyword for more informations
+about address files.\
+.references
+Program AGENDA for the HP-75 by Pierre David.
+.related
+ADCREATE
+ADDELETE
+ADFIND
+ADPUT
+ADSIZE
+KA
+.author
+Pierre David
+.end keyword
+
+.keyword
+ADPUT
+
+.purpose
+The {cADPUT} keyword write a card into an address file.
+
+.options
+SKID
+
+.syntaxe
+{cADPUT {ifile{c , {iarray{c
+{cADPUT {ifile{c , {iarray{c , {ipassword{c
+
+.examples
+.ex
+ADPUT ESSAI,T$
+.co
+Writes the card stored in T$ into file ESSAI.
+.ex
+ADPUT A$,T$,P$
+.co
+Writes the card T$ into the address file specified by A$ whose
+password is in P$.
+
+.input
+.it
+file
+.de
+String expression or unquoted string.
+.re
+The file must be in Ram.
+.it
+array
+.de
+String array name.
+.re
+Must have exactly 8 elements.
+.it
+password
+.de
+String expression.
+.re
+8 first characters only are used.
+.df
+No password.
+
+.operation
+\The {cADPUT} statement writes a card into the address file
+specified by {ifile}.\
+
+\The card is stored automatically in alphabetical order.\
+
+\Warning : {iarray} must have exactly 8 elements. Each element
+must be long enough to store the data. A line holds at most 91
+characters. Errors are reported otherwise.\
+
+\{cADPUT} cannot store the card if :\
+\- the file is not in Ram,\
+\- file type is not {cADRS},\
+\- the file contains a password and the password provided is not
+valid,\
+\- the {iarray} does not have enough elements,\
+\- one of the card fields is too long to be stored in an array
+element.\
+\- there is not enough memory.\
+
+\Please refer to  the {cADCREATE} keyword for more informations
+about address files.\
+.references
+Program AGENDA for the HP-75 by Pierre David.
+.related
+ADCREATE
+ADDELETE
+ADFIND
+ADGET
+ADSIZE
+KA
+.author
+Pierre David
+.end keyword
+
+.keyword
+ADSIZE
+
+.purpose
+The  {cADSIZE} function returns the number of cards in an address
+file.
+
+.options
+FKID
+
+.syntaxe
+{cADSIZE ( {ifile{c )
+{cADSIZE ( {ifile{c , {ipassword{c )
+
+.examples
+.ex
+N=ADSIZE("ESSAI")
+.co
+Stores into the variable N the number of cards in file ESSAI,
+without password.
+.ex
+FOR I=1 TO ADSIZE(A$,P$)
+.co
+Loops on all cards in file A$, whose password is in P$.
+
+.input
+.it
+file
+.de
+String expression.
+.re
+The file must be in Ram.
+.it
+password
+.de
+String expression.
+.re
+8 first characters only are used.
+.df
+No password.
+
+.operation
+\The {cADSIZE} function returns the number of cards found in the
+specified address file.\
+
+\If {cADSIZE} fails for any reason, a negative number is returned
+whose absolute value is equal to the number of the
+error causing the failure.\
+
+\{cADSIZE} cannot return the number of cards if :\
+\- the file is not in Ram,\
+\- the file type is not {cADRS},\
+\- the file contains a password and the password provided is not
+valid,\
+
+\Please refer to  the {cADCREATE} keyword for more informations
+about address files.\
+.references
+Program AGENDA for the HP-75 by Pierre David.
+.related
+ADCREATE
+ADDELETE
+ADFIND
+ADGET
+ADPUT
+KA
+.author
+Pierre David
+.end keyword
+
+.keyword
+ARR
+
+.purpose
+{cARR} (Arrangements) computes the number of possible different
+arrangements (permutations) of n items taken p at a time.
+
+.options
+FKCID
+
+.syntaxe
+{cARR ( {in{c , {ip{c )
+
+.examples
+.ex
+A=ARR(4,3)
+.co
+Stores 24 in variable A.
+
+.input
+.it
+n
+.de
+Numeric expression.
+.re
+Integer between 0 and 10{^12{--1.
+.it
+p
+.de
+Numeric expression.
+.re
+Integer between 0 and n.
+
+.operation
+ARR (n,p) = A{p{vn{^p} = n! / (n-p)!
+
+\{cARR ({in{c, {ip{c)} computes the number of possible different
+arrangements (permutations) of n items taken p at a time. This
+function is very useful in probability and statistics.\
+
+\In order to increase the range of valid parameters, and to
+improve accuracy, {cARR} uses a multiplication based
+algorithm instead of factorials. This results in long
+execution times for large numbers.\
+.references
+{iJPC 25} (page 50) first version by Laurent Istria.
+
+{iJPC 41} (page 32) second version by Guy Toublanc.
+.related
+COMB
+FACT
+
+.author
+Laurent Istria
+Guy Toublanc
+.end keyword
+
+.keyword
+ASC$
+
+.purpose
+{cASC$} (ASCII string) returns a string stripped of all
+non-displayable ASCII characters.
+
+.options
+FKID
+
+.syntaxe
+{cASC$ ( {istring{c )
+
+.examples
+.ex
+DISP ASC$("AbC"&CHR$(27))
+.co
+Displays the string "AbC.". The period takes the place of the Escape
+character (27).
+
+.input
+.it
+string
+.de
+String expression.
+.re
+None.
+
+.operation
+{gThe ASCII character set :}
+
+\The ASCII (American Standard Code for Information
+Interchange) code is a character set widely used by computers.\
+
+\In this standard, the numerical value of displayable characters
+are in the range from 32 to
+126. Values between 0 and 31 as well as 127 are used to
+control data
+transmission and can not be displayed. Finally, characters above
+128 are undefined in the standard ASCII character set.\
+
+
+{gThe ASC$ function :}
+
+\{cASC$} returns its input argument, with all non displayable
+characters replaced by a period (".").\
+.references
+{iJPC 22} (page 31) first version by Michel Martinet.
+
+{iJPC 27} (page 34) second version by Michel Martinet.
+.related
+ATH$
+HTA$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+ATH$
+
+.purpose
+{cATH$} (Ascii To Hexadecimal) returns the hexadecimal string
+corresponding to the parameter string.
+
+.options
+FKID
+
+.syntaxe
+{cATH$ ( {istring{c )
+{cATH$ ( {istring{c , {imode{c )
+
+.examples
+.ex
+A$=ATH$("ABCDE")
+.co
+Stores the hexadecimal equivalent "1424344454" in A$.
+.ex
+A$=ATH$("ABCDE",1)
+.co
+Stores the standard hexadecimal equivalent "4142434445" in A$.
+
+.input
+.it
+string
+.de
+String expression.
+.re
+None.
+.it
+mode
+.de
+Numeric expression.
+.re
+None.
+.df
+0
+
+.operation
+\{cATH$} returns a string of hexadecimal digits corresponding to
+its argument.\
+
+\This hexadecimal string can have two different formats
+according to
+{imode} :\
+
+\If {imode} = 0, logical value {ifalse} (default), the order
+of the two hexadecimal digits that represent an ASCII
+character is reversed.  For example,
+character "A" (hexadecimal code 41) will be translated into "14".
+This representation is similar to the internal data format in the HP-71.\
+
+\If {imode} is different from 0, logical value
+{itrue}, a standard representation is used. Character "A" (hexadecimal
+code 41) will be translated into "41".\
+.references
+{iJPC 22} (page 31) first version by Michel Martinet.
+
+{iJPC 27} (page 34) second version by Michel Martinet.
+
+{iTo be published} : third version by Pierre David.
+.related
+HTA$
+ASC$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+ATTN
+
+.purpose
+{cATTN} (ATTeNtion) enables or disables the action of the
+{l[ATTN]} key to stop program execution.
+
+.options
+SKID
+
+.syntaxe
+{cATTN ON
+{cATTN OFF
+
+.examples
+.ex
+10 ATTN OFF
+20 REPEAT
+30   K$=KEYWAIT$
+40   DISP K$
+50 UNTIL K$="#43"
+60 ATTN ON
+.co
+Defines a loop to display all keys pressed until the user presses
+{l[ATTN]{p.
+.ex
+ATTN OFF @ BEEP INF,INF
+.co
+Don't try this example ! The only way to stop it is
+{lINIT 1{p.
+
+.operation
+{gThe [ATTN] key :}
+
+\Generally, the {l[ATTN]} key stops program execution. You have
+to press {l[ATTN]} twice to stop the execution of some functions
+found in the HP-IL, Math or JPC Rom modules.\
+
+{gThe ATTN command :}
+
+\{cATTN OFF} deactivates the action of the {l[ATTN]} key. This
+means that you will not be able to stop program or function
+execution with the {l[ATTN]} key. While you are in this
+mode, pressing {l[ATTN]} loads keycode "#43" into the key
+buffer and the keycode is processed as any other standard
+keycode.\
+
+\However, during data or command input, the {l[ATTN]} key clears
+the input line even if {cATTN OFF} has been executed. {cATTN
+OFF} only inhibits program break with the {l[ATTN]} key.\
+
+\Caution : the only way to stop a program while in the {cATTN
+OFF} mode is to execute a level
+one initialization {cINIT 1}. This also restores the main environment
+and variables.\
+
+\{cATTN OFF} disables the action of {l[ATTN]}, however this has
+no effect on {cINPUT} or {cLINPUT}. To mask the effect of this
+key, it must be redefined to a null string. This is done as
+follows :\
+{c10 DEF KEY "#43","";
+20 INPUT A$}
+\and setting the HP-71 to {cUSER} mode. Then, the {l[ATTN]} key
+has no effect.\
+
+\An other way is to use the statement {cFINPUT}.\
+
+\{cATTN ON} re-activates the normal operation of the {l[ATTN]}
+key.\
+.references
+{iJPC 23} (page 38) by Pierre David and Michel Martinet.
+.related
+USER
+DEF KEY
+FINPUT
+.author
+Pierre David
+Michel Martinet
+.end keyword
+.end

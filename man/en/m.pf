@@ -1,0 +1,842 @@
+.language
+A
+
+.keyword
+MAP
+
+.purpose
+{cMAP} applies a mapping function to the contents of a text file.
+
+.options
+SKID
+
+.syntaxe
+MAP {ifile{c , {istring1{c , {istring2
+MAP {ifile{c , {istring1{c , {istring2{c , {ifrom
+MAP {ifile{c , {istring1{c , {istring2{c , {ifrom{c , {ito
+MAP # {ichannel{c , {istring1{c , {istring2{c
+MAP # {ichannel{c , {istring1{c , {istring2{c , {ifrom{c
+MAP # {ichannel{c , {istring1{c , {istring2{c , {ifrom{c , {ito
+
+.example
+.ex
+MAP TOTO,"EQ","eq",10,50
+.co
+Replaces, in file TOTO, uppercase characters "E" and "Q" by the
+lowercase characters "e" and "q" respectively, from record 10 to
+record 50.
+
+.input
+.it
+file
+.de
+String expression or unquoted string.
+.re
+File name with optional device specifier. File must reside in Ram
+or independent Ram.
+.it
+channel
+.de
+Numeric expression rounded to an integer.
+.re
+1 through 255.
+.it
+string1, string2
+.de
+String expression.
+.re
+Both strings must have the same length.
+.it
+from
+.de
+Numeric expression rounded to an integer (first record).
+.re
+0 through 1048575.
+.df
+0
+.it
+to
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 1048575.
+.df
+Last record.
+
+.operation
+\{cMAP} scans the file specified by {ifile} or
+by its associated channel number ({ichannel}).\
+
+\Each character is tested to check if it is included in
+{istring1}. If so, the corresponding character in {istring2}
+replaces the original one.\
+
+\If a character occurs in {istring2} twice, the second occurrence
+will never be used, as the matching process always starts at the
+beginning of {istring2}.\
+.references
+{iSTaK} (Finnish Users Club Journal) November 1986. First version by
+Tapani Tarvainen.
+
+{iJPC 46} (page 18) translation of Tapani Tarvainen's article in
+{iJPC}
+.related
+ASSIGN #
+MAP
+ROMAN
+.author
+Tapani Tarvainen
+.end keyword
+
+.keyword
+MAP$
+
+.purpose
+{cMAP$} applies a mapping function to the contents of a character string.
+
+.options
+FKID
+
+.syntaxe
+MAP$ ( {istring1{c , {istring2{c , {istring3{c )
+
+.example
+.ex
+MAP$ ("strings","s","S")
+.co
+Returns "StringS".
+
+.input
+.it
+string1
+.de
+String expression.
+.re
+None.
+.it
+string2, string3
+.de
+String expressions.
+.re
+Both strings must have the same length.
+
+.operation
+\{cMAP$} scans all characters in {istring1} ; each character is
+matched against the characters in {istring2} and, if a match is
+found, the character is replaced by the corresponding character
+in {istring3}.\
+
+\If a character occurs in {istring2} twice, the second occurrence
+will never be used, as the matching process always starts at the
+beginning of {istring2}.\
+.references
+{iSTaK} (Finnish Users Club Journal) November 1986. First version by
+Tapani Tarvainen.
+
+{iJPC 46} (page 18) translation of Tapani Tarvainen's article in
+{iJPC}
+.related
+MAP
+REPLACE$
+ROMAN
+.author
+Tapani Tarvainen
+.end keyword
+
+.keyword
+MARGIN
+
+.purpose
+{cMARGIN} enables a beep when the cursor reaches the specified
+position.
+
+.options
+SKID
+
+.syntaxe
+{cMARGIN
+{cMARGIN {iposition
+
+.examples
+.ex
+MARGIN 80
+.co
+A beep occurs when the cursor reaches column 80.
+.ex
+MARGIN
+.co
+Disables the previous {lMARGIN{p setting.
+
+.input
+.it
+position
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 96.
+.df
+0
+
+.operation
+\{cMARGIN} stores the specified cursor position. Thereafter, your
+HP-71 will beep every time the cursor reaches this position
+assuming the beep mode has been enabled ({cBEEP ON}), and that
+JPC†Rom is in your HP-71.\
+
+\{cMARGIN} is active during normal input as well as during 
+{cINPUT}, {cLINPUT} or {cFINPUT} in program mode,
+or in FORTH with Forth / Assembler module or Translator Pac.\
+
+\{cMARGIN} without parameter or {cMARGIN 0} disables this feature
+and recovers the Ram used to store the cursor position
+(4.5 bytes).\
+.references
+{iJPC 26} (page 33) first version by Michel Martinet.
+
+{iTo be published} : modifications to use HP allocated resources,
+by Pierre David and Janick Taillandier.
+
+HP-75 {cMARGIN} statement.
+.related
+FINPUT
+FORTH
+INPUT
+LINPUT
+.author
+Pierre David
+Michel Martinet
+Janick Taillandier
+.end keyword
+
+.keyword
+MAXD
+
+.purpose
+{cMAXD} (MAXimum Directory size) returns the maximum number of
+entries that can be stored in the directory of a mass storage
+medium.
+
+.options
+FKIC
+
+.syntaxe
+{cMAXD ( {idevice specifier{c )
+
+.examples
+.ex
+A=MAXD(".DISK")
+.co
+Stores into variable A the number of entries in the directory of
+medium with label "DISK".
+.ex
+DISP MAXD(A$)
+.co
+Displays the number of entries available on the medium specified
+by the contents of A$.
+.ex
+N=MAXD(D)
+.co
+Stores into N the number of entries on the disk at address {lD}
+in the loop.
+
+.input
+.it
+device specifier
+.de
+See standard HP-IL definitions.
+.re
+Unquoted strings are not allowed.
+
+.operation
+{gMass storage :}
+
+\Peripherals recognized as mass storage by the HP-71 use the
+{iFilbert} protocol. They include the cassette drive HP-82161 and
+the disk drive HP-9114. They can be specified using {c:TAPE} or
+{c:MASSMEM}.\
+
+\The standard unit for mass storage operations is the {isector}.
+Each {isector} has a storage capacity of 256 bytes ; this is the
+basic element for transfers between the mass storage device and
+the controller (the HP-71).\
+
+\A digital cassette for the HP-82161 has 512 sectors, or 131
+Kbytes. A double-sided disk for the HP-9114 has 2464 sectors or
+630 Kbytes.\
+
+
+\Information is stored on mass storage media as follows :\
+
+\- {isystem data} : the HP-IL controller (the HP-71) uses it to
+store information such as initialization date and time, volume
+label, directory size and medium size. This use sectors 0 and 1,
+or 512 bytes.\
+
+\- {idirectory} : this is a table of information about the files,
+such as creation date and time, location on the medium, size,
+type, etc. Each directory entry consists of 32 bytes. The
+directory normally starts at sector 2.\
+
+\- {ifile storage area} : this is where the files are stored.\
+
+
+\The directory space is allocated during medium initialization,
+using the {cINITIALIZE} statement. The information is stored in
+the system data sectors. The real directory size is always the
+smallest multiple of 8 greater than the specified number in order
+to fill an integer number of sectors.\
+
+\By default, {cINITIALIZE} uses a directory size equal to 1/32th
+the medium size (in sectors).  So, the number of entries is :\
+{ientries} = {imedium size in bytes} / 1024
+
+{gThe MAXD function :}
+
+\{cMAXD} returns the maximum number of directory entries on the
+specified medium.\
+
+\This number is always a multiple of 8. To get the space used by
+the directory, you can do : \
+
+\sectors : {cMAXD / 8}\
+\bytes : {cMAXD * 32}\
+
+
+{gInterrupting the function with [ATTN] :}
+
+\This function can be interrupted by pressing the {l[ATTN]} key
+twice.  This causes the message {cHPIL ERR:Aborted}.  It may then
+be necessary to execute {cRESTORE IO} to reactivate the HP-IL
+system.\
+.references
+{iJPC 30} (page 40) first version by Michel Martinet.
+
+{iHP82161 Digital Cassette Drive Owner's Manual}.
+
+{iHP-IL Interface Owner's Manual} Chapter 3 and appendix D.
+.related
+INITIALIZE
+MEMD
+MAXM
+RREC$
+WREC
+.author
+Michel Martinet
+.end keyword
+
+.keyword
+MAXM
+
+.purpose
+{cMAXM} (MAXimum Medium capacity) returns the maximum storage
+capacity available on the medium.
+
+.options
+FKIC
+
+.syntaxe
+{cMAXM ( {idevice specifier{c )
+
+.examples
+.ex
+A=MAXM("%16")
+.co
+Returns the space, in bytes, of the medium.
+
+.input
+.it
+device specifier
+.de
+See standard HP-IL definitions.
+.re
+Unquoted strings are not allowed.
+
+.operation
+\{cMAXM} returns the capacity of the mass storage device specified by
+{idevice specifier}. This capacity includes the system sectors and
+the sectors allocated to the directory.\
+
+\To get the space available for user data, you can do :\
+
+{cMAXM(D)-512-MAXD(D)*32}
+
+\For more information, see {cMAXD} and the HP-IL interface
+owner's manual.\
+
+
+{gInterrupting the function with [ATTN] :}
+
+\This function can be interrupted by pressing the {l[ATTN]} key
+twice.  This causes the message {cHPIL ERR:Aborted}.  It may then
+be necessary to execute {cRESTORE IO} to reactivate the HP-IL
+system.\
+.references
+{iJPC 30} (page 40) first version by Michel Martinet.
+
+{iHP82161 Digital Cassette Drive Owner's Manual}.
+
+{iHP-IL Interface Owner's Manual} Chapter 3 and appendix D.
+.related
+MAXD
+MEMM
+RREC$
+WREC
+.author
+Michel Martinet
+.end keyword
+
+.keyword
+MDY
+
+.purpose
+{cMDY} (Month Day Year) enables date input in numeric format {imm.ddyyyy}.
+
+.options
+SKID
+
+.syntaxe
+MDY
+
+.examples
+.ex
+IF K$="N" THEN MDY
+.co
+If K$ equals "N", then use U.S. date format.
+
+.operation
+\In the mode enabled by {cMDY}, date parameters used by JPC†Rom
+date functions can be input using a numeric {imm.ddyyyy}
+format.\
+
+\The {cMDY} format is the default format after a memory reset.\
+
+\Date information can always be entered using the string format,
+which is not affected by the MDY / DMY modes.\
+
+\For more information about date input formats, see the
+{cDATESTR$} function.\
+.references
+{iJPC 28} (page 40) first version by Laurent Istria.
+
+{iJPC 49} (page 24) second version by Pierre David and Janick
+Taillandier.
+.related
+DATESTR$
+DATEADD
+DDAYS
+DMY
+DOW
+DOW$
+.author
+Pierre David
+Laurent Istria
+Janick Taillandier
+.end keyword
+
+.keyword
+MEMD
+
+.purpose
+{cMEMD} (MEMory in Directory) returns the number of entries in
+the directory of the specified medium that remain available for
+new files.
+
+.options
+FKIC
+
+.syntaxe
+{cMEMD ( {idevice specifier{c )
+
+.examples
+.ex
+A=MEMD(":TAPE")
+.co
+Returns the number of entries available in the directory..
+
+.input
+.it
+device specifier
+.de
+See standard HP-IL definitions.
+.re
+Unquoted strings are not allowed.
+
+.operation
+{gPurged files :}
+
+\When files are removed from the medium using the {cPURGE}
+command, the corresponding entry in the directory becomes
+available for new files. This creates gaps in the directory that
+are invisible to the user.\
+
+\These gaps may occasionally become too numerous. When this
+happens, a {cPACKDIR} may be necessary to pack the directory
+area, and remove gaps.\
+
+{gThe MEMD function :}
+
+\{cMEMD} returns the number of entries available in the
+directory. This count includes purged file entries, if any.\
+
+\{cMEMD} considers purged files entries as available : {cMEMD}
+acts as if a {cPACKDIR} had occurred.\
+
+{gInterrupting the function with [ATTN] :}
+
+\This function can be interrupted by pressing the {l[ATTN]} key
+twice. This causes the message {cHPIL ERR:Aborted}. It may then
+be necessary to execute {cRESTORE IO} to reactivate the HP-IL
+system.\
+
+.references
+{iJPC 30} (page 40) : first version by Michel Martinet.
+
+{iHP82161 Digital Cassette Drive Owner's Manual}.
+
+{iHP-IL Interface Owner's Manual} Chapter 3 and appendix D.
+.related
+MAXD
+MEMM
+PACKDIR
+RREC$
+WREC
+.author
+Michel Martinet
+.end keyword
+
+.keyword
+MEMM
+
+.purpose
+{cMEMM} (MEMory on Medium) returns the available room in the file
+storage area of the specified medium.
+
+.options
+FKIC
+
+.syntaxe
+{cMEMM ( {idevice specifier{c )
+
+.examples
+.ex
+A=MEMM(":HP9114")
+.co
+Returns the storage capacity remaining available in the first
+HP-9114 unit on the loop.
+
+.input
+.it
+device specifier
+.de
+See standard HP-IL definitions.
+.re
+Unquoted strings are not allowed.
+
+.operation
+{gPurged files :}
+
+\When files are purged from a medium using the {cPURGE} command,
+the corresponding space in the file storage area becomes
+available. This produces gaps on the medium invisible to the
+user.\
+
+\However, these gaps may become too numerous. In this case a
+{cPACK} may be necessary to pack the directory and file storage
+areas, and remove these gaps.\
+
+
+{gThe MEMM function :}
+
+\The {cMEMM} function returns the storage capacity in the file
+storage area that is available for new files.\
+
+\{cMEMM} includes the space reserved by purged file entries :
+{cMEMM} gives the same result as if a {cPACK} had occurred.\
+
+
+{gInterrupting the function with [ATTN] :}
+
+\This function can be interrupted by pressing the {l[ATTN]} key
+twice. This causes the message {cHPIL ERR:Aborted}. It may then
+be necessary to execute {cRESTORE IO} to reactivate the HP-IL
+system.\
+
+.references
+{iJPC 30} (page 40) : first version by Michel Martinet.
+
+{iHP82161 Digital Cassette Drive Owner's Manual}.
+
+{iHP-IL Interface Owner's Manual} Chapter 3 and appendix D.
+.related
+MAXM
+MEMD
+PACK
+RREC$
+WREC
+.author
+Michel Martinet
+.end keyword
+
+.keyword
+MENU
+
+.purpose
+{cMENU} is an interactive menu facility.
+
+.options
+FKID
+
+.syntaxe
+{cMENU ( {inumber of elements{c )
+{cMENU ( {inumber of elements{c , {ifirst element{c )
+
+.examples
+.ex
+10 ATTN OFF @ M=1
+20 DATA ONE,TWO,THREE,FOUR
+30 RESTORE 20 
+40 M=MENU(4,M) @ ON M GOTO 60,70,80,90
+50 ATTN ON @ BEEP @ END
+60 DISP "ONE" @ GOTO 30
+70 DISP "TWO" @ GOTO 30
+80 DISP "THREE" @ GOTO 30
+90 DISP "FOUR" @ GOTO 30
+.co
+Display a choice of 4 items, scrolled using vertical cursor
+keys. The user validates his choice with {l[ENDLINE]{p, or
+exits with {l[ATTN]{p and resumes execution at line 40.
+
+.input
+.it
+number of elements
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 1048575.
+.it
+first element
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 1048575.
+.df
+1
+
+.operation
+\{cMENU} provides interactive menu processing for programs.\
+
+\{cMENU} uses items stored in {cDATA} statements, starting with
+the data item at the current DATA pointer position.\
+
+\The various menu items can be scrolled using vertical cursor
+keys {l[^]}, {l[v]}, {l[g][^]} et {l[g][v]}.\
+
+\A choice is validated using {l[ENDLINE]}. The sequence number of
+the corresponding element is returned. The first item on the menu
+list returns a value of 1 and the last item returns {inumber of
+elements}.\
+
+\Pressing {l[ATTN]} exits {cMENU} and skips to next program line
+(not next statement). This allows special processing of user
+interrupts.\
+
+\If {ifirst element} is specified, it represents the number of
+the first data element displayed.  Keys {l[^]} and {l[g][^]}
+allow to scroll to previous elements.\
+.references
+{iJPC 26} (page 34) first version by Jean-Jacques Dh≈nin.
+.related
+DATA
+FINPUT
+READ
+RESTORE
+.author
+Jean-Jacques Dh≈nin
+.end keyword
+
+.keyword
+MERGE
+
+.purpose
+{cMERGE} extends the standard {cMERGE} function to Lex files.
+{cMERGE} is nonprogrammable.
+
+.options
+SKID
+
+.syntaxe
+{cMERGE {ifile
+{cMERGE {ifile{c , {ifirst line{c
+{cMERGE {ifile{c , {ifirst line{c , {ilast line
+
+.examples
+.ex
+EDIT STRINGLX @ MERGE KEYWAIT
+.co
+Chain Lex file KEYWAIT into STRINGLX.
+
+.input
+.it
+file
+.de
+String expression or unquoted string.
+.re
+File name with optional device specifier.
+.it
+start line
+.de
+Integer constant.
+.re
+1 through 9999 (no meaning for Lex files).
+.df
+First program line.
+.it
+final line
+.de
+Integer constant.
+.re
+Start line through 9999 (no meaning for Lex files).
+.df
+Start line.
+
+.operation
+{gMerging Lex files :}
+
+\Merging Lex files links two or more Lex files into a single file
+in Ram or independent Ram.\
+
+\This process has many advantages.  First, it allows you to bring
+together all the keywords and operating system enhancements
+required by any given application package in a single file.
+This can greatly simplify the main application program, since it
+needs to verify the presence of only one Lex file instead of
+several. Also, the time required to load the combined Lex file is
+significantly less than the time required to load all the
+component Lex files.\
+
+\Linking existing Lex files is much easier than writing a new
+special purpose Lex with all the prerequisite capabilities. It
+helps conserve HP-71 system resources, since you can link files
+with different Id or with non-consecutive token numbers. Finally,
+it reduces memory requirements by 18.5 bytes for each file that
+is merged, since linked Lex files share a common 18.5 byte
+header.\
+
+\Keep in mind that linking Lex files does not reduce the number
+of entries in the configuration buffers, and that the number of
+poll handlers also remains the same. This means that linking
+Lex files will not result in the improved system performance that
+you get from combining the source code of the component Lex files
+to produce a single Lex such as JPC†Rom.\
+
+\You should link (merge) Lex files for the same reasons you merge
+several subprograms into a single file : convenience and
+simplified mass storage management.\
+
+
+{gUsing MERGE :}
+
+\To merge Lex files F1, F2 and F3 into file F1, you have to execute :{c\
+
+EDIT F1
+MERGE F2
+MERGE F3
+EDIT
+
+\}{cEDIT F1} makes F1 the current {iworkfile}.  {cMERGE F2}
+merges F1 into F2.  {cMERGE F3} merges F3 into F1 (which is now
+F1 + F2).\
+
+\The final {cEDIT} restores {cworkfile} as the current file.\
+
+\F2 and F3, which are still in memory, may now be purged as after
+a standard {cMERGE} of Basic or Keys files.\
+
+\If you want to restore the current file, you can use :{c\
+
+A$=CAT$(0)[1,8]
+EDIT F1
+MERGE F2
+MERGE F3
+EDIT
+
+{gWarning !}
+
+\{gNever purge the current Lex file} !\
+
+\A bug seems to exist. The Basic statement {cPURGE} does not work
+properly if the current file is a Lex : the file pointer is not
+reset to the {cworkfile}. This typically causes a
+strange {cCAT}
+operation. In most cases, a simple {cEDIT} corrects the
+problem.\
+.references
+{iJPC 23} (page 47) Basic program to merge Lex files by Michel Martinet.
+
+{iJPC 37} (page 22) assembly language Lex file merger by
+Pierre David and Michel Martinet.
+.related
+EDIT
+MERGE
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+MODE
+
+.purpose
+{cMODE} sends an escape sequence that changes the print pitch on
+the {cPRINTER IS} device.
+
+.options
+SKI
+
+.syntaxe
+{cMODE {iargument
+
+.examples
+.ex
+MODE 2
+.co
+Sets the printer to the compressed print mode.
+
+.input
+.it
+argument
+.de
+Numeric expression rounded to an integer.
+.re
+0 to 999.
+
+.operation
+\{cMODE} changes the print pitch on the peripheral selected 
+by the last {cPRINTER IS} command.\
+
+\On a ThinkJet printer,\
+
+\{cMODE 0} selects 80 characters per line,\
+\{cMODE 1} selects 40 characters per line,\
+\{cMODE 2} selects 142 characters per line and\
+\{cMODE 3} selects 71 characters per line.\
+
+
+{gCodes sent to the printer :}
+
+{cMODE {in} : {cESC & k {in{c S
+.references
+{iJPC 26} (page 39) first version by Pierre David.
+
+{iJPC 40} (page 16) second version by Pierre David.
+
+Also consult your printer reference manual.
+.related
+BOLD
+PRINTER IS
+UNDERLINE
+WRAP
+.author
+Pierre David
+.end keyword
+.end

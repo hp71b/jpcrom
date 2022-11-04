@@ -1,0 +1,949 @@
+.language
+F
+
+.keyword
+FILEPOS
+
+.purpose
+{cFILEPOS} (FILE POSition) cherche une cha—ne g≈n≈rique dans un
+fichier Texte.
+
+.options
+FKID
+
+.syntaxe
+FILEPOS ( {ifichier{c , {imotif{c )
+FILEPOS ( {ifichier{c , {imotif{c , {id≈but{c )
+FILEPOS ( {ifichier{c , {imotif{c , {id≈but{c , {ifin{c )
+FILEPOS ( {ifichier{c , {imotif{c , {id≈but{c , {ifin{c , {icolonne{c )
+FILEPOS ( {icanal{c , {imotif{c )
+FILEPOS ( {icanal{c , {imotif{c , {id≈but{c )
+FILEPOS ( {icanal{c , {imotif{c , {id≈but{c , {ifin{c )
+FILEPOS ( {icanal{c , {imotif{c , {id≈but{c , {ifin{c , {icolonne{c )
+
+.examples
+.ex
+DISP FILEPOS ("ESSAI","JPC Rom")
+.co
+Cherche la cha—ne "JPC Rom" dans le fichier ESSAI et retourne
+le num≈ro de l'enregistrement trouv≈, ou -1 si la recherche a ≈chou≈.
+.ex
+L=FILEPOS (5,"^[0-9]",25,50)
+.co
+Recherche dans le fichier correspondant au canal #5, la premi…re occurrence
+d'un chiffre en d≈but d'enregistrement, entre les lignes 25 et 50.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique.
+.re
+Le fichier doit ¡tre en m≈moire vive.
+.it
+canal
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 255, et le fichier doit ¡tre en m≈moire vive.
+.it
+motif
+.de
+Expression alphanum≈rique.
+.re
+Expression g≈n≈rique valide.
+.it
+d≈but
+.de
+Expression num≈rique arrondie » un entier.
+.re
+0 » 1048575.
+.df
+0
+.it
+fin
+.de
+Expression num≈rique arrondie » un entier.
+.re
+d≈but » 1048575.
+.df
+dernier enregistrement du fichier.
+.it
+colonne
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 65535.
+.df
+1
+
+.operation
+\{cFILEPOS} recherche la premi…re occurrence de {imotif} dans le
+fichier sp≈cifi≈. Si une occurrence est trouv≈e, le num≈ro de
+l'enregistrement est retourn≈. Si aucune occurrence n'est trouv≈e,
+la valeur -1 est renvoy≈e. Les param…tres {id≈but} et {ifin}
+permettent de restreindre la recherche dans une partie du fichier.\
+
+\{gAttention} : les param…tres {id≈but} et {ifin} de {cFILEPOS} sont
+exprim≈s en {inum≈ros d'enregistrement}. L'enregistrement 0
+correspond » la ligne 1 du fichier, de mani…re » ¡tre compatible
+avec les ordres standard du HP-71 ({cREAD†#}, {cRESTORE†#}, etc.).\
+
+\La recherche tient compte des caract…res g≈n≈riques ≈tendus
+(voir {cXEDIT} pour plus de pr≈cision sur les caract…res g≈n≈riques).
+Le tableau ci-dessous r≈sume les caract…res sp≈ciaux :{l\
+
+          Caract…re       Signification
+          ---------       ----------------------------------------------
+              \           annule la signification du caract…re suivant
+              ^           d≈but de ligne
+              $           fin de ligne
+              .           caract…re quelconque
+             [ ]          ensemble de caract…res
+            [^ ]          compl≈mentaire de l'ensemble
+              *           r≈p≈tition du motif pr≈c≈dent 0 ou n fois}
+
+\Le param…tre {icolonne} sp≈cifie le num≈ro de la colonne » partir
+de laquelle la recherche commence. La recherche commencera » la
+ligne et » la colonne sp≈cifi≈es, et continuera sur les lignes suivantes
+» partir de la premi…re colonne. Ceci est utile lorsque vous
+d≈sirez reprendre une recherche sur une ligne alors qu'une
+occurrence a d≈j» ≈t≈ trouv≈e. Le param…tre {icolonne} permet
+alors de ˚†sauter†˝ cette occurrence, et de reprendre la recherche
+apr…s.\
+
+\{gNote} : les modules {iForth / Assembler} et {iText Editor} offrent
+la fonction {cSEARCH}. La fonctionnalit≈ de {cFILEPOS} est
+≈quivalente, mais se distingue par trois points essentiels :\
+\- la recherche utilise les cha—nes g≈n≈riques ≈tendues (celles de {cXEDIT}
+et pas celles de {cTEDIT}),\
+\- la syntaxe est bien plus simple, claire et mn≈motechnique, et enfin,\
+\- la valeur de retour est, elle aussi, plus simple.\
+
+\Si vous d≈sirez chercher une cha—ne dans un fichier, et que
+cette cha—ne est susceptible de contenir des caract…res sp≈ciaux, il
+faut annulerla signification de ces caract…res. Il suffit de les faire
+pr≈c≈der par un {c\}, ce qui donne la commande suivante :{c\
+    FILEPOS ({ifichier{c, GENRPLC$ ({imotif{c, "[\\\^\$\.\[\]\*]", "\\&"))}
+.references
+{iA para—tre} : Premi…re version de {cFILEPOS} par Pierre
+David et Janick Taillandier.
+
+{iUnix User's Reference Manual} par AT&T.
+.related
+ASSIGN #
+CREATE
+FIND
+GENLEN
+GENPOS
+GENRPLC
+PRINT #
+READ #
+XEDIT
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+FILESIZE
+
+.purpose
+{cFILESIZE} renvoie la taille du fichier sp≈cifi≈.
+
+.options
+FKI
+
+.syntaxe
+{cFILESIZE ( {ifichier{c )
+
+.examples
+.ex
+A=FILESIZE("ESSAI")
+.co
+Renvoie la taille du fichier ESSAI s'il est pr≈sent, 0 sinon.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique.
+.re
+Nom de fichier avec sp≈cificateur de p≈riph≈rique en option.
+
+.operation
+\{cFILESIZE} renvoie la taille du fichier en octets, ou 0 si le
+fichier n'est pas pr≈sent en m≈moire ou sur le support indiqu≈.\
+
+\On peut ainsi tester facilement l'existence d'un fichier,
+que ce soit en m≈moire ou sur un p≈riph≈rique externe. On
+fera donc un test similaire » :{c\
+
+1000 IF FILESIZE(F$&":TAPE") THEN
+1010   COPY :TAPE TO F$
+1020 END IF
+
+\}La taille renvoy≈e est la taille {itotale} du fichier. Cette
+taille comprend la place occup≈e par l'en-t¡te. Cette partie
+comprend le nom du fichier, son type, la date de cr≈ation et
+d'autres informations utiles pour le syst…me. Cette taille est
+donc diff≈rente de celle renvoy≈e par le catalogue {cCAT} ou
+{cCAT$}.\
+
+\L'int≈r¡t d'utiliser cette taille est qu'elle correspond » la
+place disponible fournie par {cMEM}. Pour copier un fichier d'un
+support magn≈tique vers une m≈moire ind≈pendante, il suffit d'un
+test du type :{c\
+
+{cIF MEM(0)>=FILESIZE("TOTO:TAPE") THEN COPY} ...
+.references
+{iJPC 23} (page 36) mot-clef {cFILE?}
+
+{iA para—tre} : {cFILESIZE} par Henri Kudelski.
+.related
+ADDR$
+CAT
+.author
+Henri Kudelski
+.end keyword
+
+.keyword
+FIND
+
+.purpose
+{cFIND} trouve une cha—ne de caract…re dans un programme Basic.
+{cFIND} est non programmable.
+
+.options
+SKD
+
+.syntaxe
+{cFIND {icha—ne
+{cFIND {icha—ne{c , {iligne d≈part
+{cFIND {icha—ne{c , {iligne d≈part{c , {iligne fin
+
+.examples
+.ex
+FIND "OSUB 1210"
+.co
+Cherche la premi…re occurence de la cha—ne "OSUB 1210" apr…s la
+ligne courante, et y positionne le curseur.
+.ex
+FIND "[^$]([^)]*)=",1
+.co
+Cherche, » partir de la premi…re ligne du fichier, une affectation
+» un tableau num≈rique.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+ligne d≈part
+.de
+Constante enti…re identifiant une ligne de programme.
+.re
+1 » 9999.
+.df
+ligne suivant la ligne courante.
+.it
+Constante enti…re identifiant une ligne de programme.
+.de
+Ligne de d≈part jusqu'» 9999.
+.df
+derni…re ligne du programme.
+
+.operation
+\{cFIND} cherche une cha—ne de caract…res dans le programme Basic
+≈dit≈, » partir de la ligne courante, ou » partir de la
+ligne {iligne d≈part} si sp≈cifi≈e, et jusqu'» la derni…re
+ligne, ou la ligne {iligne fin} si sp≈cifi≈e.\
+
+\Si {cFIND} trouve la cha—ne, il affiche la ligne concern≈e et
+positionne le curseur sur le premier caract…re de la cha—ne
+trouv≈e.\
+
+\Si la cha—ne n'est pas entre la ligne courante et la derni…re
+ligne du programme, l'erreur :  {cJPC ERR:Not Found} est
+renvoy≈e.\
+
+\{cFIND} ne peut pas trouver la cha—ne dans la premi…re
+ligne du programme, » moins que le programme vienne d'¡tre
+≈dit≈ » l'aide de l'ordre {cEDIT} ou que le param…tre
+{iligne d≈part} soit fourni.\
+
+\La cha—ne de recherche peut contenir des caract…res
+g≈n≈riques. Le tableau ci-dessous r≈sume ces caract…res.
+Pour plus de d≈tails, voir {cXEDIT}.{l\
+
+          Caract…re       Signification
+          ---------       ----------------------------------------------
+              \           annule la signification du caract…re suivant
+              ^           d≈but de ligne
+              $           fin de ligne
+              .           caract…re quelconque
+             [ ]          ensemble de caract…res
+            [^ ]          compl≈mentaire de l'ensemble
+              *           r≈p≈tition du motif pr≈c≈dent 0 ou n fois}
+.references
+{iJPC 31} (page 25) premi…re version par Jean-Jacques Moreau.
+
+{iJPC 45} (page 19) deuxi…me version par Janick Taillandier.
+
+{iA para—tre} : troisi…me version par Janick Taillandier et Pierre David.
+
+Fonction {cFETCH} du HP-75.
+.related
+FETCH
+FILEPOS
+GENPOS
+XEDIT
+.author
+Jean-Jacques Moreau
+Janick Taillandier
+.end keyword
+
+.keyword
+FINPUT
+
+.purpose
+{cFINPUT} (Formatted INPUT) cr≈e un masque de saisie, et attend
+l'introduction de l'utilisateur.
+
+.options
+SKID
+
+.syntaxe
+{cFINPUT {iinput{c , {iprompt{c , {iattn
+{cFINPUT {iinput{c , {iprompt{c , {iformat{c , {iattn
+
+.examples
+.ex
+10 DIM I$[8]
+20 FINPUT I$,"Fichier: ",A
+30 IF A=0 THEN }...
+.co
+L'utilisateur entre le nom du fichier (pas plus de 8 caract…res),
+et {lFINPUT{p le place dans la variable I$. Si L'utilisateur
+appuie sur la touche {l[ATTN]{p, la variable A est mise » 0.
+
+.input
+.it
+input
+.de
+Nom de variable ou de tableau alphanum≈rique existant.
+.re
+La variable ou le tableau doit ¡tre cr≈≈ avant d'utiliser
+{lFINPUT{p.
+.it
+prompt
+.de
+Expression ou nom de tableau alphanum≈rique.
+.re
+Ne doit pas contenir de caract…res non affichables.
+.it
+format
+.de
+Expression ou nom de tableau alphanum≈rique.
+.re
+Cha—ne de longueur non nulle, compos≈e des caract…res 'U' et
+'P' et de chiffres indiquant un format.
+.df
+STR$(LEN(prompt))&"PU"
+.it
+attn
+.de
+Nom de variable ou ≈l≈ment de tableau num≈rique.
+.re
+Aucune.
+
+.operation
+{gLes champs prot≈g≈s :}
+
+\En quelques mots, les champs prot≈g≈s servent
+lors d'un {cINPUT} ou {cLINPUT} » isoler des
+caract…res et emp¡cher l'utilisateur du programme
+de les effacer ou d'≈crire autre chose » la
+place.\
+
+\A titre d'exemple, pour entrer une date, l'affichage devra avoir
+l'aspect suivant :\
+{cDate: Dy/Mo/Yr}
+
+\L'utilisateur devra remplacer les seuls caract…res {cDy} (Day),
+{cMo} (Month) et {cYr} (Year) par leur valeur. Les autres ne
+doivent pas changer. Voici le programme pour atteindre ce but
+:{c\
+
+100 E$=ESC$("<")                   ! Eteint le curseur
+110 A$=ESC$(">")                   ! Allume le curseur
+120 D$=A$&"Jr"&E$"/"&A$&"Mo"&E$&"/"&A$&"Yr"
+130 DISP E$&"Date: "&D$&E$;        ! Affichage
+140 INPUT "";I$                    ! Introduction de la date
+
+\}Premi…re observation : ce programme est
+illisible malgr≈ les commentaires.\
+
+\Deuxi…me observation : l'affichage du masque de saisie est
+lent.\
+
+\Troisi…me observation : si une date est rentr≈e, puis la touche
+{l[ATTN]} press≈e, le mois s'efface et le curseur revient au
+d≈but. Un deuxi…me appui sur {l[ATTN]} ne provoque aucune
+r≈action.  La touche {l[ATTN]} est inactive, il n'y a aucun moyen
+d'arr¡ter le programme. La seule solution est d'appuyer sur
+{l[ENDLINE]}. Et la date est valid≈e telle quelle, malgr≈ une
+volont≈ ≈vidente d'arr¡ter !\
+
+\Quatri…me observation : si la date est rentr≈e, rien n'emp¡che
+de continuer » rentrer des caract…res. Comment y rem≈dier ?\
+
+\Le probl…me vient de ce qu'aucun caract…re n'est plus prot≈g≈
+apr…s la date. Le HP-71 n'a donc plus aucune raison de bloquer le
+reste de l'affichage.  Pour y arriver, il faut calculer : il faut
+afficher un masque de 14 caract…res, et les autres doivent ¡tre
+tous prot≈g≈s. Les autres, cela fait 96-14, c'est » dire 82
+espaces » prot≈ger. il faut donc ajouter quelques lignes :{c\
+
+121 DIM S$[82]
+122 S$=""
+123 S$[82]=" "
+
+\}Puis remplacer la ligne 130 par :{c\
+
+129 WIDTH INF
+130 DISP E$&"Date: "&D$&E$&S$;
+
+\}A l'ex≈cution, il y a un clignotement ind≈sirable de
+l'affichage, puis tout s'affiche. Il n'y a enfin aucun moyen de
+rentrer de caract…res au-del» de la date.\
+
+\Mais il y a un nouveau probl…me : un appui sur la touche {l[->]}
+apr…s la deuxi…me ann≈e provoque un d≈robement de l'affichage sur
+la gauche. Mieux encore : un appui sur sur {l[g][->]} aboutit »
+un ≈cran vide apr…s un temps assez long.\
+
+
+{gUtilisation de FINPUT :}
+
+
+{iFINPUT mono-ligne}
+
+\Dans sa forme la plus simple, {cFINPUT} est une extension de
+l'ordre {cLINPUT} pour manipuler facilement les champs prot≈g≈s.\
+
+\Le programme Basic qui a servi d'exemple se r≈sume alors » la
+forme suivante :{c\
+
+100 DIM I$[6]
+110 FINPUT I$,"Date: Dy/Mo/Yr","6P2UP2UP2UP",A
+
+
+\}Dans cet exemple, il faut constater que :\
+
+\- I$ est la cha—ne de destination. Elle doit ¡tre
+cr≈≈e avant d'utiliser {cFINPUT}.\
+
+\- Ensuite vient le {iprompt}. C'est ce
+qui appara—tra sur l'≈cran. Tous les caract…res » afficher y
+figurent, prot≈g≈s ou non.\
+
+\- Le param…tre suivant est le {iformat}.  Examinons de pr…s ce
+que cette expression contient : le {c6P} signifie que les six
+premiers caract…res sont prot≈g≈s ({iProtected}). Le {c2U}
+pr≈cise que les deux caract…res suivants sont ˚non prot≈g≈s˝
+({iUnprotected}). Le {cP} indique ensuite que le caract…re
+suivant est prot≈g≈, et ainsi de suite... Le {cP} final signifie
+que le reste de l'affichage est prot≈g≈. Il n'y a donc pas besoin
+de mettre {c82P} pour terminer la ligne.\
+
+\- Enfin vient la variable {iattn}. En sortie, elle vaudra 0 si
+la touche {l[ATTN]} a ≈t≈ utilis≈e pour sortir de {cFINPUT}.\
+
+
+\Comme vous pouvez le constater, le probl…me de l'utilisation des
+champs prot≈g≈s est simplifi≈ » l'extr¡me.  Mais, ce n'est pas
+tout ce qu'apporte {cFINPUT}. Parmi ses nombreux avantages, nous
+pouvons citer :\
+
+\- gestion de la touche {l[ATTN]} :  lors d'un {cFINPUT}, la
+touche {l[ATTN]} sert une premi…re fois pour revenir »
+l'affichage par d≈faut (la cha—ne {iprompt}). La deuxi…me fois,
+{l[ATTN]} sort de {cFINPUT} en mettant la variable {iattn} » 0.
+Le programme n'est pas interrompu, et il est facile de g≈rer la
+touche {l[ATTN]}. Un simple test :{c IF NOT A THEN ...  }suffit.\
+
+\- gestion des touches {l[->]} et {l[g][->]} :  les touches
+{l[->]} et {l[g][->]} n'ont plus l'effet d≈sagr≈able qu'elles
+avaient lors du premier exemple.\
+
+\- gestion des ˚variables courtes˝ :  dans l'exemple ci-dessus,
+si la variable I$ avait ≈t≈ d≈clar≈ » moins de 6 caract…res, par
+exemple 3, il n'aurait pas ≈t≈ possible d'en rentrer plus de 3.
+{cFINPUT} met cette s≈curit≈ suppl≈mentaire. Les programmes ne
+peuvent plus s'arr¡ter avec l'erreur :  {c"String Overflow"} !\
+
+
+{iFINPUT sans cha—ne de format :}
+
+\Dans bien des cas, il n'y a pas besoin d'une gestion
+sophistiqu≈e de l'affichage. Par exemple, pour rentrer le nom
+d'un fichier. Avec {cINPUT}, vous feriez :\
+{c100 INPUT "Fichier: ";F$}
+
+\Mais un nom de fichier en m≈moire ne peut faire plus de 8
+caract…re. Avec {cFINPUT}, le programme devient :{c\
+100 DIM F$[8]
+110 FINPUT F$,"Fichier: ",A
+120 IF NOT A THEN END
+
+\}Il est maintenant impossible de rentrer plus de 8 caract…res,
+et si l'utilisateur d≈sire se r≈tracter en appuyant sur
+{l[ATTN]}, le programme l'autorise de la mani…re la plus simple.\
+
+\Ce {iformat} est donc facultatif.  Si il n'est pas pr≈sent,
+{cFINPUT} le cr≈e.  Par d≈faut, cette cha—ne de format est :
+STR$(LEN({iprompt}))&"PU".  C'est » dire que tous les caract…res
+de la cha—ne de {iprompt} sont prot≈g≈s.  Les suivants sont tous
+non prot≈g≈s, jusqu'» la dimension maximum de la cha—ne
+r≈sultat.\
+
+
+{iFINPUT sur plusieurs lignes :}
+
+\Mais la principale caract≈ristique de {cFINPUT}
+est la gestion de plusieurs lignes de saisie.
+C'est, en quelque sorte, un ˚masque d'≈cran˝
+complet.\
+
+\Si un programme doit entrer la date et l'heure, ce pourrait ¡tre
+:{c\
+
+100 DIM D$[6],H$[6]
+110 FINPUT D$,"Date: Dy/Mo/Yr","6P2UP2UP2UP",A
+120 IF NOT A THEN END
+130 ! traitement de la date
+ :
+200 FINPUT H$,"Heure: Hr:Mn:Sc","7P2UP2UP2UP",A
+210 IF NOT A THEN END
+220 ! traitement de l'heure}
+
+\Mais il y a une autre solution :{c\
+
+100 OPTION BASE 1             ! Pour d≈marrer les tableaux » 1
+110 DIM I$(2)[6],M$(2),P$(2)
+120 DATA Date: Dy/Mo/Yr,Heure: Hr:Mn:Sc
+130 DATA 6P2UP2UP2UP,7P2UP2UP2UP
+160 READ M$                   ! Lit les 2 messages
+170 READ P$                   ! Lit les 2 cha—nes de protection
+180 FINPUT I$,M$,P$,A
+190 IF NOT A THEN END
+200 ! traitement de la date (I$(1))
+210 ! traitement de l'heure (I$(2))}
+
+\Cette derni…re solution est beaucoup plus pratique que la
+premi…re quand on doit entrer de grandes quantit≈s de
+donn≈es. L'introduction se fait en une seule op≈ration.\
+
+\Les touches de curseur vertical servent » passer d'une ligne »
+l'autre. La touche {l[ENDLINE]} sert » valider chaque ligne.
+La touche {l[RUN]} sert » valider la ligne et » sortir de
+{cFINPUT}.\
+
+\{gImportant} : il y a deux possibilit≈s de sortir de
+{cFINPUT} en validant la fiche :\
+
+\- la touche {l[RUN]}, qui valide la ligne courante, et\
+\- deux pressions successives sur {l[ENDLINE]} lorsque le
+curseur est sur le dernier champ.\
+
+\La variable {iattn} contient
+alors le num≈ro de la ligne sur laquelle on est sorti. La valeur
+0 indique toujours une sortie par {l[ATTN]}.\
+
+\Cette forme d'utilisation de {cFINPUT} permet de
+saisir des fiches compl…tes en une seule
+op≈ration. Le programmeur n'a donc plus » g≈rer
+tous les d≈placements » l'int≈rieur de cette
+fiche, {cFINPUT} le fait » sa place !\
+
+
+{gR≈sum≈ :}
+
+\La variable {iinput} doit ¡tre cr≈≈e avant de commencer »
+ex≈cuter {cFINPUT}.\
+
+\La cha—ne {iprompt} ne doit contenir que des caract…res
+affichables, c'est » dire des caract…res dont le code n'est ni 0
+(NULL), ni 27 (ESC), ni 13 (CR), ni 10 (LF), ni 8 (BS).\
+
+\La sp≈cification de format doit contenir les lettres "U" et "P"
+(en majuscules ou minuscules) pr≈c≈d≈es ou non d'un facteur de
+r≈p≈tition pour indiquer les caract…res prot≈g≈s ou non. La
+cha—ne doit ¡tre non nulle, et le format r≈sultant ne doit pas
+d≈passer 96 caract…res. Ainsi, si {c96P} est l≈gal, {c97P} ne
+l'est pas, non plus que {c95P2U}.\
+
+\Les variables simples sont assimil≈es » des tableaux » un seul
+≈l≈ment.\
+
+
+{iL'utilisation :}
+
+\Sous {cFINPUT}, la signification des touches est
+la suivante :\
+
+{l[ATTN]}
+\Si des caract…res ont ≈t≈ entr≈s, restauration de l'affichage
+par d≈faut, c'est » dire du {iprompt} tel quel.\
+\Une deuxi…me fois : sortie de {cFINPUT}.\
+
+{l[f][OFF]}
+\Sortie directe de {cFINPUT}.\
+
+{l[ENDLINE]}
+\Validation de la ligne courante et passage » la
+ligne suivante. Si il n'y a qu'une seule ligne,
+sort de {cFINPUT}.\
+\Une deuxi…me fois sur la derni…re ligne : sort de {cFINPUT}
+en validant la fiche.\
+
+{l[RUN]}
+\Validation de la ligne courante et sort de
+{cFINPUT}. Si il n'y a qu'une seule ligne,
+{l[RUN]} est identique » {l[ENDLINE]}.\
+
+{l[{m°{l]}, {l[{m£{l]}, {l[g][{m°{l]} et {l[g][{m£{l]}
+\Change de ligne sans valider la ligne courante.
+Si une seule ligne, remet l'affichage par d≈faut.\
+
+
+{iContenu des variables en sortie :}
+
+\Les variables {iprompt} et {iformat} ne sont
+jamais modifi≈es.\
+
+\En cas de sortie normale (par {l[ENDLINE]} ou
+{l[RUN]}), la variable {iattn} contient le num≈ro
+logique
+de la ligne sur laquelle on est sorti. Ce num≈ro
+varie entre 1 et la dimension du tableau, m¡me si le tableau
+avait ≈t≈ d≈clar≈ en {cOPTION BASE 0}.\
+
+\La variable destination contient les valeurs
+introduites.\
+
+\En cas de sortie pr≈matur≈e (par {l[ATTN]} ou
+{l[f][OFF]}), la variable {iattn} contient 0. La
+variable destination n'est pas chang≈e.\
+.references
+{iJPC 43} (page 16) {cFINPUT} par Pierre David et Janick
+Taillandier.
+.related
+INPUT
+LINPUT
+DISP
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+FKEY
+
+.purpose
+{cFKEY} (First KEY) pousse une touche en premier dans la m≈moire
+tampon de touches.
+
+.options
+SKID
+
+.syntaxe
+{cFKEY {itouche
+
+.examples
+.ex
+10 DISP "R≈sultat =";R
+20 K$=KEYWAIT$
+30 FKEY K$
+40 INPUT X$
+.co
+Affiche le r≈sultat contenu dans la variable R, puis attend une
+pression de touche pour continuer l'ex≈cution. La touche n'est
+pas perdue, et sera le premier caract…re de l'introduction de
+donn≈es suivante.
+
+.input
+.it
+touche
+.de
+Expression alphanum≈rique.
+.re
+Moins de cinq caract…res.
+
+.operation
+\{cFKEY} ajoute la touche sp≈cifi≈e en t¡te de la m≈moire tampon
+(qui contient 15 pressions de touches) » la diff≈rence de {cPUT}
+qui l'ajoute en queue.\
+
+\Si la m≈moire tampon est pleine, la touche la plus ancienne (c'est
+» dire celle qui a ≈t≈ frapp≈e en premier) est perdue.\
+
+\{cFKEY} permet d'≈tablir un syst…me de priorit≈s, dans
+lequel certaines instructions (touches assign≈es) seront
+trait≈es avant d'autres entr≈es au clavier.\
+.references
+{iJPC 24} (page 35) premi…re version par Jean-Pierre Bondu.
+.related
+KEY$
+KEYWAIT$
+PUT
+.author
+Jean-Pierre Bondu
+.end keyword
+
+.keyword
+FORMAT$
+
+.purpose
+{cFORMAT$} ins…re des espaces suppl≈mentaires dans la cha—ne de
+faµon » ce qu'elle fasse exactement le nombre de caract…res
+sp≈cifi≈.
+
+.options
+FKID
+
+.syntaxe
+{cFORMAT$ ( {icha—ne{c , {ilargeur{c )
+
+.examples
+.ex
+A$=FORMAT$("P P C",9)
+.co
+R≈partit quatre espaces dans la cha—ne sp≈cifi≈e.
+
+.input
+.it
+cha—ne
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.it
+largeur
+.de
+Expression num≈rique arrondie » un entier.
+.re
+1 » 1048575.
+
+.operation
+\{cFORMAT$} r≈duit d'abord la cha—ne (voir {cREDUCE$}). Des
+espaces sont ensuite ajout≈s de faµon » ce que la cha—ne finale
+fasse exactement la largeur sp≈cifi≈e.\
+
+\Les espaces sont ajout≈s entre les mots.\
+
+\Ceci facilite grandement la r≈alisation d'une
+justification des textes » gauche et » droite.\
+.references
+{iJPC 21} (page 34) premi…re version du programme de formattage
+en Basic par Pierre David.
+
+{iJPC 26} (page 50) deuxi…me version du programme en Basic avec
+les fonctions en assembleur par Pierre David et Michel Martinet.
+.related
+CESURE
+REDUCE$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+FPRIM
+
+.purpose
+{cFPRIM} (First PRIMe number) renvoie le premier nombre premier
+» partir d'un nombre donn≈.
+
+.options
+FCKID
+
+.syntaxe
+{cFPRIM ( {iargument{c )
+{cFPRIM ( {iargument{c , {idirection{c )
+
+.examples
+.ex
+A=FPRIM(300)
+.co
+Place le nombre 307, premier nombre premier » partir de 300, dans
+la variable A.
+.ex
+A=FPRIM(300,350)
+.co
+Place le nombre 307, premier nombre premier entre 300 et
+350, dans la variable A.
+.ex
+DISP FPRIM(300,250)
+.co
+Affiche le nombre 293, plus grand nombre premier inf≈rieur » 300
+et sup≈rieur » 250.
+
+.input
+.it
+argument
+.de
+Expression num≈rique.
+.re
+Doit ¡tre un nombre entier non nul compris entre
+-10{^12{-+1 et 10{^12{--1.
+.it
+direction
+.de
+Expression num≈rique.
+.re
+Doit ¡tre un nombre entier compris entre
+-10{^12{-+1 et 10{^12{--1.
+.df
+10{^12{- * SGN(argument).
+
+.operation
+\{cFPRIM} cherche le premier nombre premier » partir de
+l'argument sp≈cifi≈, ou renvoie l'argument si il est lui-m¡me
+premier.\
+
+\Le deuxi…me param…tre, {idirection}, indique si la recherche
+doit ¡tre faite vers les nombres sup≈rieurs ({idirection} >
+{iargument}) ou vers les nombres inf≈rieurs ({idirection} <
+{iargument}).\
+
+\{iDirection} est ≈galement utilis≈e comme limite sup≈rieure
+ou inf≈rieure de la recherche. {cFPRIM} renvoie 0 si il n'y
+a pas de nombre premier compris entre {iargument} et
+{idirection}.\
+
+
+{gInterruption par [ATTN] :}
+
+\Cette fonction est interruptible par deux appuis successifs sur
+la touche {l[ATTN]}. Le HP-71 affiche alors le message d'erreur
+{cJPC ERR:Function Interrupted}.\
+.references
+{iJPC 35} (page 21) premi…re version de DIVILEX par Guy Toublanc.
+
+{iJPC 38} (page 18) deuxi…me version par Guy Toublanc.
+
+{iJPC 48} (page 23) troisi…me version par Guy Toublanc.
+
+L'ancienne appellation de {cFPRIM} ≈tait {cFPRM}.
+.related
+PRIM
+NPRIM
+DIV
+.author
+Guy Toublanc
+.end keyword
+
+.keyword
+FRAC$
+
+.purpose
+{cFRAC$} (FRACtion) approxime un nombre r≈el par une fraction.
+
+.options
+FKID
+
+.syntaxe
+{cFRAC$ ( {inombre r≈el{c )
+{cFRAC$ ( {inombre r≈el{c , {ipr≈cision{c )
+
+.examples
+.ex
+A$=FRAC$(1.25)
+.co
+Renvoie la cha—ne "5/4" dans la variable A$.
+.ex
+DISP FRAC$(PI,2)
+.co
+Affiche la cha—ne "22/7", approximation de PI » 10{^-2{- pr…s.
+
+.input
+.it
+nombre r≈el
+.de
+Expression num≈rique.
+.re
+Aucune.
+.it
+precision
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-99 » 99
+.df
+si |n|>=1, 10, sinon 10-exposant de n.
+
+.operation
+\{cFRAC$} approxime le nombre r≈el {ix} pass≈ en param…tre en une
+faction rationnelle exprim≈e sous forme d'une cha—ne
+alphanum≈rique.\
+
+\La pr≈cision est optionnelle. Si elle est omise, ou si elle vaut
+0, elle est prise par d≈faut » 10{p{^-10} si |{ix}|>=1, ou
+10{p{^-10+exposant de x} sinon.\
+
+\Si le param…tre {ipr≈cision} est positif, la pr≈cision vaut
+10{i{^-pr≈cision}.\
+
+\Si le param…tre {ipr≈cision} est n≈gatif, il s'agit du nombre
+d'it≈rations de l'algorithme des r≈duites successives.\
+.references
+{iJPC 20} (page 55) premi…re version du programme en Basic par
+Pierre David.
+
+{iJPC 42} (page 21) {cFRAC$} premi…re version par Guy Toublanc.
+.related
+EXPONENT
+.author
+Guy Toublanc
+.end keyword
+
+.keyword
+FRAME
+
+.purpose
+{cFRAME} trace un cadre autour de la zone de traµage courante.
+
+.options
+SKID
+
+.syntaxe
+FRAME
+
+.examples
+.ex
+100 IF F THEN FRAME
+.co
+Trace un cadre autour de la zone de traµage si le contenu de la
+variable F est non nul.
+
+.operation
+\Apr…s le traµage, la plume est positionn≈e dans le coin
+inf≈rieur gauche, et elle est lev≈e.\
+
+\Le cadre est trac≈ suivant le dernier ordre {cLINETYPE}
+ex≈cut≈.\
+
+.related
+LINETYPE
+BOX
+
+.author
+Pierre David
+.end keyword
+
+.end

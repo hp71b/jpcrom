@@ -1,0 +1,613 @@
+.language
+A
+
+.keyword
+The VER$ function
+
+.purpose
+{cVER$} returns a string indicating the version of JPC Rom present
+in the HP-71 memory or in a plug-in Rom.
+
+.operation
+\{cVER$} returns a string containing JPC Rom version.\
+
+\The version of JPC Rom that corresponds with this manual is : {cJPC:D}.\
+
+.references
+{iHP-71 Reference Manual}
+
+{iJPC 23} (page 33) poll introduction by Laurent Istria.
+
+{iInternal Design Specification} Volume I, chapter 8.4 and page
+17.14.
+.related
+VER$
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+Assembler tabs
+
+.purpose
+Assembler source files are much more readable when various fields
+are aligned.
+
+.operation
+{gAbout tabs :}
+
+\Although the assembler processes files in {ifree format}, they are
+much more readable when aligned.\
+
+\Tabs are available by pressing the {l[SPC]} key in text editing
+mode. Each time you press the {l[SPC]} key, the cursor skips to
+the next tab until the last tab at column 25.\
+
+\Tabs are set to columns 9, 16 and 25. A û{c*}ý in the line, specifying 
+a comment, disables all tabs.\
+
+
+{gUsing tabs :}
+
+\The key {l[SPC]} moves the cursor to the next tab when :\
+
+\- tab mode is enabled,\
+\- the HP-71 is in Text Editor mode,\
+\- when there is no star character ({c*}) in the line.\
+
+\The tab mode is enabled or disabled by keying
+{l[CALC]} in Text Editor mode.\
+.references
+{iJPC 30} (page 42) third version by par StÅphane
+Barizien, Pierre David and Michel Martinet.
+
+{iForth / Assembler ROM Owner's manual}, page 46.
+.related
+EDTEXT
+.author
+StÅphane Barizien
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+Editing in CALC mode
+
+.purpose
+In CALC mode, access to backspace key is inconvenient. JPC Rom
+enables the {l[<]} key to correct inputs.
+
+.operation
+{gCALC mode :}
+
+\CALC mode is very convenient for calculations. However, editing
+inputs is not very easy because you have to press two keys
+({l[g]} and {l[<-]}) to correct the last input character.\
+
+\With JPC Rom in your HP-71, you have only to press
+{l[<-]} to correct mistakes.\
+.references
+{iJPC 27} (page 26) first version by Pierre David.
+.related
+}CALC mode 
+.author
+Pierre David
+.end keyword
+
+.keyword
+Cursor position
+
+.purpose
+Without a video interface for a display device, it is sometimes
+difficult to know the current cursor position in the line.
+
+.operation
+\In USER mode, press {l[f][VIEW]} to display the current cursor
+position. This display is maintained while key is held down.\
+
+\The cursor position will be a number between 1 and 96.\
+
+\This is available only in USER mode to allow using {l[VIEW]} to
+display key assignments.\
+
+\This feature is available in most operating modes, to include
+text editing modes, in Forth and even during {cINPUT}, {cLINPUT},
+{cFINPUT} or {cKA} execution.\
+.references
+{iJPC 24} (page 33) first version by Pierre David.
+.related
+DEF KEY
+EDTEXT
+FORTH
+FINPUT
+INPUT
+KA
+LINPUT
+.author
+Pierre David
+.end keyword
+
+.keyword
+Auto-repeat speed up
+
+.purpose
+JPC Rom in your HP-71 speeds-up the keyboard auto-repeat feature.
+
+.operation
+\As soon as JPC Rom is in your machine you will notice that the
+keyboard auto-repeat response is significantly faster.\
+
+\This is a permanent feature. It is available in Text Editor
+mode, in Forth and even while executing {cINPUT}, {cLINPUT},
+{cFINPUT} or {cKA}. The auto-repeat is not speeded-up during catalog
+operations.\
+.references
+{iJPC 26} (page 29) first version by Jean-Jacques Moreau.
+
+{iTo be published} : second version by Pierre David and Janick
+Taillandier.
+.related
+EDTEXT
+FORTH
+FINPUT
+INPUT
+LINPUT
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+Initialization after a Memory Lost.
+
+.purpose
+After a memory reset, the HP-71 will try to execute a subprogram
+called {cML}.
+
+.operation
+\This is very useful to reset all sorts of parameters
+after a Memory Lost. For example, date and time, delay, contrast,
+etc. Here is a sample subprogram :{c\
+
+100 SUB ML
+110   DIM D$
+120   FINPUT D$,"Time : Hr:Mn:Sc","7P2UP2UP2UP",A
+130   SETTIME D$[1,2]&":"&D$[3,4]&":"&D$[5]
+120   FINPUT D$,"Date : Dy/Mo/Yr","7P2UP2UP2UP",A
+130   SETDATE D$[5]&"/"&D$[3,4]&"/"&D$[1,2]
+140   DELAY 0,0
+150   USER ON
+160   STACK 15
+170   LC ON
+180   WIDTH 80
+190   PWIDTH INF
+200   DEF KEY "#46","RUN ";
+210 END SUB
+
+\}Of course, this program must be in independent Ram, Rom or
+Eprom module, otherwise it would be cleared during the memory
+reset.\
+
+\Warning :  this subprogram must not contain configuration
+statements such as :  {cLEX ON/OFF}, {cCOPY} of Lex
+files into Ram , etc.\
+.references
+{iJPC 31} (page 24) first version by Jean-Jacques Moreau.
+.related
+CALL
+SUB
+.author
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+Filetype translation
+
+.purpose
+JPC Rom recognizes new file types and displays their name during a
+{cCAT} or {cDDIR}.
+
+.operation
+\When JPC Rom is plugged in your HP-71 it decodes the file type
+of non standard files during a {cCAT}, {cCAT$}, {cDDIR} or
+{cPDIR}.\
+
+\This allows you to easily recognize or locate files from other
+computers (HP-41 or HP-75, for example) when they are stored on a
+mass storage device.\
+
+\The following filetypes are recognized :\
+
+HP-71 files
+
+{cGRAPH      }GRAPHIC modules pictures
+{cFORTH      }Forth or Translator Forthram files
+{cROM        }Image of Independent Ram (ROMCOPY LEX)
+{cOBJ        }Object files (Development Module, not yet available)
+{cSYM        }Symbol tables (Development Module, not yet available)
+{cADRS       }Address files ({cKA} and {cADCREATE} functions)
+
+HP-41 files
+
+{c41:WA      }HP-41 Ram backup (WRTA)
+{c41:KE      }Key assignments backup (function WRTK)
+{c41:ST      }Status backup (function WRTS)
+{c41:PR      }HP-41 Program
+{c41:ML      }Microcode programs for MLDL (Eramco)
+{c41:XM      }Extended memory backup (function WRTXM in EXT IL Rom)
+{c41:CA      }Calculator (function WRTCAL in EXt IL Rom)
+
+HP-75 files
+
+{c75:T       }Text files
+{c75:A       }Alarm files (APPT)
+{c75:B       }Basic programs
+{c75:L       }Lex files
+{c75:W       }Visicalc spreadsheet
+{c75:G       }General purpose file (I/O Rom)
+{c75:R       }PMS Rom 
+.references
+{iTo be published} : first version by Jan Buitenhuis and
+Janick Taillandier.
+.related
+CAT
+CAT$
+DDIR
+PDIR
+.author
+Jan Buitenhuis
+Janick Taillandier
+.end keyword
+
+.keyword
+HP-IL messages
+
+.purpose
+The error messages of the HP-IL module are not always very clear.
+JPC Rom redefines them to get more precise diagnostics.
+
+.operation
+\As the HP-IL module size is exactly 16384 bytes, there is not
+even a free nibble in the ROM. It is easy to understand why
+messages are often identical. Hewlett-Packard was obliged to
+ignore some messages to fit the HP-IL Lex into a 16 Kbytes
+module.\
+
+\JPC Rom redefines these messages to clarify their meaning.\
+
+\Here is the message list, giving the HP-IL module message first
+and the corresponding JPC Rom message seconds :\
+
+
+0 : {inon existent}
+0 : {cHPIL}
+
+\Message  0, used by the system to display errors, for example
+:\
+{cHPIL ERR:Blank Medium}
+
+
+1 : {cASSIGN IO Needed}
+1 : {cASSIGN IO Needed}
+
+\Attempted to execute a {cLIST IO} without having executed {cASSIGN IO}.
+Execute {cASSIGN IO}.\
+
+
+3 : {cExcess Chars}
+3 : {cExcess Chars}
+
+\The HP-71 found more characters in the command than expected.
+Check syntax.\
+
+
+4 : {cMissing Parm}
+4 : {cMissing Parm}
+
+\A parameter required by the statement is missing. Check
+syntax.\
+
+
+5 : {cInvalid Parm}
+5 : {cInvalid Parm}
+
+\A parameter used in the statement is not legal. Check
+parameters.\
+
+
+6 : {cInvalid Expr}
+6 : {cInvalid Expr}
+
+\The expression cannot be evaluated due to invalid data type
+(such as a string variable instead of a numeric one). Check the
+expression.\
+
+
+7 : {cSyntax}
+7 : {cSyntax}
+
+\The HP-71 does not recognize the statement. Check keyword
+spelling and required parameters.\
+
+
+16 : {cFile Protect}
+16 : {cFile Protect}
+
+\The file is secure or private, you cannot execute this
+operation. If the file is secured, execute {cUNSECURE}.\
+
+
+17 : {cEnd Of Medium}
+17 : {cEnd of Medium}
+
+\The file is too big for available space on the medium ; medium is
+full ; drive error condition. Check medium ; recreate file ; pack
+medium ; use another medium.\
+
+\Warning : whenever you have a disk drive error, there is a
+strong possibility that you have a low battery condition. Make
+sure that the battery is adequately charged before taking other
+corrective action ! Be sure to back-up important files before
+attempting a {cPACK} operation. {cPACK} is the most common cause
+for crashed mass storage media.\
+
+
+18 : {cInvalid Medium}
+18 : {cDisk Drive Error}
+
+\Mass storage drive motor is stalled. Check for jammed medium.\
+
+
+19 : {cInvalid Medium}
+19 : {cNot LIF Format}
+
+\The medium is not initialized to proper format. Execute
+{cINITIALIZE} statement.\
+
+
+20 : {cNo Medium}
+20 : {cNo Medium}
+
+\No medium detected in the mass storage device. Check that drive
+door is closed ; insert medium.\
+
+
+21 : {inon existent}
+21 : {cLow Battery}
+
+\The mass storage has not enough power. Check or change
+batteries. This will not work properly with HP9114A disk drive,
+due to a system bug in the drive.\
+
+
+22 : {cFile Not Found}
+22 : {cFile Not Found}
+
+\The specified file was not found ; the specified file name
+differs from directory entry. Check directory and file name.\
+
+
+23 : {cInvalid Medium}
+23 : {cNew Medium}
+
+\Opened and closed door of mass storage device during file
+operation or medium access. Restart the operation.\
+
+
+24 : {cInvalid Medium}
+24 : {cBlank Medium}
+
+\Medium not initialized. Execute the {cINITIALIZE} statement.\
+
+
+25 : {cInvalid Medium}
+25 : {cWrong dir # records}
+
+\Record number in directory does not match record number on
+medium. Retry. If it fails again, initialize medium, using
+{cINITIALIZE} statement and recreate file system.\
+
+\Caution : this message may indicate a low battery condition.\
+
+
+26 : {cInvalid Medium}
+26 : {cChecksum}
+
+\Data checksum error detected. Initialize medium ; recreate
+file.\
+
+
+28 : {cSize of File}
+28 : {cSize of File}
+
+\File too big to copy to or from the mass storage device. Add a
+memory module to the HP-71 or use another medium.\
+
+
+29 : {inon existent}
+29 : {cWrite Protected}
+
+\Disk drive error. The medium in specified drive is write protected.\
+
+30 : {cFile Exists}
+30 : {cFile Exists}
+
+\The file name specified in a {cCREATE} or as the destination of
+a {cCOPY} statement already exists. Purge old file or use another
+name.\
+
+
+31 : {cDirectory Full}
+31 : {cDirectory Full}
+
+\The directory on a medium is full. Purge unwanted files ;
+pack directory or medium.\
+
+
+32 : {cDevice Not Found}
+32 : {cDevice Not Found}
+
+\Requested device was not found in loop. Check device
+specifier ; check system setup ; execute {cRESTORE IO}.\
+
+
+34 : {cDevice Not Ready}
+34 : {cDevice Not Ready}
+
+\A device did not respond when expected (such as not sending
+data or not accepting control). Check device specifier ;
+check device ; execute {cRESTORE IO}.\
+
+
+35 : {cLoop Broken}
+35 : {cLoop Broken}
+
+\Loop is not complete. Check HP-IL connections ; check that
+devices are turned on.\
+
+
+36 : {cMessage Error}
+36 : {cToo Many Frames}
+
+\Too many messages received by HP-71. Restart operation.\
+
+
+37 : {cMessage Error}
+37 : {cFrames Lost}
+
+\Message lost due to slow retransmission. Restart
+operation.\
+
+
+38 : {cMessage Error}
+38 : {cFrames Altered}
+
+\Message altered during transmission. Restart
+operation.\
+
+
+39 : {cUnexpected Message}
+39 : {cUnexpected Message}
+
+\HP-IL protocol violation occurred (more than one talker was
+active in loop at same time) ; talker indicated transmission
+error. Restart operation.\
+
+
+40 : {cMessage Error}
+40 : {cToo Many Frames}
+
+\Too many messages received by HP-71. Restart operation.\
+
+
+41 : {cInvalid Mode}
+41 : {cInvalid Mode}
+
+\Attempted to execute a controller statement while the HP-71
+was acting as a device. Check the mode (controller or
+device) required by the statement.\
+
+
+42 : {cLoop Broken}
+42 : {cMessage Altered}
+
+\A partial message was received due to retransmission error.
+Restart operation.\
+
+
+43 : {cLoop Broken}
+43 : {cLoop Timeout}
+
+\A message took longer than the {cSTANDBY} timeout period to
+go around loop. Clear listeners ; restart operation.\
+
+
+44 : {cSystem Error}
+44 : {cBad addresses}
+
+\Device addresses probably invalid (if flag -24 set). Clear
+flag -24 or assign new addresses (execute {cRESTORE IO}).\
+
+\Internal error related to I/O channels. Execute {cRUN} and
+restart operation ; perform {cINIT:2} ; perform {cINIT:3}.
+If error persists, the HP-71 requires repair service.\
+
+
+45 : {cSelf-test failed}
+45 : {cSelf Test failed}
+
+\Interface failed internal self-test. Repeat self-test by
+executing {cRESET HPIL}. If the error persists,
+the HP-IL interface is defective and requires repair service.\
+
+
+47 : {cDevice Type}
+47 : {cDevice Type}
+
+\The specified device is not of a legal type for the
+statement. Check device type requirements.\
+
+
+52 : {cAborted}
+52 : {cAborted}
+
+\Pressed {l[ATTN][ATTN]} to interrupt operation. Execute
+{cRESTORE IO} ; if necessary, execute {cRESET HPIL}, then
+{cRESTORE IO}. Check HP-IL connections ; check that devices
+are turned on.\
+
+
+53 : {cInvalid Device Spec}
+53 : {cInvalid Device Spec}
+
+\The device specifier is not valid for the statement. Check
+device specifier.\
+
+
+54 : {cData Type}
+54 : {cData Type}
+
+\Specified the wrong type of a variable (numeric or
+string). Change argument to proper variable type.\
+
+
+56 : {cInvalid Arg}
+56 : {cInvalid Arg}
+
+\An argument is out of the allowable range. Check argument
+value.\
+
+\Directory entry (start record or length) received during
+mass storage operation is improper. Re-store file.\
+
+
+57 : {cNo Loop}
+57 : {cNo Loop}
+
+\Interface is not installed. Check system setup.\
+
+
+59 : {cInsufficient Memory}
+59 : {cInsufficient Memory}
+
+\Not enough main Ram to perform required operation. Add
+memory ; delete files or key assignments ; reallocate
+internal Ram.\
+
+60 : {cRESTORE IO Needed}
+60 : {cRESTORE IO Needed}
+
+\Attempted an I/O operation after executing {cOFF IO}.
+Execute {cRESTORE IO}.\
+.references
+{iJPC 37} (page 27) first version by Michel Martinet.
+
+HP-IL Owner's Manual.
+.related
+MSG$
+}All HP-IL module keywords
+.author
+Michel Martinet
+.end keyword
+
+.end

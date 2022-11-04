@@ -1,0 +1,115 @@
+.language
+A
+
+.keyword
+OPCODE$
+
+.purpose
+{cOPCODE$} returns the mnemonic of the machine language
+instruction pointed to by the specified address.
+
+.options
+FKID
+
+.syntaxe
+{cOPCODE$ ( {ihexadecimal address{c )
+
+.examples
+.ex
+A$=OPCODE$("0BD38")
+.co
+Stores the string {lA=DAT1 7{p in variable A$ : this is the
+mnemonic of the first instructiono of the POP1S routine.
+.ex
+DISP OPCODE$(ENTRY$("LOG"))
+.co
+Displays {lGOSUB {l #0BD8D{p, the first instruction of the {lLOG{p
+routine.
+
+.input
+.it
+hexadecimal address
+.de
+String expression containing hexadecimal digits.
+.re
+Up to 5 uppercase or lowercase digits.
+
+.operation
+{gThe OPCODE$ function :}
+
+\{cOPCODE$} returns the mnemonic of the assembler instruction at
+the the specified address.\
+
+\It makes the development of a disassembler much easier. For
+example, the following routine is a very fast, powerful
+disassembler. It replaces a 4+ Kbyte Basic program.{c\
+
+100 DIM I$[8],A$[5]            ! strings definitions
+110 FINPUT I$,"Keyword : ",A   ! keyword input
+120 IF NOT A THEN END
+130 A$=ENTRY$(I$)              ! entry-point address
+140 ATTN OFF
+150 WHILE KEY$#"#43"           ! while [ATTN] is not pressed
+160   DISP OPCODE$(A$)         !   display the instruction
+170   A$=NEXTOP$(A$)           !   next address
+180 END WHILE                  ! end while
+190 ATTN ON
+200 BEEP
+
+{gThe mnemonics :}
+
+\Mnemonics returned by {cOPCODE$} conform to the syntax of the
+HP-71 assembler. The only exception are the conditional
+instructions which are decoded on a single line and separated by a slash
+({c/}).\
+
+\The following program allows you to reformat the disassembler
+output to conform with the HP-71 assembler :{c\
+
+160 O$=OPCODE$(A$)             ! the instruction
+161 P=POS(O$,"/")
+162 IF P THEN                  ! any slash
+163   DISP O$[1,P-1]           ! yes : display the test
+164   DISP O$[P+1]             !       then RTNYES or GOYES
+165 ELSE                       ! no : display an unmodified
+166   DISP O$                  !       mnemonic
+167 END IF
+
+\}Mnemonics cannot be more than 23 characters long. A {cDIM
+O$[23]} on line 100 is a useful complement to other
+definitions.\
+
+\Instructions such as {cP= {in}, {cA=DAT1 {in}, {cST=1 {in} are
+disassembled using {idecimal} values. This is consistent with the
+Forth Rom assembler.\
+
+\Instructions using absolute addresses (branch instructions,
+{cD0=({in{c)}, etc.) are displayed using hexadecimal constants,
+with a {c#} before the constant.\
+
+\The instruction {cLCHEX} is a special case. As the name
+indicates that a hexadecimal value is expected, there is no
+need to emphasize the fact. So there is no {c#} to clarify the
+data.\
+
+.references
+{iForth / Assembler Owner's Manual} : page 55.
+Good introduction to HP-71 microprocessor instructions.
+
+{iInternal Design Specification} Volume I (Chapter 16).
+Complete and detailed description of the instruction set.
+
+{iInternal Design Specification} Volume III. The way the HP-71
+uses its instructions...
+.related
+NEXTOP$
+PEEK$
+SYSEDIT
+
+.author
+Pierre David
+Jean-Jacques Dh≈nin
+Janick Taillandier
+.end keyword
+
+.end

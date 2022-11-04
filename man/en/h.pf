@@ -1,0 +1,303 @@
+.language
+A
+
+.keyword
+HMS
+
+.purpose
+{cHMS} (Hour Minute Second) converts decimal hour or degree data
+into an equivalent value in HMS format.
+
+.options
+FCKID
+
+.syntaxe
+{cHMS ( {iargument{c )
+
+.examples
+.ex
+A=HMS(121.5)
+.co
+An angle of 121.5 decimal degrees is equivalent to an angle of 121 degrees 30'.
+
+.input
+.it
+argument
+.de
+Numeric expression.
+.re
+None.
+
+.operation
+{gThe HMS format :}
+
+\The functions {cHMS}, {cHR}, {cHMSADD} and {cHMSSUB} manipulate
+time or angle data in the HMS format. The arguments must be real
+numbers.\
+
+\The HMS format is {ih.mmssd}, where :\
+
+\- {ih} = 0 or more digits representing the integer part of the
+number,\
+\- {imm} = 2 digits representing the number of minutes,\
+\- {iss} = 2 digits representing the number of seconds, and\
+\- {id} = 0 or more digits representing the fractional decimal
+part of seconds.\
+
+\These numbers are not related to the current angle mode setting
+(see {cOPTION ANGLE}).\
+
+
+{gThe HMS function :}
+
+\{cHMS} converts decimal hour or degree data into an equivalent
+value in HMS format.\
+.references
+{iJPC 25} (page 52) first version by Michel Martinet.
+
+{iJPC 50} (page 29) second version by Guy Toublanc.
+
+{iHP-41 Owner's Manual.}
+
+{iHP-28C Reference Manual.}
+.related
+HMSADD
+HMSSUB
+HR
+}trigonometric functions
+.author
+Michel Martinet
+Guy Toublanc
+.end keyword
+
+.keyword
+HMSADD
+
+.purpose
+{cHMSADD} (Hour Minute Second ADD) returns the sum of two
+arguments interpreted using the HMS format.
+
+.options
+FKIDC
+
+.syntaxe
+{cHMSADD ( {iarg1{c , {iarg2{c )
+
+.examples
+.ex
+A=HMSADD(12.3456,-20.1721)
+.co
+Store in A the sum of 12 hours 34'56" and -20 hours 17'21". The
+sum is -7 hours 42'25".
+
+.input
+.it
+arg1, arg2
+.de
+Numeric expressions interpreted according to the HMS format.
+.re
+None.
+
+.operation
+\{cHMSADD} adds two arguments interpreted as sexagesimal numbers
+in HMS format. The value returned is also in the HMS format.\
+
+\See the {cHMS} function for more informations about the HMS format.\
+.references
+{iJPC 25} (page 52) first version by Michel Martinet.
+
+{iJPC 50} (page 29) second version by Guy Toublanc.
+
+{iHP-41 Owner's Manual.}
+
+{iHP-28C Reference Manual.}
+
+{cHMSADD} was called {cHMS+}.
+.related
+HMS
+HMSSUB
+HR
+}trigonometric functions
+.author
+Michel Martinet
+Guy Toublanc
+.end keyword
+
+.keyword
+HMSSUB
+
+.purpose
+{cHMSSUB} (Hour Minute Second SUBtract) returns the difference
+of two arguments interpreted using the HMS format.
+
+.options
+FKIDC
+
+.syntaxe
+{cHMSSUB ( {iarg1{c , {iarg2{c )
+
+.examples
+.ex
+A=HMSSUB(12.3456,20.1721)
+.co
+Stores into variable A the difference between 12 hours 34'56" and 20
+hours 17'21".
+
+.input
+.it
+arg1, arg2
+.de
+Numeric expressions interpreted using the HMS format.
+.re
+None.
+
+.operation
+\{cHMSSUB} subtracts two arguments interpreted as sexagesimal
+numbers in HMS format. The value returned is also in the HMS
+format.\
+
+\The result is positive if {iarg{p{v1} is greater
+than {iarg{p{v2}.\
+
+\See function {cHMS} for more information about HMS format.\
+.references
+{iJPC 25} (page 52) first version by Michel Martinet.
+
+{iJPC 50} (page 29) second version by Guy Toublanc.
+
+{iHP-41 Owner's Manual.}
+
+{iHP-28C Reference Manual.}
+
+{cHMSSUB} was called {cHMS-}.
+.related
+HMS
+HMSADD
+HR
+}trigonometric functions
+.author
+Michel Martinet
+Guy Toublanc
+.end keyword
+
+.keyword
+HR
+
+.purpose
+{cHR} (HouR) converts a number from HMS format to its decimal
+equivalent.
+
+.options
+FCKID
+
+.syntaxe
+{cHR ( {iargument{c )
+
+.examples
+.ex
+A=HR(121.3)
+.co
+121 degrees 30' correspond to 121.5 decimal degrees.
+
+.input
+.it
+argument
+.de
+Numeric expressions interpreted using the HMS format.
+.re
+None.
+
+.operation
+\{cHR} converts real numbers in the HMS format to real numbers in
+the decimal format which can be used directly by trigonometric
+functions. {cHR} is the inverse of {cHMS}.\
+
+\See the {cHMS} function for more information about the HMS format.\
+.references
+{iJPC 25} (page 52) first version by Michel Martinet.
+
+{iJPC 50} (page 29) second version by Guy Toublanc.
+
+{iHP-41 Owner's Manual.}
+
+{iHP-28C Reference Manual.}
+.related
+HMS
+DEGREES
+HMSADD
+HMSSUB
+}trigonometric functions
+.author
+Michel Martinet
+Guy Toublanc
+.end keyword
+
+.keyword
+HTA$
+
+.purpose
+{cHTA$} (Hexadecimal To Ascii) converts a string of hexadecimal
+digits into an Ascii character string.
+
+.options
+FKID
+
+.syntaxe
+{cHTA$ ( {ihexadecimal string{c )
+{cHTA$ ( {ihexadecimal string{c , {imode{c )
+
+.examples
+.ex
+A$=HTA$("0516279637")
+.co
+Stores the string "Paris" into variable A$.
+.ex
+A$=HTA$("5061726973",1)
+.co
+Stores the string "Paris" into variable A$.
+
+.input
+.it
+hexadecimal string
+.de
+String expression.
+.re
+Even number of hexadecimal digits either uppercase or lowercase.
+.it
+mode
+.de
+Numeric expression.
+.re
+None.
+.df
+0
+
+.operation
+\{cHTA$} is the inverse function of {cATH$}.\
+
+\As for {cATH$}, interpretation of hexadecimal digits depends on
+the {imode} parameter :\
+
+\If {imode} = 0, logical value {ifalse} (default), the
+hexadecimal string is built by reversing the order of digits in a
+character. For example, the string "14" represents character
+"A". This representation is similar to the internal data format
+in the HP-71.\
+
+\If {imode} is not 0, logical value {itrue}, a standard
+representation is used : the string "41" represents character
+"A".\
+.references 
+{iJPC 22} (page 31) first version by Michel Martinet.
+
+{iJPC 27} (page 34) second version by Michel Martinet.
+
+{iTo be published} : third version by Pierre David.
+.related
+ATH$
+ASC$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+.end

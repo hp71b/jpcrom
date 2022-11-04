@@ -1,0 +1,118 @@
+.language
+F
+
+.keyword
+OPCODE$
+
+.purpose
+{cOPCODE$} renvoie en clair la mn≈monique de l'instruction
+assembleur situ≈e » l'adresse sp≈cifi≈e.
+
+.options
+FKID
+
+.syntaxe
+{cOPCODE$ ( {iadresse hexad≈cimale{c )
+
+.examples
+.ex
+A$=OPCODE$("0BD38")
+.co
+Place la cha—ne {lA=DAT1 7{p dans la variable A$, soit la
+mn≈monique de la premi…re instruction de la routine POP1S.
+.ex
+DISP OPCODE$(ENTRY$("LOG"))
+.co
+Affiche {lGOSUB {l #0BD8D{p, soit la premi…re instruction
+ex≈cut≈e par le fonction {lLOG{p.
+
+.input
+.it
+adresse hexad≈cimale
+.de
+Expression alphanum≈rique contenant des chiffres hexad≈cimaux.
+.re
+Jusqu'» 5 chiffres en majuscules ou en minuscules.
+
+.operation
+{gLa fonction OPCODE$ :}
+
+\{cOPCODE$} renvoie la mn≈monique de l'instruction assembleur
+point≈e par l'adresse sp≈cifi≈e.\
+
+\Elle fournit un moyen simple de constituer un d≈sassembleur
+automatique. Par exemple, le petit programme Basic suivant
+est un d≈sassembleur tr…s rapide, puissant et compact. A
+titre indicatif, il remplace un programme Basic d'environ 4
+Ko.{c\
+
+100 DIM I$[8],A$[5]            ! dimensionne les cha—nes
+110 FINPUT I$,"Keyword : ",A   ! introduction du mot-clef
+120 IF NOT A THEN END
+130 A$=ENTRY$(I$)              ! adresse du point d'entr≈e
+140 ATTN OFF
+150 WHILE KEY$#"#43"           ! tant que pas [ATTN]
+160   DISP OPCODE$(A$)         !   afficher l'instruction
+170   A$=NEXTOP$(A$)           !   adresse suivante
+180 END WHILE                  ! fin tant que
+190 ATTN ON
+200 BEEP
+
+{gLes mn≈moniques :}
+
+\Les mn≈moniques renvoy≈es par {cOPCODE$} sont conformes » la
+syntaxe de l'assembleur du HP-71, » la seule exception pr…s que
+les instructions conditionnelles sont regroup≈es sur une seule
+ligne, et s≈par≈es par une barre oblique ({c/}).\
+
+\Il est alors possible de les s≈parer. Par exemple, si l'on
+voulait en tenir compte dans le programme ci-dessus, on
+remplacerait la ligne 160 par :{c\
+
+160 O$=OPCODE$(A$)             ! l'instruction
+161 P=POS(O$,"/")
+162 IF P THEN                  ! Y-a-t'il une barre oblique ?
+163   DISP O$[1,P-1]           ! oui : affichage du test
+164   DISP O$[P+1]             !       puis du RTNYES ou GOYES
+165 ELSE                       ! non : affichage de la mn≈monique
+166   DISP O$                  !       non modifi≈e
+167 END IF
+
+\}Les mn≈moniques ne peuvent exc≈der 23 caract…res. Un {cDIM
+O$[23]} est donc recommand≈ en ligne 100 pour compl≈ter les
+d≈clarations.\
+
+\Les instructions mettant en oeuvre des constantes inf≈rieures »
+16, telles que {cP= {in}, {cA=DAT1 {in}, {cST=1 {in} sont
+renvoy≈es avec les constantes en {id≈cimal}.\
+
+\Les instructions mettant en oeuvre des adresses absolues (instructions
+de branchement, {cD0=({in{c)} etc.) sont affich≈es avec des
+constantes en {ihexad≈cimal}, avec un symbole {c#} devant la
+constante. Ceci est compatible avec les assembleurs du
+module Forth ou {iAREUH} pour les machines MS/DOS ou HP-UX.\
+
+\L'instruction {cLCHEX} est un cas » part. Le libell≈ m¡me de
+l'instruction indique une adresse en {ihexad≈cimal}. Il n'y a
+donc pas de symbole {c#} pour lever une ≈ventuelle ambigu›t≈.\
+.references
+{iManuel du module Forth / Assembler} : pages 55 et suivantes.
+Bonne introduction aux instructions du microprocesseur du HP-71.
+
+{iInternal Design Specification} Volume I (Chapitre 16).
+Description d≈taill≈e et exhaustive du jeu d'instructions.
+
+{iInternal Design Specification} Volume III. La mani…re dont le
+HP-71 utilise ses instructions...
+.related
+NEXTOP$
+PEEK$
+SYSEDIT
+
+.author
+Pierre David
+Jean-Jacques Dh≈nin
+Janick Taillandier
+.end keyword
+
+.end

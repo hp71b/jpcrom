@@ -1,0 +1,8 @@
+if [ $# != 1 ]
+then
+    echo "usage : impg <file>"
+    exit 1
+fi
+
+pf -fpg -e -l70 $1 | imp -fpg -l70 -h130 -n40 -tbc"#" -db75
+exit 0

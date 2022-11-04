@@ -1,0 +1,953 @@
+.language
+F
+
+.keyword
+XAXIS
+
+.purpose
+{cXAXIS} trace un axe horizontal avec des marques de graduation
+optionnelles, » l'ordonn≈e y sp≈cifi≈e.
+
+.options
+SKID
+.syntaxe
+{cXAXIS {iordonn≈e y
+{cXAXIS {iordonn≈e y{c, {iespacement
+{cXAXIS {iordonn≈e y{c, {iespacement{c, {ixmin{c, {ixmax
+
+.examples
+.ex
+XAXIS 10
+.co
+Trace un axe » l'ordonn≈e 10.
+.ex
+XAXIS (Y2-Y1)/2,-5
+.co
+Trace un axe et des marques de graduation espac≈es de 5 unit≈s
+graphiques, en commenµant par la droite.
+
+.input
+.it
+ordonn≈e y
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-32767 » +32767
+.it
+espacement
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-32767 » +32767
+.df
+0, pas de marques.
+.it
+xmin
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-32767 » +32767
+.df
+0
+.it
+xmax
+.de
+Expression num≈rique arrondie » un entier.
+.re
+-32767 » +32767
+.df
+639
+
+.operation
+\{cXAXIS} trace un axe horizontal » l'ordonn≈e {iy}, de {ixmin} »
+{ixmax}.\
+
+\Si le param…tre {iespacement} est pr≈sent et non nul, des
+marques sont trac≈es toutes les {iespacement} unit≈s graphiques,
+en commenµant par {ixmin} si {iespacement} est positif, par
+{ixmax} si {iespacement} est n≈gatif.\
+
+\Les longueurs des marques de graduation sont d≈finies par
+{cTICLEN}. Apr…s ex≈cution de {cGINIT}, elles valent 4.\
+
+.related
+LINETYPE
+TICLEN
+YAXIS
+
+.author
+Pierre David
+.end keyword
+
+.keyword
+XEDIT
+
+.purpose
+{cXEDIT} (eXtended EDITor) est un ≈diteur de textes ≈tendu.
+
+.options
+SKID
+
+.syntaxe
+XEDIT {ifichier{c
+XEDIT {ifichier{c , {icha—ne de commandes{c
+
+.examples
+.ex
+XEDIT ESSAI
+.co
+Cr≈e le fichier {lESSAI{p et rentre sous
+l'≈diteur de textes en mode commandes.
+.ex
+XEDIT ESSAI,"1,$R/TOTO/TATA/;E"
+.co
+Appelle l'≈diteur de textes sur le ficher {lESSAI{p, substitue
+toutes les occurrences de la cha—ne {lTOTO{p par la cha—ne {lTATA{p
+et sort de l'≈diteur.
+.ex
+XEDIT ESSAI:TAPE
+.co
+Copie le fichier {lESSAI{p en m≈moire et rentre sous l'≈diteur
+de textes en mode commandes.
+
+.input
+.it
+fichier
+.de
+Expression alphanum≈rique ou cha—ne sans guillemets.
+.re
+Sp≈cificateur de p≈riph≈rique en option.
+.it
+cha—ne de commandes
+.de
+Expression alphanum≈rique.
+.re
+Aucune.
+.df
+Aucune commande n'est ex≈cut≈e.
+
+.operation
+{gQu'est-ce qu'un ≈diteur de textes ?}
+
+\Un {i≈diteur de textes} est un programme permettant de rentrer
+des caract…res dans un fichier {cTEXT} du HP-71. Hewlett-Packard
+fournit un ≈diteur de textes dans les modules {iForth/Assembleur}
+d'une part, et {iText Editor} d'autre part.\
+
+\Le module {iText Editor} comprend en outre un {iformatteur de textes},
+c'est » dire un programme pour aligner des paragraphes, centrer des
+lignes, etc. De tels programmes ont ≈t≈ publi≈s dans {iJPC}. Un formatteur
+de textes op…re sur des fichiers qu'il a donc fallu introduire dans
+le HP-71 » l'aide d'un ≈diteur de textes.\
+
+\{cEDTEXT}, l'≈diteur de textes pr≈sent dans les deux
+modules de Hewlett-Packard, est r≈dig≈ en majeure partie en Basic, et
+souffre d'une lenteur caract≈ris≈e.\
+
+\{iJPC†Rom} contient un ≈diteur de textes enti…rement en assembleur,
+extr¡mement rapide et dont les performances ne se d≈gradent pas, m¡me
+avec de tr…s grands fichiers.\
+
+
+{gEntr≈e sous l'≈diteur}
+
+\Lorsque vous ex≈cutez l'ordre {cXEDIT} suivi d'un nom de fichier,
+le fichier est soit :\
+\- cr≈≈ s'il n'existait pas,\
+\- copi≈ en m≈moire s'il r≈side sur un support magn≈tique,\
+\- ou simplement cherch≈ en m≈moire,\
+\puis il est analys≈ pour v≈rifier s'il est bien du type {pTEXT},
+enfin l'≈diteur passe en mode {icommandes}
+(voir chapitre suivant).\
+
+\Notez que l'indicateur {c1} dispara—t de l'affichage (le
+drapeau 1 conserve toujours son ≈tat en m≈moire, seul l'affichage
+est affect≈).\
+
+\L'≈diteur d≈termine en outre si votre fichier est modifiable,
+c'est » dire s'il n'est ni en Rom ou Eprom, pas
+s≈curis≈ par {cSECURE}, et pas d≈j» ouvert par {cASSIGN #}. Si
+votre fichier n'est pas modifiable, vous pouvez le visualiser,
+mais toute tentative de modification d≈clenchera l'erreur
+correspondant au type de protection.\
+
+\Vous sortez de l'≈diteur par la commande {cE} ou {cQ}. Si vous
+≈tiez en mode {isaisie}, vous sortez en appuyant sur la touche
+{l[ATTN]}, puis en tapant une de ces deux commandes. Si vous ne
+savez pas en quel mode vous ¡tes, appuyez sur {l[ATTN]}, puis
+tapez la commande {cE} ou {cQ}.\
+
+\Si vous aviez sp≈cifi≈ une cha—ne de commandes, celle-ci aurait
+≈t≈ ex≈cut≈e automatiquement, sans passer en mode {icommandes}.
+Lorsque vous utilisez une cha—ne de commandes, faites attention
+toutefois » la terminer par la commande {cE} ou {cQ} pour sortir
+de l'≈diteur, faute de quoi l'≈diteur attendra une nouvelle commande.\
+
+
+{gLes modes d'op≈ration}
+
+\L'≈diteur poss…de deux modes, le mode {icommandes} et le mode
+{isaisie}.\
+
+{iLe mode commandes}
+
+\Lorsque vous rentrez sous l'≈diteur, vous ¡tes plac≈s en mode
+{icommandes}. L'≈diteur vous le signale en affichant un message
+tel que :{c\
+        Line {innn{c, Cmd:              }ou bien{c
+        Eof, Cmd:}
+\et en plaµant le curseur » droite des caract…res.\
+
+\L'≈diteur attend alors que vous tapiez une commande selon le
+format d≈crit dans le chapitre suivant.\
+
+\Si vous laissez votre doigt appuy≈ sur la touche :\
+\- {l[ENDLINE]}, la ligne est affich≈e, sans changer la
+ligne courante,\
+\- {l[f][CONT]}, l'≈diteur affiche le nom du fichier courant, le
+num≈ro de la ligne courante et le nombre de lignes dans le
+fichier.\
+
+\Vous pouvez, en outre, utiliser les touches de curseur verticales
+pour passer » la ligne suivante (touche {l[{m£{l]}), revenir » la
+ligne pr≈c≈dente (touche {l[{m°{l]}), aller directement » la derni…re
+(touche {l[g][{m£{l]}) ou » la premi…re (touche {l[g][{m°{l]}) ligne du
+fichier.\
+
+\Vous pouvez aussi choisir d'utiliser la pile de commandes en
+appuyant sur {l[g][CMDS]}, de la m¡me mani…re qu'en utilisation
+normale.\
+
+\Toutes les touches d'≈dition (touches de curseur horizontales,
+{l[f][BACK]}, {l[f][-CHAR]}, etc.) sont utilisables pour
+faciliter l'introduction de vos commandes.\
+
+
+{iLe mode saisie}
+
+\Vous pouvez choisir de passer en mode {isaisie} (saisie de texte}
+avec les commandes {cT} ({itext}) ou {cI} ({iinsert}). Tout ce que vous
+introduisez est alors rentr≈ dans votre fichier, jusqu'» ce que
+vous appuyiez sur la touche {l[ATTN]} qui vous replace en mode
+commandes.\
+
+\La touche {l[f][CONT]} est l» aussi active, ce qui vous permet de
+conna—tre » tout moment le nom du fichier en cours d'≈dition, le num≈ro de la
+ligne courante et le nombre de lignes dans le fichier.\
+
+\La touche {l[f][VIEW]} est aussi active (en mode {pUSER}
+seulement) et vous donne la position du curseur dans la ligne.\
+
+\La pile de commandes est accessible » tout moment, toujours en
+appuyant sur {l[g][CMDS]}.\
+
+
+{iInactivit≈ de plus de dix minutes}
+
+\L'≈diteur d≈tecte les p≈riodes d'inactivit≈ de plus de dix
+minutes et :\
+\- si vous ≈tiez en mode {isaisie}, repasse en mode {icommandes},\
+\- si vous ≈tiez en mode {icommandes}, sort de l'≈diteur,\
+
+\Ceci assure l'extinction automatique de votre HP-71B au bout de 20 ou 30
+minutes suivant le mode dans lequel vous ≈tiez.\
+
+
+{gSyntaxe des commandes}
+
+\Les commandes que vous introduisez ont la syntaxe suivante :{c\
+
+       [ {id≈but }[[ {c,} ]{i fin }]] [ {c?} ]  [ {icommande} ] [ {iparam…tre} ]
+
+\oÀ les ≈l≈ments entre crochets sont optionnels. Certaines commandes
+peuvent restreindre leur syntaxe : par exemple, la commande {cT} n'admet
+pas de {ifin}, pas de point d'interrogation, pas de {iparam…tre}.\
+
+\Les ≈l≈ments {id≈but} et {ifin} sont des num≈ros de ligne sp≈cifiant
+un intervalle bornes comprises (si les deux sont pr≈sents), une simple
+ligne (si {id≈but} est seul) ou la ligne courante (si aucun n'est pr≈sent).
+Pour plus de pr≈cision, voir les valeurs par d≈faut pour chacune
+des commandes.\
+\Ces ≈l≈ments sont en fait de v≈ritables expressions pouvant faire
+jouer :\
+\- la ligne courante (symbole {c.}),\
+\- la derni…re ligne du fichier (symbole {c$}),\
+\- une constante num≈rique, ou\
+\- la prochaine occurrence d'un certain motif (cha—ne encadr≈e par {c/}).\
+\Par exemple, l'expression {c.+5,/exemple/-3} signifie : de la ligne courante
+plus cinq lignes jusqu'» la prochaine occurrence de la cha—ne {iexemple} moins
+trois lignes.\
+
+\Le point d'interrogation (utilis≈ par les commandes {cS}, {cR} et {cJ})
+sp≈cifie qu'une commande doit ¡tre ex≈cut≈e en mode {iconfirmation}, c'est »
+dire qu'une question vous est pos≈e, pour la commande {cR} par
+exemple, » chaque remplacement.\
+
+\La {icommande} est une simple lettre. Il n'y a pas de
+distinction entre majuscule et minuscule. Le cas sp≈cial oÀ la
+commande est vide implique le positionnement sur une ligne. Par
+exemple, pour vous positionner sur la ligne 523, vous taperez
+simplement {c523}, puis {l[ENDLINE]}. Vous pouvez aussi vous
+rendre directement » la prochaine occurrence de la cha—ne
+{iexemple} en tapant {c/exemple} (notez que le {c/} final peut ¡tre
+omis ici), puis {l[ENDLINE]}.\
+
+\Le {iparam…tre} est enfin un param…tre optionnel de la commande.
+Par exemple, il permet » la commande {cH} (Help) de savoir si
+vous d≈sirez l'aide sur toutes les commandes, ou sur une commande
+particuli…re.\
+
+\Vous pouvez placer plusieurs commandes sur la m¡me ligne,
+s≈par≈es par le caract…re {c;} (point-virgule). Elles seront
+alors ex≈cut≈es en s≈quence, sauf si l'une d'entre-elles
+s'interrompt » cause d'une erreur. Cette facilit≈ de regrouper
+des commandes est tr…s int≈ressante lorsque vous appelez {cXEDIT}
+avec une cha—ne de commandes.\
+
+
+{gCha—nes g≈n≈riques}
+
+\Le terme {icha—ne g≈n≈rique} est utilis≈ pour d≈finir les
+cha—nes avec ou sans caract…re sp≈cial utilis≈es dans les
+recherches ou les remplacements avec {cXEDIT} et les fonctions
+associ≈es ({cFILEPOS}, {cFIND}, {cGENLEN}, {cGENPOS} et
+{cGENRPLC$}).\
+
+\Ces cha—nes g≈n≈riques sont compatibles avec les cha—nes g≈n≈riques
+sous Unix (Unix est une marque d≈pos≈e par AT&T), et plus
+particuli…rement avec l'≈diteur {ced} d'Unix.\
+
+{iCha—nes g≈n≈riques de recherche}
+
+\Les cha—nes g≈n≈riques sont le plus souvent utilis≈es lors des
+recherches de cha—nes dans le fichier.\
+
+\Pour chercher une suite de caract…res standards, il n'y a aucun
+probl…me. Par contre, les choses se compliquent d…s que vous avez
+des besoins un peu plus compliqu≈s, comme par exemple chercher un
+chiffre quelconque, une majuscule en d≈but de ligne, un {ca} et
+un {cb} sur la m¡me ligne, etc. Il faut alors que vous ins≈riez dans votre
+cha—ne de recherche des caract…res sp≈ciaux pour repr≈senter ces
+cas.\
+
+\La table ci-dessous d≈crit les caract…res sp≈ciaux utilis≈s dans
+les cha—nes de recherche :{l\
+
+          Caract…re       Signification
+          ---------       ----------------------------------------------
+              \           annule la signification du caract…re suivant
+              ^           d≈but de ligne
+              $           fin de ligne
+              .           caract…re quelconque
+             [ ]          ensemble de caract…res
+            [^ ]          compl≈mentaire de l'ensemble
+              *           r≈p≈tition du motif pr≈c≈dent 0 ou n fois}
+
+\- Le caract…re {c\} (back-slash) est le caract…re sp≈cial des
+caract…res sp≈ciaux ! Si vous voulez chercher un point, par
+exemple, cela est impossible puisque c'est un caract…re sp≈cial
+et {cXEDIT} le prendra comme tel. Il faut donc annuler la
+signification sp≈ciale du point, pour ne plus le consid≈rer que
+comme un caract…re standard. Pour chercher un point, la cha—ne
+g≈n≈rique sera donc : "{c\.}" (les guillemets ne font pas partie
+de la cha—ne, et sont l» simplement pour la lisibilit≈).\
+
+\- Le caract…re {c^} signifie, lorsqu'il est plac≈ au d≈but d'une
+cha—ne de recherche, {id≈but de ligne}. Ceci vous permet, par
+exemple, de chercher {ctoto} en d≈but de ligne : vous utiliserez
+la cha—ne g≈n≈rique : "{c^toto}".\
+
+\- Le caract…re {c$} signifie, lorsqu'il est plac≈ » la fin
+d'une cha—ne de recherche, {ifin de ligne}. Ceci vous permet, par
+exemple, de chercher {ctata} en fin de ligne : vous utiliserez
+la cha—ne g≈n≈rique : "{ctata$}".\
+
+\- Le caract…re {c.} signifie {in'importe quel caract…re}. Pour
+chercher un {cx} en deuxi…me position sur une ligne, vous
+utilisez la cha—ne g≈n≈rique : "{c^.x}".\
+
+\- Les caract…res {c[} et {c]} servent » chercher un caract…re
+dans un ensemble. Un ensemble ne peut trouver qu'un et un
+seul caract…re. Il existe plusieurs types d'ensembles : les
+ensembles par ≈num≈ration et les intervalles.\
+\Un ensemble par ≈num≈ration est, par exemple,
+la cha—ne g≈n≈rique "{c[0123456789]}" : elle
+repr≈sente un (et un seul) chiffre. L'ensemble est d≈fini comme
+l'ensemble de tous les caract…res entre les crochets.\
+\Un ensemble de type intervalle est, par exemple, la cha—ne
+g≈n≈rique "{c[0-9]}", qui repr≈sente la m¡me chose que ci-dessus,
+mais de mani…re plus condens≈e. Un tel ensemble est d≈fini par
+tous les caract…res de code ASCII compris entre les deux bornes.\
+\La s≈paration entre ces deux types d'ensembles n'est pas si
+rigide, et les deux types peuvent cohabiter dans un seul
+ensemble. Par exemple, pour identifier un caract…re qui peut ¡tre
+une lettre (minuscule ou majuscule) ou un chiffre impair, on
+utilisera la cha—ne g≈n≈rique suivante : "{c[A-Za-z13579]}". Il y
+a l» deux intervalles et une ≈num≈ration dans le m¡me ensemble.\
+
+\- Lorsqu'un caract…re {c^} est le premier caract…re dans un
+ensemble, cela signifie que cet ensemble ne trouvera pas un
+caract…re appartenant » cet ensemble, mais au contraire un
+caract…re {in'appartenant pas} » cet ensemble. Par exemple, pour
+trouver un caract…re qui ne soit pas une lettre, on utilisera la
+cha—ne g≈n≈rique : "{c[^A-Za-z]}".\
+
+\- Le caract…re {c*}, quant » lui, ne repr≈sente pas un
+caract…re, mais la r≈p≈tition 0 ou n fois du {imotif
+pr≈c≈dent}. Par exemple, la combinaison "{c[A-Z]*}" repr≈sente
+0 ou n occurrences d'une majuscule. Le caract…re {c*} est
+indissociable du motif pr≈c≈dent.\
+\D'autre part, remarquez que la r≈p≈tition est faite {i0 ou n fois}.
+Ceci signifie, par exemple, que "{cX*}" sera trouv≈, m¡me dans
+une cha—ne ne contenant pas de {cX}. Si vous d≈sirez trouver au
+moins un {cX}, il faudra utiliser "{cXX*}", ce qui signifiera :
+trouver le caract…re {cX} suivi du caract…re {cX} 0 ou n fois,
+donc trouver le caract…re {cX} 1 ou n fois.\
+
+
+\Vous pouvez combiner ces caract…res sp≈ciaux entre eux ou avec
+des caract…res normaux comme bon vous semble, pour arriver au
+r≈sultat.\
+
+\Voici quelques exemples, pour vous familiariser avec ces
+cha—nes g≈n≈riques :\
+- une r≈f≈rence » {cTEDIT} ou {cXEDIT} :
+{c        [TX]EDIT}
+- une ligne vide :
+{c        ^$}
+- une ligne se terminant par des espaces :
+{c          *$                  {pnote : la cha—ne commence par deux espaces}
+- une phrase ne commenµant pas par une majuscule :
+{c        \. *[^A-Z]            {pnote : ne traite pas les phrase en d≈but de ligne}
+- un nombre n≈gatif :
+{c        -[0-9][0-9]*          {pnote : au moins un chiffre}
+- un nombre hexad≈cimal en assembleur HP-71 :
+{c        #[0-9A-F][0-9A-F]*}
+- une affectation » un tableau num≈rique en basic HP-71 :
+{c        [^$]([^)]*)=}
+
+
+{iCha—nes g≈n≈riques de remplacement}
+
+\Lorsque vous d≈sirez effectuer un remplacement, vous sp≈cifiez
+une cha—ne de recherche, d≈limitant le ou les motifs que vous
+voulez remplacer, puis une cha—ne de remplacement qui sp≈cifie
+par quoi vous allez remplacer votre motif. La cha—ne de recherche
+est une de celles vues plus haut.\
+
+\Ceci permet, par exemple, de remplacer toutes les suites
+d'espaces par un seul (c'est » dire remplacer toutes les
+occurrences de "{c††*}" (deux espaces) par "{c }" (un seul
+espace)), et ainsi de simuler le comportement de
+la fonction {cREDUCE$} de JPC Rom).\
+
+\Mais la cha—ne de remplacement peut
+≈galement contenir des caract…res sp≈ciaux, r≈sum≈s dans la table
+ci-dessous :{l\
+
+          Caract…re       Signification
+          ---------       ----------------------------------------------
+              \           annule la signification du caract…re suivant
+              &           substitue l'occurrence trouv≈e}
+
+\- Le caract…re {c\} a la m¡me signification que pr≈c≈demment,\
+
+\- Le caract…re {c&} ({iet commercial}) signifie : substituer par
+l'occurrence trouv≈e.\
+
+\Ainsi, si on veut mettre un signe {c-} devant tous les nombres,
+on remplacera "{c[0-9][0-9]*}" par "{c-&}".\
+
+\Si on veut remplacer toutes les occurrences d'une majuscule par
+la m¡me r≈p≈t≈e deux fois, on remplacera "{c[A-Z]}" par
+"{c&&}".\
+
+
+{iAffectation du back-slash}
+
+\Comme vous avez pu le constater, le caract…re {c\}
+({iback-slash}) a une certaine importance sous {cXEDIT}. Nous
+vous conseillons de l'affecter d≈finitivement » une touche.
+L'≈diteur de textes {cEDTEXT} de Hewlett-Packard l'affectait » la
+touche {l[f][/]} ce qui nous semble un bon choix. Vous pouvez
+donc faire {cDEF†KEY†"f/",CHR$(92);} pour l'affecter » cette
+touche.\
+
+
+{iLimitations des cha—nes g≈n≈riques}
+
+\Les cha—nes g≈n≈riques de recherche sont sujettes » des limitations
+du fait de la ressource interne utilis≈e (les buffers du syst…me
+sont limit≈s » 2†Ko) : il ne peut y avoir plus de 14 ensembles
+dans un cha—ne g≈n≈rique. Sachez en outre qu'un ensemble occupe
+128 octets.\
+
+\Une autre limitation vient de l'algorithme utilis≈ pour traiter
+les {c*}. Le cas pathologique est la recherche, par exemple, du
+motif {c.*xx} (oÀ {cxx} n'existe pas dans votre fichier), qui
+peut devenir nettement plus longue que pr≈vu.\
+
+
+{gTraduction des messages et commandes}
+
+\Vous pouvez utiliser un traducteur de messages pour traduire les
+messages de {cXEDIT} ainsi que ses commandes.\
+
+
+{gUtilisation de la m≈moire}
+
+\{cXEDIT}, pour ses besoins propres, n≈cessite de la m≈moire
+disponible dans votre HP-71. Cette m≈moire est lib≈r≈e d…s que
+vous sortez de l'≈diteur.\
+
+\{cXEDIT}, » l'initialisation, cherche » cr≈er une table d'acc…s
+rapide aux lignes de votre fichier. Pour cela, l'≈diteur peut consommer
+jusqu'» 2†Ko si votre fichier est tr…s gros. Tr…s exactement, il
+occupe 3,5 octets + 5 octets toutes les 200 lignes. Si votre
+fichier fait plus de 80000 lignes (environ), {cXEDIT} s'arr¡tera
+» 2†Ko. Si vous ne disposez pas de la place suffisante en
+m≈moire, {cXEDIT} prendra ce qui est disponible.\
+
+\A chaque fois que vous faites une recherche, {cXEDIT} alloue de
+la m≈moire pour stocker la cha—ne g≈n≈rique de recherche. La
+place occup≈e est 4 octets + 0,5 octets pour les caract…res {c^},
+{c$}, {c.} et {c*}, 1,5 octets pour les caract…res normaux et
+128,5 octets pour les ensembles. S'il n'y a pas assez de m≈moire,
+{cXEDIT} affiche l'erreur {cNo Room for Pattern}.\
+
+\Lors d'une commande {cC}, {cM} ou {cD} dans un fichier externe,
+256 octets au moins sont requis pour mener » bien l'op≈ration
+dans des conditions de rapidit≈ convenables. Plus de m≈moire
+disponible acc≈l…re notablement le transfert.\
+
+
+{gNote » propos des grands fichiers}
+
+\{cXEDIT} cr≈e une table d'acc…s rapide aux lignes de votre
+fichier, ce qui lui ≈vite de parcourir tout le fichier depuis
+le d≈but » chaque fois que vous faites la moindre op≈ration.
+Cette cr≈ation est faite lorsque vous rentrez sous {cXEDIT}.\
+
+\Toutefois, il peut arriver qu'au cours d'une s≈ance d'≈dition,
+votre fichier s'amenuise ou grandisse. Lorsque {cXEDIT} le jugera
+bon, il
+d≈cidera de recalculer cette table d'acc…s rapide, ce qui
+peut se traduire par un ralentissement d'autant plus important
+que votre fichier est gros. Ceci dit, cette op≈ration est
+rarement perceptible, le
+recalcul d≈passant rarement l'ordre de la seconde.\
+
+
+{hCommande nulle}
+
+\La commande nulle a comme seul effet de d≈placer la ligne
+courante.\
+
+{gSyntaxe}
+    {iligne}
+
+{gValeurs par d≈faut}
+    {iaucune}
+
+{gOp≈ration}
+
+\La commande nulle a comme seul effet de d≈placer la ligne
+courante. En profitant de l'utilisation des cha—nes g≈n≈riques
+dans les num≈ros de lignes, cela permet de faire une recherche
+tr…s simplement. Par exemple, pour se d≈placer » la prochaine
+occurrence de la cha—ne {ctoto}, faire {c/toto}, puis
+{l[ENDLINE]}.\
+
+
+{hCommandes Exit et Quit}
+
+\Les commandes {cE} ({iExit}) et {cQ} ({iQuit}) sortent de {cXEDIT}.\
+
+{gSyntaxes}
+{c    E}
+{c    Q}
+
+{gValeurs par d≈faut}
+{c    {iAucune}
+
+{gOp≈ration}
+
+\Les commandes {cE} et {cQ} sont deux synonymes servant » sortir de
+l'≈diteur. Aucun message n'est affich≈, le curseur Basic revient
+» l'affichage, et l'≈tat initial du drapeau 1 est restaur≈.\
+
+{gExemples}
+
+{cE             }sort de l'≈diteur
+{cQ             }sort de l'≈diteur
+
+
+{hCommande Help}
+
+\La commande {cH} ({iHelp}) affiche la syntaxe d'une ou de plusieurs
+commandes.\
+
+{gSyntaxe}
+{c    H} [ {icommande} ]
+
+{gValeurs par d≈faut}
+{c    {icommande} = toutes les commandes
+
+{gOp≈ration}
+
+\Si vous sp≈cifiez une commande derri…re {cH}, {cXEDIT} affiche
+la syntaxe de la commande sp≈cifi≈e. Toute pression sur une
+touche ram…ne l'affichage en mode {icommandes}.\
+
+\Si vous ne sp≈cifiez aucune commande, {cXEDIT} affiche la syntaxe
+de toutes les commandes par ordre alphab≈tique. Vous passez d'une
+commande » l'autre par pression sur les touches de curseur
+verticales ({l[{m£{l]}, {l[{m°{l]}, {l[g][{m£{l]} et {l[g][{m°{l]}). Toute autre
+touche ram…ne l'affichage en mode {icommandes}.\
+
+{gExemples}
+
+{cH             }affiche la syntaxe de toutes les commandes, une par une
+{cH H           }affiche la syntaxe de la commande {cH}
+
+
+{hCommandes Text et Insert}
+
+\Les commandes {cT} ({iText}) et {cI} ({iInsert}) rentrent en mode
+{isaisie}).\
+
+{gSyntaxes}
+{c    }[ {iligne} ] {cT
+{c    }[ {iligne} ] {cI
+
+{gValeurs par d≈faut}
+{c    {iligne} = ligne courante
+
+{gOp≈ration}
+
+\La commande {cT} est la commande d'introduction de texte.
+Lorsque vous entrez en mode {isaisie} avec la commande {cT}, la
+ligne courante est affich≈e, et vous pouvez la modifier. Lorsque
+vous appuyez sur la touche {l[ENDLINE]}, cette ligne est
+introduite dans le fichier.\
+
+\La commande {cI} est la commande d'insertion de lignes de texte.
+Lorsque vous entrez en mode {isaisie} avec la commande {cI},
+l'indicateur {c1} s'allume pour signaler que vous ¡tes en mode
+insertion, et la ligne courante est affich≈e. Lorsque vous
+taperez du texte et que vous appuierez sur la touche
+{l[ENDLINE]}, le texte sera ins≈r≈ dans le fichier juste avant la
+ligne que vous avez vue.\
+
+\Lorsque vous ¡tes en mode {isaisie}, vous pouvez vous d≈placer avec
+les touches de curseur horizontales sur la m¡me ligne, ou sur une
+autre ligne avec les touches verticales.\
+
+\Pour sortir du mode {isaisie}, appuyez sur la touche
+{l[ATTN]}.\
+
+{gExemples}
+
+{cT             }rentre en mode {isaisie} sur la ligne courante
+{c$I            }rentre en mode {isaisie} avant la derni…re ligne
+{c/toto/T       }rentre en mode {isaisie} sur la prochaine occurrence de {ctoto}
+
+
+{hCommandes List et Print}
+
+\Les commandes {cL} ({iList}) et {cP} ({iPrint}) listent les lignes sur
+l'appareil de visualisation ou d'impression.\
+
+{gSyntaxes}
+{c    }[ {iligne d≈but} [ {iligne fin} ]]{c L }[ {inombre de lignes} ] [ {cN} ]
+{c    }[ {iligne d≈but} [ {iligne fin} ]]{c P }[ {inombre de lignes} ] [ {cN} ]
+
+{gValeurs par d≈faut}
+{c    {iligne d≈but} = ligne courante
+{c    {iligne fin} = derni…re ligne
+
+{gOp≈ration}
+
+\Les commandes {cL} et {cP} sont tr…s similaires (autant que
+{cLIST} et {cPLIST} en Basic).\
+
+\Apr…s le listage, la ligne courante devient la derni…re ligne
+list≈e plus une. Le {inombre de lignes} est optionnel (et est
+incompatible avec {iligne fin}). Il indique le nombre de lignes »
+lister. Le caract…re {cN} optionnel provoque l'apposition du
+num≈ro de ligne devant chaque ligne list≈e.\
+
+{gExemples}
+
+{c3,5L          }liste les lignes 3 » 5 et la ligne 6 devient la ligne courante
+{cLN            }liste toutes les lignes avec leur num≈ro jusqu'» la fin
+{c.+3,$-5LN     }liste avec num≈ros de lignes
+{c5L10N         }liste 10 lignes » partir de la ligne 5
+
+
+{hCommande Delete}
+
+\La commande {cD} ({iDelete}) d≈truit des lignes dans le fichier.\
+
+{gSyntaxe}
+{c    }[ {iligne d≈but} [ {iligne fin} ]]{c D }[ {ifichier} [ {c+} ]]
+
+{gValeurs par d≈faut}
+{c    {iligne d≈but} = ligne courante
+{c    {iligne fin} = {iligne d≈but}
+
+{gOp≈ration}
+
+\La commande {cD} d≈truit une ou plusieurs lignes. Si plus
+d'une ligne doit ¡tre d≈truite, confirmation est demand≈e avec le
+message {cOk to Delete? Y/N:}. Toute pression sur une touche
+autre que {l[Y]} annule l'op≈ration.\
+
+\Il est possible de sp≈cifier que les lignes d≈truites
+doivent ¡tre plac≈es dans le fichier {ifichier}. Si celui-ci
+n'existe pas, il est cr≈≈. S'il existe, une erreur est g≈n≈r≈e.
+Si vous voulez ajouter les lignes d≈truites » un fichier
+existant, faites suivre son nom par {c+}.\
+
+{gExemples}
+
+{cD             }d≈truit la ligne courante
+{c$-5,$D        }d≈truit les 6 derni…res lignes du fichier
+{cD EXEMPLE1    }d≈truit la ligne courante et la met dans le fichier EXEMPLE1
+{cD EXEMPLE2 +  }d≈truit la ligne courante et l'ajoute au fichier EXEMPLE2
+
+
+{hCommandes Copy et Move}
+
+\Les commandes {cC} ({iCopy}) et {cM} ({iMove}) copient ou d≈placent une ou
+plusieurs lignes du fichier.\
+
+{gSyntaxes}
+{c    }[ {iligne d≈but} [ {iligne fin} ]]{c C }[ {ifichier} ]
+{c    }[ {iligne d≈but} [ {iligne fin} ]]{c M }[ {ifichier} ]
+
+{gValeurs par d≈faut} (pas de {ifichier} sp≈cifi≈)
+{c    {iligne d≈but} = ligne courante
+{c    {iligne fin} = {iligne d≈but}
+{gValeurs par d≈faut} ({ifichier} sp≈cifi≈)
+{c    {iligne d≈but} = premi…re ligne du fichier sp≈cifi≈
+{c    {iligne fin} = derni…re ligne du fichier sp≈cifi≈
+
+{gOp≈ration}
+
+\La commande {cC} copie une plusieurs lignes et les ins…re avant
+la ligne courante. La commande {cM} est similaire » la commande {cC},
+mais d≈truit les lignes originales.\
+
+\Si aucun fichier n'est sp≈cifi≈, les lignes ins≈r≈es viennent du
+fichier ≈dit≈. Si un fichier est sp≈cifi≈ et qu'il existe, ces
+lignes viendront de ce fichier.\
+
+\Il faut un minimum de 256 octets disponibles pour d≈placer des
+lignes de texte. De mani…re g≈n≈rale, plus grande est la m≈moire
+disponible et plus rapide est le d≈placement.\
+
+\Attention » l'utilisation des expressions ({c.}, {c$},
+recherches) dans les param…tres de ces commandes lorsqu'elles
+sont utilis≈es avec un fichier externe : les num≈ros de lignes
+font r≈f≈rences au fichier externe, et les expressions sont
+≈valu≈es avec le fichier courant. Pour cette raison, n'utilisez
+que des nombres pour vos num≈ros de lignes.\
+
+{gExemples}
+
+{cC             }duplique la ligne courante
+{c5,7C          }duplique les lignes 5 » 7 et les ins…re avant la ligne courante
+{c5,$-1M        }d≈place les lignes 5 » l'avant-derni…re ligne du fichier
+{c5,7C EXEMPLE1 }copie les lignes 5 » 7 du fichier EXEMPLE1 devant la ligne courante
+{c20M EXEMPLE2  }copie les lignes 20 jusqu'» la fin de EXEMPLE2 et les ins…re dans le fichier courant
+
+
+{hCommande Join}
+
+\La commande {cJ} ({iJoin}) r≈unit deux (ou plus) lignes du
+fichier en une seule.\
+
+{gSyntaxe}
+{c    }[ {iligne d≈but} [ {iligne fin} ]] [ {c?} ]{c J }[ {inombre de lignes} ]
+
+{gValeurs par d≈faut}
+{c    {iligne d≈but} = ligne courante
+{c    {iligne fin} = {iligne d≈but} + 1
+
+{gOp≈ration}
+
+\La commande {cJ} r≈unit les lignes sp≈cifi≈es en une seule.
+Attention toutefois : le HP-71 ne permet pas l'≈dition de lignes
+sup≈rieures » 96 caract…res !\
+
+\Un espace est ajout≈ avant chaque ligne jointe.\
+
+\Si vous sp≈cifiez un {inombre de lignes}, vous ne pouvez pas
+sp≈cifier de {iligne fin}.\
+
+\Vous pouvez contr¬ler finement la r≈union des lignes en
+utilisant le caract…re {c?} avant {cJ}. Chaque tentative de
+r≈union provoquera l'affichage du num≈ro de ligne, d'un {c:}, du
+num≈ro de colonne auquel s'effectue la r≈union, d'un {c\}, de la
+ligne au point pr≈cis de la r≈union, d'un {c/} et d'un point
+d'interrogation indiquant que {cXEDIT} attend une r≈ponse}.\
+\Vous pouvez alors r≈pondre par :\
+\- {l[Y]} pour accepter la r≈union et passer ≈ventuellement » la
+suivante,\
+\- {l[N]} ou {l[Q]} pour refuser la r≈union et revenir en mode
+{icommandes}.\
+
+\Pour faire l'op≈ration inverse de la commande {cJ}, c'est »
+dire s≈parer une ligne en deux, vous pouvez
+copier la ligne courante par {cC}, puis ≈diter la ligne courante
+avec {cT}, d≈truire du point de c≈sure jusqu'» la fin, puis
+descendre d'une ligne et d≈truire jusqu'au point de c≈sure.\
+
+{gExemples}
+
+{cJ             }r≈unit la ligne courante et la suivante en une seule
+{c5,7J          }r≈unit les lignes 5 » 7 en une seule ligne 5
+{cJ5            }r≈unit 5 lignes » partir de la ligne courante
+{c.,/toto/?J    }r≈unit les lignes sp≈cifi≈es en demandant confirmation
+
+
+{hCommande Search}
+
+\La commande {cS} ({iSearch}) cherche un motif dans le fichier.\
+
+{gSyntaxe}
+{c    }[ {iligne d≈but} [ {iligne fin} ]] [ {c?} ]{c S/ {imotif} [ {c/} ]
+
+{gValeurs par d≈faut}
+{c    {iligne d≈but} = ligne courante + 1
+{c    {iligne fin} = derni…re ligne
+
+{gOp≈ration}
+
+\La commande {cS} cherche dans le fichier le motif sp≈cifi≈ »
+l'aide d'une cha—ne g≈n≈rique (voir le paragraphe {icha—nes
+g≈n≈riques de recherche}). Si le motif est trouv≈, la ligne
+trouv≈e devient la ligne courante.\
+
+\Le caract…re d≈limiteur de fin est optionnel.\
+
+\Si vous d≈sirez chercher une cha—ne contenant un caract…re {c/},
+sp≈cifiez un autre caract…re d≈limiteur apr…s le {cS}. Tout
+caract…re non blanc peut convenir.\
+
+\Vous pouvez contr¬ler finement la recherche en
+utilisant le caract…re {c?} avant {cS}. Chaque occurrence
+trouv≈e provoquera l'affichage du num≈ro de ligne, d'un {c:}, du
+num≈ro de colonne trouv≈, d'un {c\}, de la partie de la ligne
+contenant l'occurrence, d'un {c/} et d'un point
+d'interrogation indiquant que {cXEDIT} attend une r≈ponse}.\
+\Vous pouvez alors r≈pondre par :\
+\- {l[Y]} pour accepter l'occurrence trouv≈e et revenir en mode
+commande avec cette ligne comme ligne courante,\
+\- {l[N]} pour refuser cette occurrence et continuer la recherche,
+en affichant un message d'erreur si toutes les occurrences ont
+≈t≈ pass≈es,\
+\- {l[Q]} pour quitter la recherche et revenir en mode
+{icommandes}.\
+
+\Note : pour effectuer une recherche simple, il est plus facile
+de taper directement {c/{imotif} puis {l[ENDLINE]} que d'utiliser la
+commande {cS}, r≈serv≈e pour les utilisations ˚†lourdes†˝.\
+
+{gExemples}
+
+{c1S/toto       }recherche la cha—ne {ctoto} dans tout le fichier
+{c1,$-10S/^$    }recherche une ligne vide avant la dixi…me avant la fin
+{c?S:1/4:       }recherche {c1/4} dans le fichier (caract…re d≈limiteur = {c:})
+
+{hCommande Replace}
+
+\La commande {cR} ({iReplace}) remplace une cha—ne par une autre
+dans le fichier.\
+
+{gSyntaxe}
+{c    }[ {iligne d≈but} [ {iligne fin} ]] [ {c?} ] {c R/{i motif {c/{i remplacement} [ {c/} ]
+
+{gValeurs par d≈faut}
+{c    {iligne d≈but} = ligne courante
+{c    {iligne fin} = {iligne d≈but}
+
+{gOp≈ration}
+
+\La commande {cR} cherche dans le fichier le motif sp≈cifi≈ »
+l'aide de cha—ne g≈n≈riques (voir le paragraphe {icha—nes
+g≈n≈riques de recherche}). Si le motif est trouv≈, l'occurrence
+trouv≈e est remplac≈e par la cha—ne de remplacement (voir le
+paragraphe {icha—nes g≈n≈riques de remplacement}).\
+
+\Le caract…re d≈limiteur de fin est optionnel.\
+
+\Si vous d≈sirez chercher ou remplacer une cha—ne contenant un caract…re {c/},
+sp≈cifiez un autre caract…re d≈limiteur apr…s le {cR}. Tout
+caract…re non blanc peut convenir.\
+
+\Vous pouvez contr¬ler finement le remplacement en
+utilisant le caract…re {c?} avant {cR}. Chaque occurrence
+trouv≈e provoquera l'affichage du num≈ro de ligne, d'un {c:}, du
+num≈ro de colonne trouv≈, d'un {c\}, de la partie de la ligne
+contenant l'occurrence substitu≈e par {iremplacement},
+d'un {c/} et d'un point
+d'interrogation indiquant que {cXEDIT} attend une r≈ponse}.\
+\Vous pouvez alors r≈pondre par :\
+\- {l[Y]} pour accepter le remplacement et passer ≈ventuellement
+au suivant,\
+\- {l[N]} pour refuser ce remplacement et continuer la recherche,\
+\- {l[Q]} pour quitter la recherche et revenir en mode
+{icommandes}.\
+
+{gExemples}
+
+{cR/toto/tata/  }remplace {ctoto} par {ctata} sur la ligne courante
+{c.,$R/[A-Z]/&& }remplace les majuscules par deux majuscules jusqu'» la fin du fichier
+{cRx/x\\x       }remplace tous les {c/} par des {c\} sur la ligne courante
+{c?R/a/b        }remplace avec confirmation tous les {ca} par des {cb}
+
+
+{hCommande eXchange}
+
+\La commande {cX} ({ieXchange file}) ≈dite un autre fichier sans
+sortir de {cXEDIT}.\
+
+{gSyntaxe}
+{c    X {ifichier}
+
+{gValeurs par d≈faut}
+{c    {iAucune}
+
+{gOp≈ration}
+
+\La commande {cX} ≈dite un autre fichier sans sortir de {cXEDIT}.
+Si le fichier nomm≈ n'existe pas, il est cr≈≈. S'il existe, il
+est simplement cherch≈ en m≈moire.\
+
+{gExemples}
+
+{cX EXEMPLE     }≈dite le fichier EXEMPLE sans sortir de {cXEDIT}
+.references
+{iA para—tre} : Premi…re version de {cXEDIT} par Pierre
+David et Janick Taillandier.
+
+{iManuel du module Editeur de Textes} par Hewlett-Packard.
+
+{iManuel du module Forth / Assembleur} par Hewlett-Packard.
+
+{iUnix User's Reference Manual} par AT&T.
+.related
+FILEPOS
+FIND
+GENLEN
+GENPOS
+GENRPLC
+TEDIT
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.end

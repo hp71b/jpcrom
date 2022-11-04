@@ -1,0 +1,104 @@
+.language
+A
+
+.keyword
+BELL
+
+.purpose
+{cBELL} causes the printer's beeper, if available, to sound.
+
+.options
+SKI
+
+.syntaxe
+BELL
+
+.examples
+.ex
+IF DEVADDR("HP82905B")>0 THEN BELL
+.co
+If there is an HP82905B printer on the loop, then it will beep.
+
+.operation
+\{cBELL} causes the peripheral specified by the last
+{cPRINTER IS} command to beep, if it is able to do so.\
+
+\The ThinkJet has no beeper.\
+
+{gCodes sent to the printer :}
+
+Character code 7.
+.references
+{iJPC 26} (page 39) first version by Pierre David.
+
+{iJPC 40} (page 16) second version by Pierre David.
+
+Also consult your printer reference manual.
+.related
+BOLD
+MODE
+PAGELEN
+PCR
+PFF
+PLF
+UNDERLINE
+WRAP
+.author
+Pierre David
+.end keyword
+
+.keyword
+BOLD
+
+.purpose
+{cBOLD} enables or disables the bold mode of the printer.
+
+.options
+SKI
+
+.syntaxe
+BOLD ON
+BOLD OFF
+
+.examples
+.ex
+BOLD ON @ PRINT "JPC"
+.co
+Enables bold print and prints "JPC".
+.ex
+BOLD OFF @ PRINT "JPC"
+.co
+Disables bold print and prints "JPC".
+
+.operation
+\{cBOLD ON} enables bold print on the peripheral designated
+by {cPRINTER IS}. {cBOLD OFF} returns to normal print. The action of
+this statement depends on the peripheral used. It is 
+intended for peripherals using the Hewlett-Packard Printer Command
+Language ({iPCL}).\
+
+{gCodes sent to the printer :}
+
+{cBOLD ON } : {cESC ( s 1 B}
+{cBOLD OFF} : {cESC ( s 0 B}
+.references
+{iJPC 26} (page 39) first version by Pierre David.
+
+{iJPC 40} (page 16) second version by Pierre David.
+
+Also consult your printer reference manual.
+.related
+BELL
+MODE
+PAGELEN
+PCR
+PFF
+PLF
+PRINT
+PRINTER IS
+UNDERLINE
+WRAP
+.author
+Pierre David
+.end keyword
+.end

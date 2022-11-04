@@ -1,0 +1,182 @@
+.language
+A
+
+.keyword
+IF ... THEN ... ELSE ... END IF
+
+.purpose
+The structure {cIF} ... {cTHEN} ... {cELSE} ... {cEND IF} extends
+the standard structure to allow multiple line statements.
+
+.options
+SKID
+
+.syntaxe
+{cIF {ilogical expression{c THEN
+  {iprogram segment
+END IF
+}or :
+{cIF {ilogical expression{c THEN
+  {iprogram segment
+ELSE
+  {iprogram segment
+END IF
+
+.examples
+.ex
+100 IF X=0 THEN
+110   INPUT X
+120 ELSE
+130   X=X+1
+140 END IF
+150  }:
+.co
+If X is 0 then {lINPUT{p is executed, otherwise X is incremented.
+.ex
+100 IF X=0 THEN
+110   INPUT X
+120 END IF
+130  }:
+.co
+If X is 0 then {lINPUT{p is executed, otherwise execution
+continues after line 130.
+
+.input
+.it
+logical expression
+.de
+Numeric expression evaluated as true if non-zero and false if
+zero..
+.re
+None.
+.it
+program segment
+.de
+Any number of contiguous lines.
+.re
+None.
+
+.operation
+\The structure {cIF} ... {cELSE} ... {cEND IF} (or {cIF} ... {cEND
+IF}) of JPC Rom extends the standard {cIF} structure.\
+
+\The difference occurs when there is a statement after the
+{cTHEN} clause i.e. an end of line, a character ({c@}, a
+comment ({c!}), or an {cELSE} that is not preceded by an {cIF}
+... {cTHEN} on the same line.\
+
+\For example :\
+
+{c10 IF X=0 THEN              } JPC Rom {cIF}
+{c10 IF X=0 THEN @ BEEP       }      "
+{c10 IF X=0 THEN ! Remarque   }      "
+
+{c10 IF X=0 THEN 'BEEP'       } standard {cIF} 
+{c10 IF X=0 THEN 10           }      "
+{c10 IF X=0 THEN BEEP         }      "
+
+\Programs with standard {cIF} can be executed without JPC Rom in
+your HP-71.\
+
+\If the evaluation of {ilogical expression} is true (different
+from zero), execution resumes at the first statement following
+{cTHEN}. If {cELSE} is present, execution will continue after 
+{cEND IF} skipping the block of {cELSE} code.\
+
+\If the evaluation of {ilogical expression} is false (null)
+execution resumes immediately after the {cELSE} clause, if any,
+or after the {cEND IF} instruction.\
+
+\Program segments can contain any loop structure. These
+structures must be properly matched otherwise the error 
+{cJPC ERR:Structure Mismatch} is reported.\
+.references
+{iJPC 52} first version by Pierre David and Janick
+Taillandier.
+
+HP 9000 series 200/300 Basic 4.0.
+.related
+IF} ... {cTHEN
+SELECT} ... {cEND SELECT
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+INVERSE
+
+.purpose
+{cINVERSE} displays the binary complement of the contents of the
+display.
+
+.options
+SKID
+
+.syntaxe
+INVERSE
+INVERSE {ibegin{c , {iend{c
+
+.examples
+.ex
+IF KEYDOWN("I") THEN INVERSE
+.co
+Inverts the display if key {l[I]{p is pressed.
+.ex
+INVERSE 10,121
+Inverts the display from column 10 to column 121, i.e. leaving
+10 column unchanged on both sides.
+
+.input
+.it
+begin
+.de
+Numeric expression rouded to an integer.
+.re
+0 through 131
+.df
+0
+.it
+end
+.de
+Numeric expression rouded to an integer.
+.re
+begin through 131
+.df
+131
+
+.operation
+\{cINVERSE} inverts the whole LCD display or a part of it : black
+dots turns to white and white ones to black. The contents of the
+display buffer remain unchanged.\
+
+\The contents of the screen memory (returned by {cDISP$}) is not
+modified.\
+
+\The optional parameters specify the first and last column for
+the inversion. The columns are numbered from 0
+(leftmost) to 131 (rightmost).\
+.references
+{iJPC 19} (page 25) Forth word to invert the display by 
+Jean-Pierre Bondu.
+
+{iJPC 24} (page 37) first version by Jean-Jacques Moreau.
+
+{iJPC 25} (page 59) Forth word to return the address of a graphic
+column by Jean-Pierre Bondu.
+
+{iTo be published} : second version by Pierre David and Janick
+Taillandier.
+
+{iInternal Design Specification} Volume I, chapter 3.2.1.
+.related
+GDISP$
+GDISP
+INV$
+.author
+Pierre David
+Jean-Jacques Moreau
+Janick Taillandier
+.end keyword
+.end
+

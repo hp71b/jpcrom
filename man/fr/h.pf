@@ -1,0 +1,307 @@
+.language
+F
+
+.keyword
+HMS
+
+.purpose
+{cHMS} (Hour Minute Second) convertit des heures ou des
+degr≈s en leur ≈quivalent au format HMS.
+
+.options
+FCKID
+
+.syntaxe
+{cHMS ( {iargument{c )
+
+.examples
+.ex
+A=HMS(121.5)
+.co
+121 degr≈s d≈cimaux ≈quivalent » 121 degr≈s 30'.
+
+.input
+.it
+argument
+.de
+Expression num≈rique.
+.re
+Aucune.
+
+.operation
+{gLe format HMS :}
+
+\Les fonctions {cHMS}, {cHR}, {cHMSADD} et {cHMSSUB} op…rent sur
+des quantit≈s de temps (ou des quantit≈s angulaires) exprim≈es »
+l'aide de nombres r≈els sous la forme HMS (heures, minutes,
+secondes).\
+
+\Le format HMS est {ih.mmssd}, oÀ :\
+
+\- {ih} = z≈ro ou plusieurs chiffres repr≈sentant la partie
+enti…re du nombre,\
+\- {imm} = deux chiffres repr≈sentant le nombre de minutes,\
+\- {iss} = deux chiffres repr≈sentant le nombre de secondes, et\
+\- {id} = z≈ro ou plusieurs chiffres repr≈sentant la partie
+fractionnaire d≈cimale de secondes.\
+
+\Ces nombres sont ind≈pendant du mode angulaire courant (voir
+{cOPTION ANGLE}).\
+
+
+{gLa fonction HMS :}
+
+\{cHMS} convertit un nombre r≈el repr≈sentant des heures
+d≈cimales (ou des degr≈s) en format HMS.\
+
+\{cHMS} est la fonction inverse de {cHR}.\
+.references
+{iJPC 25} (page 52) premi…re version par Michel Martinet.
+
+{iJPC 50} (page 29) deuxi…me version par Guy Toublanc.
+
+{iManuel d'utilisation du HP-41}.
+
+{iManuel de r≈f≈rence du HP-28C}.
+.related
+HMSADD
+HMSSUB
+HR
+}fonctions trigonom≈triques
+.author
+Michel Martinet
+Guy Toublanc
+.end keyword
+
+.keyword
+HMSADD
+
+.purpose
+{cHMSADD} (Hour Minute Second ADDition) renvoie la somme des deux
+arguments interpr≈t≈s en format HMS.
+
+.options
+FKIDC
+
+.syntaxe
+{cHMSADD ( {iarg1{c , {iarg2{c )
+
+.examples
+.ex
+A=HMSADD(12.3456,-20.1721)
+.co
+Place dans la variable A la somme de 12 heures 34'56" et de -20 heures
+17'21", soit -7.4225 ou -7 heures, 42 minutes et 25
+secondes.
+
+.input
+.it
+arg1, arg2
+.de
+Expressions num≈riques interpr≈t≈es selon le format HMS.
+.re
+Aucune.
+
+.operation
+\{cHMSADD} additionne les deux arguments interpr≈t≈s comme des nombres
+sexag≈simaux au format HMS. La valeur retourn≈e est elle
+aussi dans le format HMS.\
+
+\Voir la fonction {cHMS} pour le d≈tail du format HMS.\
+.references
+{iJPC 25} (page 52) premi…re version par Michel Martinet.
+
+{iJPC 50} (page 29) deuxi…me version par Guy Toublanc.
+
+{iManuel d'utilisation du HP-41}.
+
+{iManuel de r≈f≈rence du HP-28C}.
+
+L'ancienne appellation de {cHMSADD} ≈tait {cHMS+}.
+.related
+HMS
+HMSSUB
+HR
+}fonctions trigonom≈triques
+.author
+Michel Martinet
+Guy Toublanc
+.end keyword
+
+.keyword
+HMSSUB
+
+.purpose
+{cHMSSUB} (Hour Minute Second SUBstract) renvoie la soustraction des
+deux arguments interpr≈t≈s en format HMS.
+
+.options
+FKIDC
+
+.syntaxe
+{cHMSSUB ( {iarg1{c , {iarg2{c )
+
+.examples
+.ex
+A=HMSSUB(12.3456,20.1721)
+.co
+Place dans la variable A la diff≈rence de 12 heures 34'56" et de 20
+heures 17'21".
+
+.input
+.it
+arg1, arg2
+.de
+Expressions num≈riques interpr≈t≈es selon le format HMS.
+.re
+Aucune.
+
+.operation
+\{cHMSSUB} soustrait les deux arguments interpr≈t≈s comme des nombres
+sexag≈simaux au format HMS. La valeur retourn≈e est elle
+aussi au format HMS.\
+
+\Voir la fonction {cHMS} pour les d≈tails sur le format HMS.\
+.references
+{iJPC 25} (page 52) premi…re version par Michel Martinet.
+
+{iJPC 50} (page 29) deuxi…me version par Guy Toublanc.
+
+{iManuel d'utilisation du HP-41}.
+
+{iManuel de r≈f≈rence du HP-28C}.
+
+L'ancienne appellation de {cHMSADD} ≈tait {cHMS+}.
+.related
+HMS
+HMSADD
+HR
+}fonctions trigonom≈triques
+.author
+Michel Martinet
+Guy Toublanc
+.end keyword
+
+.keyword
+HR
+
+.purpose
+{cHR} (HouR) convertit un nombre r≈el exprim≈ au format HMS
+en son ≈quivalent d≈cimal.
+
+.options
+FCKID
+
+.syntaxe
+{cHR ( {iargument{c )
+
+.examples
+.ex
+A=HR(121.3)
+.co
+121 degr≈s 30' correspondent » 121.5 degr≈s d≈cimaux.
+
+.input
+.it
+argument
+.de
+Expression num≈rique interpr≈t≈e selon le format HMS.
+.re
+Aucune.
+
+.operation
+\{cHR} convertit les nombres du format HMS en nombres r≈els
+d≈cimaux, directement utilisable par les fonctions
+trigonom≈triques.\
+
+\La fonction {cHR} est l'inverse de la fonction {cHMS}. Voir
+cette derni…re pour les d≈tails sur le format HMS.\
+.references
+{iJPC 25} (page 52) premi…re version par Michel Martinet.
+
+{iJPC 50} (page 29) deuxi…me version par Guy Toublanc.
+
+{iManuel d'utilisation du HP-41}.
+
+{iManuel de r≈f≈rence du HP-28C}.
+.related
+HMS
+DEGREES
+HMSADD
+HMSSUB
+}fonctions trigonom≈triques
+.author
+Michel Martinet
+Guy Toublanc
+.end keyword
+
+.keyword
+HTA$
+
+.purpose
+{cHTA$} (Hexadecimal To Ascii) convertit une cha—ne de codes
+hexad≈cimaux en cha—ne de caract…res.
+
+.options
+FKID
+
+.syntaxe
+{cHTA$ ( {icha—ne hexad≈cimale{c )
+{cHTA$ ( {icha—ne hexad≈cimale{c , {imode{c )
+
+.examples
+.ex
+A$=HTA$("0516279637")
+.co
+Place la cha—ne "Paris" dans la variable A$.
+.ex
+A$=HTA$("5061726973",1)
+.co
+Place la cha—ne "Paris" dans la variable A$.
+
+.input
+.it
+cha—ne hexad≈cimale
+.de
+Expression alphanum≈rique.
+.re
+Nombre pair de chiffres hexad≈cimaux, en majuscules ou minuscules.
+.it
+mode
+.de
+Expression num≈rique nulle ou non nulle.
+.re
+Aucune.
+.df
+0
+
+.operation
+\{cHTA$} est la fonction r≈ciproque de {cATH$}.\
+
+\Comme pour {cATH$}, le param…tre {imode} conditionne l'ordre des
+chiffres hexad≈cimaux :\
+
+\- si {imode} = 0, valeur logique {ifaux} (valeur par
+d≈faut), la cha—ne hexad≈cimale
+est construite en inversant les chiffres deux » deux. Ainsi, la
+cha—ne hexad≈cimale "14" repr≈sente la lettre "A". Cette
+repr≈sentation est conforme » la repr≈sentation interne des
+donn≈es dans le HP-71.\
+
+\- si {imode} est diff≈rent de 0, valeur logique
+{ivrai}, la repr≈sentation est standard. Le caract…re "A" est
+repr≈sent≈ par la cha—ne hexad≈cimale "41".\
+.references
+{iJPC 22} (page 31) premi…re version par Michel Martinet.
+
+{iJPC 27} (page 34) deuxi…me version par Michel Martinet.
+
+{iA para—tre} : troisi…me version par Pierre David.
+.related
+ATH$
+ASC$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+.end

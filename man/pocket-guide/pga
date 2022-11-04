@@ -1,0 +1,512 @@
+^{eJPC ROM
+
+^Quick Reference Guide
+
+
+
+
+{cADBUF$ ( {ibuffer id{c )
+\}Function : Returns the address of the buffer
+specified by its identification number.
+The following table lists various buffers
+used by the system :\
+\- 808 : Hold a string of characters used by {kSTARTUP},\
+\- 83D : {kMARGIN} setting,\
+\- 83E : Hold a string of characters used by {kENDUP},\
+\- BFB : Character set defined by {kCHARSET}, and\
+\- BFC : Address of Lex files.\
+
+{cADCREATE {ifile{c }[{c , {ipassword{c }]
+\}Statement : Creates an empty address file. A card
+is composed of the following fields :\
+\- name and first name, separated by a {c/},\
+\- phone number,\
+\- 4 lines to store the address,\
+\- a line to store general information, and\
+\- a line to store a criterion to be used by your own programs.\
+
+{cADDELETE {ifile{c , {inumber{c }[{c , {ipassword{c }]
+\}Statement : Removes a card from an address file.\
+
+{cADFIND ( {ifile{c , {istring{c }[{c , {ipassword{c }]{c )
+\}Function : Looks for a name in an address file and returns
+the number of the card. Rules used during search are :\
+\- name only (without {k/}),\
+\- name and first name (with {k/}), and\
+\- abbreviated search (name terminated with a dot).\
+
+{cADGET {ifile{c , {iarray{c , {inumber{c }[{c , {ipassword{c }]
+\}Statement : Reads a card and stores it into a string array.\
+
+{cADPUT {ifile{c , {iarray{c }[{c , {ipassword{c }]
+\}Statement : Write a card (a string array) into an address file.\
+
+{cADSIZE ( {ifile{c }[{c , {ipassword{c }]{c )
+\}Function : Returns the number of cards in an address file.\
+
+{cARR ( {in{c , {ip{c )
+\}Function : Compute the number of possible different
+arrangements (permutations) of n items taken p at a time.\
+
+{cASC$ ( {istring{c )
+\}Function : Returns a string stripped of all
+non-displayable ASCII characters.\
+
+{cATH$ ( {istring{c }[{c , {imode{c }]{c )
+\}Function : Returns the hexadecimal string
+corresponding to the parameter string. If {imode} = 1,
+nibbles in a byte are not reversed.\
+
+{cATTN ON }/{c OFF
+\}Statement : Enables or disables the action of the
+{l[ATTN]} key to stop program execution.\
+
+{cBELL
+\}Statement : Causes the printer's beeper to sound if possible.\
+
+{cBOLD ON }/{c OFF
+\}Statement : Enables or disables the bold mode of the printer.\
+
+{cCASE {ielement{c ,} ...
+{cCASE {irelational operator{c {c {i element{c ,} ...
+{cCASE {ielement{c TO {ielement{c ,} ...
+{cCASE ELSE
+\}Statement : Part of {kSELECT} ... {kCASE} ...
+{kEND SELECT} structure.\
+
+{cCENTER$ ( {istring{c , {iwidth{c )
+\}Function : Adds spaces at the beginning of the string
+specified in parameter in order to center it.\
+
+{cCESURE ( {istring{c , {iwidth{c )
+\}Function : Returns the position of the first place in the string where
+a word-break can occur.\
+
+{cCOMB ( {in{c , {ip{c )
+\}Function : Computes the number of possible different
+sets of n items taken p at a time.\
+
+{cCONTRAST
+\}Function : Returns the current contrast setting.\
+
+{cDATEADD ( {idate{c , {idays{c )
+\}Function : Computes the date corresponding to the
+specified date incremented by the specified number of days.\
+
+{cDATESTR$ ( {idate{c )
+\}Function : Converts a date to the HP-71 string format for
+date : "{iyyyy/mm/dd}".\
+
+{cDBLIST }[{c {ifile{c }[{c , {istart line{c }[{c , {ifinal line{c }]]]
+		[{c INDENT {iindentation{c }] [ {cTO {itarget{c }]
+\}Statement : Produces a structured listing of
+a Basic program.\
+
+{cDDAYS ( {idate1{c , {idate2{c )
+\}Function : Compute the number of days between two dates.\
+
+{cDDIR }[{c {ifile specifier{c }] [{c TO {itarget{c }]
+{cDDIR ALL }[{c TO {itarget{c }]
+\}Statement : Lists directory of the specified
+device.\
+
+{cDMY
+\}Statement : Enable date input in numeric format
+{idd.mmyyyy}.\
+
+{cDOW }[{c ( {idate{c ){c }]
+\}Function : Returns the day of week corresponding to the
+specified date parameter.\
+
+{cDOW$ }[{c ( {idate{c ){c }]
+\}Function : Returns the name of the day corresponding to the
+specified date or today.\
+
+{cEDIT }[{c {ifile1{c }] [{c TO {ifile2}{c }]
+\}Statement : Allows merging of Lex files, or editing files on external
+peripherals. Nonprogrammable.\
+
+{cENDUP {icommand string{c
+\}Statement : Defines a command string to be executed when the HP-71
+turns off.\
+
+{cENDUP$
+\}Function : Returns the command string specified in {kENDUP}.\
+
+{cENTRY$ ( {ikeyword{c }[{c , {isequence{c }]{c )
+\}Function : Returns the entry point address for the specified
+keyword.\
+
+{cESC$ }[{c ( {istring{c ){c }]
+\}Function : Returns the string with a leading "escape" character.\
+
+{cEXECUTE {icommand string{c
+\}Statement : Executes the specified command string and stops program
+execution.\
+
+{cEXIT {iloop variable
+\}Statement : Exits a {kFOR} ... {kNEXT} loop.\
+
+{cFILESIZE ( {ifile{c )
+\}Function : Returns the size in bytes of the specified file.\
+
+{cFIND {istring
+\}Statement : Finds a character string in a Basic program.
+Nonprogrammable.\
+
+{cFINPUT {iinput{c , {iprompt{c }[{c , {iformat{c }]{c , {iattn
+\}Statement : Creates an input mask and waits for
+data input from the user.\
+
+{cFKEY {ikey
+\}Statement : Inserts a key code at the beginning of the keyboard buffer.\
+
+{cFORMAT$ ( {istring{c , {iwidth{c )
+\}Function : Inserts extra spaces inside a string so that it will
+have exactly the specified number of characters.\
+
+{cFPRIM ( {iargument{c }[{c , {idirection{c }]{c )
+\}Function : Returns the first prime number after the argument.\
+
+{cFRAC$ ( {ireal number{c }[{c , {iaccuracy{c }]{c )
+\}Function : Approximates a real number by a fraction.\
+
+{cGLINE {ix{c , {ilength{c , {ifirst{c , {isize{c , {igap{c
+\}Statement : Builds a raster graphics representation 
+of a drawn line for use with ThinkJet or LaserJet printers.\
+
+{cGPSET {ix{c
+\}Statement : Prepares for the drawing of a pixel on
+ThinkJet or LaserJet printers.\
+
+{cHMS ( {iargument{c )
+\}Function : Converts decimal hour or degree data into an
+equivalent value in HMS format.\
+
+{cHMSADD ( {iarg1{c , {iarg2{c )
+\}Function : Returns the sum of two arguments interpreted using the HMS format.\
+
+{cHMSSUB ( {iarg1{c , {iarg2{c )
+\}Function : Returns the difference
+of two arguments interpreted using the HMS format.\
+
+{cHR ( {iargument{c )
+\}Function : Converts a number from HMS format to its decimal
+equivalent.\
+
+{cHTA$ ( {ihexadecimal string{c }[{c , {imode{c }]{c )
+\}Function : Converts a string of hexadecimal
+digits into an ASCII character string. If {imode} = 1,
+nibbles in a byte are not reversed.\
+
+{cIF {ilogical expression{c THEN
+{c  {iprogram segment
+{cEND IF
+{c}or :
+{cIF {ilogical expression{c THEN
+{c  {iprogram segment
+{cELSE
+{c  {iprogram segment
+{cEND IF
+\}Statement : Extends
+the standard {kIF} structure to allow multiple line statements.\
+
+{cINVERSE }[{c {ibegin{c , {iend{c }]
+\}Statement : Displays the binary complement of the contents of the LCD.\
+
+{cKA }[{c {ifile{c }]
+\}Statement : Interactive address directory editor. Following keystrokes
+are allowed :\
+\- {l[ATTN]} : exit {kKA},\
+\- {l[(]}, {l[)]}, {l[g][(]} and {l[g][)]} : move inside the file,\
+\- {l[v]}, {l[^]}, {l[g][v]} and {l[g][^]} : move inside the card,\
+\- {l[<]}, {l[>]}, {l[g][<]} and {l[g][>]} : scroll the display,\
+\- {l[0]} to {l[7]} : direct access to 	a card field,\
+\- {l[f][CAT]} : display the number of cards,\
+\- {l[f][DELETE]} : delete the current card,\
+\- {l[f][EDIT]} : edit the current card,\
+\- {l[f][INPUT]} : input a new card,\
+\- {l[f][KEY]} : input a password, and\
+\- {l[A]} to {l[Z]} : looks for a name.\
+
+{cKEYWAIT$
+\}Function : Waits until a key is pressed and then returns a
+string representing its keycode.\
+
+{cLEAVE
+\}Statement : Exits from a structured programming loop such as {cWHILE},
+{cREPEAT} or {cLOOP}.\
+
+{cLEX {ifile{c ON }/{c OFF
+\}Statement : Enables or disables a Lex file.\
+
+{cLOOP
+{c  {iprogram segment}
+{cEND LOOP
+\}Statement : Defines an endless loop.\
+
+{cMAP {ifile{c , {istring1{c , {istring2{c }[{c , {ifrom{c }[{c , {ito{c }]]
+{cMAP # {ichannel{c , {istring1{c , {istring2{c }[{c , {ifrom{c }[{c , {ito{c }]]
+\}Statement : Applies a mapping function to the contents of a text file.\
+
+{cMAP$ ( {istring1{c , {istring2{c , {istring3{c )
+\}Function : Applies a mapping function
+to the contents of a character string.\
+
+{cMARGIN }[{c {iposition{c }]
+\}Statement : Enables a beep when the cursor reaches the specified
+position, or disables it when {iposition} is missing or 0.\
+
+{cMAXD ( {idevice specifier{c )
+\}Function : Returns the maximum number of
+entries that can be stored in the directory of a mass storage
+medium.\
+
+{cMAXM ( {idevice specifier{c )
+\}Function : Returns the maximum storage
+capacity available on the medium.\
+
+{cMDY
+\}Statement : Enables date input in numeric format {imm.ddyyyy}.\
+
+{cMEMD ( {idevice specifier{c )
+\}Function : Returns the number of entries in
+the directory of the specified medium that remain available for
+new files.\
+
+{cMEMM ( {idevice specifier{c )
+\}Function : Returns the available room in the file
+storage area of the specified medium.\
+
+{cMENU ( {inumber of elements{c }[{c , {ifirst element{c }]{c )
+\}Function : Read {kDATA} elements and display them to create interactive
+menu facility. Following keystrokes are allowed :\
+\- {l[ATTN]} : exit from {kMENU},\
+\- {l[v]}, {l[^]}, {l[g][v]} and {l[g][^]} :
+move within the menu,\
+\- {l[ENDLINE]} : validates the displayed option.\
+
+{cMERGE {ifile{c }[{c , {ifirst line{c }[{c , {ilast line{c }]]
+\}Statement : Extends the standard keyword to Lex files.
+Nonprogrammable.\
+
+{cMODE {iargument
+\}Statement : Changes the print pitch on the printer.\
+
+{cNEXTOP$ ( {ihexadecimal address pointer{c )
+\}Function : Returns the address of the next
+assembler instruction.\
+
+{cNLOOP }[{c ( {iloop number{c ){c }]
+\}Function : Returns the number of devices on
+the HP-IL loop.\
+
+{cNPRIM ( {in1{c , {in2{c )
+\}Function : Returns the number of prime
+numbers in an interval.\
+
+{cOPCODE$ ( {ihexadecimal address{c )
+\}Function : Returns the mnemonic of the machine language
+instruction pointed to by the specified address.\
+
+{cPAGELEN }[{c {ipage length{c }[{c , {itext length{c }]{c }]
+\}Statement : Sets the page and text lengths on the
+printer.\
+
+{cPAINT ( }[{c {istate{c , }]{c {ix{c , {iy{c )
+\}Function : Turns on a pixel on the HP-71 display and returns its
+value before modification.\
+
+{cPARPOLL }[{c ( {iloop number{c ){c }]
+\}Function : Returns the result of an HP-IL loop parallel
+poll.\
+
+{cPBLIST }[{c {ifile{c }[{c , {istart line{c }[{c , {ifinal line{c }]]]
+		[{c INDENT {iindentation{c }] [ {cTO {itarget{c }]
+\}Statement : Produces a structured listing of a
+Basic program on the current printer device.\
+
+{cPCR
+\}Statement : Moves the print head to the
+beginning of the line.\
+
+{cPDIR }[{c {ifile specifier{c }] [{c TO {itarget{c }]
+{cPDIR ALL }[{c TO {itarget{c }]
+\}Statement : Prints directory of the specified
+device.\
+
+{cPEEK$ ( {ihexadecimal address{c , {inumber of nibbles{c )
+\}Function : Returns the contents of a memory area specified by its
+address.\
+
+{cPERF ON }/{c OFF
+\}Statement : Enables or disables the {iperforation skip} mode on the
+current printer device.\
+
+{cPFF
+\}Statement : Advances paper to the beginning of next page.\
+
+{cPGCD ( {iarg{v1{c , {iarg{v2} {c}[{c , {iarg{v3{c }[{c ,} ... {iarg{v10{c }]...]{c )
+\}Function : Computes the greatest common divisor of two or more numbers.\
+
+{cPHI ( {iargument{c )
+\}Function : Returns the number of integers between 1 and {iargument} that
+are relatively prime to {iargument}.\
+
+{cPLF }[{c {inumber of lines{c }]
+\}Statement : Advances the paper by the number of
+lines specified.\
+
+{cPOKE {ihexadecimal address{c , {idata
+\}Statement : Writes to memory at the specified hexadecimal address.\
+
+{cPOSI ( {istring{c , {imin{c }[{c , {imax{c }]{c )
+\}Function : Returns the position in a
+string of the first character whose value falls within a
+specified range. {iMin} and {imax} can be specified either
+as a decimal number or as a character.\
+
+{cPPCM ( {iarg{v1{c , {iarg{v2{c }[{c , {iarg{v3} }[{c , }... {iarg{v10{c }]...]{c )
+\}Function : Returns the smallest common multiple of all arguments.\
+
+{cPRIM ( {inumber{c )
+{cPRIM ( {ihigher part{c , {ilower part{c )
+\}Function : Returns 0 if a number is prime, or the smallest divisor
+of that number.\
+
+{cRED$ ( {istring{c )
+\}Function : Trims all leading and trailing spaces from the specified
+string.\
+
+{cREDUCE$ ( {istring{c )
+\}Function : Reduces all substrings consisting of two or more
+spaces to a single space, and removes leading and trailing
+spaces.\
+
+{cRENUMREM }[{c {inew start{c }[{c , {iincrement{c }[{c ,}
+		{iold start{c }[{c , {iold end{c }]]]]
+\}Statement : Renumbers a Basic program with
+special handling of comment lines.\
+
+{cREPEAT
+{c  {iprogram segment
+{cUNTIL {ilogical expression
+\}Statement : Defines a loop which is repeated until the
+logical expression evaluated by {kUNTIL} statement is true.\
+
+{cREPLACE$ ( {istring{c , {ipattern1{c , {ipattern2{c }[{c , {istart{c }]{c )
+{cREPLACE$ ( {istring{c , {ipattern1{c , {ipattern2{c , {iwild{c )
+\}Function : Replaces a substring with another in the target
+string using HP text editor rules (first syntax) or a wild
+card character (second syntax). Text editor rules are :\
+\- {t.} : any character,\
+\- {t@} : any number of unspecified characters,\
+\- {t&} : the text that matches pattern1{l when used in pattern2,\
+\- {t^} : beginning of a line  (must be the fist character in pattern1),\
+\- {t$} : end of a line  (must be the last character in pattern1), and\
+\- {t\} : cancel the meaning of the previous {k\}.\
+
+{cROMAN ON }/{c OFF
+\}Statement : Enables the {iRoman} extended character set
+(see table below).{t\
+
+       0 1 2 3 4 5 6 7 8 9 A B C D E F
+   
+     0       0 @ P © p       ° À Ð à ð
+     1     ! 1 A Q a q     ¡   Á Ñ á ñ
+     2     " 2 B R b r     ¢   Â Ò â  
+     3     # 3 C S c s     £ ³ Ã Ó ã  
+     4     $ 4 D T d t     ¤ ´ Ä Ô ä  
+     5     % 5 E U e u     ¥ µ Å Õ å  
+     6     & 6 F V f v     ¦ ¶ Æ Ö æ ö
+     7     ¨ 7 G W g w     § · Ç × ç ÷
+     8     ( 8 H X h x     ¨ ¸ È Ø è ø
+     9     ) 9 I Y i y     © ¹ É Ù é ù
+     A     * : J Z j z     ª º Ê Ú ê ú
+     B     + ; K [ k {{     « » Ë Û ë û
+     C     , < L \ l |     ¬ ¼ Ì Ü ì ü
+     D     - = M ] m }}     ­ ½ Í Ý í ý
+     E     . > N ^ n ~     ® ¾ Î Þ î þ
+     F     / ? O _ o       ¯ ¿ Ï ß ï  
+
+{cRREC$ ( {iaddress{c , {idevice specifier{c )
+\}Function : Reads a record from the specified mass
+storage device.\
+
+{cSELECT {iexpression
+{c  CASE {imatch item
+{c    {iprogram segment
+{c  CASE {imatch item
+{c    {iprogram segment
+{c   }:
+{c  }[{c CASE ELSE
+{c      {iprogram segment} ]
+{cEND SELECT
+\}Statement : Provides conditional execution of program segments.
+See {kCASE} for {imatch item} syntax.\
+
+{cSHRINK {ifile
+\}Statement : Minimizes the size of a text file in Ram, releasing
+memory that is not used to store text.\
+
+{cSLEEP
+\}Statement : Puts the HP-71 into light sleep mode.\
+
+{cSPACE$ ( }[{c {icharacter{c }/{c {istring{c , }]{c {irepeat{c )
+\}Function : Returns a string consisting of the specified number of
+characters of strings (or spaces, default value).\
+
+{cSRQ }[{c ( {iloop number{c ){c }]
+\}Function : Sends a identification message on the HP-IL loop to
+check whether a peripheral requires service.\
+
+{cSTACK {inumber of levels
+\}Statement : Sets the size of the command stack to the specified
+number of levels.\
+
+{cSTARTUP$
+\}Function : Returns the {kSTARTUP} command string.\
+
+{cSYSEDIT {ihexadecimal address
+\}Statement : Puts the HP-71 into an interactive
+memory editor / disassembler mode. Following keystrokes are
+allowed :\
+\- {l[ATTN]} or {l[f][OFF]} : Exit {kSYSEDIT},\
+\- {l[+]}, {l[:]}, {l[*]} or {l[/]} : Move the editor window through memory,\
+\- {l[A][1]} to {l[A][8]} : NIBASC,\
+\- {l[N][1]} to {l[N][9]} et {l[N][.][0]} È {l[N][.][6]} : NIBHEX,\
+\- {l[C][1]} to {l[C][6]} : Decimal constant,\
+\- {l[C][H][1]} to {l[C][H][6]} : Hexadecimal constant,\
+\- {l[R][1]} to {l[R][5]} : Relative address,\
+\- {l[H]} : Hexadecimal mode,\
+\- {l[D]} : Disassembler mode,\
+\- {l[L]} : LCASC if disassembler mode active,\
+\- {l[F]} : Saving disassembler output,\
+\- {l[=]} : Direct move,\
+\- {l[(]} : Move and push address,\
+\- {l[)]} : Return,\
+\- {l[ENDLINE]} : Validation,\
+\- {l[Z]} : Address editing, and\
+\- {l[f][Z]} or {l[M]} : Memory editing.\
+
+{cTOKEN ( {ikeyword{c }[{c , {isequence{c }]{c )
+\}Function : Returns the Lex Id and token for the specified keyword.\
+
+{cUNDERLINE ON }/{c OFF
+\}Statement : Enables or disables underline mode on the printer.\
+
+{cVARSWAP {ivariable1{c , {ivariable2{c
+\}Statement : Swaps the contents of two variables or array elements.\
+
+{cWHILE {ilogical expression
+{c  {iprogram segment
+{cEND WHILE
+\}Statement : Defines a loop which is executed as
+long as {ilogical expression} is true.\
+
+{cWRAP ON }/{c OFF
+\}Statement : Enables or disable the printer wrap-around mode.\
+
+{cWREC {isector{c , {iaddress{c , {idevice specifier
+\}Statement : Writes a 256 bytes string to the specified
+sector of selected mass memory device.\

@@ -1,0 +1,115 @@
+^{hMAIN DIFFERENCES
+
+^BETWEEN VERSION B AND VERSION C}
+
+
+
+\The differences between version B00 and version C00 (see {cVER$}
+in {iOther JPC† Rom features}) result from some bug fixes,
+modifications and improvements. The main differences are listed
+below :\
+
+
+
+{gBug fixes}
+
+\Structured programming statements didn't work properly if
+followed by a comment after the beginning of the loop, as for
+example :{c\
+      10 WHILE 1 !
+      20 END WHILE
+\}Same problem with {cSELECT}, {cCASE}, etc. Notified by Henri
+Kudelski from Switzerland and G≈rard Kossman in France.\
+
+\Functions {cSTARTUP$} and {cENDUP$} didn't returned their result
+properly, this could produce a {cData†type} error when the
+following program was executed :{c\
+      10 DESTROY ALL
+      20 DIM S$
+      30 DIM S$[LEN(STARTUP$)]
+\}Same problem with {cENDUP$}. Notified by Tapani Tarvainen from
+Finland.\
+
+\The {l[f][BACK]} key acts as usual in the Command Stack under
+CALC mode, this allows freely editing expressions in the
+command line. Notified by Michael Markov in the United States and
+Tapani Tarvainen in Finland.\
+
+\After a configuration (for example, {cCOPY} of a Lex file to
+Ram, {cLEX†ON/OFF}), assembler tabs were enabled when using
+{cEDTEXT}.\
+
+\The keyword {cSTACK} has been replaced by a new version from
+Henri Kudelski in Switzerland to avoid bad problems during the
+{cML} program.\
+
+
+{gNew keywords and features}
+
+\The keywords {cSYSEDIT}, {cOPCODE$} and {cNEXTOP$} have been
+added. {cOPCODE$} and {cNEXTOP$} were written by Jean-Jacques
+Dh≈nin. {cSYSEDIT} was written by Pierre David and Janick
+Taillandier.\
+
+\The {cFILESIZE} function by Henri Kudelski has been added.\
+
+\The address directory manager {cKA} and its related programmable
+functions ({cADCREATE}, {cADDELETE}, {cADFIND}, {cADGET},
+{cADPUT} and {cADSIZE}) have been added. These keywords have been
+written by Pierre David.\
+
+\The {cKEYWAIT$} function by Hewlett-Packard has been added. Its
+Id and token numbers have not been modified versus the
+Users'†Library version.\
+
+\The keyword {cROMAN} was added to allow using the {iRoman}
+character set. This keyword was written by Pierre David and
+Janick Taillandier.\
+
+\Now, JPC†Rom recognizes non standard file types, such as HP-41
+or HP-75 ones, during a {cCAT}, as well as non standard HP-71
+types. This was written by Jan Buitenhuis in The Netherlands and
+Janick Taillandier in France.\
+
+
+{gModifications and improvements}
+
+\{iJPC Rom} was previously called {iJPCLEX}.\
+
+\{cBLIST} has been renamed to {cDBLIST}, because of a conflict
+with the BREAK Lex from the Users'†Library.\
+
+\{cSWAP} has been renamed to {cVARSWAP}.\
+
+\The {cINV$} function has been removed, its functionalities are
+now part of {cINVERSE}.\
+
+\Syntax of {cINVERSE} and {cPAINT} have been extended to provide
+more flexibility.\
+
+\Syntax of {cSPACE$} has been extend to allow repeating any
+string.\
+
+\{cENABLE} and {cDISABLE} have been renamed to {cLEX†ON/OFF}
+because of a conflict with {cENABLE} in the HP-IL module.\
+
+\Functions {cREPLACE$} and {cRPLC$} have been merged in a new
+{cREPLACE$}. With three parameters or if the fourth one is
+numeric, functionalities are similar to the old {cRPLC$}. If the
+fourth parameter is a string it is the {iwild-card} character
+used in the old {cREPLACE$}.\
+
+\{cDBLIST} and {cPBLIST} were rewritten to allow indentation of
+structure and redirection into a file.\
+
+\Removed keywords are listed as {cobsolete} when they are present
+in a program. If these programs are executed, they produce the
+error {cJPC†ERR:Removed†Keyword} (message number 16).\
+
+
+{gNote}
+
+\All these improvements and corrections have been realized
+preserving program compatibility with previous versions of
+JPC†Rom. So your programs written with previous versions are
+totally compatible with the new JPC†Rom.\

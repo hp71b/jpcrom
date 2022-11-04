@@ -1,0 +1,66 @@
+
+
+
+
+
+
+^{hFOREWORD}
+
+
+
+
+
+
+
+\This manual is a reference tool for JPC†Rom users. It is assumed
+that the users are already familiar with HP-71 operation and Basic
+language programming.\
+
+\JPC†Rom combines over 100 keywords into a single 25K Lex
+file. This brings together some of the most useful HP-71
+enhancements and improves the overall performance of the machine.
+The source material was contributed by members of the
+international user community, most of whom are members of PPC
+Paris.\
+
+\All contributions have been made in the same spirit of
+benevolent, cooperative, mutual assistance.\
+
+\The manual itself was an enormous task. Any remarks or comments
+about its contents are welcome. It was carried out by Pierre
+David, Jean-Jacques Dh≈nin and Janick Taillandier. Special thanks
+are due to Michael Markov and Mark Cracknell for their help during 
+the translation of this manual and for their support of our work.\
+
+\It is also worth noting that the printing was done with an HP-71
+and a LaserJet printer.\
+
+\We hope you will appreciate the result. Don't hesitate to give
+us your feelings :\
+
+
+     PPC Paris
+     B.P. 604
+     75028 Paris Cedex 01
+     France
+
+
+
+
+
+
+
+
+\{pPPC Paris  makes no express or implied warranty with
+regard to the keystroke procedures and program material offered
+or their merchantability or their fitness for any particular
+purpose. The keystroke procedures and program material are made
+available solely on an "as is" basis, and the entire risk as to
+their quality and performance is with the user. Should the
+keystroke procedures or program material prove defective, the
+user (and not PPC Paris  nor any other party) shall bear
+the entire cost of all necessary correction and all incidental or
+consequential damages. PPC Paris  shall not be liable for
+any incidental or consequential damages in connection with or
+arising out of the furnishing, use, or performance of the
+keystroke procedures or program material.\

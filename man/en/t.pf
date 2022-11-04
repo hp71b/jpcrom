@@ -1,0 +1,92 @@
+.language
+A
+
+.keyword
+TOKEN
+
+.purpose
+{cTOKEN} returns the Lex Id and token for the specified keyword.
+
+.options
+FKID
+
+.syntaxe
+{cTOKEN ( {ikeyword{c )
+{cTOKEN ( {ikeyword{c , {isequence{c )
+
+.examples
+.ex
+A=TOKEN("TOKEN",1)
+.co
+Stores 225073 into variable A, this is the resource allocation
+for the {lTOKEN{p keyword.
+
+.input
+.it
+keyword
+.de
+String expression.
+.re
+The keyword must exist.
+
+.it
+sequence
+.de
+Numeric expression rounded to an integer.
+.re
+The keyword must exist.
+.df
+1
+
+.operation
+\{cTOKEN} returns the resource allocation for the specified
+keyword. This is the number used after {cXWORD} or {cXFN} when
+the Lex file containing the function has been removed.\
+
+\{cTOKEN} returns the internal code as {iiittt}, where {iii} is
+the Lex identifier (Id) followed by the token allocation
+({ittt}). For example, {cTOKEN} itself has the token 73 in the
+Lex 225. The result is 225*1000+73, or 225073.\
+
+\If there is more than one keyword in your HP-71 with the same
+name, {isequence} allows you to identify the duplicates. The
+default {isequence} is 1.\
+
+\If the keyword does not exist or if {isequence} is greater than
+the number of duplicates for example, {cERR:Invalid Arg} will be
+reported.\
+
+\For keywords of more than 8 characters, special processing is
+required from the system. For example, keywords like {cUNDERLINE}
+or {cRANDOMIZE} are recognized as {cUNDERLIN} or {cRANDOMIZ}. The
+final "E" is processed by the keyword itself. Therefore, {cTOKEN}
+handles only the first eight characters of a keyword. Any
+additional characters will be ignored. Thus, {cTOKEN} recognizes
+{cUNDERLIN} and does not take care of the "E". Similarly,
+{cTOKEN("RANDOMIZE")} and {cTOKEN("RANDOMIZ----")} ignore extra
+characters and return the same number.\
+
+\{cTOKEN} will identify the longest keyword whose name is part of
+the parameter string, starting with the first character. For
+example, {cTOKEN("MEMORY")} returns the resource data of the
+{cMEM} keyword.\
+
+\{cTOKEN} recognizes all statements and functions but also all
+valid Basic syntax elements. So, {cTOKEN(",")} is correct as well as
+{cTOKEN("3")}, etc.\
+
+\{cTOKEN} provides a convenient method for identifying potential
+keyword conflicts.\
+
+.references
+{iJPC 31} (page 22) first version by Jean-Jacques Moreau.
+
+{iForth/Assembler Rom Owner's Manual} (page 63).
+
+{iInternal Design Specification}, Volume I.
+.related
+ENTRY$
+.author
+Jean-Jacques Moreau
+.end keyword
+.end

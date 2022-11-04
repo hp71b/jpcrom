@@ -1,0 +1,631 @@
+.language
+A
+
+.keyword
+RED$
+
+.purpose
+{cRED$} trims all leading and trailing spaces from the specified
+string.
+
+.options
+FKID
+
+.syntaxe
+{cRED$ ( {istring{c )
+
+.examples
+.ex
+A$=RED$("  A b   c  ")
+.co
+Removes spaces before and after the string. Spaces bracketed by
+other characters remain unchanged. The result is
+{c"A b   c"}.\
+
+.input
+.it
+string
+.de
+String expression.
+.re
+None.
+
+.operation
+\{cRED$} trims all the leading and trailing spaces from the
+specified parameter string.\
+
+\Example :{c\
+
+10 DIM C$[50]
+20 I=0
+30 REPEAT
+40   I=I+1
+50   C$=CAT$(I)
+60   C$=RED$(C$[1,8]) ! isolates the file name and trims spaces
+70   DISP C$
+80 UNTIL LEN(C$)=0    ! until no more files
+.reference
+{iJPC 21} (page 31) first version by Michel Martinet.
+
+{iJPC 22} (page 35) second version by Michel Martinet and
+Pierre David.
+
+{iJPC 27} (page 34) third version by Michel Martinet.
+.related
+REDUCE$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+REDUCE$
+
+.purpose
+{cREDUCE$} reduces all substrings consisting of two or more
+spaces to a single space, and removes leading and trailing
+spaces.
+
+.options
+FKID
+
+.syntaxe
+{cREDUCE$ ( {istring{c )
+
+.examples
+.ex
+A$=REDUCE$("     P   P     C    ")
+.co
+Removes leading and trailing spaces from the string and reduces the number
+of spaces between words to only a single space.
+
+.input
+.it
+string
+.de
+String expression.
+.re
+None.
+
+.operation
+\{cREDUCE$} removes all unnecessary spaces in a string. Unnecessary
+spaces are defined as :\
+
+\- all leading and trailing spaces,\
+
+\- all spaces between words, except the single space required for
+word division.\
+.references
+{iJPC 21} (page 34) first version of the Basic text formatter by
+Pierre David.
+
+{iJPC 26} (page 50) second version of the Basic text formatter with
+assembly language functions by Pierre David and Michel Martinet.
+.related
+CESURE
+RED$
+.author
+Pierre David
+Michel Martinet
+.end keyword
+
+.keyword
+RENUMREM
+
+.purpose
+{cRENUMREM} (RENUMber REMarks) renumbers a Basic program with
+special handling for comment lines.
+
+.options
+SKID
+
+.syntaxe
+RENUMREM
+RENUMREM {inew start{c
+RENUMREM {inew start{c , {iincrement{c
+RENUMREM {inew start{c , {iincrement{c , {iold start{c
+RENUMREM {inew start{c , {iincrement{c , {iold start{c , {iold end
+
+.examples
+.ex
+RENUMREM 1000,10,1000,2000
+.co
+Renumbers the program starting from line 1000, in increments of
+10, beginning with line 1000 and ending with line 2000.
+.ex
+RENUMREM
+.co
+Renumbers the entire file, starting from line 10, in increments
+of 10.
+
+.input
+.it
+new start
+.de
+Integer constant.
+.re
+1 through 9999.
+.df
+10
+.it
+increment
+.de
+Integer constant.
+.re
+1 through 9999.
+.df
+10
+.it
+old start
+.de
+Integer constant.
+.re
+1 through 9999.
+.df
+Start of file.
+.it
+old end
+.de
+Integer constant.
+.re
+1 through 9999.
+.df
+End of file.
+
+.operation
+\When a program is listed using {cDBLIST} or {cPBLIST}, the line
+numbers of comment lines ({cREM} or {c!}) are not displayed. This
+gives the impression of unordered line numbering.\
+
+\{cRENUMREM} renumbers the current Basic program, like
+{cRENUMBER}, but processes comment lines in a special way.\
+
+\Comment lines numbers are renumbered in increments of 1,
+starting with a line number as near to the line
+number of the preceding line as possible. For example :{c\
+
+10 PRINT TAB(18);"HP-71"
+30 ! first comment line
+40 ! second comment line
+42 ! third comment line
+45 ! fourth comment line
+50 IF KEY$="" THEN 50
+
+\}becomes, after {cRENUMREM 100,10} : {c\
+
+100 PRINT TAB(18);"HP-71"
+101 ! first comment line
+102 ! second comment line
+103 ! third comment line
+104 ! fourth comment line
+110 IF KEY$="" THEN 110
+
+\}Comment lines have been renumbered "near" line 100.
+Lines 100 and 110 are properly numbered. This program will be
+listed by 
+{cDBLIST} or {cPBLIST} as :{c\
+
+ 100 PRINT TAB(18);"HP-71"
+   - first comment line
+     second comment line
+     third comment line
+     fourth comment line
+ 110 IF KEY$="" THEN 110
+
+\}This makes it easy to key-in the program without the comment
+lines, and the listing is far more readable.\
+.references
+{iJPC 18} (page 25) first version of program JPCLISTE, in Basic,
+by Pierre David and Michel Martinet.
+
+{iJPC 38} (page 24) first version by Jean-Pierre Bondu.
+.related
+DBLIST
+PBLIST
+RENUMBER
+.author
+Jean-Pierre Bondu
+.end keyword
+
+.keyword
+REPEAT ... UNTIL
+
+.purpose
+{cREPEAT} ... {cUNTIL} defines a loop which is repeated until the
+logical expression evaluated by {cUNTIL} statement is true.
+
+.options
+SKID
+
+.syntaxe
+REPEAT
+  {iprogram segment
+{cUNTIL {ilogical expression
+
+.examples
+.ex
+10 REPEAT
+20   CALL AA(I,N)
+30   I=I+1
+40 UNTIL I+2>N
+.co
+Executes subprogram "AA" until the condition is true.
+.ex
+10 DATA FILE1,FILE2,FILE3,
+20 REPEAT
+30   READ F$
+40   DISP F$
+50 UNTIL F$=''
+.co
+Reads and display data, until there is nothing left to read (the
+last {lDATA{p is empty).
+
+.input
+.it
+program segment
+.de
+Any number of contiguous program lines.
+.re
+None.
+.it
+logical expression.
+.de
+Numeric expression evaluated as true if non-zero.
+.re
+None.
+
+.operation
+\{cREPEAT} ... {cUNTIL} executes {iprogram segment} until the
+logical expression evaluated by the {cUNTIL} statement becomes
+true (non-zero).\
+
+\Execution starts with the first statement following {cREPEAT},
+and continues to the {cUNTIL} statement, where a test is
+performed. If the test is false, a branch will be made to the
+first statement following {cREPEAT}.\
+
+\When the test is true, program execution continues with the
+first statement following {cUNTIL}.\
+
+\The loop is executed at least once.\
+
+\The statement {cLEAVE} can be used for early (and clean) exit
+from the loop.\
+
+\The program segment itself can contains other structures
+provided that such inner structures begin and end before the
+outer structure ends, otherwise the error {cJPC ERR:Structure
+Mismatch} will be reported.\
+.references
+{iJPC 31} (page 38) first version by  Janick Taillandier.
+
+{iJPC 52} : second version by  Pierre David and Janick
+Taillandier.
+
+HP 9000 series 200/300 Basic 4.0. 
+.related
+LEAVE
+LOOP} ... {cEND LOOP
+WHILE} ... {cEND WHILE
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+REPLACE$
+
+.purpose
+{cREPLACE$} replaces a substring with another in the target
+string.
+
+.options
+FKID
+
+.syntaxe
+{cREPLACE$ ( {istring{c , {ipattern1{c , {ipattern2{c )
+{cREPLACE$ ( {istring{c , {ipattern1{c , {ipattern2{c , {istart{c )
+{cREPLACE$ ( {istring{c , {ipattern1{c , {ipattern2{c , {iwild{c )
+
+.examples
+.ex
+REPLACE$ ("A B   D   E F   "," ","")
+.co
+Removes all spaces from the specified string and returns "ABCDEF".
+.ex
+REPLACE$ ("ABxCDxEF", ".x", "", ".")
+.co
+Displays the string "ACEF".
+.ex
+A$=REPLACE$("X1 X2 X3","X\.","X")
+.co
+Stores the string "X X X" into variable A$.
+.ex
+A$=REPLACE$("X1 X2 X3","X\.","X",3)
+.co
+Stores the string "X1 X X" into variable A$, i.e.
+the original string processed beginning at the third character.
+
+.input
+.it
+target string
+.de
+String expression.
+.re
+None.
+.it
+match pattern
+.de
+String expression.
+.re
+None.
+.it
+substitute pattern
+.de
+String expression.
+.re
+None.
+.it
+start
+.de
+Numeric expression rounded to an integer.
+.re
+0 through 1048575.
+.df
+1
+.it
+wildcard
+.de
+String expression.
+.re
+LEN(wildcard) <= 1
+.df
+Null string
+
+.operation
+\{cREPLACE$} replaces, in {itarget string}, all occurrences of 
+the string {imatch pattern} by the string {isubstitute pattern}.\
+
+\{cREPLACE$} uses special conventions similar to those of the
+{cSEARCH} keyword used by the text editor {cEDTEXT} found in
+the {iText Editor}, {iForth / Assembler} and {iTranslator Pac}
+modules.\
+
+\These conventions include the use of special characters to allow
+more sophisticated operations. These characters are {c.}, {c@},
+{c&}, {c^} and {c$}. To switch these characters to their special
+meaning, they must be preceded by a backslash character {c\}. Two
+consecutive backslash characters are considered as a single
+backslash character, not as two switches.{l\
+
+Character Meaning
+--------- --------------------------------------------------------
+   .      Any character (wild-card character)
+   @      Any number of wild-card characters
+   &      The text that matches {imatch pattern{l when used in {isubstitute pattern{l
+   ^      Beginning of a line  (must be the fist character in {imatch pattern{l)
+   $      End of a line  (must be the last character in {imatch pattern{l)
+
+\}The {istart} parameter specifies the character in {itarget
+string} where the search and substitution begin. By default,
+{itarget string} is searched for {imatch pattern} from beginning
+to end.\
+
+\If the {iwild-card} option is used, the wild-card character in
+{imatch pattern} will match with any character in the {itarget
+string}.\
+.references
+{iJPC 23} (page 34) first version by Michel Martinet.
+
+{iJPC 35} (page 28) first version of {cRPLC$} by Jean-Jacques Moreau.
+
+{iText Editor Owner's Manual}.
+
+{cREPLACE$} includes functions of {cRPLC$}.
+.related
+MAP
+MAP$
+.author
+Michel Martinet
+Jean-Jacques Moreau
+.end keyword
+
+.keyword
+ROMAN
+
+.purpose
+{cROMAN} enables the {iRoman} extended character set.
+
+.options
+SKID
+
+.syntaxe
+{cROMAN ON
+{cROMAN OFF
+
+.examples
+.ex
+10 SUB ML
+20   ROMAN ON
+30 END SUB
+.co
+After a (Memory Lost), enables the Roman extended character
+set.
+
+.operation
+{gThe Roman character set}
+
+\Hewlett-Packard printers or video interfaces allow using
+accentuated characters. To do this, you have to use the
+character set called {iRoman}.\
+
+\For example, to print character "Å" on a ThinkJet or LaserJet,
+you only have to do:\
+
+{cPRINT CHR$(201)}
+
+\The following table summarizes the {iRoman} character set.{l\
+
+   0   1   2   3   4   5   6   7   8   9   A   B   C   D   E   F
+
+0              0   @   P   `   p               °   À   Ð   à   ð
+1          !   1   A   Q   a   q           ¡       Á   Ñ   á   ñ
+2          "   2   B   R   b   r           ¢       Â   Ò   â    
+3          #   3   C   S   c   s           £   ³   Ã   Ó   ã    
+4          $   4   D   T   d   t           ¤   ´   Ä   Ô   ä    
+5          %   5   E   U   e   u           ¥   µ   Å   Õ   å    
+6          &   6   F   V   f   v           ¦   ¶   Æ   Ö   æ   ö
+7          '   7   G   W   g   w           §   ·   Ç   ×   ç   ÷
+8          (   8   H   X   h   x           ¨   ¸   È   Ø   è   ø
+9          )   9   I   Y   i   y           ©   ¹   É   Ù   é   ù
+A          *   :   J   Z   j   z           ª   º   Ê   Ú   ê   ú
+B          +   ;   K   [   k   {{           «   »   Ë   Û   ë   û
+C          ,   <   L   \   l   |           ¬   ¼   Ì   Ü   ì   ü
+D          -   =   M   ]   m   }}           ­   ½   Í   Ý   í   ý
+E          .   >   N   ^   n   ~           ®   ¾   Î   Þ   î   þ
+F          /   ?   O   _   o               ¯   ¿   Ï   ß   ï   ÿ
+
+
+\}The first half of the table is the standard ASCII character set
+(see {cASC$} function). The second one is called {iRoman
+Extension}.\
+
+\It can be noticed that, in both half, the first two columns are
+not used. These are control characters.\
+
+
+{gHP-71 character set}
+
+\The HP-71 only knows the first half of the above table. The
+characters of the second half are mapped on the first one.\
+
+\The above example is correct either you have executed {cROMAN
+ON} or not. In this latter case, the printer recognizes the
+character. Your HP-71 will display a character which doesn't
+looks like "Å" unless you have executed {cROMAN ON}.\
+
+\Using {cROMAN ON} allows you to have accentuated characters
+{iin} the HP-71 display.\
+
+
+{gFrom the keyboard}
+
+\In your programs, you can use accentuated characters as
+{cCHR$(}...{c)}. However, it is easier and more readable to
+create key definitions. For example, to produce {iJPC}, we are
+using the following set :{c\
+
+DEF KEY 'fW', CHR$(197);      }Å{c
+DEF KEY 'fE', CHR$(193);      }Á{c
+DEF KEY 'fR', CHR$(201);      }É{c
+DEF KEY 'fY', CHR$(203);      }Ë{c
+DEF KEY 'fU', CHR$(195);      }Ã{c
+DEF KEY 'fI', CHR$(209);      }Ñ{c
+DEF KEY 'fO', CHR$(194);      }Â{c
+DEF KEY 'f/', CHR$(92);       }\{c
+DEF KEY 'fA', CHR$(192);      }À{c
+DEF KEY 'fS', CHR$(200);      }È{c
+DEF KEY 'fD', CHR$(205);      }Í{c
+DEF KEY 'fJ', CHR$(207);      }Ï{c
+DEF KEY 'fK', CHR$(221);      }Ý{c
+DEF KEY 'f*', CHR$(124);      }|{c
+DEF KEY 'fC', CHR$(181);      }µ{c
+
+\}Note the semi-column after the definitions and the lack of
+quotes around {cCHR$(}...{c)}. So you enter the character and
+not the string {cCHR$(}...{c)}. You have only to press the
+{l[f][W]} key to have a "Å" in the display.\
+
+
+{gSummary}
+
+\HP printers use the {iRoman} character set.\
+
+\The HP-71 does not display character codes greater than 127 if
+you have not executed {cROMAN ON}.\
+
+\Key redefinitions ease {iRoman} characters input from the
+keyboard.\
+.references
+{iJPC 35} (page 8) first version of CHARLEX by Pierre David.
+
+{iTo be published} : first version of {cROMAN} by Pierre David
+and Janick Taillandier.
+
+Consult your printer reference manual.
+.related
+ASC$
+CHR$
+DEF KEY
+NUM
+MAP
+MAP$
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+RREC$
+
+.purpose
+{cRREC$} (Read RECord) reads a record from the specified mass
+storage device.
+
+.options
+FKI
+
+.syntaxe
+{cRREC$ ( {iaddress{c , {idevice specifier{c )
+
+.examples
+.ex
+DIM A$[256]
+A$=RREC$(2,":TAPE")
+.co
+Reads the third record of the medium directory.
+
+.input
+.it
+address
+.de
+Numeric expression rounded to an integer or string expression
+containing hexadecimal digits specifying an address on the
+medium.
+.re
+0 through medium maximum size.
+.it
+device specifier
+.de
+See standard HP-IL definitions.
+.re
+Unquoted strings are not allowed.
+
+.operation
+\The {irecord} (256 bytes) is the basic unit for transfers 
+between the HP-71 and a mass storage device.\
+
+\{cRREC$} reads a 256 bytes record from the medium.
+Records are numbered starting from 0.\
+
+
+{gInterrupting the function with [ATTN] :}
+
+\This function can be interrupted by pressing the 
+{l[ATTN]} key twice. This causes the message
+{cHPIL ERR:Aborted}. It may then be necessary to execute {cRESTORE
+IO} to reactivate the HP-IL system.\
+.references
+{iJPC 45} (page 15) first version by Michel Martinet.
+
+{iHP82161 Digital Cassette Drive Owner's Manual}.
+
+{iHP-IL Interface Owner's Manual} Chapter 3 and appendix D.
+.related
+ENTER
+WREC
+.author
+Michel Martinet
+.end keyword
+.end
+

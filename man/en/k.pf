@@ -1,0 +1,356 @@
+.language
+A
+
+.keyword
+KA
+
+.purpose
+{cKA} is an interactive address directory editor.
+
+.options
+SKID
+
+.syntaxe
+KA
+KA {ifile
+
+.examples
+.ex
+KA
+.co
+Enters the address directory editor using the default file
+ADRS.
+.ex
+KA EXAMPLE
+.co
+Enters the address directory editor using the EXAMPLE address
+file.
+
+.input
+.it
+file
+.de
+String expression or unquoted string.
+.re
+File name with optional device specifier.
+.df
+ADRS
+
+.operation
+{gGetting started}
+
+\Let us begin with a little guided tour of {cKA} functions. We
+will first enter 3 addresses (or card), then we will learn how to
+browse through the file, search it and modify cards.\
+
+\First, type {cKA} to enter the address directory management
+function. {cKA} tells you that the file is empty ({cEmpty†file}
+message) and is waiting for your commands.\
+
+\To enter the first address, press the {l[f]} key (yellow
+prefix key) and {l[INPUT]} (corresponding to the G key).\
+
+\Input the name and first name separated by a slash ({c/}). For
+example :\
+{cSelere/Jacques                }then {l[ENDLINE]}
+
+\Now, you can enter the phone number :\
+{c(3) 14 15 92 65               }then {l[ENDLINE]}
+
+\Now the address itself. We have 4 lines at our disposal, but we
+will use only 2 lines in this example :\
+{c33, rue des Marguerites       }then {l[ENDLINE]}
+{c75028 Paris                   }then {l[ENDLINE]}
+
+\We want to exit address input. We still have 2 empty address
+lines, a general purpose note line and a criterion line. Do not
+input anything in these lines. Press {l[ENDLINE]} 4 times, and
+one more time to validate the input.\
+
+\As an address directory with a single address is rather poor,
+let us enter 2 new addresses. It is up to you (don't forget to
+press {l[f][INPUT]} first) :\
+
+Caux/Harry
+(2) 71 18 28 18
+14 bd des Paquerettes
+27085 Paris
+
+            and
+
+Breille/Jean
+(0) 69 31 47 18
+1, all≈e du Mimosa
+82705 Paris
+
+
+\Now, you have three adresses in your file (press {l[f][CAT]}
+continuously to check this) we will see how to move around the
+file.\
+
+\Try cursor keys {l[{m°{l]} et {l[{m£{l]} to scroll a card. You
+will see empty lines corresponding to those you have entered
+previously. You can go to the first or last line by using cursor
+keys prefixed by the {l[g]} key (blue prefix key).\
+
+\If a line is longer than 22 characters you can read it by
+scrolling the display with {l[{m¢{l]} and {l[{m§{l]} keys (or
+these keys prefixed by the {l[g]} key).\
+
+\To skip from card to card, you have to use the {l[(]} and {l[)]}
+keys (parenthesis), or these keys prefixed by the blue key {l[g]}
+to go from one file end to the other. Note that cards are sorted
+in alphabetical order.\
+
+\Go to the beginning of the file (key {l[g][(]}). We will search
+Jacques Selere's address. Press the {l[S]} key, then
+{l[E][L][E][R][E]} and press {l[ENDLINE]}.\
+
+\Now you are at the card for Jacques Selere. Not that the search
+does not make differences between uppercase and lowercase
+characters.\
+
+\If you want to find the card whose name begins with "†BR†",
+press the {l[B]} key and then type characters {cR} and {c.} (dot)
+and press {l[ENDLINE]}. This is the generic search.\
+
+\If you want to delete the card corresponding to Jacques Selere.
+Go to this card and press {l[f][DELETE]}. A confirmation is
+requested, if you press {l[Y]} the card is deleted.\
+
+\Finally we will modify a card. Go to Harry Caux's card and press
+{l[f][EDIT]}. Now, you can modify each field in the card. You
+exit this mode and store the modifications by pressing the
+{l[RUN]} key or pressing the {l[ENDLINE]} key twice at the last
+line.\
+
+
+{gAddress files}
+
+\{cKA} is an interactive address directory manager. Addresses are
+stored in a file whose type is {cADRS}. The default address file
+is called {cADRS} ; it is automatically searched when {cKA} is
+executed without a parameter.\
+
+\When the specified file is on an external mass storage device,
+such as a disk drive, {cKA} first copy the file into Ram and then
+process the data contained in it.\
+
+
+{gAddresses}
+
+\An address file contains cards, each one contains an address
+and
+other optional information. A card is identified by the name
+associated with it.\
+
+\The only limits on the number of cards that 
+{cKA} can manage is the amount of memory in your HP-71.\
+
+\Each card is made up of 8 lines, organized in the following way :\
+\-†name and first name, separated by a {c/},\
+\-†phone number,\
+\-†4 lines to store the address,\
+\-†a line to store general information, and\
+\-†a line to store a criterion to be used by your own programs.\
+
+\The first line contains the name and first name, separated by a
+slash ({c/}). {cKA} will add it for you if you forget it.\
+
+\Each line can be up to 90 characters long.\
+
+
+{gUsing KA}
+
+\When you enter {cKA}, you are in browse mode. In this mode you
+can look at all your addresses.\
+
+\In case of difficulty, press {l[ATTN]}. This exits {cKA} in
+{ibrowse} mode or return to {ibrowse} mode from other ones.\
+
+
+{iBrowse mode}
+
+\In this mode you can skip from card to card using {l[(]} and
+{l[)]} keys. The {l[g][(]} and {l[g][)]} keys are used to go to
+the beginning and the end of the file respectively.\
+
+\You can scroll through a card using 
+{l[{m°{l]} and {l[{m£{l]} keys. You can also use the
+{l[g][{m°{l]} and {l[g][{m£{l]} keys to go to
+the beginning and the end of the card respectively.\
+
+\Keys {l[0]} through {l[7]} allows you to go directly to a
+specified line inside the card.\
+
+\The {l[f][CAT]} (kept pressed) displays the number of cards in
+the file and an estimate of the number of cards than can be
+input. Please note that this figure is an estimation based on
+the average size of the cards and on the amount of
+memory available.\
+
+\The {l[f][DELETE]} is used to remove a card. A confirmation is
+asked. The card will be erased only if you answer {l[Y]}
+({iyes}).\
+
+
+{iEditing mode}
+
+\The {iediting} mode allows you to modify a card ({l[f][EDIT]}
+key) or to enter a new one ({l[f][INPUT]} key).\
+
+\From {ibrowse} mode, you enter {iediting} mode by pressing :\
+\-†{l[f][EDIT]} (you edit the current card), or\
+\-†{l[f][INPUT]} (the edited card is empty).\
+
+\Then, you can modify or input the edited card. The following
+keys are valid :\
+
+\- {l[{m°{l]}, {l[{m£{l]}, {l[g][{m°{l]} or {l[g][{m£{l]} :
+go to another line in the card without validation of the current
+line,\
+\- {l[ENDLINE]} : validation of the current line and skip to next
+line,\
+\- {l[ATTN]} : clears current line,\
+\- {l[ATTN]} twice : exits the {iediting} mode without entering
+the modifications.\
+\- {l[ENDLINE]} twice on the last line or {l[RUN]} : validates
+the card and stores it in the file.\
+
+\When validated, the card is automatically inserted in the file in
+alphabetical order.\
+
+
+{iSearch mode}
+
+\The {isearch} mode allows you to search for a name in the whole
+file. From {ibrowse} mode, simply press one of the keys from
+{l[A]} through {l[Z]} to input the first character of the name.
+Then you can type the remaining letters.. When you press
+{l[ENDLINE]}, the name (and first name if typed) are searched
+for in the file. The error {cNot†Found} is reported if the name
+was not found.\
+
+\In {isearch} mode you have 3 kind of search :\
+
+\- name search :\
+\When you enter the name only (i.e. no 
+{c/} character), the name is searched in the file from the
+current file to the end of file and from the beginning to the
+current card. The first name found becomes the current card.\
+
+\- name and first name search :\
+\the search path is the same as before. if a card has the same
+name but a different first name it will not be found.\
+
+\- generic search :\
+\This is the most useful search kind. You have only to type the
+beginning of the name and a {c.} (dot).
+{cKA} will search the first card whose name begins with the
+requested characters. If no card matches, the next one is edited.\
+
+\No difference is made between uppercase and lowercase characters
+during the search.\
+
+\The generic search is easier and faster to use. This is the
+preferred search method in day to day use of {cKA}.\
+
+
+{gPassword}
+
+\Each address file can have a password. If it has one, each time
+you enter {cKA} you will be prompted for the password and you
+will have to provide it if you use the programmable keywords to
+access the file (see {cADCREATE}).\
+
+\You can change the file password (it is the only way to do it)
+by pressing the {l[f][KEY]} key in {iview} mode. You are asked
+for a new password.\
+
+\-†if you press {l[ATTN]}, the password is left unchanged,\
+\-†if you do not enter anything and press {l[ENDLINE]},
+the password is cleared, and finally\
+\-†if you type a new password (up to 8 characters) and press
+{l[ENDLINE]}, it is stored.\
+
+\If you use an HP-IL video interface, the password will not be
+displayed on the screen when you type it.\
+.references
+AGENDA program for the HP-75 user's manual.
+.related
+ADCREATE
+ADDELETE
+ADFIND
+ADGET
+ADPUT
+ADSIZE
+.author
+Pierre David
+.end keyword
+
+.keyword
+KEYWAIT$
+
+.purpose
+{cKEYWAIT$} waits until a key is pressed and then returns a
+string representing its keycode.
+
+.options
+FKID
+
+.syntaxe
+KEYWAIT$
+
+.examples
+.ex
+A$=KEYWAIT$
+.co
+Waits for a key pressed and returns the keycode into A$.
+.ex
+10 LOOP
+20   DISP KEYWAIT$
+30 END LOOP
+.co
+Loops and displays all key pressed.
+.ex
+10 SELECT KEYWAIT$
+20   CASE "A" TO "Z"
+30     DISP "LETTER"
+40   CASE "#46"
+50     DISP "[RUN]"
+60   CASE ELSE
+70     DISP "OTHER"
+80 END SELECT
+.co
+Waits for a key pressed, then displays "LETTER"
+if the key was a letter, "[RUN]" if it was the {l[RUN]{p
+key, "OTHER" otherwise.
+
+.operation
+\{cKEYWAIT$} places the HP-71 into a low-power state until a key
+is pressed.\
+
+\The keycode returned in the string is in the same format as
+the standard function {cKEY$}.\
+
+\Using {cKEYWAIT$} allows you to write loops that wait for a
+character. For example :{c\
+
+10 K$=KEY$ @ IF K$="" THEN 10
+
+\}You can replace this by :{c\
+
+10 K$=KEYWAIT$
+.references
+{iJPC 20} (page 50) {cKEYWAIT$} listing by Pierre
+David and Michel Martinet.
+.related
+ATTN
+FKEY
+KEY$
+PUT
+.author
+Hewlett-Packard
+.end keyword
+
+.end

@@ -1,0 +1,203 @@
+.language
+A
+
+.keyword
+WHILE ... END WHILE
+
+.purpose
+{cWHILE} ... {cEND WHILE} defines a loop which is executed as
+long as the logical expression in the {cWHILE} is true.
+
+.options
+SKID
+
+.syntaxe
+{cWHILE {ilogical expression
+  {iprogram segment
+{cEND WHILE
+
+.examples
+.ex
+10 WHILE I+2<=N
+20   CALL AA(I,N)
+30   I=I+1
+40 END WHILE
+.co
+Repeats the AA subprogram as long as the condition is true.
+
+.input
+.it
+logical expression
+.de
+Numeric expression evaluated as true if non-zero.
+.re
+None.
+.it
+program segment
+.de
+Any number of contiguous lines.
+.re
+None.
+
+.operation
+\The {cWHILE} ... {cEND WHILE} construct allows conditional
+execution of a program segment. If the condition is true, the
+program segment between the {cWHILE} and {cEND WHILE} is executed
+and a branch is made back to the {cWHILE} statement.\
+
+\The program segment will be repeated until the test becomes
+false. When this occurs, the program segment will be skipped and
+execution continues with the first statement after {cEND
+WHILE}.\
+
+\The program segment may never be executed if the expression is
+evaluated as false the first time.\
+
+\As for loop structures {cLOOP} ... {cEND LOOP} or {cREPEAT} ...
+{cUNTIL}, the statement {cLEAVE} allows early exit from a
+{cWHILE} ... {cEND WHILE} structure.\
+
+\The program segment itself can contain other structures provided
+that the inner structure begins and ends before the outer
+construct ends, otherwise the error {cJPC ERR:Structure Mismatch}
+will be reported.\
+.references
+{iJPC 31} (page 38) first version by Janick Taillandier.
+
+{iJPC 52} : second version by Pierre David and Janick
+Taillandier.
+
+HP 9000 series 200/300 Basic 4.0. 
+.related
+LEAVE
+LOOP} ... {cEND LOOP
+REPEAT} ... {cUNTIL
+.author
+Pierre David
+Janick Taillandier
+.end keyword
+
+.keyword
+WRAP
+
+.purpose
+{cWRAP} enables or disable the printer wrap-around mode.
+
+.options
+SKI
+
+.syntaxe
+WRAP ON
+WRAP OFF
+
+.examples
+.ex
+WRAP ON @ PBLIST
+.co
+Prints the current program. A carriage return / line feed is
+executed for lines longer than the current line length.
+
+.operation
+\The wrap-around mode is used when the HP-71 must print lines
+longer than the printer current line length. Long lines are
+broken-up and printed on several lines.\
+
+\The HP-71 has already a similar capability with the statement 
+{cPWIDTH}. However, {cWRAP} mode is handled by the printer and eases
+the burden on your HP-71. Also, the HP-71 includes the escape sequences
+that {cPRINT} sends to the printer to compute the line length,
+which may induce errors.
+Using {cWRAP} insures more exact results and improved system
+performance.\
+
+
+{gEscape sequences sent to the printer :}
+
+{cWRAP ON } : {cESC & s 0 C
+{cWRAP OFF} : {cESC & s 1 C
+.references
+{iJPC 26} (page 39) first version by  Pierre David.
+
+{iJPC 40} (page 16) second version by Pierre David.
+
+Also consult your printer reference manual.
+.related
+BOLD
+ENDLINE
+ESC$
+PRINT
+PRINTER IS
+UNDERLINE
+.author
+Pierre David
+.end keyword
+
+.keyword
+WREC
+
+.purpose
+WREC (Write RECord) writes a 256 bytes string to the specified
+sector of selected mass memory device.
+
+.options
+SKI
+
+.syntaxe
+WREC {isector{c , {iaddress{c , {idevice specifier
+
+.examples
+.ex
+WREC A$,1,:TAPE
+.co
+Writes the string A$ (256 characters)
+to sector number 1 of medium specified by {l:TAPE{p.
+
+.input
+.it
+sector
+.de
+String expression.
+.re
+The length must be exactly 256 bytes.
+.it
+address
+.de
+Numeric expression rounded to an integer or string expression
+containing hexadecimal digits specifying an address on the
+medium.
+.re
+0 through medium maximum size.
+.it
+device specifier
+.de
+See standard HP-IL definition.
+.re
+Unquoted strings are not allowed.
+
+.operation
+\{cWREC} writes a 256 bytes string (the sector or record) to the
+{idevice specifier}.\
+
+\The address may be either a sector number in decimal, or a string
+expression containing the hexadecimal equivalent.\
+
+
+{gInterrupting the function with [ATTN] :}
+
+\This function can be interrupted by pressing the {l[ATTN]} key
+twice. This causes the message {cHPIL ERR:Aborted}. It may then
+be necessary to execute {cRESTORE IO} to reactivate the HP-IL
+system.\
+.references
+{iJPC 45} (page 15) first version by Michel Martinet.
+
+{iHP82161 Digital Cassette Drive Owner's Manual}.
+
+{iHP-IL Interface Owner's Manual} Chapter 3 and appendix D.
+.related
+RREC$
+OUTPUT
+.author
+Michel Martinet
+.end keyword
+.end
