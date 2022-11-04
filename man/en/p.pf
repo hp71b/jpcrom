@@ -1099,14 +1099,12 @@ number
 Numeric expression.
 .re
 Integer between 1 and 10{^12{--1.
-
 .it
 higher part
 .de
 Numeric expression.
 .re
 Integer between -10{^12{-+1 and 10{^12{--1.
-
 .it
 lower part
 .de

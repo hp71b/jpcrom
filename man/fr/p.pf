@@ -1316,14 +1316,12 @@ argument
 Expression numÅrique.
 .re
 Nombre entier compris entre 1 et 10{^12{--1.
-
 .it
 partie haute
 .de
 Expression numÅrique.
 .re
 Nombre entier compris entre -10{^12{-+1 et 10{^12{--1.
-
 .it
 partie basse
 .de
