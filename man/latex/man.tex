@@ -240,9 +240,22 @@
 \newcommand{\Fl}{\tt}
 \newcommand{\Fp}{\rm}			% ignore this font change
 \newcommand{\Fh}{\fontspec{Liberation Serif Bold}[Scale=1.2]}	% header
+\newcommand{\FA}{\fontspec{Liberation Sans Bold}[Scale=1.8]}	% header
+\newcommand{\FB}{\fontspec{Liberation Sans Bold}[Scale=1.4]}	% header
 
 \begin{document}
+{
+    \renewcommand{\FA}{\fontspec{Liberation Sans Bold}[Scale=1.6]}
+    \renewcommand{\FB}{\fontspec{Liberation Sans Bold}[Scale=2.5]}
+    \chap{garde}
+}
 \tableofcontents
+\chap{intro}
+\chap{diff.a.b}
+\chap{diff.b.c}
+\chap{diff.c.d}
+\chap{diff.d.e}
+\cleardoublepage
 \chap{a}
 \chap{b}
 \chap{c}
@@ -269,5 +282,13 @@
 \chap{x}
 \chap{y}
 \chap{z}
+\cleardoublepage
+\chap{poll.intro}
 \chap{poll}
+\cleardoublepage
+\chap{jpc.tok}
+\cleardoublepage
+\chap{jpc.msg}
+\cleardoublepage
+\chap{jpc.bug}
 \end{document}

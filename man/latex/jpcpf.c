@@ -194,11 +194,18 @@ font_start (int f)
 	case 'm' :
 	    alternate_charset = 1 ;
 	    break ;
+	case '1' :
+	case '2' :
+	case '3' :
+	case '4' :
+	    if (font_must_be_closed)
+		putchar (rightb) ;
+	    f = f - '1' + 'A' ;	// translate {1 to {A
+	    // fall through
 	default :
 	    printf ("%c%c%cF%c%c%c", leftb, rightb, bslash, f, leftb, rightb) ;
 	    alternate_charset = 0 ;
 	    curfont = f ;
-
     }
 }
 
@@ -291,6 +298,7 @@ main (int argc, char *argv [])
     int opt ;
     char directive [MAXLINE] ;
     int idxdirect ;
+    int term = 0 ;
 
     // substitution characters
     bslash = BSLASH ;
@@ -314,12 +322,15 @@ main (int argc, char *argv [])
 	usage (argv [0]) ;
 
     state = S_NEWLINE ;
-    curfont = 'n' ;
     num_empty = 0 ;
     in_verbatim = 0 ;
+    term = 0 ;
+    font_start ('n') ;
+    putchar('\n') ;
 
-    while ((c = getchar ()) != EOF)
+    while (! term)
     {
+	c = getchar () ;
 	switch (state)
 	{
 	    case S_NEWLINE :	// at beginning of a new line
@@ -360,6 +371,10 @@ main (int argc, char *argv [])
 			}
 			num_empty++ ;
 			break ;
+		    case EOF :
+			verbatim_end (num_empty) ;
+			term = 1 ;
+			break ;
 		    default :
 			state = S_NONE ;
 			if (num_empty >= 1 && fixedfont (curfont))
@@ -368,13 +383,21 @@ main (int argc, char *argv [])
 		}
 		break ;
 	    case S_DIRECTIVE :	// line to output as is
-		putlatex (c) ;
-		if (c == '\n')
+		switch (c)
 		{
-		    state = S_NEWLINE ;
-		    directive [idxdirect] = '\0' ;
-		    pf_explicit = is_pf_explicit (directive) ;
-		} else directive [idxdirect++] = c ;
+		    case EOF :
+			term = 1 ;
+			break ;
+		    case '\n' :
+			putchar (c) ;
+			state = S_NEWLINE ;
+			directive [idxdirect] = '\0' ;
+			pf_explicit = is_pf_explicit (directive) ;
+			break ;
+		    default :
+			putchar (c) ;
+			directive [idxdirect++] = c ;
+		}
 		break ;
 	    case S_NONE :	// line to output as is
 		switch (c)
@@ -390,12 +413,17 @@ main (int argc, char *argv [])
 			putchar (c) ;
 			state = S_NEWLINE ;
 			break ;
+		    case EOF :
+			term = 1 ;
+			break ;
 		    default :
 			putlatex (c) ;
 		}
 		break ;
 	    case S_FONT :	// { or } inside a normal line
-		brace_handling (c, S_NONE) ;
+		if (c == EOF)
+		    term = 1 ;
+		else brace_handling (c, S_NONE) ;
 		break ;
 	    case S_PARAGRAPH :	// inside a paragraph
 		switch (c)
@@ -411,6 +439,9 @@ main (int argc, char *argv [])
 		    case '\\' :
 			state = S_BACKSLASH ;
 			break ;
+		    case EOF :
+			term = 1 ;
+			break ;
 		    default :
 			putlatex (c) ;
 		}
@@ -422,6 +453,10 @@ main (int argc, char *argv [])
 			printf ("\n%cpar\n", bslash) ;
 			state = S_NEWLINE ;
 			break ;
+		    case EOF :
+			printf ("\n%cpar\n", bslash) ;
+			term = 1 ;
+			break ;
 		    default :
 			putlatex ('\\') ;
 			ungetc (c, stdin) ;
@@ -430,7 +465,9 @@ main (int argc, char *argv [])
 		}
 		break ;
 	    case S_PARAFONT :	// { or } in a paragraph
-		brace_handling (c, S_PARAGRAPH) ;
+		if (c == EOF)
+		    term = 1 ;
+		else brace_handling (c, S_PARAGRAPH) ;
 		break ;
 	    case S_CENTER :
 		switch (c)
@@ -444,12 +481,18 @@ main (int argc, char *argv [])
 			printf ("\n%cend{center}\n", bslash) ;
 			state = S_NEWLINE ;
 			break ;
+		    case EOF :
+			printf ("\n%cend{center}\n", bslash) ;
+			term = 1 ;
+			break ;
 		    default :
 			putlatex (c) ;
 		}
 		break ;
 	    case S_CENTFONT :	// { or } in a paragraph
-		brace_handling (c, S_CENTER) ;
+		if (c == EOF)
+		    term = 1 ;
+		else brace_handling (c, S_CENTER) ;
 		break ;
 	    default :
 		fprintf (stderr, "invalid state %d sequence\n", state) ;

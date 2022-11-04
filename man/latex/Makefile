@@ -10,7 +10,7 @@ man.pdf: jpcpf man.tex $(DIR)/a.tex
 	xelatex man
 	xelatex man
 
-$(DIR)/a.tex: ../$(L)/a.pf jpcpf dir.awk
+$(DIR)/a.tex: ../$(L)/a.jpc jpcpf dir.awk
 	rm -rf $(DIR)
 	mkdir $(DIR)
 	sh format-jpc.sh ../$(L)

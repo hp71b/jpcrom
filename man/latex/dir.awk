@@ -42,7 +42,7 @@ END		{ newstate("") }
 /^\.end$/	{ newstate("") ; next }
 /^\.graph/	{ newstate("ignore") ; next }
 
-/^\.[a-z]/	{ printf "Invalid macro '%s'\n", $0 > "/dev/stderr" ; next }
+/^\.[a-z]/	{ printf "Invalid directive '%s'\n", $0 > "/dev/stderr" ; next }
 
 	        {
 		    # line processing outside any directive

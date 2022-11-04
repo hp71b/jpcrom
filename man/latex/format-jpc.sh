@@ -36,8 +36,14 @@ then
 fi
 INDIR="$1"
 
+for f in $(ls "$INDIR/"*.jpc)
+do
+    base=$(basename $f .jpc)
+    jpcpf < $f | jpcfmt | specialchar > $OUTDIR/$base.tex
+done
+
 for f in $(ls "$INDIR/"*.pf)
 do
     base=$(basename $f .pf)
-    jpcpf < $f | jpcfmt | specialchar > $OUTDIR/$base.tex
+    jpcpf -d < $f > $OUTDIR/$base.tex
 done
