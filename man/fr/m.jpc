@@ -578,7 +578,7 @@ comptant ≈galement les fichiers effac≈s et l'espace
 inutilis≈.\
 
 \{cMEMM} compte comme disponible la place rendue disponible par
-les fichiers effac≈s : {cMEMM} agit comme si il y avait e√ un
+les fichiers effac≈s : {cMEMM} agit comme si il y avait eu un
 {cPACK}.\
 
 
