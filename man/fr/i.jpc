@@ -31,7 +31,7 @@ Expressions num≈riques arrondies » des entiers.
 -32767 » +32767
 
 .operation
-\{cDRAW} est semblable » {cDRAW}, » ceci pr…s que les param…tres
+\{cIDRAW} est semblable » {cDRAW}, » ceci pr…s que les param…tres
 sont des incr≈ments et non des positions absolues. L'origine est
 la plus r≈cente position de la plume.\
 
