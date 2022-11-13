@@ -3,7 +3,6 @@
 set -e
 set -u
 
-OUTDIR=./D
 DIRECTAWK=./dir.awk
 
 jpcfmt ()
@@ -29,12 +28,13 @@ specialchar ()
 	}' -
 }
 
-if [ $# != 1 ]
+if [ $# != 2 ]
 then
-    echo "usage: $0 <sourcedir>" >&2
+    echo "usage: $0 <sourcedir> <destdir>" >&2
     exit 1
 fi
 INDIR="$1"
+OUTDIR="$2"
 
 for f in $(ls "$INDIR/"*.jpc)
 do

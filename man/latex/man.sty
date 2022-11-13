@@ -1,20 +1,13 @@
-\documentclass {report}
+\NeedsTeXFormat {LaTeX2e}
 
-\newcommand{\repertoire}{D}
-\newcommand{\chap}[1]{\include{\repertoire/#1}}
+\ProvidesPackage {man} [2022/11/13 1.0 (pda)]
 
-\usepackage [french] {babel}
-\raggedbottom   % par defaut, babel aligne les bas de page. Pas booooo !
+\DeclareOption {fr} {\jlangfr \newcommand{\bablang}{french}}
+\DeclareOption {en} {\jlangen \newcommand{\bablang}{english}}
 
-\usepackage [a4paper, margin=20mm] {geometry}
-
-\frenchspacing
-\parskip=1mm
-\parindent=0mm
-
-\usepackage{hyperref}
-\usepackage{amssymb}
-\usepackage{ifthen}
+\newcommand{\jdir}{.}
+\newcommand{\setjdir}[1]{\renewcommand{\jdir}{#1}}
+\newcommand{\chap}[1]{\include{\jdir/#1}}
 
 \newcommand{\chooselang}{%
     Please use \textbackslash jlangfr or \textbackslash jlangen\par}
@@ -99,6 +92,21 @@
 
     \renewcommand{\textAuthor}{Authors}
 }
+
+\ProcessOptions
+
+
+\RequirePackage [\bablang] {babel}
+\raggedbottom   % par defaut, babel aligne les bas de page. Pas booooo !
+\RequirePackage [a4paper, margin=20mm] {geometry}
+
+\frenchspacing
+\parskip=1mm
+\parindent=0mm
+
+\RequirePackage{hyperref}
+\RequirePackage{amssymb}
+\RequirePackage{ifthen}
 
 % \jkeyword {keyword}
 \newcommand{\jkeyword}[1] {\clearpage\section*{#1}%
@@ -227,7 +235,7 @@
 	\egroup
     }
 
-\usepackage{fontspec}
+\RequirePackage{fontspec}
 
 \setmainfont{Liberation Serif}
 \setsansfont{Liberation Sans}
@@ -242,53 +250,3 @@
 \newcommand{\Fh}{\fontspec{Liberation Serif Bold}[Scale=1.2]}	% header
 \newcommand{\FA}{\fontspec{Liberation Sans Bold}[Scale=1.8]}	% header
 \newcommand{\FB}{\fontspec{Liberation Sans Bold}[Scale=1.4]}	% header
-
-\begin{document}
-{
-    \renewcommand{\FA}{\fontspec{Liberation Sans Bold}[Scale=1.6]}
-    \renewcommand{\FB}{\fontspec{Liberation Sans Bold}[Scale=2.5]}
-    \chap{garde}
-}
-\tableofcontents
-\chap{intro}
-\chap{diff.a.b}
-\chap{diff.b.c}
-\chap{diff.c.d}
-\chap{diff.d.e}
-\cleardoublepage
-\chap{a}
-\chap{b}
-\chap{c}
-\chap{d}
-\chap{e}
-\chap{f}
-\chap{g}
-\chap{h}
-\chap{i}
-\chap{j}
-\chap{k}
-\chap{l}
-\chap{m}
-\chap{n}
-\chap{o}
-\chap{p}
-\chap{q}
-\chap{r}
-\chap{s}
-\chap{t}
-\chap{u}
-\chap{v}
-\chap{w}
-\chap{x}
-\chap{y}
-\chap{z}
-\cleardoublepage
-\chap{poll.intro}
-\chap{poll}
-\cleardoublepage
-\chap{jpc.tok}
-\cleardoublepage
-\chap{jpc.msg}
-\cleardoublepage
-\chap{jpc.bug}
-\end{document}
