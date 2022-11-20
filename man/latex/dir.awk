@@ -49,7 +49,6 @@ END		{ newstate("") }
 		    switch (e) {
 			case "lang" :
 			    newstate("")
-			    # lang = $0
 			    if ($0 == "F")
 				l = "fr"
 			    else if ($0 == "A")
@@ -59,10 +58,12 @@ END		{ newstate("") }
 			    break
 			case "kw" :
 			    newstate("")
-			    latex_1("jkeyword", $0)
+			    if ($0 != "")
+				latex_1("jkeyword", $0)
 			    break
 			case "purp" :
-			    print
+			    if ($0 != "")
+				print
 			    break
 			case "opt" :
 			    newstate("")

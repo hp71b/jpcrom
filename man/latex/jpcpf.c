@@ -40,7 +40,7 @@ int curfont = 'n' ;		// current font
 int pffont = 'n' ;		// the font we should be in
 int num_empty = 0 ;		// number of empty lines
 int in_verbatim = 0 ;		// currently in pseudo-verbatim environment
-int pf_explicit = 0 ;		// format as original pf source
+int pf_explicit ;		// format as original pf source
 
 enum state state ;
 int oldbrace ;
@@ -327,6 +327,10 @@ main (int argc, char *argv [])
     term = 0 ;
     font_start ('n') ;
     putchar('\n') ;
+
+    // By default, this is a pure pf text.
+    // If this is a jpcrom manual page, the first directive will tell us.
+    pf_explicit = 1 ;
 
     while (! term)
     {
