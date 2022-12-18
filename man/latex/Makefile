@@ -9,8 +9,8 @@ CFLAGS = -g -Wall -Wextra -Werror
 
 all:	jpcpf man-fr.pdf man-en.pdf
 
-man-fr.pdf: jpcpf D-fr/a.tex
-man-en.pdf: jpcpf D-en/a.tex
+man-fr.pdf: jpcpf man.sty D-fr/a.tex
+man-en.pdf: jpcpf man.sty D-en/a.tex
 
 D-fr/a.tex: ../fr/a.jpc jpcpf dir.awk
 	rm -rf D-fr
