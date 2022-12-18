@@ -5,7 +5,7 @@ set -u
 
 DIRECTAWK=./dir.awk
 
-jpcfmt ()
+jpcdir ()
 {
     # process JPCRom directives (such as .keyword, .example, etc.)
     # and writes latex code on stdout, with special characters : \ { }
@@ -39,7 +39,7 @@ OUTDIR="$2"
 for f in $(ls "$INDIR/"*.jpc)
 do
     base=$(basename $f .jpc)
-    jpcpf < $f | jpcfmt | specialchar > $OUTDIR/$base.tex
+    jpcpf < $f | jpcdir | specialchar > $OUTDIR/$base.tex
 done
 
 for f in $(ls "$INDIR/"*.pf)
