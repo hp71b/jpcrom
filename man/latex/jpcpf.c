@@ -42,6 +42,7 @@ int num_empty = 0 ;		// number of empty lines
 int in_verbatim = 0 ;		// currently in pseudo-verbatim environment
 int pf_explicit ;		// format as original pf source
 int alt_charset = 0 ;		// alternate charset ('m' font)
+int font_must_be_closed = 0 ;	// \textsubscript, \textsuperscript, \underline
 
 enum state state ;
 int oldbrace ;
@@ -151,8 +152,6 @@ is_pf_explicit (const char *directive)
 	    return 1 ;
     return 0 ;
 }
-
-int font_must_be_closed = 0 ;	// \textsubscript, \textsuperscript, \underline
 
 int
 fixedfont (int f)
