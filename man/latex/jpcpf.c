@@ -162,11 +162,19 @@ fixedfont (int f)
 }
 
 void
-font_start (int f)
+font_close_if_needed (void)
 {
     if (font_must_be_closed)
+    {
 	putchar (rightb) ;
-    font_must_be_closed = 0 ;
+	font_must_be_closed = 0 ;
+    }
+}
+
+void
+font_start (int f)
+{
+    font_close_if_needed () ;
 
     switch (f)
     {
@@ -181,9 +189,6 @@ font_start (int f)
 	    printf ("%ctextsubscript%c", bslash, leftb) ;
 	    break ;
 	case '-' :		// end superscript or subscript
-	    if (font_must_be_closed)
-		putchar (rightb) ;
-	    font_must_be_closed = 0 ;
 	    alternate_charset = 0 ;
 	    break ;
 	case '_' :		// underline
@@ -198,8 +203,6 @@ font_start (int f)
 	case '2' :
 	case '3' :
 	case '4' :
-	    if (font_must_be_closed)
-		putchar (rightb) ;
 	    f = f - '1' + 'A' ;	// translate {1 to {A
 	    // fall through
 	default :
@@ -212,9 +215,7 @@ font_start (int f)
 void
 font_end (void)
 {
-    if (font_must_be_closed)
-	putchar (rightb) ;
-    font_must_be_closed = 0 ;
+    font_close_if_needed () ;
 
     if (curfont != 'n')
 	font_start ('n') ;
