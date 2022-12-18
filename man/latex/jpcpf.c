@@ -158,7 +158,7 @@ int font_must_be_closed = 0 ;	// \textsubscript, \textsuperscript, \underline
 int
 fixedfont (int f)
 {
-    return (f == 'c' || f == 'l') ;
+    return strchr("cl", f) != NULL ;
 }
 
 void
