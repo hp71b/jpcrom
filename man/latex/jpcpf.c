@@ -154,9 +154,16 @@ is_pf_explicit (const char *directive)
 }
 
 int
-fixedfont (int f)
+is_fixedfont (int f)
 {
     return strchr("cl", f) != NULL ;
+}
+
+void
+font_open (const char *f)
+{
+    font_must_be_closed = 1 ;
+    printf ("%c%s%c", bslash, f, leftb) ;
 }
 
 void
@@ -178,18 +185,15 @@ font_start (int f)
     switch (f)
     {
 	case '^' :		// superscript
-	    font_must_be_closed = 1 ;
-	    printf ("%ctextsuperscript%c", bslash, leftb) ;
+	    font_open ("textsuperscript") ;
 	    break ;
 	case 'v' :		// subscript
-	    font_must_be_closed = 1 ;
-	    printf ("%ctextsubscript%c", bslash, leftb) ;
+	    font_open ("textsubscript") ;
 	    break ;
 	case '-' :		// end superscript or subscript
 	    break ;
 	case '_' :		// underline
-	    font_must_be_closed = 1 ;
-	    printf ("%cunderline%c", bslash, leftb) ;
+	    font_open ("underline") ;
 	    break ;
 	case 'm' :
 	    alt_charset = 1 ;	// one unique exception for 'm' font
@@ -201,7 +205,7 @@ font_start (int f)
 	    f = f - '1' + 'A' ;	// translate {1 to {A
 	    // fall through
 	default :
-	    printf ("%c%c%cF%c%c%c", leftb, rightb, bslash, f, leftb, rightb) ;
+	    printf ("%cF%c%c%c", bslash, f, leftb, rightb) ;
 	    curfont = f ;
     }
 }
@@ -376,7 +380,7 @@ main (int argc, char *argv [])
 			break ;
 		    default :
 			state = S_NONE ;
-			if (num_empty >= 1 && fixedfont (curfont))
+			if (num_empty >= 1 && is_fixedfont (curfont))
 			    verbatim_start () ;
 			putlatex (c) ;
 		}
