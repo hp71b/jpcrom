@@ -41,6 +41,7 @@ int pffont = 'n' ;		// the font we should be in
 int num_empty = 0 ;		// number of empty lines
 int in_verbatim = 0 ;		// currently in pseudo-verbatim environment
 int pf_explicit ;		// format as original pf source
+int alt_charset = 0 ;		// alternate charset ('m' font)
 
 enum state state ;
 int oldbrace ;
@@ -98,15 +99,13 @@ char *roman8_utf8 [256] = {
     "½" , "ª" , "º" , "«" ,	"■" , "»" , "±" , NULL ,
 } ;
 
-// alternative charset introduced by {m sequence
+// alternative charset introduced by font 'm'
 char *other_utf8 [256] = {
     [0xa1] = "$\\uparrow$",
     [0xa2] = "$\\leftarrow$",
     [0xa3] = "$\\downarrow$",
     [0xa4] = "$\\rightarrow$",
 } ;
-
-int alternate_charset = 0 ;
 
 void
 usage (char *argv0)
@@ -120,7 +119,7 @@ putlatex (int c)
 {
     char *p ;
 
-    if (alternate_charset)
+    if (alt_charset)
 	p = other_utf8 [c] ;
     else p = roman8_utf8 [c] ;
 
@@ -176,28 +175,25 @@ font_start (int f)
 {
     font_close_if_needed () ;
 
+    alt_charset = 0 ;	// by default
     switch (f)
     {
 	case '^' :		// superscript
 	    font_must_be_closed = 1 ;
-	    alternate_charset = 0 ;
 	    printf ("%ctextsuperscript%c", bslash, leftb) ;
 	    break ;
 	case 'v' :		// subscript
 	    font_must_be_closed = 1 ;
-	    alternate_charset = 0 ;
 	    printf ("%ctextsubscript%c", bslash, leftb) ;
 	    break ;
 	case '-' :		// end superscript or subscript
-	    alternate_charset = 0 ;
 	    break ;
 	case '_' :		// underline
 	    font_must_be_closed = 1 ;
-	    alternate_charset = 0 ;
 	    printf ("%cunderline%c", bslash, leftb) ;
 	    break ;
 	case 'm' :
-	    alternate_charset = 1 ;
+	    alt_charset = 1 ;	// one unique exception for 'm' font
 	    break ;
 	case '1' :
 	case '2' :
@@ -207,7 +203,6 @@ font_start (int f)
 	    // fall through
 	default :
 	    printf ("%c%c%cF%c%c%c", leftb, rightb, bslash, f, leftb, rightb) ;
-	    alternate_charset = 0 ;
 	    curfont = f ;
     }
 }
