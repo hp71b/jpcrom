@@ -108,12 +108,20 @@ char *other_utf8 [256] = {
     [0xa4] = "$\\rightarrow$",
 } ;
 
+/******************************************************************************
+ * Common function
+ */
+
 void
 usage (char *argv0)
 {
     fprintf (stderr, "usage: %s [-d]\n", argv0) ;
     exit (1) ;
 }
+
+/******************************************************************************
+ * Output latex code corresponding to a Roman8 character
+ */
 
 void
 putlatex (int c)
@@ -140,10 +148,16 @@ putlatex (int c)
     }
 }
 
+/******************************************************************************
+ * Find pure "pf" text
+ */
+
 // check if we enter a section where explicit pf formatting should be done
 int
 is_pf_explicit (const char *directive)
 {
+    // any text starting from these directives and ending with
+    // any other directive is a pure pf source
     const char *direct [] = {
 	".operation",
     } ;
@@ -152,6 +166,10 @@ is_pf_explicit (const char *directive)
 	    return 1 ;
     return 0 ;
 }
+
+/******************************************************************************
+ * Font handling
+ */
 
 int
 is_fixedfont (int f)
@@ -191,6 +209,7 @@ font_start (int f)
 	    font_open ("textsubscript") ;
 	    break ;
 	case '-' :		// end superscript or subscript
+	    // font already closed
 	    break ;
 	case '_' :		// underline
 	    font_open ("underline") ;
@@ -220,6 +239,10 @@ font_end (void)
     curfont = 'n' ;
 }
 
+/******************************************************************************
+ * Verbatim text handling
+ */
+
 void
 verbatim_start (void)
 {
@@ -243,6 +266,10 @@ verbatim_end (int num_empty)
     for (int i = 0 ; i < num_empty ; i++)
 	putchar ('\n') ;
 }
+
+/******************************************************************************
+ * Common brace handling for all states
+ */
 
 // Handle font change, whatever the current state is
 void
@@ -290,6 +317,10 @@ brace_handling (int c, enum state from)
     }
 }
 
+/******************************************************************************
+ * main program
+ */
+
 int
 main (int argc, char *argv [])
 {
@@ -307,7 +338,7 @@ main (int argc, char *argv [])
     while ((opt = getopt (argc, argv, "d")) != -1) {
 	switch (opt)
 	{
-	    case 'd' :
+	    case 'd' :			// 'd'ebug => output '\', '{' and '}'
 		bslash = '\\' ;
 		leftb = '{' ;
 		rightb = '}' ;
