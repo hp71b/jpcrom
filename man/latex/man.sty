@@ -36,6 +36,7 @@
 \newcommand{\textRelated}{\chooselang}
 
 \newcommand{\textAuthor}{\chooselang}
+\newcommand{\textAuthors}{\chooselang}
 
 \newcommand{\jlangfr} {
     \renewcommand{\textS}{Ordre}
@@ -62,7 +63,8 @@
 
     \renewcommand{\textRelated}{Mots-clés associés}
 
-    \renewcommand{\textAuthor}{Auteurs}
+    \renewcommand{\textAuthor}{Auteur}
+    \renewcommand{\textAuthors}{Auteurs}
 }
 
 \newcommand{\jlangen} {
@@ -90,7 +92,8 @@
 
     \renewcommand{\textRelated}{Related Keywords}
 
-    \renewcommand{\textAuthor}{Authors}
+    \renewcommand{\textAuthor}{Author}
+    \renewcommand{\textAuthors}{Authors}
 }
 
 \ProcessOptions
@@ -226,6 +229,7 @@
 
 % \jauthor				starts the author section
 \newcommand{\jauthor} {\subsection*{\textAuthor} \rm}
+\newcommand{\jauthors} {\subsection*{\textAuthors} \rm}
 
 % \begin{jverb} ... \end{jverb}		pseudo-verbatim text
 \newenvironment{jverb}{%

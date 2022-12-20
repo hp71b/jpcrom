@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <ctype.h>
+#include <math.h>
 
 /*
  * Input file is encoded in HP-Roman8
@@ -19,6 +21,8 @@
 #define	LEFTB	'{'
 #define	RIGHTB	'}'
 
+#define	THRESHOLD_SKIP	5	// threshold for vertical space
+
 // these variables are modified with the "-d" option
 int bslash = BSLASH ;
 int leftb = LEFTB ;
@@ -26,6 +30,7 @@ int rightb = RIGHTB ;
 
 enum state {
     S_NEWLINE,			// beginning of a new line
+    S_NEWLFONT,			// { or } at the beginning of a new line
     S_DIRECTIVE,		// '.xxx' => directive
     S_NONE,			// line outside of a paragraph
     S_FONT,			// { or } in a line
@@ -159,12 +164,56 @@ is_pf_explicit (const char *directive)
     // any text starting from these directives and ending with
     // any other directive is a pure pf source
     const char *direct [] = {
-	".operation",
+	"operation",
     } ;
     for (int i = 0 ; i < NTAB(direct) ; i++)
 	if (strcmp (directive, direct [i]) == 0)
 	    return 1 ;
     return 0 ;
+}
+
+/******************************************************************************
+ * Vertical spacing
+ */
+
+void
+vspace (void)
+{
+    double v ;
+
+    if (num_empty >= 2)
+    {
+	v = num_empty ;
+	if (v >= THRESHOLD_SKIP) 
+	    v = THRESHOLD_SKIP + sqrt (v - THRESHOLD_SKIP) ;
+	printf ("\n\n%cvspace%c%fex%c\n\n", bslash, leftb, v, rightb) ;
+    }
+    num_empty = 0 ;
+}
+
+/******************************************************************************
+ * Verbatim text handling
+ */
+
+void
+verbatim_start (void)
+{
+    if (! in_verbatim)
+    {
+	printf ("%cbegin%cjverb%c", bslash, leftb, rightb) ;
+	in_verbatim = 1 ;
+    }
+}
+
+void
+verbatim_end (void)
+{
+    if (in_verbatim)
+    {
+	printf ("%cend%cjverb%c", bslash, leftb, rightb) ;
+	in_verbatim = 0 ;
+	// font_start (curfont) ;	// font may have been modified in the jverb env
+    }
 }
 
 /******************************************************************************
@@ -224,6 +273,8 @@ font_start (int f)
 	    f = f - '1' + 'A' ;	// translate {1 to {A
 	    // fall through
 	default :
+	    if (in_verbatim && ! is_fixedfont (f))
+		verbatim_end () ;
 	    printf ("%cF%c%c%c", bslash, f, leftb, rightb) ;
 	    curfont = f ;
     }
@@ -237,34 +288,6 @@ font_end (void)
     if (curfont != 'n')
 	font_start ('n') ;
     curfont = 'n' ;
-}
-
-/******************************************************************************
- * Verbatim text handling
- */
-
-void
-verbatim_start (void)
-{
-    if (! in_verbatim)
-    {
-	printf ("%cbegin{jverb}", bslash) ;
-	in_verbatim = 1 ;
-    }
-}
-
-void
-verbatim_end (int num_empty)
-{
-    if (in_verbatim)
-    {
-	printf ("%cend{jverb}\n", bslash) ;
-	printf ("%cpar\n", bslash) ;
-	in_verbatim = 0 ;
-	font_start (curfont) ;	// font may have been modified in the jverb env
-    }
-    for (int i = 0 ; i < num_empty ; i++)
-	putchar ('\n') ;
 }
 
 /******************************************************************************
@@ -371,50 +394,52 @@ main (int argc, char *argv [])
 		switch (c)
 		{
 		    case '.' :
-			verbatim_end (num_empty) ;
+			verbatim_end () ;
+			vspace () ;
 			state = S_DIRECTIVE ;
-			putlatex (c) ;
 			idxdirect = 0 ;
-			directive [idxdirect++] = c ;
+			curfont = 'n' ;
 			num_empty = 0 ;
 			break ;
 		    case '\\' :
-			verbatim_end (num_empty) ;
+			verbatim_end () ;
+			vspace () ;
 			state = S_PARAGRAPH ;
 			num_empty = 0 ;
 			break ;
 		    case '^' :
-			verbatim_end (num_empty) ;
+			verbatim_end () ;
+			vspace () ;
 			state = S_CENTER ;
-			printf ("%cbegin{center}\n", bslash) ;
+			printf ("%cbegin%ccenter%c\n", bslash, leftb, rightb) ;
 			num_empty = 0 ;
 			break ;
 		    case '{' :
 		    case '}' :
 			oldbrace = c ;
-			state = S_FONT ;
+			state = S_NEWLFONT ;
 			break ;
 		    case '\n' :		// at least one empty line
 			// don't change state, just count empty lines
-			if (in_verbatim)
-			{
-			    verbatim_end (0) ;
-			    num_empty = 0 ;
-			} else {
-			    putchar (c) ;
-			}
+			putchar ('\n') ;
 			num_empty++ ;
 			break ;
 		    case EOF :
-			verbatim_end (num_empty) ;
+			verbatim_end () ;
 			term = 1 ;
 			break ;
 		    default :
 			state = S_NONE ;
-			if (num_empty >= 1 && is_fixedfont (curfont))
+			vspace () ;
+			if (is_fixedfont (curfont))
 			    verbatim_start () ;
 			putlatex (c) ;
 		}
+		break ;
+	    case S_NEWLFONT :	// { or } at the beginning of a line
+		if (c == EOF)
+		    term = 1 ;
+		else brace_handling (c, S_NEWLINE) ;
 		break ;
 	    case S_DIRECTIVE :	// line to output as is
 		switch (c)
@@ -423,14 +448,22 @@ main (int argc, char *argv [])
 			term = 1 ;
 			break ;
 		    case '\n' :
-			putchar (c) ;
-			state = S_NEWLINE ;
 			directive [idxdirect] = '\0' ;
+			printf ("\n.%s\n", directive) ;
 			pf_explicit = is_pf_explicit (directive) ;
+			state = S_NEWLINE ;
 			break ;
 		    default :
-			putchar (c) ;
-			directive [idxdirect++] = c ;
+			if (isalpha (c) || c == ' ')
+			    directive [idxdirect++] = c ;
+			else	// starting with '.', but not a directive
+			{
+			    // assume that ungetc is able to push > 1 char
+			    for (int i = idxdirect-1 ; i >= 0 ; i--)
+				ungetc (directive [i], stdin) ;
+			    putlatex ('.') ;
+			    state = S_NONE ;
+			}
 		}
 		break ;
 	    case S_NONE :	// line to output as is
@@ -446,6 +479,7 @@ main (int argc, char *argv [])
 			    putchar (c) ;	// 2*\n => \par
 			putchar (c) ;
 			state = S_NEWLINE ;
+			num_empty = 0 ;
 			break ;
 		    case EOF :
 			term = 1 ;
@@ -512,11 +546,11 @@ main (int argc, char *argv [])
 			state = S_CENTFONT ;
 			break ;
 		    case '\n' :
-			printf ("\n%cend{center}\n", bslash) ;
+			printf ("\n%cend%ccenter%c\n", bslash, leftb, rightb) ;
 			state = S_NEWLINE ;
 			break ;
 		    case EOF :
-			printf ("\n%cend{center}\n", bslash) ;
+			printf ("\n%cend%ccenter%c\n", bslash, leftb, rightb) ;
 			term = 1 ;
 			break ;
 		    default :

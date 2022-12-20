@@ -9,6 +9,9 @@ CFLAGS = -g -Wall -Wextra -Werror
 
 all:	jpcpf man-fr.pdf man-en.pdf
 
+jpcpf:	jpcpf.c
+	cc $(CFLAGS) -o jpcpf jpcpf.c -lm
+
 man-fr.pdf: jpcpf man.sty D-fr/a.tex
 man-en.pdf: jpcpf man.sty D-en/a.tex
 

@@ -37,7 +37,8 @@ END		{ newstate("") }
 /^\.related/	{ newstate("rel") ; next }
 /^\.references/	{ newstate("refs") ; next }
 /^\.reference$/	{ newstate("ref") ; next }
-/^\.author/	{ newstate("author") ; next }
+/^\.authors/	{ newstate("author") ; next }
+/^\.author$/	{ newstate("author") ; next }
 /^\.end keyword/ { newstate("endkw") ; next }
 /^\.end$/	{ newstate("") ; next }
 /^\.graph/	{ newstate("ignore") ; next }
@@ -53,7 +54,8 @@ END		{ newstate("") }
 				l = "fr"
 			    else if ($0 == "A")
 				l = "en"
-			    else printf "%d: invalid language\n", NR > "/dev/stderr"
+			    else if ($0 != "")
+				printf "%d: invalid language\n", NR > "/dev/stderr"
 			    latex_0("jlang" l)
 			    break
 			case "kw" :
@@ -79,40 +81,36 @@ END		{ newstate("") }
 				printf "%ctt{}%s\n", bs, $0
 			    break
 			case "ex" :
-			    printf "%d: invalid line in .example\n", NR > "/dev/stderr"
+			    if ($0 != "")
+				printf "%d: invalid line in .example\n", NR > "/dev/stderr"
 			    break
 			case "ex-ex" :
-			    texex[idxex] = addcurline(texex[idxex])
+			    if ($0 != "")
+				texex[idxex] = addcurline(texex[idxex])
 			    break
 			case "ex-co" :
-			    if ($0 == "")
-				newstate("exlast")
-			    else
+			    if ($0 != "")
 				texco[idxex] = addcurline(texco[idxex])
 			    break
 
 			case "input" :
-			    printf "%d: invalid line in .input\n", NR > "/dev/stderr"
+			    if ($0 != "")
+				printf "%d: invalid line in .input\n", NR > "/dev/stderr"
 			    break
 			case "inp-it" :
-			    tinpit[idxinp] = addcurline(tinpit[idxinp])
+			    if ($0 != "")
+				tinpit[idxinp] = addcurline(tinpit[idxinp])
 			    break
 			case "inp-de" :
-			    if ($0 == "")
-				newstate("inplast")
-			    else
+			    if ($0 != "")
 				tinpde[idxinp] = addcurline(tinpde[idxinp])
 			    break
 			case "inp-re" :
-			    if ($0 == "")
-				newstate("inplast")
-			    else
+			    if ($0 != "")
 				tinpre[idxinp] = addcurline(tinpre[idxinp])
 			    break
 			case "inp-df" :
-			    if ($0 == "")
-				newstate("inplast")
-			    else
+			    if ($0 != "")
 				tinpdf[idxinp] = addcurline(tinpdf[idxinp])
 			    break
 			case "op" :
@@ -127,14 +125,15 @@ END		{ newstate("") }
 			    print
 			    break
 			case "author" :
-			    taut [idxaut++] = $0
+			    if ($0 != "")
+				taut [idxaut++] = $0
 			    break
 			default :
 		    }
 		}
 
 function newstate(new) {
-    # printf "OLD = %s, NEW = %s\n", e, new	# DEBUG
+    # printf "OLD = %s, NEW = %s\n", e, new > "/dev/stderr"	# DEBUG
     ############# end old state
     switch (e) {
 	case "purpose" :
@@ -143,42 +142,48 @@ function newstate(new) {
 	case "synt" :
 	    latex_end("jsyntax")
 	    break
-	case "exlast" :
-	    if (idxex > 1)
-		latex_begin_arg("jexample", "s")
-	    else
-		latex_begin_arg("jexample", "")
-	    for (i = 0 ; i < idxex ; i++) {
-		latex_begin("jexex")
-		print texex[i]
-		latex_end("jexex")
-		latex_begin("jexco")
-		print texco[i]
-		latex_end("jexco")
-	    }
-	    latex_end("jexample")
-	    break
 	case "ex-co" :
 	    idxex++
-	    break
-	case "inplast" :
-	    if (idxinp > 1)
-		latex_begin_arg("jinput", "s")
-	    else
-		latex_begin_arg("jinput", "")
-	    for (i = 1 ; i <= idxinp ; i++) {
-		if (i == 1) {
-		    rule = "first"
-		} else if (i == idxinp) {
-		    rule = "last"
-		} else {
-		    rule = ""
+	    if (new != "ex-ex")
+	    {
+		if (idxex > 1)
+		    latex_begin_arg("jexample", "s")
+		else
+		    latex_begin_arg("jexample", "")
+		for (i = 0 ; i < idxex ; i++) {
+		    latex_begin("jexex")
+		    print texex[i]
+		    latex_end("jexex")
+		    latex_begin("jexco")
+		    print texco[i]
+		    latex_end("jexco")
 		}
-
-		latex_5("jinputitem", \
-			tinpit[i], tinpde[i], tinpre[i], tinpdf[i], rule)
+		latex_end("jexample")
 	    }
-	    latex_end("jinput")
+	    break
+	case "inp-de" :
+	case "inp-re" :
+	case "inp-df" :
+	    if (new !~ /^inp-/)
+	    {
+		if (idxinp > 1)
+		    latex_begin_arg("jinput", "s")
+		else
+		    latex_begin_arg("jinput", "")
+		for (i = 1 ; i <= idxinp ; i++) {
+		    if (i == 1) {
+			rule = "first"
+		    } else if (i == idxinp) {
+			rule = "last"
+		    } else {
+			rule = ""
+		    }
+
+		    latex_5("jinputitem", \
+			    tinpit[i], tinpde[i], tinpre[i], tinpdf[i], rule)
+		}
+		latex_end("jinput")
+	    }
 	    break
 	case "rel" :
 	    latex_0("jrelated")
@@ -191,7 +196,10 @@ function newstate(new) {
 	    }
 	    break
 	case "author" :
-	    latex_0("jauthor")
+	    if (idxaut == 1)
+		latex_0("jauthor")
+	    else
+		latex_0("jauthors")
 	    for (i = 0 ; i < idxaut ; i++)
 	    {
 		if (i == idxaut - 1)
