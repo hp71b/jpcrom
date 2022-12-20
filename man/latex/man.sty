@@ -1,6 +1,6 @@
 \NeedsTeXFormat {LaTeX2e}
 
-\ProvidesPackage {man} [2022/11/13 1.0 (pda)]
+\ProvidesPackage {man} [2022/12/20 1.1 (pda)]
 
 \DeclareOption {fr} {\jlangfr \newcommand{\bablang}{french}}
 \DeclareOption {en} {\jlangen \newcommand{\bablang}{english}}
@@ -104,16 +104,33 @@
 \RequirePackage [a4paper, margin=20mm] {geometry}
 
 \frenchspacing
-\parskip=1.5mm
+\parskip=1mm
 \parindent=0mm
 
 \RequirePackage{hyperref}
 \RequirePackage{amssymb}
 \RequirePackage{ifthen}
 
+\RequirePackage{fontspec}
+
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setmonofont{Liberation Mono}[Scale=0.9]
+
+\newcommand{\Fn}{\rm}
+\newcommand{\Fc}{\tt}
+\newcommand{\Fi}{\it}
+\newcommand{\Fg}{\bf}
+\newcommand{\Fl}{\tt}
+\newcommand{\Fp}{\rm}			% ignore this font change
+\newcommand{\Fh}{\fontspec{Liberation Serif Bold}[Scale=1.2]}	% header
+\newcommand{\FA}{\fontspec{Liberation Sans Bold}[Scale=1.8]}	% header
+\newcommand{\FB}{\fontspec{Liberation Sans Bold}[Scale=1.4]}	% header
+
 % \jkeyword {keyword}
-\newcommand{\jkeyword}[1] {\clearpage\section*{#1}%
-	\addcontentsline{toc}{chapter}{\protect\numberline{}#1}}
+\newcommand{\jkeyword}[1] {\clearpage\hfill{\FA #1}\par
+    \addcontentsline{toc}{section}{\protect\numberline{}{\sf #1}}%
+}
 \newcommand{\jendkeyword} {}
 
 % \jopt {statement} {function} {keyboard} {calc} {ifthenelse} {device}
@@ -169,9 +186,7 @@
 
 % \begin{jexample} ... \end{jexample}	all examples as a whole
 \newenvironment{jexample}[1]{%
-    \vspace* {1ex}
     \subsection*{\ifthenelse{\equal{#1}{s}}{\textExamples}{\textExample}}
-    \par
 } {}
 % \begin{jexex} ... \end{jexex}		one example...
 \newenvironment{jexex}{%
@@ -191,6 +206,7 @@
 
 % \begin{jinput} ... \end{jinput}	parameter specifications
 \newenvironment{jinput}[1]{%
+    \vspace*{-0.5ex}
     \subsection*{\ifthenelse{\equal{#1}{s}}{\textInputs}{\textInput}}
     \renewcommand{\arraystretch}{1.2}
     \footnotesize
@@ -238,19 +254,3 @@
     }{%
 	\egroup
     }
-
-\RequirePackage{fontspec}
-
-\setmainfont{Liberation Serif}
-\setsansfont{Liberation Sans}
-\setmonofont{Liberation Mono}[Scale=0.9]
-
-\newcommand{\Fn}{\rm}
-\newcommand{\Fc}{\tt}
-\newcommand{\Fi}{\it}
-\newcommand{\Fg}{\bf}
-\newcommand{\Fl}{\tt}
-\newcommand{\Fp}{\rm}			% ignore this font change
-\newcommand{\Fh}{\fontspec{Liberation Serif Bold}[Scale=1.2]}	% header
-\newcommand{\FA}{\fontspec{Liberation Sans Bold}[Scale=1.8]}	% header
-\newcommand{\FB}{\fontspec{Liberation Sans Bold}[Scale=1.4]}	% header

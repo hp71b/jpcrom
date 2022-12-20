@@ -251,6 +251,9 @@ font_start (int f)
     alt_charset = 0 ;	// by default
     switch (f)
     {
+	case 't' :		// title
+	    font_open ("chapter") ;
+	    break ;
 	case '^' :		// superscript
 	    font_open ("textsuperscript") ;
 	    break ;
