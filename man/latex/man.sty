@@ -128,7 +128,7 @@
 \newcommand{\FB}{\fontspec{Liberation Sans Bold}[Scale=1.4]}	% header
 
 % \jkeyword {keyword}
-\newcommand{\jkeyword}[1] {\clearpage\hfill{\FA #1}\par
+\newcommand{\jkeyword}[1] {\clearpage\phantomsection\hfill{\FA #1}\par
     \addcontentsline{toc}{section}{\protect\numberline{}{\sf #1}}%
 }
 \newcommand{\jendkeyword} {}
