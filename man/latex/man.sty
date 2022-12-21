@@ -39,6 +39,7 @@
 \newcommand{\textAuthors}{\chooselang}
 
 \newcommand{\textTOC}{\chooselang}
+\newcommand{\textCont}{\chooselang}
 
 \newcommand{\jlangfr} {
     \renewcommand{\textS}{Ordre}
@@ -69,6 +70,7 @@
     \renewcommand{\textAuthors}{Auteurs}
 
     \renewcommand{\textTOC}{Table des matières}
+    \renewcommand{\textCont}{(suite)}
 }
 
 \newcommand{\jlangen} {
@@ -100,6 +102,7 @@
     \renewcommand{\textAuthors}{Authors}
 
     \renewcommand{\textTOC}{Contents}
+    \renewcommand{\textCont}{(continued)}
 }
 
 \ProcessOptions
@@ -116,6 +119,15 @@
 \RequirePackage{hyperref}
 \RequirePackage{amssymb}
 \RequirePackage{ifthen}
+\RequirePackage{fancyhdr}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{%
+    \fancyhf{}%
+    \fancyfoot[C]{\thepage}%
+}
+\fancypagestyle{kw}[plain]{}
+\pagestyle{plain}
 
 \RequirePackage{fontspec}
 
@@ -132,14 +144,19 @@
 \newcommand{\Fh}{\fontspec{Liberation Serif Bold}[Scale=1.2]}	% header
 \newcommand{\FA}{\fontspec{Liberation Sans Bold}[Scale=1.8]}	% header
 \newcommand{\FB}{\fontspec{Liberation Sans Bold}[Scale=1.4]}	% header
+\newcommand{\FCont}{\fontspec{Liberation Sans Bold}[Scale=1.4]}	% (continued)
 
 \newcommand{\jtoc} {\cleardoublepage\phantomsection
     \addcontentsline{toc}{chapter}{\protect\numberline{}\textTOC}
     \tableofcontents
 }
 
-% \jkeyword {keyword}
-\newcommand{\jkeyword}[1] {\clearpage\phantomsection\hfill{\FA #1}\par
+\newcommand{\jkeyword}[1] {\clearpage\phantomsection%
+    \fancyhead[RO,LE]{{\FA #1 }{\FCont\textCont}}
+    \fancypagestyle{kw}{%
+	\fancyhead[RO,LE]{{\FA #1}}%
+    }%
+    \thispagestyle{kw}
     \addcontentsline{toc}{section}{\protect\numberline{}{\sf #1}}
     \vspace{1.5ex}
 }
