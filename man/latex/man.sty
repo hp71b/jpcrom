@@ -38,6 +38,8 @@
 \newcommand{\textAuthor}{\chooselang}
 \newcommand{\textAuthors}{\chooselang}
 
+\newcommand{\textTOC}{\chooselang}
+
 \newcommand{\jlangfr} {
     \renewcommand{\textS}{Ordre}
     \renewcommand{\textF}{Fonction}
@@ -65,6 +67,8 @@
 
     \renewcommand{\textAuthor}{Auteur}
     \renewcommand{\textAuthors}{Auteurs}
+
+    \renewcommand{\textTOC}{Table des matières}
 }
 
 \newcommand{\jlangen} {
@@ -94,6 +98,8 @@
 
     \renewcommand{\textAuthor}{Author}
     \renewcommand{\textAuthors}{Authors}
+
+    \renewcommand{\textTOC}{Contents}
 }
 
 \ProcessOptions
@@ -126,6 +132,11 @@
 \newcommand{\Fh}{\fontspec{Liberation Serif Bold}[Scale=1.2]}	% header
 \newcommand{\FA}{\fontspec{Liberation Sans Bold}[Scale=1.8]}	% header
 \newcommand{\FB}{\fontspec{Liberation Sans Bold}[Scale=1.4]}	% header
+
+\newcommand{\jtoc} {\cleardoublepage\phantomsection
+    \addcontentsline{toc}{chapter}{\protect\numberline{}\textTOC}
+    \tableofcontents
+}
 
 % \jkeyword {keyword}
 \newcommand{\jkeyword}[1] {\clearpage\phantomsection\hfill{\FA #1}\par
