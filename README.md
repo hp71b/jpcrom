@@ -12,14 +12,14 @@ october 1989.
 What is JPC Rom?
 ----------------
 
-**JPC Rom** is a module conceived around the end of the 80s for
-the [''pocket computer HP-71B''](https://en.wikipedia.org/wiki/HP-71B)
+**JPC Rom** is a module conceived around the end of the 80s for the
+"[pocket computer HP-71B](https://en.wikipedia.org/wiki/HP-71B)""
 by contributors, members of the PPC Paris club. This club gathered
 Hewlett-Packard calculators owners, including the HP-71B.  Entirely
-written in assembly language (about 50 000 source code lines) for
-the (processor HP Saturn)[https://en.wikipedia.org/wiki/HP_Saturn], **JPC Rom**
-extends the functionalities of the HP-71B in various areas as shown in
-the documentation.
+written in assembly language (about 50 000 source code lines) for the
+[processor HP Saturn](https://en.wikipedia.org/wiki/HP_Saturn), **JPC
+Rom** extends the functionalities of the HP-71B in various areas as
+shown in the documentation.
 
 
 Why this repository?
@@ -41,10 +41,9 @@ Complete source files for the version E are available in the `src/`
 directory.
 
 The assembler/link editor used to build the LEX from the source files
-is available here 
-[https://github.com/hp71b/areuh](https://github.com/hp71b/areuh).
-Under Unix, with `aas`, `amg` and `ald` in the PATH, you just type
-`make` in the `src/` directory to rebuild the LEX file.
+is available in the [AREUH repository](https://github.com/hp71b/areuh).
+Under Unix, with `aas`, `amg` and `ald` in the PATH, you just type `make`
+in the `src/` directory to rebuild the LEX file.
 
 
 Building the documentation
@@ -65,7 +64,7 @@ The English manual was not updated for the E version and so it documents
 the D version (missing from the documentation are the graphic functions
 and the text editor).
 
-Both [English PDF manual]((https://hp71b.github.io/jpcrom/man-en.pdf)
+Both [English PDF manual](https://hp71b.github.io/jpcrom/man-en.pdf)
 and [French PDF manual](https://hp71b.github.io/jpcrom/man-en.pdf)
 should be printed double-sided.
 

@@ -17,7 +17,7 @@ l'ordinateur de poche » [HP-71B](https://en.wikipedia.org/wiki/HP-71B)
 par des contributeurs membres du club PPC Paris. Ce club regroupait
 des possesseurs de calculatrices Hewlett-Packard, dont ce HP-71B.
 Entièrement programmé en assembleur (environ 50 000 lignes) pour le
-(processeur HP Saturn)[https://en.wikipedia.org/wiki/HP_Saturn], **JPC
+[processeur HP Saturn](https://en.wikipedia.org/wiki/HP_Saturn), **JPC
 Rom** étend les fonctionnalités du HP-71B dans de nombreux domaines
 comme le montre sa documentation.
 
@@ -42,12 +42,11 @@ Reconstruction du LEX à partir des sources
 L'intégralité des sources de la version E sont disponibles dans le
 répertoire `src/`.
 
-L'assembleur/éditeur de liens utilisé pour construire le
-LEX à partir de ces fichiers sources est accessible via
-[https://github.com/hp71b/areuh](https://github.com/hp71b/areuh).
-Sur Unix, avec ces programmes (`aas`, `amg` et `ald`) dans le PATH,
-il suffit d'utiliser `make` dans le répertoire `src/` pour reconstruire
-le fichier LEX.
+L'assembleur/éditeur de liens utilisé pour construire le LEX
+à partir de ces fichiers sources est accessible via le [dépôt
+AREUH](https://github.com/hp71b/areuh).  Sur Unix, avec ces programmes
+(`aas`, `amg` et `ald`) dans le PATH, il suffit d'utiliser `make` dans
+le répertoire `src/` pour reconstruire le fichier LEX.
 
 
 Reconstruction de la documentation
@@ -69,9 +68,9 @@ Le manuel en anglais n'avait pas été mis à jour pour la version E et
 correspond donc à la version D (manquent en particulier 
 les fonctions graphiques et l'éditeur de textes).
 
-Les fichiers PDF [français](https://hp71b.github.io/jpcrom/man-fr.pdf)
-et [anglais](https://hp71b.github.io/jpcrom/man-en.pdf) sont prévus
-pour être imprimés recto-verso.
+Le [fichier PDF français](https://hp71b.github.io/jpcrom/man-fr.pdf)
+et le [fichier PDF anglais](https://hp71b.github.io/jpcrom/man-en.pdf)
+sont prévus pour être imprimés recto-verso.
 
 
 Avertissement : codage des caractères
