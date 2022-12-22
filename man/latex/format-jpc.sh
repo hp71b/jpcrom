@@ -4,6 +4,7 @@ set -e
 set -u
 
 DIRECTAWK=./dir.awk
+JPCPF=./jpcpf
 
 jpcdir ()
 {
@@ -39,11 +40,11 @@ OUTDIR="$2"
 for f in $(ls "$INDIR/"*.jpc)
 do
     base=$(basename $f .jpc)
-    jpcpf < $f | jpcdir | specialchar > $OUTDIR/$base.tex
+    $JPCPF < $f | jpcdir | specialchar > $OUTDIR/$base.tex
 done
 
 for f in $(ls "$INDIR/"*.pf)
 do
     base=$(basename $f .pf)
-    jpcpf -d < $f > $OUTDIR/$base.tex
+    $JPCPF -d < $f > $OUTDIR/$base.tex
 done
