@@ -13,7 +13,7 @@ What is JPC Rom?
 ----------------
 
 **JPC Rom** is a module conceived around the end of the 80s for the
-"[pocket computer HP-71B](https://en.wikipedia.org/wiki/HP-71B)""
+"[pocket computer HP-71B](https://en.wikipedia.org/wiki/HP-71B)"
 by contributors, members of the PPC Paris club. This club gathered
 Hewlett-Packard calculators owners, including the HP-71B.  Entirely
 written in assembly language (about 50 000 source code lines) for the
