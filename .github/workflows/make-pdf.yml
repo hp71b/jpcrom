@@ -1,0 +1,31 @@
+on:
+  push:
+    branches: [main]
+  # lauch this workflow on demand from "Actions" tab
+  workflow_dispatch:
+
+# Allow deployment on github pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  make-pdf:
+    runs-on: ubuntu-latest
+    container:
+      image: docker://pdagog/latex
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v3
+      - name: Format file
+        run: |
+          mkdir _site
+          cd man/latex
+          make && mv man-??.pdf ../../_site
+      - uses: actions/upload-pages-artifact@v1
+      - uses: actions/deploy-pages@v1
