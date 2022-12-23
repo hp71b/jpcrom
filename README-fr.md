@@ -1,7 +1,7 @@
 JPC Rom
 =======
 
-[[Version anglais/English version](README.md)]
+[[Version anglaise/English version](README.md)]
 
 Ce dépôt contient l'ensemble des fichiers sources de **JPC Rom** ainsi que 
 les fichiers originaux qui ont permis de générer la documentation de plus
