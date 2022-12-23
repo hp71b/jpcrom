@@ -252,7 +252,7 @@ font_start (int f)
     switch (f)
     {
 	case 't' :		// title
-	    font_open ("chapter") ;
+	    font_open ("jchapter") ;
 	    break ;
 	case '^' :		// superscript
 	    font_open ("textsuperscript") ;
