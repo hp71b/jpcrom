@@ -13,11 +13,11 @@ What is JPC Rom?
 ----------------
 
 **JPC Rom** is a module conceived around the end of the 80s for the
-"[pocket computer HP-71B](https://en.wikipedia.org/wiki/HP-71B)"
+"[HP-71B pocket computer](https://en.wikipedia.org/wiki/HP-71B)"
 by contributors, members of the PPC Paris club. This club gathered
 Hewlett-Packard calculators owners, including the HP-71B.  Entirely
 written in assembly language (about 50 000 source code lines) for the
-[processor HP Saturn](https://en.wikipedia.org/wiki/HP_Saturn), **JPC
+[Saturn processor](https://en.wikipedia.org/wiki/HP_Saturn), **JPC
 Rom** extends the functionalities of the HP-71B in various areas as
 shown in the documentation.
 
@@ -102,8 +102,8 @@ All the source files we have not developped ourselves have been
 published in JPC and are available in the
 [archive](http://www.jeffcalc.hp41.eu/divers/index.html#jpc).
 So we think nothing prevents their diffusion in this repository. If an
-author doesn't wish his source files be republished, he just need to ask
-us for their withdrawal.
+author doesn't wish his source files be republished, he just needs to ask
+us to pull the files.
 
 
 Additional informations
