@@ -110,7 +110,7 @@
 
 \RequirePackage [\bablang] {babel}
 \raggedbottom   % par defaut, babel aligne les bas de page. Pas booooo !
-\RequirePackage [a4paper, margin=20mm] {geometry}
+\RequirePackage [a4paper, margin=20mm,top=20mm,headheight=17pt] {geometry}
 
 \frenchspacing
 \parskip=1mm
@@ -151,7 +151,7 @@
     \tableofcontents
 }
 
-\newcommand{\jchapter}[1] {\chapter{#1}\pagestyle{plain}}
+\newcommand{\jchapter}[1] {\chapter{#1}\fancyhead[RO,LE]{\FCont #1}}
 
 \newcommand{\jkeyword}[1] {\clearpage\phantomsection%
     \fancyhead[RO,LE]{{\FA #1 }{\FCont\textCont}}
