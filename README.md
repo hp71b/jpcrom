@@ -65,7 +65,7 @@ the D version (missing from the documentation are the graphic functions
 and the text editor).
 
 Both [English PDF manual](https://hp71b.github.io/jpcrom/man-en.pdf)
-and [French PDF manual](https://hp71b.github.io/jpcrom/man-en.pdf)
+and [French PDF manual](https://hp71b.github.io/jpcrom/man-fr.pdf)
 should be printed double-sided.
 
 
