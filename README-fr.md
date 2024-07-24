@@ -21,6 +21,10 @@ Entièrement programmé en assembleur (environ 50 000 lignes) pour le
 Rom** étend les fonctionnalités du HP-71B dans de nombreux domaines
 comme le montre sa documentation.
 
+Jean-François Garnier a rédigé une
+[très intéressante histoire de JPC Rom](http://www.jeffcalc.hp41.eu/emu71/files/jpcromstory.pdf)
+qui permet de se rendre compte de l'ampleur de ce logiciel.
+
 
 Pourquoi ce dépôt ?
 -------------------

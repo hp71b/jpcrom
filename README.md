@@ -21,6 +21,10 @@ written in assembly language (about 50 000 source code lines) for the
 Rom** extends the functionalities of the HP-71B in various areas as
 shown in the documentation.
 
+Jean-François Garnier has written a
+[very interesting history of JPC Rom](http://www.jeffcalc.hp41.eu/emu71/files/jpcromstory.pdf)
+that gives an idea of the scope of this software.
+
 
 Why this repository?
 --------------------
